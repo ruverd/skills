@@ -170,7 +170,7 @@ if [[ "$GROK_PLUGIN" -eq 1 ]]; then
   elif [[ "$UNINSTALL" -eq 1 ]]; then
     echo "plugin uninstall is: grok plugin uninstall ruver --confirm"
   else
-    if grok plugin marketplace list 2>/dev/null | grep -qE 'ruverd/skills|ruverd/ai-skills|\bskills\b'; then
+    if grok plugin marketplace list 2>/dev/null | grep -qE 'ruverd/skills|\bskills\b'; then
       echo "ok     grok marketplace already lists this repo"
     else
       echo "add    grok plugin marketplace add $REPO"

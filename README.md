@@ -18,9 +18,6 @@ use the `ruver-*` skill name.
 This is the source of truth for the graphs I actually run. It is not a
 dump of every third-party skill on the machine.
 
-Formerly [`ruverd/ai-skills`](https://github.com/ruverd/ai-skills).
-GitHub redirects the old URL.
-
 ## Installation (30-second setup)
 
 Two ways in. **Plugin** installs the whole set as a managed bundle.
