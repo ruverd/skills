@@ -1,5 +1,7 @@
 # Ruver architecture
 
+Command pages: [commands/](commands/README.md).
+
 Five graphs share one session. They do not nest. They pass work through
 files on the bus.
 

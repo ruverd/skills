@@ -2,9 +2,12 @@
 
 A graph engineer writes **how the agent works**. Not the product.
 
-The main thread of `/ruver-developer`, `/ruver-qa`, `/ruver-lstm` (and
-reviewer, triage) **is** that role. It walks a GRAPH. It writes STATE.
-It does not open `src/` and type the feature.
+The main thread of `/ruver-developer`, `/ruver-qa`, `/ruver-triage`,
+`/ruver-reviewer`, `/ruver-lstm`, `/ruver-bus`, and `/ruver-goal`
+**is** that role. It walks a GRAPH. It writes STATE. It does not
+open `src/` and type the feature.
+
+Command pages: [commands/](commands/README.md).
 
 ## Three layers
 

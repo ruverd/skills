@@ -5,17 +5,21 @@ Ruver graphs for coding agents. Same files on **Grok**, **Claude Code**,
 
 ```text
 /ruver-developer DEV-1234
+/ruver-reviewer https://github.com/org/repo/pull/99
 /ruver-lstm https://github.com/org/repo/pull/99
 /ruver-qa https://github.com/org/repo/pull/99
 ```
+
+Full list and deep pages: [docs/commands](docs/commands/README.md).
 
 This repo is the source of truth for the graphs I actually run. It is
 not a dump of every third-party skill on the machine.
 
 ## Graph engineer
 
-The main thread of those commands is a **graph engineer**, not an
-implementer.
+The main thread of `/ruver-developer`, `/ruver-qa`, `/ruver-triage`,
+`/ruver-reviewer`, `/ruver-lstm`, `/ruver-bus`, and `/ruver-goal` is a
+**graph engineer**, not an implementer.
 
 It walks a GRAPH (nodes + edges). It writes STATE under `~/.ruver`.
 It spawns a **worker** when a node must touch product code. It never
@@ -79,68 +83,43 @@ Manifests: `.grok-plugin/`, `.claude-plugin/`, `.cursor-plugin/`,
 
 Restart the session after install.
 
-## The three commands
+## Commands
 
-### `/ruver-developer`
+Index: [docs/commands](docs/commands/README.md). Each row is a page.
 
-Deliver a Linear ticket or a free-text goal.
+### Graphs (graph engineer)
 
-1. Grill the design against the repo.
-2. Write a spec and tickets.
-3. Implement with TDD in a **worker** (`ruver-fd-coder`). The
-   graph engineer does not touch product code.
-4. Open a **draft** PR.
-5. Wait until CI is green **and** the PR is MERGEABLE.
-6. Hand off to `/ruver-qa` over the bus.
+| Command | When | More |
+|---|---|---|
+| `/ruver-developer` | Ticket, goal, or PR_BUG fix | [page](docs/commands/ruver-developer.md) |
+| `/ruver-qa` | Browser QA + video comment | [page](docs/commands/ruver-qa.md) |
+| `/ruver-triage` | Classify a QA finding | [page](docs/commands/ruver-triage.md) |
+| `/ruver-reviewer` | Review a PR, diagnose CI | [page](docs/commands/ruver-reviewer.md) |
+| `/ruver-lstm` | Incoming review, patch same branch | [page](docs/commands/ruver-lstm.md) |
+| `/ruver-bus` | Resume stack / QA slot | [page](docs/commands/ruver-bus.md) |
+| `/ruver-goal` | Wake until QA+video on head SHA | [page](docs/commands/ruver-goal.md) |
 
-Never merges. `gh pr ready` only after QA PASS.
+Aliases: `/ruver_developer`, `/ruver_qa`, `/ruver_triage`,
+`/ruver_reviewer`, `/ruver_lstm`, `/ruver_bus`, `/ruver_goal`.
 
-```text
-/ruver-developer DEV-1212
-/ruver-developer the notification inbox on the dashboard
-/ruver-developer resume
-```
+### Engines
 
-Skill: [`plugins/ruver/skills/ruver-developer`](plugins/ruver/skills/ruver-developer).
-Engine: [`ruver-feature-delivery`](plugins/ruver/skills/ruver-feature-delivery).
+| Command | When | More |
+|---|---|---|
+| `/ruver-feature-delivery` (`/ruver-fd`) | Grill → TDD → draft PR, CI green | [page](docs/commands/ruver-feature-delivery.md) |
+| `/ruver-code-review` | One GitHub review artifact | [page](docs/commands/ruver-code-review.md) |
 
-### `/ruver-lstm`
+Prefer `/ruver-developer` over raw `/ruver-fd` when you also want
+MERGEABLE + QA. Prefer `/ruver-reviewer` over raw `/ruver-code-review`
+when CI / mergeability need a graph around the engine.
 
-Looks shit to me. Author side of a review.
+### Branch helpers
 
-1. Ingest a PR, review, or comment URL.
-2. Rebase if the branch is dirty or conflicting.
-3. Verify each comment (`receiving-code-review`).
-4. Patch should-fix on the **same branch** with TDD.
-5. Reply, resolve threads, re-request review.
-
-Never opens a new PR. Draft stays draft.
-
-```text
-/ruver-lstm https://github.com/org/repo/pull/99
-/ruver-lstm resume
-```
-
-Skill: [`plugins/ruver/skills/ruver-lstm`](plugins/ruver/skills/ruver-lstm).
-
-### `/ruver-qa`
-
-QA a GitHub PR the way a user would.
-
-1. Claim the single QA slot (extras queue).
-2. Write a plan from the **diff** before clicking anything.
-3. Exercise the screens in a browser. Record video.
-4. Product suspicion → `/ruver-triage` over the bus.
-5. Post a PR comment with the verdict and the video.
-
-A backend-only PR still has to hit the frontend route that calls it.
-Unit tests are not a complete run.
-
-```text
-/ruver-qa https://github.com/org/repo/pull/99
-```
-
-Skill: [`plugins/ruver/skills/ruver-qa`](plugins/ruver/skills/ruver-qa).
+| Command | When | More |
+|---|---|---|
+| `/ruver-validate-branch` | Local gates, then ask before push | [page](docs/commands/ruver-validate-branch.md) |
+| `/ruver-create-pr-frontend` | Draft FE PR body (does not open) | [page](docs/commands/ruver-create-pr.md) |
+| `/ruver-create-pr-backend` | Draft BE PR body (does not open) | [page](docs/commands/ruver-create-pr.md) |
 
 ## How the graphs fit
 
@@ -178,28 +157,9 @@ Runtime state:
 
 ## Catalog
 
-### Skills
-
-Each folder is a slash command of the same name.
-
-| Skill | What it does |
-|---|---|
-| `ruver-developer` | Orchestrate delivery + MERGEABLE + QA handoff. |
-| `ruver-lstm` | Consume review comments and patch the same branch. |
-| `ruver-qa` | Plan from the diff, browser QA, comment with video. |
-| `ruver-feature-delivery` | Grill → spec → tickets → TDD implement → review → CI. |
-| `ruver-bus` | Envelopes, job slot, stack between graphs. |
-| `ruver-reviewer` | Run code-review, classify CI, optionally bus a result. |
-| `ruver-code-review` | Adaptive PR review via `gh`. One artifact per PR. |
-| `ruver-triage` | Classify a QA finding: PR_BUG / EXISTING / NEW / NOT_A_BUG / BLOCKED. |
-| `ruver-goal` | `schedule_wake` until QA commented with video. |
-| `ruver-validate-branch` | Pre-PR local validation (typecheck, lint, tests, then PR). |
-| `ruver-create-pr-frontend` | Draft an empath-ui PR description. |
-| `ruver-create-pr-backend` | Draft an empath-api-v2 PR description. |
-
-Underscore aliases (`/ruver_developer`, `/ruver_lstm`, `/ruver_qa`,
-`/ruver-fd`) live in `plugins/ruver/commands/` and point at the same
-skills.
+Skills are the same names as the [commands](#commands) above. Deep
+pages live under [docs/commands](docs/commands/README.md). Source:
+`plugins/ruver/skills/<name>/`.
 
 ### Agents
 
@@ -235,8 +195,9 @@ ai-skills/
   install.sh
   docs/GRAPH_ENGINEER.md
   docs/ARCHITECTURE.md
+  docs/commands/              # one page per slash command
   plugins/ruver/
-    HOST.md                   # harness primitives
+    HOST.md
     skills/<name>/SKILL.md
     agents/*.md
     commands/*.md
