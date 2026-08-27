@@ -36,7 +36,7 @@ Do not post a `ci_pending` comment.
 `nodes/admit.md` · `nodes/resolve.md` · `nodes/wait_ci.md` ·
 `nodes/code_review.md` · `nodes/diagnose.md` · `nodes/report.md`
 
-Concurrency: `~/.agents/skills/ruver-bus/JOBS.md`.
+Concurrency: `../ruver-bus/JOBS.md`.
 
 Failures: [references/FAILURES.md](references/FAILURES.md)  
 Report: [references/REPORT.md](references/REPORT.md)

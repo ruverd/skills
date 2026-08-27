@@ -5,7 +5,7 @@ argument-hint: "<DEV-XXXX | goal | PR url | resume>"
 
 # /ruver-developer
 
-Follow **`~/.agents/skills/ruver-developer/SKILL.md`** in full.
+Follow **`../skills/ruver-developer/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 

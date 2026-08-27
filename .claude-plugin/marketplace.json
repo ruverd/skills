@@ -11,7 +11,7 @@
     {
       "name": "ruver",
       "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "Ruver Dornelas",
         "email": "ruverd@gmail.com"

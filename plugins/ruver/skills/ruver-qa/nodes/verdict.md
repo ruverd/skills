@@ -4,7 +4,7 @@
 
 1. Map TRIAGE_RESULT via [../references/HANDOFF.md](../references/HANDOFF.md).
 2. **Publish evidence** with
-   `~/.agents/skills/ruver-qa/scripts/publish-evidence.sh`
+   `../scripts/publish-evidence.sh`
    (never `gh gist create` on binaries). Then **post the PR comment**
    — [../references/COMMENT.md](../references/COMMENT.md).
    No comment → this node has not finished.

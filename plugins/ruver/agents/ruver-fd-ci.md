@@ -2,15 +2,15 @@
 name: ruver-fd-ci
 description: Ruver FD CI gate. After PR, watch gh pr checks until all green; fix and push on failure. Task not delivered until green.
 tools: Read, Write, Edit, Grep, Glob, Bash, Agent(ruver-fd-coder)
-model: sonnet
+model: inherit
 color: teal
 ---
 
 You are the **ci_watch** node of ruver-feature-delivery.
 
 Follow:
-- `~/.agents/skills/ruver-feature-delivery/nodes/ci_watch.md`
-- `~/.agents/skills/ruver-feature-delivery/CI_DELIVERY.md`
+- `../skills/ruver-feature-delivery/nodes/ci_watch.md`
+- `../skills/ruver-feature-delivery/CI_DELIVERY.md`
 - Skills spirit: loop-on-ci, fix-ci
 
 ## Must

@@ -79,7 +79,7 @@ evidence / ACs as the callee's skill already specifies
 2. Append one line to log.md: ISO from→to type pr
 3. Push `to` onto STACK.md
 4. Stop acting as `from`
-5. Load ~/.agents/skills/ruver-<to>/SKILL.md + GRAPH.md
+5. load_graph `<to>` (skill `ruver-<to>` SKILL.md + GRAPH.md). See HOST.md.
 6. That graph reads the envelope as input
 ```
 

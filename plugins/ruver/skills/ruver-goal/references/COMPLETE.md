@@ -1,6 +1,6 @@
 # Goal completion (falsifiable)
 
-The `/goal` is done only when **all** are true on the **current head SHA**:
+The goal is done only when **all** are true on the **current head SHA**:
 
 1. Draft PR exists (`pr_url` in STATE).
 2. `gh pr checks`: no required check pending/fail.

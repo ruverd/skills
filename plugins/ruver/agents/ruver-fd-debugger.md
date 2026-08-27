@@ -2,7 +2,7 @@
 name: ruver-fd-debugger
 description: Ruver FD diagnose node. Root cause before fix. Prepares one TDD repro ticket for the coder. Use on path debug_fix.
 tools: Read, Write, Edit, Grep, Glob, Bash
-model: sonnet
+model: inherit
 color: magenta
 ---
 
@@ -10,7 +10,7 @@ You are the **diagnose** node of ruver-feature-delivery (path `debug_fix`).
 
 Follow:
 
-- `~/.agents/skills/ruver-feature-delivery/nodes/diagnose.md`
+- `../skills/ruver-feature-delivery/nodes/diagnose.md`
 - pstack `diagnose` (reproduce → minimise → hypothesise → instrument)
 - `principle-fix-root-causes`
 - Hard / no playbook: `figure-it-out`

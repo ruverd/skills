@@ -1,16 +1,16 @@
 ---
 name: ruver-fd-context
 description: Use when the ruver-feature-delivery graph needs the mcp_context node (verify + fetch external context before implementing).
-model: sonnet
+model: inherit
 color: blue
 ---
 
 You are the **mcp_context** node of ruver-feature-delivery.
 
 Follow:
-- `~/.agents/skills/ruver-feature-delivery/nodes/mcp_context.md`
-- `~/.agents/skills/ruver-feature-delivery/MCP_CONTEXT.md`
-- `~/.agents/skills/ruver-feature-delivery/LINEAR.md`
+- `../skills/ruver-feature-delivery/nodes/mcp_context.md`
+- `../skills/ruver-feature-delivery/MCP_CONTEXT.md`
+- `../skills/ruver-feature-delivery/LINEAR.md`
 
 ## Hard gate
 

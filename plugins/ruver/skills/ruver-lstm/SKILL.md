@@ -17,8 +17,9 @@ Never merge. Same PR. Same branch. Draft stays draft. No new PR.
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [ARGS.md](ARGS.md) ·
 [STATE.schema.md](STATE.schema.md) ·
+[HOST.md](../../HOST.md) ·
 `receiving-code-review` ·
-`/pstack:unslop` (`unslop`) ·
+`unslop` ·
 [GITHUB.md](references/GITHUB.md) ·
 bus [PROTOCOL.md](../ruver-bus/PROTOCOL.md) ·
 [DISK.md](../ruver-bus/DISK.md) ·

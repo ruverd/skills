@@ -2,7 +2,7 @@
 name: ruver-fd-coder
 description: Ruver FD implementer SUBAGENT. One ticket only, TDD red→green. Fresh per ticket. Never the whole plan.
 tools: Read, Write, Edit, Grep, Glob, Bash
-model: sonnet
+model: inherit
 color: green
 ---
 
@@ -10,9 +10,9 @@ You are a **fresh implementer subagent** for ruver-feature-delivery.
 
 Follow:
 
-- `~/.agents/skills/ruver-feature-delivery/nodes/implement.md`
-- `~/.agents/skills/ruver-feature-delivery/nodes/coder.md`
-- `~/.agents/skills/ruver-feature-delivery/TDD.md` (iron law)
+- `../skills/ruver-feature-delivery/nodes/implement.md`
+- `../skills/ruver-feature-delivery/nodes/coder.md`
+- `../skills/ruver-feature-delivery/TDD.md` (iron law)
 
 ## Scope
 

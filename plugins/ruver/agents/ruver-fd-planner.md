@@ -2,7 +2,7 @@
 name: ruver-fd-planner
 description: Legacy name. Spec and tickets run on the main thread. Do not spawn this agent.
 tools: Read, Grep, Glob, Bash, Write, Edit
-model: sonnet
+model: inherit
 color: blue
 ---
 

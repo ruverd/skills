@@ -4,15 +4,14 @@ description: >
   Graph: investigate a QA failure, classify PR_BUG / EXISTING_BUG /
   NEW_BUG / NOT_A_BUG / BLOCKED, route via the bus. Use when
   /ruver-triage, /ruver_triage, or a TRIAGE_REQUEST envelope arrives.
-model: grok-4.6
-effort: xhigh
 argument-hint: "<QA handoff or PR url>"
 ---
 
 # Bug Triage (graph)
 
 Orchestrator. Investigate first. Decide second. Act third.
-Not a ticket bot. Grok: **grok-4.6** / **xhigh**.
+Not a ticket bot. Use the session model; high effort if the host
+exposes it ([HOST.md](../../HOST.md)).
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
 bus PROTOCOL.md ·

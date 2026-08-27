@@ -1,7 +1,7 @@
 # wait_ci — pending CI loop
 
 Pending required checks never produce a GitHub artifact. Chat only.
-Use Grok `scheduler_create` (same as `/loop`). Do not block the turn on
+`schedule_wake` ([HOST.md](../../HOST.md)). Do not block the turn on
 `gh pr checks --watch`.
 
 ## Required checks
@@ -30,22 +30,21 @@ If STATE already has a `loop_id` for this `repo#pr`, do not create a second loop
 `--force`: skip this file, continue the skill at §4.
 
 ```
-scheduler_create
+schedule_wake
   interval: "5m"
   fire_immediately: false
-  durable: false
   prompt: <exact text below>
 ```
 
-Store `task_id` in STATE as `loop_id`. Set `status: waiting_ci`.
+Store the host's wake id in STATE as `loop_id`. Set `status: waiting_ci`.
 If a prior issue comment on this SHA has `reason=ci_pending`, delete it.
 That comment is the old gate.
 
 ## Prompt (paste verbatim, fill PR/repo/caller)
 
 ```text
-Continue ruver-code-review wait_ci. Load
-~/.agents/skills/ruver-code-review/SKILL.md and LOOP.md.
+Continue ruver-code-review wait_ci. load_skill ruver-code-review
+(SKILL.md + LOOP.md).
 
 PR: <url>
 Repo: <owner/repo>
@@ -54,12 +53,12 @@ Caller: <ruver-code-review | ruver-reviewer>
 
 Re-run §1–§3 on the live head SHA. Do not read the diff until CI is green.
 If required CI is still pending, do nothing else and end the turn.
-If green, scheduler_delete the loop, then run §4–§11 (deep if nothing
-was reviewed yet). If Caller is ruver-reviewer, after the review load
-~/.agents/skills/ruver-reviewer/GRAPH.md and continue at diagnose → report.
-If required CI failed or is unknown, scheduler_delete the loop and DEFER
+If green, cancel_wake, then run §4–§11 (deep if nothing
+was reviewed yet). If Caller is ruver-reviewer, after the review
+load_skill ruver-reviewer and continue at diagnose → report.
+If required CI failed or is unknown, cancel_wake and DEFER
 (reason=ci_red or ci_unknown) with the issue comment in SKILL §9.
-If the PR is CLOSED or MERGED, scheduler_delete the loop and stop.
+If the PR is CLOSED or MERGED, cancel_wake and stop.
 Do not post while pending. Do not merge. Chat PT-BR.
 ```
 
@@ -79,7 +78,7 @@ is a new SHA; wait or review that SHA, never the stale one).
 
 ## Delete
 
-`scheduler_delete` with `loop_id` when:
+`cancel_wake` with `loop_id` when:
 
 - review or DEFER is posted, or
 - PR is closed/merged, or

@@ -4,7 +4,7 @@
 **Capability:** scheduler, chat. No GitHub artifact.
 
 Required CI is pending. Same process as
-`~/.agents/skills/ruver-code-review/LOOP.md`.
+`../../ruver-code-review/LOOP.md`.
 
 1. Write `status: waiting_ci` and `caller: ruver-reviewer` in
    `.ruver-code-review/STATE.md` (and copy `loop_id` into this graph's STATE).

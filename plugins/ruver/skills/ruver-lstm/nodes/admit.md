@@ -3,7 +3,7 @@
 **Verb:** route
 **Capability:** write JOBS, maybe spawn worker
 
-Follow `~/.agents/skills/ruver-bus/JOBS.md`.
+Follow `../../ruver-bus/JOBS.md`.
 
 1. Init `.ruver-bus/JOBS.md` if missing.
 2. `job_id` = `lstm-pr-<n>` (or `lstm-<branch>`).

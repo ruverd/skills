@@ -5,7 +5,7 @@ argument-hint: "[PR ...] [--deep|--light] [--force] [--dry-run]"
 
 # /ruver-code-review
 
-Follow **`~/.agents/skills/ruver-code-review/SKILL.md`** in full.
+Follow **`../skills/ruver-code-review/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 

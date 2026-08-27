@@ -18,6 +18,7 @@ You are the **orchestrator**. Speak to the user in Brazilian Portuguese. Unslop.
 - [ARGS.md](ARGS.md) (ticket vs goal vs resume)
 - [GRAPH.md](GRAPH.md)
 - [STATE.schema.md](STATE.schema.md)
+- [HOST.md](../../HOST.md)
 - `ruver-bus` [PROTOCOL.md](../ruver-bus/PROTOCOL.md) · [DISK.md](../ruver-bus/DISK.md)
 - delivery voice + policy: `../ruver-feature-delivery/VOICE.md` · `../ruver-feature-delivery/DECISION_POLICY.md` · `../ruver-feature-delivery/PSTACK.md`
 

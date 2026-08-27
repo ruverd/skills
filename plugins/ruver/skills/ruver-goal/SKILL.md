@@ -1,10 +1,9 @@
 ---
 name: ruver-goal
 description: >
-  Drive developer → CI green → QA comment+video with Grok /goal and
-  /loop so the circuit continues across turns. Use when the user runs
-  /ruver-goal or /ruver_goal, says "usa o goal/loop", or after a draft
-  PR is opened and CI is still pending.
+  Drive developer → CI green → QA comment+video across turns with
+  schedule_wake (HOST.md). Use when /ruver-goal, /ruver_goal, or after
+  a draft PR is opened and CI is still pending.
 argument-hint: "<DEV-XXXX | PR url | status | cancel>"
 ---
 
@@ -32,19 +31,22 @@ Chat PT-BR.
 
 1. Write `.ruver-goal/STATE.md` from
    [templates/STATE.md](templates/STATE.md).
-2. Tell the user to run this **host** goal (verifier needs it):
+2. Name the completion bar (verifier / user):
 
 ```text
-/goal Draft PR for <id> is CI-green, MERGEABLE, and has a ruver-qa
+Draft PR for <id> is CI-green, MERGEABLE, and has a ruver-qa
 comment on the head SHA that includes a video URL.
 ```
 
-3. If there is no PR yet → load **ruver-developer** GRAPH (`deliver`).
-4. When a draft PR exists and CI is not green → **start the loop**
-   ([LOOP.md](references/LOOP.md)). Do not `gh pr checks --watch`.
-5. Stop the turn. The loop wakes the session.
+If the host has a `/goal` (or equivalent) command, register that
+sentence there. If it does not, STATE is enough.
 
-## Each `/loop` fire (or `/ruver-goal` resume)
+3. If there is no PR yet → load **ruver-developer** GRAPH (`deliver`).
+4. When a draft PR exists and CI is not green → **schedule_wake**
+   ([LOOP.md](references/LOOP.md)). Do not `gh pr checks --watch`.
+5. Stop the turn. The wake resumes this skill.
+
+## Each wake (or `/ruver-goal` resume)
 
 Read STATE. Inspect the real PR (`gh pr view`, `gh pr checks`,
 issue comments). Then **one** step:
@@ -60,12 +62,12 @@ issue comments). Then **one** step:
 | QA comment on this SHA, PASS / FAIL-unrelated / BLOCKED documented | **complete** |
 
 Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
-`scheduler_delete` the loop.
+`cancel_wake`.
 
 ## Never
 
 - Claim the goal done without the QA comment + video on **head** SHA
-- Sit in `--watch` (tool timeout < empath-ui CI)
+- Sit in `--watch` (CI is longer than a tool timeout)
 - Spawn graph-agents as children (bus switch / load GRAPH)
 - Start a second QA while `qa_active` is another PR
 - Merge

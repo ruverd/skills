@@ -11,7 +11,9 @@ developer ⇄ qa ⇄ triage
 
 The **main thread** is the only graph runner. Outbound work writes an
 envelope under `$RUVER_ROOT/.ruver-bus/`, pushes the stack, and loads
-the target graph. Graphs never `spawn_subagent` another graph.
+the target graph. Graphs never `spawn_worker` another graph
+(`load_graph` on this thread). See [GRAPH_ENGINEER.md](GRAPH_ENGINEER.md)
+and [HOST.md](../plugins/ruver/HOST.md).
 
 Worker subagents (`ruver-fd-coder`, `ruver-fd-tester`, …) implement
 product code. They are not graphs.
@@ -20,7 +22,7 @@ product code. They are not graphs.
 
 ```bash
 slug=$(git rev-parse --show-toplevel | sed 's|^/||; s|/|-|g')
-RUVER_ROOT="$HOME/.grok/ruver/$slug"
+RUVER_ROOT="${RUVER_HOME:-$HOME/.ruver}/$slug"
 ```
 
 Every `.ruver-*` directory lives under `$RUVER_ROOT`. See
@@ -99,10 +101,10 @@ Never opens a new PR. Draft stays draft.
 
 ## Goal loop
 
-`/ruver-goal` keeps a Grok `/goal` + `/loop` alive across turns until
-the draft PR is CI-green, MERGEABLE, and has a QA comment with video
-on the head SHA. CI for empath-ui is longer than a tool timeout, so
-the loop polls instead of `gh pr checks --watch`.
+`/ruver-goal` uses `schedule_wake` (HOST.md) until the draft PR is
+CI-green, MERGEABLE, and has a QA comment with video on the head SHA.
+CI is often longer than a tool timeout, so the loop polls instead of
+`gh pr checks --watch`.
 
 ## Invariants
 

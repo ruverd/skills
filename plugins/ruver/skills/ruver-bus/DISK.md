@@ -8,14 +8,21 @@ and `.ruver/`.
 
 ## Home
 
+Harness-neutral. Claude Code, Codex, Grok, and Cursor share it.
+
 ```bash
 slug=$(git rev-parse --show-toplevel | sed 's|^/||; s|/|-|g')
-RUVER_ROOT="$HOME/.grok/ruver/$slug"
+RUVER_HOME="${RUVER_HOME:-$HOME/.ruver}"
+# One-time: if ~/.ruver is missing and ~/.grok/ruver exists, use that
+# tree (install.sh symlinks ~/.ruver -> ~/.grok/ruver).
+if [ ! -e "$RUVER_HOME" ] && [ -d "$HOME/.grok/ruver" ]; then
+  RUVER_HOME="$HOME/.grok/ruver"
+fi
+RUVER_ROOT="$RUVER_HOME/$slug"
 mkdir -p "$RUVER_ROOT"
 ```
 
-Example: repo `/Users/ruverdornelas/Developer/empath/empath-api-v2`
-→ `~/.grok/ruver/Users-ruverdornelas-Developer-empath-empath-api-v2/`.
+Example: repo `/Users/you/src/app` → `$HOME/.ruver/Users-you-src-app/`.
 
 All `.ruver-*` paths in ruver skills are **under `$RUVER_ROOT`**:
 
@@ -34,8 +41,8 @@ $RUVER_ROOT/
 
 `.ruver-bus/ENVELOPE.md` means `$RUVER_ROOT/.ruver-bus/ENVELOPE.md`.
 
-One slug per git toplevel (each worktree has its own). Claude and Grok
-on this machine share the same files. Do **not** `git add` these dirs.
+One slug per git toplevel (each worktree has its own). Do **not**
+`git add` these dirs.
 
 If a leftover `.ruver-*` exists inside the repo, move it into
 `$RUVER_ROOT` and delete the copy in the repo. Do not keep writing there.

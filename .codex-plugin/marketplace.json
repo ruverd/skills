@@ -1,0 +1,17 @@
+{
+  "name": "ai-skills",
+  "interface": {
+    "displayName": "ai-skills"
+  },
+  "plugins": [
+    {
+      "name": "ruver",
+      "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa on any harness.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ruver"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

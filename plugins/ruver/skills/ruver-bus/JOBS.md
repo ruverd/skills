@@ -61,8 +61,8 @@ Worker jobs use `.ruver-bus/jobs/<id>/STATE.md` only.
 
 ## Worktree
 
-Prefer host `spawn_subagent` `isolation: "worktree"` (do not also
-pass `cwd`).
+Prefer host `spawn_worker` with worktree isolation ([HOST.md](../../HOST.md)).
+Do not also pass `cwd` when isolation is a worktree.
 
 Else git fallback (`.worktrees/` is gitignored in empath-ui):
 
@@ -80,10 +80,10 @@ if `node_modules` is missing in that worktree.
 
 ## Worker
 
-`subagent_type: general-purpose`. **Never** spawn types
-`ruver_developer` / `ruver_qa` / `ruver_triage` / `ruver_reviewer` /
-`ruver_lstm`.
-Worker **must not** spawn children (Grok depth=1).
+Child type: general-purpose ([HOST.md](../../HOST.md) `spawn_worker`).
+**Never** spawn types `ruver_developer` / `ruver_qa` / `ruver_triage` /
+`ruver_reviewer` / `ruver_lstm`.
+Worker **must not** spawn children.
 
 Prompt must include: job id, worktree path (or “host worktree”),
 PR/Linear, “execute the skill **yourself** — no ruver-* / ruver-fd-*

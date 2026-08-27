@@ -5,7 +5,7 @@ argument-hint: "<PR url or owner/repo#N>"
 
 # /ruver-qa
 
-Follow **`~/.agents/skills/ruver-qa/SKILL.md`** in full.
+Follow **`../skills/ruver-qa/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 

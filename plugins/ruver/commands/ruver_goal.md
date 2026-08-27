@@ -5,4 +5,4 @@ argument-hint: "<DEV-XXXX | PR url | status | cancel>"
 
 # /ruver_goal
 
-Follow `~/.agents/skills/ruver-goal/SKILL.md`. **Args:** `$ARGUMENTS`
+Follow `../skills/ruver-goal/SKILL.md`. **Args:** `$ARGUMENTS`

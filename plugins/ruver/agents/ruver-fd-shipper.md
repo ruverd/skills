@@ -2,13 +2,13 @@
 name: ruver-fd-shipper
 description: Ruver FD shipper. After thermo fix all — commit, push, draft PR. Does not claim delivery; CI gate follows.
 tools: Read, Grep, Glob, Bash
-model: haiku
+model: inherit
 color: purple
 ---
 
 You are the **shipper** node of ruver-feature-delivery.
 
-Follow `~/.agents/skills/ruver-feature-delivery/nodes/shipper.md`.
+Follow `../skills/ruver-feature-delivery/nodes/shipper.md`.
 
 ## Runtime
 
@@ -23,19 +23,8 @@ Follow `~/.agents/skills/ruver-feature-delivery/nodes/shipper.md`.
 5. Commit + push (no force). If the `/ruver-validate-branch` skill exists in this
    environment, run it BEFORE push and stop on failure.
 6. If `open_pr: true`: draft PR (use the repo's `pr-description` skill for the body
-   when available). **Always** set reviewers + assignee (create and update):
-   ```bash
-   # create
-   gh pr create --draft \
-     --reviewer izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees \
-     --assignee ruverd \
-     --title "..." --body "..."
-   # update (PR already exists)
-   gh pr edit --add-reviewer izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees \
-     --add-assignee ruverd
-   ```
-   Fixed reviewers: izaiasneto4, samuelfaj, chrislong365, AirtonSth, PauloMendees.
-   Assignee: ruverd. One failed reviewer request must not block the rest.
+   when available). Reviewers + assignee from the current repo `AGENTS.md`.
+   One failed reviewer request must not block the rest.
    Then set `ci.status: pending`.
 7. **Do not** set graph `status: done` — orchestrator runs **ruver-fd-ci** next.
 8. Never merge. Brazilian Portuguese summary: PR URL + "waiting on CI green to deliver".

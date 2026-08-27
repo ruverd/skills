@@ -2,9 +2,8 @@
 # Install the Ruver plugin into the local agent homes.
 #
 # Default: symlink skills, agents, and commands into
-#   ~/.agents  ~/.grok  ~/.claude  ~/.cursor
-# so /ruver-developer, /ruver-lstm, and /ruver-qa work, and so
-# hardcoded ~/.agents/skills/... paths in agents/commands keep resolving.
+#   ~/.agents  ~/.grok  ~/.claude  ~/.cursor  ~/.codex
+# so /ruver-developer, /ruver-lstm, and /ruver-qa work on any harness.
 #
 # Usage:
 #   ./install.sh
@@ -119,11 +118,22 @@ echo "repo    $REPO"
 echo "plugin  $PLUGIN"
 echo
 
+# Harness-neutral disk. Keep existing ~/.grok/ruver jobs alive.
+if [[ "$UNINSTALL" -eq 0 ]]; then
+  if [[ -d "$HOME/.grok/ruver" && ! -e "$HOME/.ruver" ]]; then
+    echo "link   $HOME/.ruver -> $HOME/.grok/ruver"
+    run ln -sfn "$HOME/.grok/ruver" "$HOME/.ruver"
+  else
+    run mkdir -p "$HOME/.ruver"
+  fi
+fi
+
 install_tree skills "$PLUGIN/skills" \
   "$HOME/.agents/skills" \
   "$HOME/.grok/skills" \
   "$HOME/.claude/skills" \
-  "$HOME/.cursor/skills"
+  "$HOME/.cursor/skills" \
+  "$HOME/.codex/skills"
 
 install_tree agents "$PLUGIN/agents" \
   "$HOME/.grok/agents" \

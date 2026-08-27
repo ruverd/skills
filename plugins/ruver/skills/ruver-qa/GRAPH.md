@@ -47,4 +47,4 @@ Execute how: [references/EXECUTION.md](references/EXECUTION.md).
 `nodes/admit.md` · `nodes/resolve.md` · `nodes/plan.md` ·
 `nodes/execute.md` · `nodes/request_triage.md` · `nodes/verdict.md`
 
-Queue: `~/.agents/skills/ruver-bus/JOBS.md`. Never two executes.
+Queue: `../ruver-bus/JOBS.md`. Never two executes.

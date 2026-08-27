@@ -5,7 +5,7 @@ argument-hint: "<QA handoff or PR url>"
 
 # /ruver-triage
 
-Follow **`~/.agents/skills/ruver-triage/SKILL.md`** in full.
+Follow **`../skills/ruver-triage/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 

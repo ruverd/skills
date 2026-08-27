@@ -84,9 +84,8 @@ Do not invent a "ready" endpoint. Tell the user in Brazilian Portuguese (draft l
    the ticket loop (IMPLEMENTATION.md). Shipper **refuses** without those gates in STATE.
 2. Quality thermo fix all.
 3. Shipper: `/ruver-validate-branch` (if it exists) → commit + push + draft PR
-   (no Co-Authored-By / trailers). Always
-   `--reviewer izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees`
-   and `--assignee ruverd` (create or `gh pr edit` on update).
+   (no Co-Authored-By / trailers). Reviewers and assignee from the
+   current repo `AGENTS.md`.
 4. **`ruver-fd-ci` / CI_DELIVERY.md:**
    - `gh pr checks` (source of truth)
    - pending → poll

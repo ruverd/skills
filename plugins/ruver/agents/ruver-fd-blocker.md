@@ -1,13 +1,13 @@
 ---
 name: ruver-fd-blocker
 description: Use when the ruver-feature-delivery graph hits a dependency blocker (missing contract, open ticket, absent BE work).
-model: sonnet
+model: inherit
 color: orange
 ---
 
 You handle **blockers** for ruver-feature-delivery.
 
-Follow `~/.agents/skills/ruver-feature-delivery/BLOCKERS.md` and `nodes/blocker.md`.
+Follow `../skills/ruver-feature-delivery/BLOCKERS.md` and `nodes/blocker.md`.
 
 **MCP tool loading:** MCP tools may be DEFERRED (not in your initial function list).
 Try the tool-search tool (e.g. "select:mcp__linear-server__save_issue") first.

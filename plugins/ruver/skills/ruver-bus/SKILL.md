@@ -32,11 +32,11 @@ The **main thread** is the only graph runner.
 | Already a subagent | Write envelope, return. Do **not** spawn a graph |
 | Resume / `/ruver-bus` | Read `STACK.md` + latest envelope → load that graph |
 
-**Never** `spawn_subagent` with type `ruver_qa` / `ruver_triage` /
+**Never** `spawn_worker` with type `ruver_qa` / `ruver_triage` /
 `ruver_developer` / `ruver_reviewer` / `ruver_lstm`. Those names are
 graphs (main-thread roles). Overflow developer/reviewer/lstm work =
-one `general-purpose` worker + worktree ([JOBS.md](JOBS.md)). Never a
-second QA worker.
+one general-purpose worker + worktree ([JOBS.md](JOBS.md),
+[HOST.md](../../HOST.md)). Never a second QA worker.
 
 ## Resume
 
@@ -46,7 +46,7 @@ second QA worker.
 
 1. Read `.ruver-bus/STACK.md` (**last line** = active graph).
 2. Read `.ruver-bus/ENVELOPE.md`.
-3. Load `~/.agents/skills/ruver-<last-line>/SKILL.md` + `GRAPH.md`.
+3. `load_graph` the last STACK line (`ruver-<name>` SKILL.md + GRAPH.md).
 4. Continue from that graph's STATE. Do not restart.
 5. Also print `JOBS.md`: `qa_active`, `qa_waiting`, worker rows.
 

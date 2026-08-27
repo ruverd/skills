@@ -7,4 +7,4 @@ argument-hint: "<PR url or owner/repo#N>"
 
 Alias de **`/ruver-qa`**. **Args:** `$ARGUMENTS`
 
-Seguir `~/.agents/skills/ruver-qa/SKILL.md`.
+Seguir `../skills/ruver-qa/SKILL.md`.

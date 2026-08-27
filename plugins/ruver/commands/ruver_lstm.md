@@ -7,4 +7,4 @@ argument-hint: "<PR | review | comment URL>"
 
 Alias de **`/ruver-lstm`**. **Args:** `$ARGUMENTS`
 
-Seguir `~/.agents/skills/ruver-lstm/SKILL.md`.
+Seguir `../skills/ruver-lstm/SKILL.md`.

@@ -1,7 +1,7 @@
 {
   "name": "ruver",
   "displayName": "Ruver",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent graphs that deliver a Linear ticket, QA a PR with video, and handle incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",

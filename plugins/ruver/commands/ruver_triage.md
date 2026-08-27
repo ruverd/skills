@@ -7,4 +7,4 @@ argument-hint: "<QA handoff or PR url>"
 
 Alias de **`/ruver-triage`**. **Args:** `$ARGUMENTS`
 
-Seguir `~/.agents/skills/ruver-triage/SKILL.md`.
+Seguir `../skills/ruver-triage/SKILL.md`.

@@ -20,21 +20,14 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
 5. Commit (cite DEV-XXXX). **No Co-Authored-By, no "Generated with", no trailers.**
 6. Push (`-u`, no force).
 7. Draft PR (default) with Linear link (body via repo `pr-description` skill if it exists).
-8. **Reviewers + assignee (required on create and update):**
+8. **Reviewers + assignee** from the current repo `AGENTS.md` / `CLAUDE.md`
+   (or git `user.name` as assignee if none listed). On create and update:
    ```bash
-   # create
-   gh pr create --draft \
-     --title "..." --body "..." \
-     --reviewer izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees \
-     --assignee ruverd
-
-   # PR already exists (idempotency)
-   gh pr edit --add-reviewer izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees \
-     --add-assignee ruverd
+   gh pr create --draft --title "..." --body "..." \
+     --reviewer "<from-repo>" --assignee "<from-repo>"
+   gh pr edit --add-reviewer "<from-repo>" --add-assignee "<from-repo>"
    ```
-   Fixed list (do not omit): `izaiasneto4`, `samuelfaj`, `chrislong365`, `AirtonSth`, `PauloMendees`.
-   Assignee always: `ruverd`.
-   If one reviewer fails (outside the org / already requested), record it in the summary and continue with the rest — **do not** block the ship.
+   One failed reviewer request must not block the rest.
 9. STATE: PR URL; `ci.status: pending`.
 10. **Hand off to ci_watch** (required with a PR).
 11. Short Brazilian Portuguese summary: "PR open; waiting on CI green to deliver."
@@ -52,4 +45,4 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
 - Never merge / force-push.
 - Never "delivered" with failing checks.
 - Fullstack: ship per repo + ci_watch on **each** PR.
-- Every PR (create or update): fixed reviewers above + assignee `ruverd`.
+- Every PR (create or update): reviewers/assignee from the current repo.

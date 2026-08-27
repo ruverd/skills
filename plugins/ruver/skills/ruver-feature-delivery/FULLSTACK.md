@@ -176,8 +176,7 @@ For **each** repo, after worker_done ok:
 1. quality / thermo in that repo's worktree
 2. commit + push on the **same** branch
 3. draft PR (base main) linking Linear + the sibling PR
-   - reviewers: `izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees`
-   - assignee: `ruverd`
+   - reviewers/assignee from each repo's `AGENTS.md`
 4. **ci_watch** on **each** PR (`gh pr checks` until green) — [CI_DELIVERY.md](CI_DELIVERY.md)
 
 **Delivered** only when **FE and BE** are green.
@@ -209,7 +208,7 @@ Triage writes `scope`. Node/orchestrator writes `worktrees` + `run_id`.
 
 ## 8. Anti-patterns
 
-- Implementing BE+FE only in empath-ui
+- Implementing BE+FE only in the frontend repo
 - Different branch names across repos
 - Worktree in only one repo
 - "Handoff" without orchestration when the user asked to coordinate FE+BE

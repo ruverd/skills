@@ -26,7 +26,7 @@ returns `binary file not supported`. Secret is already the default
 Run the skill script (text gist, then `git push` of the media):
 
 ```bash
-~/.agents/skills/ruver-qa/scripts/publish-evidence.sh \
+../scripts/publish-evidence.sh \
   --repo "$REPO" --pr "$PR" --sha "$SHA" \
   --video "$VIDEO" --artifacts .ruver-qa/artifacts
 ```

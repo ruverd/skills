@@ -7,4 +7,4 @@ argument-hint: "<DEV-XXXX | PR url | resume>"
 
 Alias de **`/ruver-developer`**. **Args:** `$ARGUMENTS`
 
-Seguir `~/.agents/skills/ruver-developer/SKILL.md`.
+Seguir `../skills/ruver-developer/SKILL.md`.

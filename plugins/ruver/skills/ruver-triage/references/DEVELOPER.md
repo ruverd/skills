@@ -9,7 +9,7 @@ so the developer `fix` node has a complete contract.
 
 ```text
 You are ruver_developer in Fix mode for a confirmed PR_BUG.
-Follow ~/.agents/skills/ruver-developer/SKILL.md (Fix mode).
+Follow ../../ruver-developer/SKILL.md (Fix mode).
 
 Constraints:
 1. Work on the EXISTING PR branch only.

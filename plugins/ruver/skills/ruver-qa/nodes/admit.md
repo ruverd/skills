@@ -3,7 +3,7 @@
 **Verb:** gate  
 **Capability:** read/write JOBS queue only
 
-Follow `~/.agents/skills/ruver-bus/JOBS.md` “Enqueue or start QA”.
+Follow `../../ruver-bus/JOBS.md` “Enqueue or start QA”.
 
 1. Init `.ruver-bus/JOBS.md` if missing.
 2. `job_id` = envelope `job_id` or `qa-pr-<n>`.

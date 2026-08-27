@@ -45,7 +45,7 @@ start (ARGS.md: URL | resume | LSTM_REQUEST)
 `nodes/conflict.md` · `nodes/verify.md` · `nodes/grill.md` ·
 `nodes/patch.md` · `nodes/reply.md` · `nodes/report.md`
 
-Concurrency: `~/.agents/skills/ruver-bus/JOBS.md`.
+Concurrency: `../ruver-bus/JOBS.md`.
 
 GitHub API: [references/GITHUB.md](references/GITHUB.md)
 Failures: [references/FAILURES.md](references/FAILURES.md)

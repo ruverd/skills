@@ -4,7 +4,7 @@ description: >
   Use when delivering a Linear ticket, bug, or chore end-to-end
   (implementation through draft PR with CI green) via
   /ruver-feature-delivery or /ruver-fd, or when resuming a run
-  whose HANDOFF.md exists under ~/.grok/ruver/<slug>/.ruver-feature-delivery/.
+  whose HANDOFF.md exists under $RUVER_ROOT/.ruver-feature-delivery/.
   Spine: grill-with-docs → spec → tickets → implement(tdd) → review.
   User-facing chat in Brazilian Portuguese. Unslop. Never write .ruver-* inside a repo.
 ---
@@ -65,7 +65,7 @@ Linear branch `feature/dev-xxxx` (or Linear `gitBranchName`).
 | **`scope: fullstack`** | FE and BE | Orca worktrees, same branch ([FULLSTACK.md](FULLSTACK.md)) |
 
 Ship: review → tester → blast (not light) → **thermo fix all** → commit → push → draft PR
-(reviewers: izaiasneto4,samuelfaj,chrislong365,AirtonSth,PauloMendees · assignee: ruverd)
+(reviewers and assignee: current repo `AGENTS.md` / git defaults)
 → **CI 100% green** (only then **delivered**).
 
 ## Intelligence

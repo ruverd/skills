@@ -12,6 +12,7 @@ argument-hint: "<PR url or owner/repo#N>"
 Orchestrator. You do **not** make the final bug call.
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
+[HOST.md](../../HOST.md) ·
 `ruver-bus` PROTOCOL.md ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
