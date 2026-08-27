@@ -17,7 +17,7 @@ Engine: [`/ruver-feature-delivery`](ruver-feature-delivery.md).
 ## Graph
 
 ```
-goal | Linear id | resume | FAIL+PR_BUG
+goal | ticket | resume | FAIL+PR_BUG
         │
      admit
         │
@@ -34,7 +34,7 @@ deliver      fix
         │
    apply_qa
         │
-   PASS → gh pr ready
+   PASS → ready
    FAIL+PR_BUG → fix
 ```
 
@@ -45,7 +45,7 @@ deliver      fix
 3. **deliver** runs [feature-delivery](ruver-feature-delivery.md) until CI green.
 4. **fix** stays on the existing PR branch.
 5. MERGEABLE + CI green → envelope `QA_REQUEST`.
-6. On `QA_RESULT` PASS → `gh pr ready`. Ready is not merge.
+6. On `QA_RESULT` PASS → mark the PR ready. Ready is not merge.
 
 Workers (`ruver-fd-coder`, tester, shipper, …) write the code. The
 graph engineer only walks edges.

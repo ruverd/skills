@@ -1,8 +1,8 @@
 # Skills
 
-Skills for coding agents. Give one a ticket and it writes the code,
-opens a draft PR, tests it in the browser (with video), and handles
-review. 
+Skills for coding agents. Give one a ticket or a local goal and it
+writes the code, opens a draft PR, exercises the change (browser, e2e,
+or HTTP), and handles review.
 
 The session you talk to is a **graph engineer**, not an implementer.
 It walks a GRAPH (nodes + edges). It writes state under `~/.ruver`.
@@ -108,6 +108,11 @@ app, and in the agent session.
 | A browser | `/qa` on UI changes |
 | The app's e2e runner if it has one (Playwright, Cypress, …) | `/qa` on UI |
 
+Which of those you need is discovered per repo
+([PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md)).
+A local goal does not need a tracker. API-only QA does not need a
+browser. `--no-pr` or a git-only remote ships a commit, not a PR.
+
 **Links in the goal**
 
 If you pass a ticket, spec, or design URL, this session must be able
@@ -158,11 +163,11 @@ Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
 **User-invoked**
 
 - **[ruver-developer](skills/graphs/ruver-developer/SKILL.md)** (`/developer`, `/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
-- **[ruver-qa](skills/graphs/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR in the browser. Comment with video. [page](docs/commands/ruver-qa.md)
+- **[ruver-qa](skills/graphs/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR (browser, e2e, or HTTP). Comment with evidence. [page](docs/commands/ruver-qa.md)
 - **[ruver-triage](skills/graphs/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
 - **[ruver-reviewer](skills/graphs/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
 - **[ruver-lstm](skills/graphs/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
-- **[ruver-goal](skills/graphs/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA + video on the head SHA. [page](docs/commands/ruver-goal.md)
+- **[ruver-goal](skills/graphs/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA evidence on the head SHA. [page](docs/commands/ruver-goal.md)
 
 **Model-invoked**
 
@@ -255,7 +260,7 @@ Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 
 1. Folder under `skills/graphs/<name>/` (or `engines/`).
 2. Relative links only. No `~/.claude`, `~/.grok`, `~/.codex`.
-3. Host primitives → HOST.md. Product policy → the target repo.
+3. Host primitives → HOST.md. Product policy → [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md) plus the target repo.
 4. Add the path to `plugin.json`, then `./install.sh` and commit.
 
 ```bash

@@ -12,12 +12,12 @@ implement product code.
 | Command | Short | When | Page |
 |---|---|---|---|
 | `/ruver-developer` | `/developer` | Ticket, goal, or PR_BUG fix | [ruver-developer](ruver-developer.md) |
-| `/ruver-qa` | `/qa` | Exercise a PR in the browser | [ruver-qa](ruver-qa.md) |
+| `/ruver-qa` | `/qa` | Exercise a PR (browser, e2e, or HTTP) | [ruver-qa](ruver-qa.md) |
 | `/ruver-triage` | — | Classify a QA finding | [ruver-triage](ruver-triage.md) |
 | `/ruver-reviewer` | `/reviewer` | Review a PR / diagnose CI | [ruver-reviewer](ruver-reviewer.md) |
 | `/ruver-lstm` | `/lstm` | Incoming review comments | [ruver-lstm](ruver-lstm.md) |
 | `/ruver-bus` | — | Resume or inspect the stack | [ruver-bus](ruver-bus.md) |
-| `/ruver-goal` | — | Keep going until QA+video | [ruver-goal](ruver-goal.md) |
+| `/ruver-goal` | — | Keep going until QA evidence | [ruver-goal](ruver-goal.md) |
 
 ## Engines
 
@@ -26,7 +26,7 @@ Called by a graph.
 | Command | When | Page |
 |---|---|---|
 | `/ruver-feature-delivery` (`/ruver-fd`) | Grill → spec → tickets → TDD → draft PR | [ruver-feature-delivery](ruver-feature-delivery.md) |
-| `/ruver-code-review` | One GitHub review artifact | [ruver-code-review](ruver-code-review.md) |
+| `/ruver-code-review` | One review artifact per PR | [ruver-code-review](ruver-code-review.md) |
 
 How they connect: [../ARCHITECTURE.md](../ARCHITECTURE.md).
 Role: [../GRAPH_ENGINEER.md](../GRAPH_ENGINEER.md).

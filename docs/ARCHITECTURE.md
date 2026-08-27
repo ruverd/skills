@@ -33,7 +33,7 @@ Every `.ruver-*` directory lives under `$RUVER_ROOT`. See
 ## /ruver-developer
 
 ```
-goal | Linear id | resume | QA_RESULT FAIL+PR_BUG
+goal | ticket | resume | QA_RESULT FAIL+PR_BUG
         │
      admit
         │
@@ -50,7 +50,7 @@ deliver      fix
         │
    apply_qa
         │
-   PASS → gh pr ready
+   PASS → ready
    FAIL+PR_BUG → fix
 ```
 
@@ -71,7 +71,7 @@ PR from args or QA_REQUEST
   → plan           from the diff, before any click
   → execute        browser, e2e, or HTTP; record evidence
   → triage?        product suspicion → bus → /ruver-triage
-  → verdict        comment + video + QA_RESULT
+  → verdict        comment + evidence + QA_RESULT
 ```
 
 Backend-only PRs with no UI sibling: HTTP the changed endpoints.
@@ -104,12 +104,12 @@ Never opens a new PR. Draft stays draft.
 ## Goal loop
 
 `/ruver-goal` uses `schedule_wake` (HOST.md) until the draft PR is
-CI-green, MERGEABLE, and has a QA comment with video on the head SHA.
-CI is often longer than a tool timeout, so the loop polls instead of
-`gh pr checks --watch`.
+CI-green, MERGEABLE, and has a QA comment with evidence on the head
+SHA. CI is often longer than a tool timeout, so the loop polls
+instead of `gh pr checks --watch`.
 
 ## Invariants
 
-- Never merge. `gh pr ready` only after QA PASS.
+- Never merge. Mark the PR ready only after QA PASS.
 - Chat with the user in English. Always apply bundled `unslop`. Never Portuguese.
 - ASK the user only as a last resort.

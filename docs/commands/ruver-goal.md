@@ -2,7 +2,7 @@
 
 Keeps delivery alive **across turns**. CI is often longer than a tool
 timeout. This graph `schedule_wake`s until QA has commented **with
-video** on the head SHA.
+evidence** on the head SHA.
 
 Skill: [`../../skills/graphs/ruver-goal`](../../skills/graphs/ruver-goal).
 
@@ -22,7 +22,8 @@ All must hold on the **current** head SHA:
 2. Required CI green
 3. MERGEABLE
 4. QA comment with `ruver-qa` marker for that SHA
-5. That comment has a **Video:** `https://` URL
+5. That comment has evidence (Video URL when recorded; HTTP record
+   is enough on API-only)
 
 See [COMPLETE.md](../../skills/graphs/ruver-goal/references/COMPLETE.md).
 
@@ -45,7 +46,7 @@ Wake primitive: [HOST.md](../../HOST.md) `schedule_wake`
 
 ## Never
 
-- Claim done without the QA comment + video on **head** SHA
+- Claim done without the QA comment + evidence on **head** SHA
 - `gh pr checks --watch`
 - Spawn graph agents as children
 - A second QA while `qa_active` is another PR

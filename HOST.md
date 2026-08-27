@@ -87,7 +87,7 @@ Claude, Codex, Grok, and Cursor on one machine **share** that tree.
 
 ## Product policy
 
-Reviewers, assignee, sibling repos, test command, Linear, design
+Reviewers, assignee, sibling repos, test command, tracker, design
 system: [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md)
 plus the **current repo** (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING`).
 Do not bake a company's GitHub handles or repo names into a graph node.

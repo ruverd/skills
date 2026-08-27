@@ -1,7 +1,7 @@
 ---
 name: ruver-goal
 description: >
-  Drive developer → CI green → QA comment+video across turns with
+  Drive developer → CI green → QA comment+evidence across turns with
   schedule_wake (HOST.md). Use when /ruver-goal, /ruver_goal, or after
   a draft PR is opened and CI is still pending.
 argument-hint: "<ticket | PR url | status | cancel>"
@@ -10,7 +10,7 @@ argument-hint: "<ticket | PR url | status | cancel>"
 # Ruver goal / loop
 
 The graphs do **not** finish in one turn. CI takes 20–30 min. This
-skill keeps the session working until QA has **commented with video**.
+skill keeps the session working until QA has **commented with evidence**.
 
 **REQUIRED:** [COMPLETE.md](references/COMPLETE.md) ·
 [LOOP.md](references/LOOP.md) · bus PROTOCOL.md ·
@@ -35,7 +35,7 @@ Chat English. Unslop always.
 
 ```text
 Draft PR for <id> is CI-green, MERGEABLE, and has a ruver-qa
-comment on the head SHA that includes a video URL.
+comment on the head SHA that includes evidence.
 ```
 
 If the host has a `/goal` (or equivalent) command, register that
@@ -66,7 +66,7 @@ Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
 
 ## Never
 
-- Claim the goal done without the QA comment + video on **head** SHA
+- Claim the goal done without the QA comment + evidence on **head** SHA
 - Sit in `--watch` (CI is longer than a tool timeout)
 - Spawn graph-agents as children (bus switch / load GRAPH)
 - Start a second QA while `qa_active` is another PR
@@ -74,4 +74,4 @@ Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
 
 ## After QA comment
 
-Cancel the loop. Report in English: PR, SHA, QA verdict, comment URL, video URL.
+Cancel the loop. Report in English: PR, SHA, QA verdict, comment URL, evidence URL.

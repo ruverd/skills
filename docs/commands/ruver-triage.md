@@ -15,11 +15,11 @@ Skill: [`../../skills/graphs/ruver-triage`](../../skills/graphs/ruver-triage).
 ```
 TRIAGE_REQUEST or args
   → receive          PR link required
-  → inspect          diff + Linear + each finding
+  → inspect          diff + tracker + each finding
   → reproduce
   → classify         one class per finding
   → act
-       ├ NEW_BUG     → Linear ticket
+       ├ NEW_BUG     → tracker ticket
        ├ PR_BUG      → no ticket, no jump to developer
        └ others      → no new ticket
        └ always: TRIAGE_RESULT → pop (back to QA)
@@ -31,7 +31,7 @@ TRIAGE_REQUEST or args
 |---|---|---|
 | `PR_BUG` | This PR introduced it | QA verdict FAIL → developer **fix** |
 | `EXISTING_BUG` | Was already there | Note. Do not block this PR |
-| `NEW_BUG` | Real, not this PR | Linear ticket |
+| `NEW_BUG` | Real, not this PR | Tracker ticket |
 | `NOT_A_BUG` | Intended / invalid | Note |
 | `BLOCKED` | Cannot prove (env/auth) | Note |
 
@@ -46,7 +46,7 @@ TRIAGE_REQUEST or args
 
 - Spawn `ruver_developer`.
 - Skip QA verdict on a PR_BUG.
-- Invent a Linear ticket for PR_BUG.
+- Invent a tracker ticket for PR_BUG.
 - Classify without trying to reproduce.
 
 ## Related

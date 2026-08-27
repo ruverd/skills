@@ -38,8 +38,10 @@ tester / quality / shipper are workers (`ruver-fd-coder`, …).
 
 ## What “delivered” means here
 
-Draft PR **and** required CI green. Until then `status ≠ done`.
-Reviewers and assignee: [PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md).
+Draft PR **and** required CI green. `--no-pr` or `forge=git`: commit
+(+ push). No PR. Until then `status ≠ done`.
+Forge, tracker, toolchain, reviewers, assignee:
+[PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md).
 
 ## Never
 

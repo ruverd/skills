@@ -63,7 +63,7 @@ general-purpose worker + worktree. Never spawn a graph as a child.
 ## Never
 
 - `spawn_worker` with types `ruver_qa` / `ruver_developer` / …
-- Two Playwright runs
+- Two QA execute runs
 - Two graphs “active” without a stack
 
 ## Related

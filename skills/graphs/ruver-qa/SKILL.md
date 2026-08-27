@@ -26,8 +26,8 @@ before any test. Spawn execute nodes only.
 Outbound triage → **bus switch** to `triage`. Never spawn `ruver_triage`.
 
 On `TRIAGE_RESULT`, continue at **verdict** (do not re-run execute).
-When done: publish **video** via `scripts/publish-evidence.sh` (never
-`gh gist create` on binaries), **post `gh pr comment` with QA + video**
+When done: publish evidence via `scripts/publish-evidence.sh` (never
+`gh gist create` on binaries), **post `gh pr comment` with QA + evidence**
 ([references/COMMENT.md](references/COMMENT.md)), then write `QA_RESULT`
 and **pop** the bus stack. Chat-only is not done.
 

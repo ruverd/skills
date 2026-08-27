@@ -1,5 +1,5 @@
 ---
-description: Drive developer → CI green → QA comment+video via /goal and /loop.
+description: Drive developer → CI green → QA comment+evidence via /goal and /loop.
 argument-hint: "<ticket | PR url | status | cancel>"
 ---
 
