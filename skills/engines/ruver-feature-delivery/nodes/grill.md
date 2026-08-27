@@ -9,6 +9,4 @@ Walk the tree internally. DECIDE and log. ASK only as last resort (very importan
 
 New module: run `architect`. Take the synthesized sketch (DECIDE). Checkpoint only as last-resort policy.
 
-Do **not** spawn `ruver-fd-brainstormer`. That agent is a leftover name.
-
 Done (frontier empty) → **spec**.

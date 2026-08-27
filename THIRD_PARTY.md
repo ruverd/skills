@@ -2,7 +2,7 @@
 
 These files are copied into this repo so a clone runs without extra
 marketplaces. Original licenses apply to those copies. Graph files
-(`skills/graphs`, `skills/engines`, `skills/branch`) remain MIT
+(`skills/graphs`, `skills/engines`) remain MIT
 © Ruver Dornelas.
 
 | Origin | License | Copied skills |

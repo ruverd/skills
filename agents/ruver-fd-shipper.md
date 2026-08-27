@@ -20,8 +20,7 @@ Follow `../skills/engines/ruver-feature-delivery/nodes/shipper.md`.
    no "Generated with", no trailers of any kind.**
 4. Idempotency: before creating anything, `gh pr list --head <branch>` — if a PR
    already exists, update it instead of creating a duplicate.
-5. Commit + push (no force). If the `/ruver-validate-branch` skill exists in this
-   environment, run it BEFORE push and stop on failure.
+5. Commit + push (no force).
 6. If `open_pr: true`: draft PR (use the repo's `pr-description` skill for the body
    when available). Reviewers + assignee from the current repo `AGENTS.md`.
    One failed reviewer request must not block the rest.

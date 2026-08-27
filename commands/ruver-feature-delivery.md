@@ -83,7 +83,7 @@ Do not invent a "ready" endpoint. Tell the user in Brazilian Portuguese (draft l
 1. Final reviewer (whole diff) + tester hard gate — if not already covered in
    the ticket loop (IMPLEMENTATION.md). Shipper **refuses** without those gates in STATE.
 2. Quality thermo fix all.
-3. Shipper: `/ruver-validate-branch` (if it exists) → commit + push + draft PR
+3. Shipper: commit + push + draft PR
    (no Co-Authored-By / trailers). Reviewers and assignee from the
    current repo `AGENTS.md`.
 4. **`ruver-fd-ci` / CI_DELIVERY.md:**

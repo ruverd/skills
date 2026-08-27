@@ -1,9 +1,5 @@
 # Skill map
 
-This graph does **not** use Superpowers as the spine
-(`brainstorming`, `writing-plans`, `subagent-driven-development`,
-`systematic-debugging`).
-
 Spine (adapted) plus bundled primitives in `skills/lib/`:
 
 ```
@@ -11,8 +7,7 @@ grill-with-docs → to-spec → to-tickets → implement(/tdd) → code-review
 ```
 
 A clone of this repo is enough. Load primitives **by name** after
-`install.sh` (they flatten next to the graphs). Do not require pstack,
-Matt Pocock, or Superpowers to be installed separately.
+`install.sh` (they flatten next to the graphs).
 
 Bugs: `diagnose` (then one implement ticket). Ungrillable feel:
 prototype, then DECIDE.
@@ -45,7 +40,5 @@ Load the skill, then follow the **adapted** node.
 | `receiving-code-review` | LSTM verify | Not this graph; `/lstm` |
 
 `implement` does not reopen the plan. That is the point.
-
-Do **not** start this graph with `using-superpowers`.
 
 Sources: [THIRD_PARTY.md](../../../THIRD_PARTY.md).

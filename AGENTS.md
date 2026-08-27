@@ -2,7 +2,7 @@
 
 Marketplace of Ruver agent skills. Not an application repo.
 
-- Canonical skill files live under `skills/{graphs,engines,branch,lib}/`.
+- Canonical skill files live under `skills/{graphs,engines,lib}/`.
 - `skills/lib/` is the bundled primitives (`unslop`, `grill-with-docs`, `receiving-code-review`, `principle-*`, …). Graphs must load those, not an external marketplace.
 - Graphs in the same category stay siblings (`../ruver-bus/PROTOCOL.md`).
 - Cross-category links use `../../engines/...` / `../../graphs/...`.

@@ -1,6 +1,6 @@
 {
   "name": "ruver",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",
@@ -25,9 +25,6 @@
     "./skills/graphs/ruver-goal",
     "./skills/engines/ruver-feature-delivery",
     "./skills/engines/ruver-code-review",
-    "./skills/branch/ruver-validate-branch",
-    "./skills/branch/ruver-create-pr-frontend",
-    "./skills/branch/ruver-create-pr-backend",
     "./skills/lib/architect",
     "./skills/lib/blast-radius",
     "./skills/lib/diagnose",

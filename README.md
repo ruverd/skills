@@ -66,7 +66,7 @@ cd skills
 ./install.sh --uninstall
 ```
 
-That flattens `skills/{graphs,engines,branch,lib}/<name>` into
+That flattens `skills/{graphs,engines,lib}/<name>` into
 `~/.agents/skills`, plus the matching homes for Grok, Claude, Cursor,
 and Codex.
 
@@ -147,18 +147,6 @@ Prefer `/ruver-developer` over raw `/ruver-fd` when you also want
 MERGEABLE + QA. Prefer `/ruver-reviewer` over raw `/ruver-code-review`
 when CI / mergeability need a graph around the engine.
 
-### Branch
-
-Local helpers. Source: [`skills/branch`](skills/branch).
-
-**User-invoked**
-
-- **[ruver-validate-branch](skills/branch/ruver-validate-branch/SKILL.md)** (`/ruver-validate-branch`): Local gates, then ask before push. [page](docs/commands/ruver-validate-branch.md)
-- **[ruver-create-pr-frontend](skills/branch/ruver-create-pr-frontend/SKILL.md)** (`/ruver-create-pr-frontend`): Draft an FE PR body. Does not open it. [page](docs/commands/ruver-create-pr.md)
-- **[ruver-create-pr-backend](skills/branch/ruver-create-pr-backend/SKILL.md)** (`/ruver-create-pr-backend`): Draft a BE PR body. Does not open it. [page](docs/commands/ruver-create-pr.md)
-
-`ruver-create-pr-*` are empath-specific extras. The core graphs are not.
-
 ## How the graphs fit
 
 ```
@@ -211,7 +199,6 @@ skills/                         # this repo
   skills/
     graphs/                     # main-thread graph engineer
     engines/                    # delivery + review engines
-    branch/                     # local validation + PR body
     lib/                        # bundled primitives (unslop, grill, tdd, …)
   agents/                       # fd workers + graph roles
   commands/                     # slash aliases
@@ -226,9 +213,8 @@ go through `../../engines/...` (and resolve via the real path).
 ## What this repo does not include
 
 - Runtime `.ruver-*` state. That stays in `~/.ruver/`.
-- Optional extras you may already have (caveman, cmux, `/simplify`).
-  Core graphs do not load them. `/ruver-validate-branch` skips
-  `/simplify` when it is absent.
+- Optional extras you may already have (caveman, cmux). The graphs
+  do not load them.
 
 Primitives the graphs load (`unslop`, `grill-with-docs`,
 `receiving-code-review`, `tdd`, `how`, `why`, the `principle-*`
@@ -243,7 +229,7 @@ QA still expects `gh`, a browser, and Playwright on the target app.
 
 Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 
-1. Folder under `skills/graphs/<name>/` (or `engines/` / `branch/`).
+1. Folder under `skills/graphs/<name>/` (or `engines/`).
 2. Relative links only. No `~/.claude`, `~/.grok`, `~/.codex`.
 3. Host primitives → HOST.md. Product policy → the target repo.
 4. Add the path to `plugin.json`, then `./install.sh` and commit.

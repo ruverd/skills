@@ -15,12 +15,10 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
    confirm exit codes in `.ruver-feature-delivery/gates.log` if it exists.
 2. Branch == `linear_branch` if Linear.
 3. Idempotency: `gh pr list --head <branch>` — PR already exists → update, do not recreate.
-4. If skill `/ruver-validate-branch` exists in the environment: run it BEFORE push;
-   failed → stop.
-5. Commit (cite DEV-XXXX). **No Co-Authored-By, no "Generated with", no trailers.**
-6. Push (`-u`, no force).
-7. Draft PR (default) with Linear link (body via repo `pr-description` skill if it exists).
-8. **Reviewers + assignee** from the current repo `AGENTS.md` / `CLAUDE.md`
+4. Commit (cite DEV-XXXX). **No Co-Authored-By, no "Generated with", no trailers.**
+5. Push (`-u`, no force).
+6. Draft PR (default) with Linear link (body via repo `pr-description` skill if it exists).
+7. **Reviewers + assignee** from the current repo `AGENTS.md` / `CLAUDE.md`
    (or git `user.name` as assignee if none listed). On create and update:
    ```bash
    gh pr create --draft --title "..." --body "..." \
@@ -28,9 +26,9 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
    gh pr edit --add-reviewer "<from-repo>" --add-assignee "<from-repo>"
    ```
    One failed reviewer request must not block the rest.
-9. STATE: PR URL; `ci.status: pending`.
-10. **Hand off to ci_watch** (required with a PR).
-11. Short Brazilian Portuguese summary: "PR open; waiting on CI green to deliver."
+8. STATE: PR URL; `ci.status: pending`.
+9. **Hand off to ci_watch** (required with a PR).
+10. Short Brazilian Portuguese summary: "PR open; waiting on CI green to deliver."
 
 ## Done
 

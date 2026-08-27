@@ -8,4 +8,4 @@ Do not publish a PRD to Linear. Do not wait for "fecha o spec?". Go to **tickets
 
 full_feature: optional `interrogate` on the spec (read-only). Act on findings: DECIDE from spec + repo. ASK only last-resort policy.
 
-Main thread. Do not spawn `ruver-fd-planner`.
+Main thread.

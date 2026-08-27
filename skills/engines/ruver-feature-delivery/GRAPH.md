@@ -2,7 +2,7 @@
 
 ## Spine
 
-Bundled primitives. Not Superpowers brainstorm / writing-plans / SDD.
+Bundled primitives.
 
 ```
 goal / resume

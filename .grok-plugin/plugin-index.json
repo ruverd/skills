@@ -39,18 +39,6 @@
           {
             "name": "ruver-goal",
             "description": "Drive developer → CI green → QA comment+video across turns with /goal and /loop."
-          },
-          {
-            "name": "ruver-validate-branch",
-            "description": "Pre-PR local validation until typecheck, lint, and tests are green."
-          },
-          {
-            "name": "ruver-create-pr-frontend",
-            "description": "Draft an empath-ui PR description."
-          },
-          {
-            "name": "ruver-create-pr-backend",
-            "description": "Draft an empath-api-v2 PR description."
           }
         ],
         "agents": [

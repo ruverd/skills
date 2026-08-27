@@ -23,7 +23,7 @@ Load now:
 - [DECISION_POLICY.md](DECISION_POLICY.md)
 - `ruver-bus` [DISK.md](../../graphs/ruver-bus/DISK.md)
 
-Spine (bundled primitives, not Superpowers):
+Spine (bundled primitives):
 
 ```
 grill-with-docs → to-spec → to-tickets → implement(/tdd) → code-review

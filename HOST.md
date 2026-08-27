@@ -4,7 +4,7 @@ Graphs name **primitives**. This file maps them onto the harness in
 front of you. If a node mentions a primitive, do that mapping here.
 Do not copy harness APIs into GRAPH.md.
 
-In this repo, skills live under `skills/{graphs,engines,branch,lib}/`.
+In this repo, skills live under `skills/{graphs,engines,lib}/`.
 After install they flatten to siblings (`ruver-qa` next to `ruver-bus`
 and `unslop`).
 Resolve a skill **by name** via the host skill loader, or by the

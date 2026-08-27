@@ -11,4 +11,4 @@ Seams: apply [../TDD.md](../TDD.md). Default table, DECIDE. Record `seams` in ST
 
 Do **not** create Linear issues from this node. [BLOCKERS.md](../BLOCKERS.md) is the only create path (missing contract).
 
-Main thread. Do not spawn `ruver-fd-planner`.
+Main thread.

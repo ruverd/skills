@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install Ruver skills into the local agent homes.
 #
-# Default: flatten skills/{graphs,engines,branch,lib}/<name> into
+# Default: flatten skills/{graphs,engines,lib}/<name> into
 #   ~/.agents  ~/.grok  ~/.claude  ~/.cursor  ~/.codex
 # so /ruver-developer, /ruver-lstm, and /ruver-qa stay flat slash names.
 #
@@ -113,11 +113,11 @@ install_tree() {
   done
 }
 
-# Nested skills/{graphs,engines,branch,lib}/<name> → dest/<name>
+# Nested skills/{graphs,engines,lib}/<name> → dest/<name>
 install_skills() {
   local dest_dirs=("$@")
   local cat src_dir src dest dest_dir name
-  for cat in graphs engines branch lib; do
+  for cat in graphs engines lib; do
     src_dir="$REPO/skills/$cat"
     [[ -d "$src_dir" ]] || continue
     for src in "$src_dir"/*; do
