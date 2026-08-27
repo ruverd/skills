@@ -2,7 +2,7 @@
 
 **Verb:** verify
 **Capability:** execute (test/typecheck); no product fix
-**Skills:** `principle-prove-it-works`. A skipped command is not a pass.
+**Skills:** bundled `principle-prove-it-works`. A skipped command is not a pass.
 
 ## Mission
 

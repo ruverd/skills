@@ -8,7 +8,7 @@ marketplaces. Original licenses apply to those copies. Graph files
 | Origin | License | Copied skills |
 |---|---|---|
 | [mattpocock/skills](https://github.com/mattpocock/skills) | MIT © Matt Pocock | `grill-with-docs`, `grill-me`, `diagnose`, `to-prd`, `to-issues` |
-| [pstack](https://github.com/poteto/pstack) (Lauren Tan) | MIT © Lauren Tan | `unslop`, `how`, `why`, `tdd`, `blast-radius`, `architect`, `figure-it-out`, `interrogate`, `typescript-best-practices`, `no-comments`, `technical-writing` |
+| [pstack](https://github.com/poteto/pstack) (Lauren Tan) | MIT © Lauren Tan | `unslop`, `how`, `why`, `tdd`, `blast-radius`, `architect`, `figure-it-out`, `interrogate`, `typescript-best-practices`, `no-comments`, `technical-writing`, `show-me-your-work`, `principle-fix-root-causes`, `principle-prove-it-works`, `principle-sequence-verifiable-units`, `principle-redesign-from-first-principles` |
 | [superpowers](https://github.com/obra/superpowers) (Jesse Vincent) | MIT © Jesse Vincent | `receiving-code-review` |
 | Cursor team kit | as shipped in the original skill | `thermo-nuclear-code-quality-review` |
 

@@ -37,6 +37,11 @@ Load the skill, then follow the **adapted** node.
 | `typescript-best-practices` / `no-comments` | review | `.ts` / `.tsx` |
 | `technical-writing` | spec, PR body | |
 | `thermo-nuclear-code-quality-review` | `quality` | Always `fix all`. Not optional. |
+| `principle-fix-root-causes` | `diagnose` | Symptom guards are off. |
+| `principle-sequence-verifiable-units` | `tickets` / `implement*` | One ticket, verify, then the next. |
+| `principle-prove-it-works` | `tester` | Real commands. A skip is not a pass. |
+| `principle-redesign-from-first-principles` | `no-comments` | Intent only. Does not widen the fence. |
+| `show-me-your-work` | `grill` | Append `decisions.tsv`. TSV format only. |
 | `receiving-code-review` | LSTM verify | Not this graph; `/lstm` |
 
 `implement` does not reopen the plan. That is the point.

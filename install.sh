@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install Ruver skills into the local agent homes.
 #
-# Default: flatten skills/{graphs,engines,branch}/<name> into
+# Default: flatten skills/{graphs,engines,branch,lib}/<name> into
 #   ~/.agents  ~/.grok  ~/.claude  ~/.cursor  ~/.codex
 # so /ruver-developer, /ruver-lstm, and /ruver-qa stay flat slash names.
 #

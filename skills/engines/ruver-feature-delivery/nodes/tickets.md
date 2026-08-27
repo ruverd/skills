@@ -4,7 +4,8 @@
 
 Write `$RUVER_ROOT/.ruver-feature-delivery/TICKETS.md` from [../templates/TICKETS.md](../templates/TICKETS.md). Tracer-bullet **vertical** slices. Each ticket names its blockers.
 
-One ticket = one implement window. `principle-sequence-verifiable-units`.
+One ticket = one implement window. Load bundled
+`principle-sequence-verifiable-units`.
 
 Seams: apply [../TDD.md](../TDD.md). Default table, DECIDE. Record `seams` in STATE.
 

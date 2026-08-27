@@ -18,6 +18,11 @@ install required.
 | `typescript-best-practices` / `no-comments` | review |
 | `technical-writing` | spec, PR body |
 | `thermo-nuclear-code-quality-review` | quality `fix all` |
+| `principle-fix-root-causes` | diagnose |
+| `principle-sequence-verifiable-units` | tickets / implement* |
+| `principle-prove-it-works` | tester |
+| `principle-redesign-from-first-principles` | `no-comments` intent |
+| `show-me-your-work` | grill `decisions.tsv`; figure-it-out trail |
 
 After `install.sh` they flatten next to the graphs (`/unslop`, `/how`, …).
 Sources and licenses: [THIRD_PARTY.md](../../THIRD_PARTY.md).

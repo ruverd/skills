@@ -12,8 +12,8 @@ Follow:
 
 - `../skills/engines/ruver-feature-delivery/nodes/diagnose.md`
 - bundled `diagnose` (reproduce → minimise → hypothesise → instrument)
-- `principle-fix-root-causes`
-- Hard / no playbook: `figure-it-out`
+- bundled `principle-fix-root-causes`
+- Hard / no playbook: bundled `figure-it-out`
 
 Iron law: NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST. No product fix in this node.
 

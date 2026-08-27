@@ -238,13 +238,16 @@ go through `../../engines/...` (and resolve via the real path).
 ## What this repo does not include
 
 - Runtime `.ruver-*` state. That stays in `~/.ruver/`.
-- Optional extras you may already have (caveman, cmux, …). The graphs
-  do not need them.
+- Optional extras you may already have (caveman, cmux, `/simplify`).
+  Core graphs do not load them. `/ruver-validate-branch` skips
+  `/simplify` when it is absent.
 
 Primitives the graphs load (`unslop`, `grill-with-docs`,
-`receiving-code-review`, `tdd`, `how`, `why`, …) live in
+`receiving-code-review`, `tdd`, `how`, `why`, the `principle-*`
+files, `show-me-your-work`, …) live in
 [`skills/lib/`](skills/lib/README.md). Sources:
-[THIRD_PARTY.md](THIRD_PARTY.md).
+[THIRD_PARTY.md](THIRD_PARTY.md). A clone of this repo is enough;
+do not install pstack, Matt Pocock, or Superpowers separately.
 
 QA still expects `gh`, a browser, and Playwright on the target app.
 

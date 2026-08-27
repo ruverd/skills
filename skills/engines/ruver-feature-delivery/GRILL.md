@@ -67,4 +67,5 @@ Feel, layout, "one page or three": prototype, then DECIDE the smaller option tha
 
 ## Done
 
-Frontier empty → spec. Short Brazilian Portuguese rollup of decisions. Append rows to `decisions.tsv` (`show-me-your-work`).
+Frontier empty → spec. Short Brazilian Portuguese rollup of decisions.
+Append rows to `decisions.tsv` (bundled `show-me-your-work` TSV format).

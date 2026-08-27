@@ -18,7 +18,9 @@ goal / resume
   → shipper → ci_watch
 ```
 
-`implement*` is one fresh coder subagent **per ticket**. Verify the ticket before starting the next (`principle-sequence-verifiable-units`).
+`implement*` is one fresh coder subagent **per ticket**. Verify the
+ticket before starting the next (bundled
+`principle-sequence-verifiable-units`).
 
 Grill, spec, and tickets run on the **main thread**. Implement / review / diagnose / tester / quality / shipper / ci are nodes (subagents where the adapter says so).
 
