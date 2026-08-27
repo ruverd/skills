@@ -1,0 +1,29 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ai-skills",
+  "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments.",
+  "owner": {
+    "name": "Ruver Dornelas",
+    "email": "ruverd@gmail.com",
+    "url": "https://github.com/ruverd"
+  },
+  "plugins": [
+    {
+      "name": "ruver",
+      "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Ruver Dornelas",
+        "email": "ruverd@gmail.com"
+      },
+      "source": "./plugins/ruver",
+      "category": "development",
+      "tags": [
+        "ruver",
+        "tdd",
+        "qa",
+        "review"
+      ]
+    }
+  ]
+}

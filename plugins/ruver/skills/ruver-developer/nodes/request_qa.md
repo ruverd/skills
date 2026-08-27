@@ -1,0 +1,17 @@
+# Node: request_qa
+
+**Verb:** switch or enqueue  
+**Capability:** write bus only
+
+Mandatory after CI green **and** MERGEABLE. Do not stop at "delivered".
+
+Write `QA_REQUEST` ([../references/QA_HANDOFF.md](../references/QA_HANDOFF.md))
+to `.ruver-bus/jobs/<job_id>/qa-request.md`. PR link + `job_id` required.
+
+Then **Enqueue or start QA** (`ruver-bus/JOBS.md`):
+
+- Slot free → copy to `ENVELOPE.md`, bus switch to `qa`.
+- Slot taken → append `qa_waiting`. Do not switch. Do not
+  spawn `ruver_qa`. Tell the user their queue position (in Brazilian Portuguese).
+
+QA must still comment + video before **this job** is done.

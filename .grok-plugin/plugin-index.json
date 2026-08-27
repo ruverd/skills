@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "plugins": {
+    "ruver": {
+      "components": {
+        "skills": [
+          {
+            "name": "ruver-developer",
+            "description": "Deliver a Linear ticket via grill → spec → tickets → TDD, then MERGEABLE + QA."
+          },
+          {
+            "name": "ruver-lstm",
+            "description": "Author-side of review. Patch should-fix on the same branch, then reply and re-request."
+          },
+          {
+            "name": "ruver-qa",
+            "description": "QA a GitHub PR. Plan from the diff, then Playwright + browser. Comment with video."
+          },
+          {
+            "name": "ruver-feature-delivery",
+            "description": "Grill → spec → tickets → TDD implement → review → draft PR with CI green."
+          },
+          {
+            "name": "ruver-bus",
+            "description": "Shared bus for the ruver graphs. Envelopes and the QA slot."
+          },
+          {
+            "name": "ruver-reviewer",
+            "description": "Review a PR via ruver-code-review. Never merges."
+          },
+          {
+            "name": "ruver-code-review",
+            "description": "Adaptive PR review via gh. One artifact per PR."
+          },
+          {
+            "name": "ruver-triage",
+            "description": "Classify a QA finding as PR_BUG / EXISTING_BUG / NEW_BUG / NOT_A_BUG / BLOCKED."
+          },
+          {
+            "name": "ruver-goal",
+            "description": "Drive developer → CI green → QA comment+video across turns with /goal and /loop."
+          },
+          {
+            "name": "ruver-validate-branch",
+            "description": "Pre-PR local validation until typecheck, lint, and tests are green."
+          },
+          {
+            "name": "ruver-create-pr-frontend",
+            "description": "Draft an empath-ui PR description."
+          },
+          {
+            "name": "ruver-create-pr-backend",
+            "description": "Draft an empath-api-v2 PR description."
+          }
+        ],
+        "agents": [
+          { "name": "ruver_developer", "description": "Main-thread developer graph." },
+          { "name": "ruver_qa", "description": "Main-thread QA graph." },
+          { "name": "ruver_reviewer", "description": "Main-thread reviewer graph." },
+          { "name": "ruver_triage", "description": "Main-thread triage graph." },
+          { "name": "ruver-fd-coder", "description": "Implement one ticket, TDD red → green." },
+          { "name": "ruver-fd-tester", "description": "Hard gate. Real exit codes." },
+          { "name": "ruver-fd-shipper", "description": "Commit, push, draft PR. Never merge." }
+        ],
+        "commands": [
+          { "name": "ruver-developer" },
+          { "name": "ruver-lstm" },
+          { "name": "ruver-qa" },
+          { "name": "ruver-fd" }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ai-skills",
+  "owner": {
+    "name": "Ruver Dornelas",
+    "email": "ruverd@gmail.com"
+  },
+  "metadata": {
+    "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments."
+  },
+  "plugins": [
+    {
+      "name": "ruver",
+      "source": "plugins/ruver",
+      "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
+      "category": "developer-tools",
+      "tags": [
+        "ruver",
+        "tdd",
+        "qa",
+        "review"
+      ]
+    }
+  ]
+}

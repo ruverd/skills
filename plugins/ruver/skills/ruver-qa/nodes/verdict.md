@@ -1,0 +1,19 @@
+# Node: verdict
+
+**Verb:** close
+
+1. Map TRIAGE_RESULT via [../references/HANDOFF.md](../references/HANDOFF.md).
+2. **Publish evidence** with
+   `~/.agents/skills/ruver-qa/scripts/publish-evidence.sh`
+   (never `gh gist create` on binaries). Then **post the PR comment**
+   — [../references/COMMENT.md](../references/COMMENT.md).
+   No comment → this node has not finished.
+   Write `video_url` and `comment_url` into STATE.
+3. Write `QA_RESULT` envelope. Pop stack.
+4. Run caller `apply_qa` (if developer is on the stack) **before**
+   starting another QA.
+5. Clear `qa_active`. Dequeue next (`ruver-bus/JOBS.md`).
+6. If `.ruver-goal/STATE.md` has `loop_id` and COMPLETE.md is satisfied
+   (or a head-SHA comment now exists), `scheduler_delete` that loop.
+
+Never FAIL a suspected product bug without triage unless unambiguous.
