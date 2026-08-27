@@ -82,6 +82,32 @@ Then run a graph:
 /developer
 ```
 
+## Dependencies
+
+Not skills. They must already exist on the machine, in the target
+app, and in the agent session.
+
+**CLI / app**
+
+| Need | Used by |
+|---|---|
+| [`gh`](https://cli.github.com/) authenticated | `/developer`, `/reviewer`, `/lstm`, `/qa` |
+| A browser | `/qa` |
+| Playwright on the target app | `/qa` |
+
+**MCP** (connected in this session)
+
+| Server (typical name) | Required when |
+|---|---|
+| Linear (`linear-server`) | `/developer` with a ticket (`DEV-1234`). `/triage` when filing `NEW_BUG` |
+| Figma | Ticket has a Figma URL (UI work) |
+| Sentry | Ticket has a Sentry URL (bug) |
+| Notion | Ticket points at Notion as the spec / AC |
+
+Linear is the usual one. The others are a hard gate **only if** the
+ticket or goal names them. A missing **critical** MCP stops the
+graph; it does not invent the ticket.
+
 ## Graph engineer
 
 The main thread of `/ruver-developer`, `/ruver-qa`, `/ruver-triage`,
@@ -214,17 +240,6 @@ so `/ruver-developer` still works. Graphs in the same category keep
 - Runtime `.ruver-*` state. That stays in `~/.ruver/`.
 - Optional extras you may already have (caveman, cmux). The graphs
   do not load them.
-
-## Dependencies
-
-Not skills. They must already exist on the machine and in the target
-app:
-
-| Need | Used by |
-|---|---|
-| [`gh`](https://cli.github.com/) authenticated | developer, reviewer, lstm, qa |
-| A browser | `/qa` |
-| Playwright on the target app | `/qa` |
 
 ## Add or edit a skill
 
