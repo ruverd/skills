@@ -25,8 +25,8 @@ Follow:
    unreachable (auth/offline), never "this subagent lacks tools".
 3. If a **critical** source cannot be accessed:
    - **Do not invent** any of its content.
-   - Write STATE: `mcp_gate: failed`, full `mcp_gate_error_pt`.
-   - Print the exact error block from MCP_CONTEXT.md ("ERROR: MCP unreachable"), in Brazilian Portuguese.
+   - Write STATE: `mcp_gate: failed`, full `mcp_gate_error`.
+   - Print the exact error block from MCP_CONTEXT.md ("ERROR: MCP unreachable"), in English.
    - Return `result: blocked`. Stop. No implement.
 4. If accessible: fetch fully → `*-context.md` + `mcp-sources.md`.
 5. Linear OK → checkout `gitBranchName` or `feature/dev-xxxx`.

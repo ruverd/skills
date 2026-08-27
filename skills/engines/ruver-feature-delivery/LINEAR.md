@@ -27,7 +27,7 @@ If the goal has a ticket and MCP `linear-server` fails / is offline / needs auth
 
 1. **Do not** invent AC / description / comments.
 2. **Do not** implement.
-3. Emit the error in Brazilian Portuguese (template in [MCP_CONTEXT.md](MCP_CONTEXT.md)):
+3. Emit the error in English (template in [MCP_CONTEXT.md](MCP_CONTEXT.md)):
 
 ```text
 ## ERROR: MCP unreachable

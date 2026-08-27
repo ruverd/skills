@@ -18,6 +18,6 @@ Classify the goal. Write `work_kind`, **`scope`** (`frontend_only` | `backend_on
 
 If FE+BE both needed → `scope: fullstack` (see FULLSTACK.md). No product code.
 
-If confidence is low and the path choice is consequential, ASK only as last resort: `waiting_user` with one multiple-choice question in Brazilian Portuguese. Prefer DECIDE.
+If confidence is low and the path choice is consequential, ASK only as last resort: `waiting_user` with one multiple-choice question in English. Prefer DECIDE.
 
 Return: result, work_kind, path, confidence, route_reason.

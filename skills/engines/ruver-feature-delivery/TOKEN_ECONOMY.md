@@ -13,7 +13,7 @@ for the end (CI green / handoff).
 | Paths + 20–40 line excerpts | Dumping whole files into the prompt |
 | Fresh subagent **with a minimal prompt** | Passing the session history to the subagent |
 | 1 parallel tool call when independent | Re-read loops on the same file |
-| User chat: short Brazilian Portuguese (status + next step) | Narrating every tool call |
+| User chat: short English (status + next step) | Narrating every tool call |
 | Incremental commits | Loading a 50-file diff into the orchestrator |
 
 ## By phase
@@ -55,7 +55,7 @@ Do NOT read all of SPEC/TICKETS if the ticket text is already in the prompt
 
 ## User-facing compression
 
-Unslop. [VOICE.md](VOICE.md). Preferred format (spoken in Brazilian Portuguese):
+Unslop. [VOICE.md](VOICE.md). Preferred format (spoken in English):
 
 ```text
 S: phase + branch + mcp_gate

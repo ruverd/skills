@@ -61,7 +61,7 @@ ci_fix_loops: 5   # default; lower on repos whose CI exceeds 15 min
 If loops blow / infinite flake / failure on main that is unrelated:
 
 - merge latest `main` when that is the case
-- or `status: escalated` + a Brazilian Portuguese summary (PR URL, red checks, logs)
+- or `status: escalated` + a English summary (PR URL, red checks, logs)
 
 **Forbidden:** declare done with CI red/pending.
 **Forbidden:** `--no-verify` to "pass".
@@ -91,4 +91,4 @@ Call it **delivered** only when you have:
 - CI green (check list or "all green")
 - branch + SHA
 
-Speak that summary in Brazilian Portuguese. Fullstack: FE green + BE green.
+Speak that summary in English. Fullstack: FE green + BE green.

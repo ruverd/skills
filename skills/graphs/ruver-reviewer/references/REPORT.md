@@ -32,8 +32,8 @@ ruver-code-review: APPROVED | CHANGES_REQUESTED | DEFERRED | SKIPPED
 
 Do not report only symptoms.
 
-Chat example (PT-BR):
+Chat example:
 
-> O CI falhou no E2E porque o serviço X não está no ambiente. O código
-> do PR não participa desse fluxo e o mesmo teste falha na base.
-> Classificação: INFRASTRUCTURE FAILURE.
+> CI failed on E2E because service X is not in the environment. The PR
+> code is not on that path, and the same test fails on the base branch.
+> Classification: INFRASTRUCTURE FAILURE.

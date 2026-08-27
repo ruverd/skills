@@ -53,7 +53,7 @@ on this machine is **one slot**.
 3. If main is **busy** → `lane=worker`:
    - Create a worktree ([Worktree](#worktree)).
    - Spawn **one** `general-purpose` subagent ([Worker](#worker)).
-   - Record `worktree`, `worker_id`. Chat PT-BR: job id + path.
+   - Record `worktree`, `worker_id`. Chat English: job id + path.
    - **Do not** leave the graph that already owns main.
 
 Foreground job keeps `.ruver-developer/STATE.md` (or reviewer / lstm).
@@ -107,7 +107,7 @@ Slot = `qa_active` empty.
 2. **Free:** `qa_active=<id>`. Copy to `ENVELOPE.md`. Bus switch
    to `qa`.
 3. **Taken:** append `<id>` to `qa_waiting`. Do **not** switch.
-   Do **not** touch `.ruver-qa/STATE.md`. Chat: posição na fila.
+   Do **not** touch `.ruver-qa/STATE.md`. Chat: queue position.
 
 Triage stacked on QA still holds the slot (`qa_active` stays).
 

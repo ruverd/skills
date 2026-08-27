@@ -33,7 +33,7 @@ waits 5m and does **not** post. Red CI still DEFERS.
    "Could be cleaner" is silent except the one code-judo nit in Phase 8, which must
    name a layer, branch, or helper to delete.
 6. **Voice.** GitHub text and chat follow **Voice** (just above §9). Teammate
-   English on the PR. Session language in chat. Never caveman. Never a form.
+   English on the PR. English in chat. Never caveman. Never a form.
 7. **Fixed output template** (§9). Section order never changes; empty sections vanish.
 8. **Phases run in order.** Do not start a phase before the previous one is done.
 9. **Other reviewers' state is ignored.** An open CHANGES_REQUESTED from someone
@@ -489,7 +489,7 @@ Keep:
 - One idea per sentence, or one short sentence plus one that explains it.
 - Active voice. "This calls `send` with null", not "null is passed to send".
 - When it happens, and what to change. The reader should know what to type.
-- Session language in chat. English on the PR.
+- English in chat. English on the PR. Always unslop.
 
 Drop:
 
@@ -629,7 +629,7 @@ and label the chat summary `DRY-RUN`.
 
 ## 10. Chat summary
 
-Lead with two to four sentences in the session language (PT-BR here). Say the
+Lead with two to four sentences in English. Unslop. Say the
 verdict and the one thing that drove it. Then the table. Do not paste the
 GitHub body into chat.
 

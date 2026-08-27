@@ -123,7 +123,7 @@ Same: checkout branch, `/ruver-fd resume` (real command on Claude), **RECONCILE*
 Include in HANDOFF: `run_id`, worktree selectors, which worker stopped.
 Resume workers with the same branch name; do not recreate worktrees if they exist.
 
-## Message to the user (Brazilian Portuguese, short)
+## Message to the user (English, short)
 
 ```text
 S: limit near on this runtime (claude|grok)

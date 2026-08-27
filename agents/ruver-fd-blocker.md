@@ -28,6 +28,6 @@ main thread — never fake them, never report the source itself as blocked.
    the SESSION ends there; the user re-runs `/ruver-fd resume` after the blocker moves.
    NEVER sleep/poll in-session (blockers resolve on human timescales).
 6. On resume with blocker Done → re-fetch contract comments; signal unblocked to orchestrator.
-7. Updates to the user in Brazilian Portuguese. Never orca linear. Never implement the blocked ticket early without a contract.
+7. Updates to the user in English. Never orca linear. Never implement the blocked ticket early without a contract.
 
 Return: result, blocker_ids, draft_created, advanced_slices.

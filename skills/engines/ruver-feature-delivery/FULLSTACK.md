@@ -223,4 +223,4 @@ Triage writes `scope`. Node/orchestrator writes `worktrees` + `run_id`.
 - [ ] run + tasks + workers via orchestration
 - [ ] BE→FE deps if the contract is new
 - [ ] draft PRs on both (if open_pr)
-- [ ] Brazilian Portuguese summary with paths, branch, 2 PRs
+- [ ] English summary with paths, branch, 2 PRs

@@ -111,6 +111,5 @@ CI is often longer than a tool timeout, so the loop polls instead of
 ## Invariants
 
 - Never merge. `gh pr ready` only after QA PASS.
-- Chat with the user in Brazilian Portuguese. Skill files stay English.
+- Chat with the user in English. Always apply bundled `unslop`. Never Portuguese.
 - ASK the user only as a last resort.
-- Unslop.

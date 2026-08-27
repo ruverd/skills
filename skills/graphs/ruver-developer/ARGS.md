@@ -9,7 +9,7 @@ Trim. Then, in order:
 | Match | Mode |
 |---|---|
 | empty, and STATE exists with `status` not in `done` / `done_notes` | **resume** the current job |
-| `resume` / `retomar` / `continue` (whole token, case-insensitive) | **resume** (`retomar` is a PT-BR alias) |
+| `resume` / `continue` (whole token, case-insensitive) | **resume** |
 | Linear URL (`linear.app/...`) | **ticket** |
 | issue id `[A-Z][A-Z0-9]+-\d+` | **ticket** |
 | GitHub PR URL, or envelope `QA_RESULT` FAIL+`PR_BUG` | **fix** (existing PR) |
@@ -51,7 +51,7 @@ Then continue at `next_node` / current graph status. Do **not**:
 - skip an open ASK; the current user message **is** the answer
 - restart delivery if `fd_status=done` (go **mergeable** / QA instead)
 
-No STATE / no HANDOFF → tell the user in Brazilian Portuguese that there is nothing to resume.
+No STATE / no HANDOFF → tell the user in English that there is nothing to resume.
 
 ## After a waiting_user stop
 

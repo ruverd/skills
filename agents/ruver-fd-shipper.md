@@ -26,6 +26,6 @@ Follow `../skills/engines/ruver-feature-delivery/nodes/shipper.md`.
    One failed reviewer request must not block the rest.
    Then set `ci.status: pending`.
 7. **Do not** set graph `status: done` — orchestrator runs **ruver-fd-ci** next.
-8. Never merge. Brazilian Portuguese summary: PR URL + "waiting on CI green to deliver".
+8. Never merge. English summary: PR URL + "waiting on CI green to deliver".
 
 Return: result, commit, pr, next=ci_watch.

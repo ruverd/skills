@@ -149,7 +149,7 @@ STATE status: waiting_blocker
    canceled       → escalate / ASK the user
    still open     → END THE SESSION:
      - STATE: waiting_blocker + blockers[].last_check
-     - Brazilian Portuguese message: what you are waiting on, draft link, and
+     - English message: what you are waiting on, draft link, and
        "when DEV-NEW is Done, run /ruver-fd resume"
      - optional: external routine re-invokes (runtime cron) — never sleep
 ```
@@ -205,4 +205,4 @@ blockers:
 - [ ] Comment with endpoint, params, request/response, types
 - [ ] Wait until Done (MCP get_issue)
 - [ ] Re-fetch the contract before integrating
-- [ ] Brazilian Portuguese summary for the user (what you wait on, draft link)
+- [ ] English summary for the user (what you wait on, draft link)

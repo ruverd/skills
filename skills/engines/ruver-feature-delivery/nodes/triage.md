@@ -29,7 +29,7 @@ scope: frontend_only | backend_only | fullstack
 path: full_feature | debug_fix | light_change
 confidence: high | medium | low
 route_reason: one sentence
-question_pt: ...  # if ask; speak in Brazilian Portuguese
+question: ...  # if ask; speak in English
 ```
 
 ## Minimum heuristic (do not invent)

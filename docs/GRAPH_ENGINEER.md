@@ -65,6 +65,7 @@ Never spawn another **graph** as a child (`ruver_qa`, `ruver_developer`,
 5. Product policy (who reviews, which test binary) comes from the
    **current repo**, not from this plugin.
 6. List the path in `plugin.json`.
+7. User-facing chat is English. Always apply bundled `unslop`. Never Portuguese.
 
 Then `./install.sh` and a commit. Slash names stay the skill folder
 name (`/ruver-developer`) because install.sh flattens categories.

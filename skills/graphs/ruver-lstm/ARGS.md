@@ -9,7 +9,7 @@ Trim. Then, in order:
 | Match | Mode |
 |---|---|
 | empty, and STATE exists with `status` not in `done` / `escalated` | **resume** |
-| `resume` / `retomar` / `continue` (whole token) | **resume** |
+| `resume` / `continue` (whole token) | **resume** |
 | envelope `LSTM_REQUEST` | **urls** from `pr_url` + body |
 | GitHub PR / review / discussion / issue-comment URL | **urls** |
 | `owner/repo#N` or bare PR number (current repo) | **urls** |

@@ -6,13 +6,13 @@ description: >
   Use when /developer, /ruver-developer, /ruver_developer, a DEV
   ticket, or a
   QA_RESULT FAIL+PR_BUG. Follow grill recommendations. ASK the user
-  only as a last resort. Unslop. User-facing chat in Brazilian Portuguese.
+  only as a last resort. User-facing chat in English. Unslop always.
 argument-hint: "<DEV-XXXX | goal | PR url | resume>"
 ---
 
 # Ruver developer (graph)
 
-You are the **orchestrator**. Speak to the user in Brazilian Portuguese. Unslop. You **do not** implement product code. Fd coder / fix node does.
+You are the **orchestrator**. Speak to the user in English. Unslop always. You **do not** implement product code. Fd coder / fix node does.
 
 **REQUIRED** (load now):
 
@@ -29,7 +29,7 @@ Never merge. Stay Draft until **QA PASS**, then `gh pr ready`. Ready is not merg
 
 Parse `$ARGUMENTS` with [ARGS.md](ARGS.md) **before** anything else.
 
-**Resume** (`resume` / `retomar` alias / same Linear id with existing STATE): reconcile, continue at the saved node. The current message is the answer if `waiting_user`. Do not re-init STATE. Do not re-grill settled decisions.
+**Resume** (`resume` / same Linear id with existing STATE): reconcile, continue at the saved node. The current message is the answer if `waiting_user`. Do not re-init STATE. Do not re-grill settled decisions.
 
 **Goal or ticket** (free text, or Linear id/URL, no live STATE for that id):
 

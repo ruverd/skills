@@ -16,7 +16,7 @@ Orchestrator. You do **not** make the final bug call.
 `ruver-bus` PROTOCOL.md ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
-Chat PT-BR. PR link required (args or envelope).
+Chat English. Unslop always. PR link required (args or envelope).
 
 Init `.ruver-qa/STATE.md`. Walk GRAPH:
 **admit → resolve → plan → execute**.

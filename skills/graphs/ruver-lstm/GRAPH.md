@@ -59,7 +59,7 @@ new_pr: false
 same_branch: true
 always_rebase_conflicts: true
 tdd: required_for_behavior_change
-chat_language: pt-BR
+chat_language: en
 voice: unslop
 decide_by_default: true
 ask_last_resort_only: true

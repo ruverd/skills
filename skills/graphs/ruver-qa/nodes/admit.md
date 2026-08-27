@@ -13,6 +13,6 @@ Follow `../../ruver-bus/JOBS.md` “Enqueue or start QA”.
    park the envelope at `jobs/<id>/qa-request.md`.
    Do **not** change `.ruver-qa/STATE.md`.
    Do **not** start Playwright, browser, or plan.
-   Chat PT-BR: fila + posição. **Stop.**
+   Chat English: queue + position. **Stop.**
 
 Never two QA `execute` runs.

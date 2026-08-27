@@ -5,7 +5,7 @@ argument-hint: "<goal|DEV-XXXX|resume> [--no-pr]"
 
 # /ruver-feature-delivery
 
-Alias: `/ruver-fd` · **Args:** `$ARGUMENTS` · User-facing chat in short Brazilian Portuguese (token economy)
+Alias: `/ruver-fd` · **Args:** `$ARGUMENTS` · User-facing chat in short English. Unslop always
 
 ## Load (progressive — do not load everything up front)
 
@@ -44,8 +44,8 @@ For each needed source (Linear / Figma / Sentry / Notion / …):
 1. **Verify** the project MCP is reachable.
 2. If **critical** and **unreachable** → **STOP** (do not invent, do not coder): print the
    exact **«ERROR: MCP unreachable»** template from `MCP_CONTEXT.md` — single source,
-   do not write your own variant. Speak it in Brazilian Portuguese.
-3. STATE: `mcp_gate: failed` + `mcp_gate_error_pt`.
+   do not write your own variant. Speak it in English.
+3. STATE: `mcp_gate: failed` + `mcp_gate_error`.
 4. If ok: full fetch → `*-context.md`; Linear → branch `feature/dev-xxxx`.
 5. `mcp_gate: passed` only with critical sources ok.
 
@@ -76,7 +76,7 @@ If a dependency is missing:
 5. STATE `waiting_blocker` → one `get_issue` check; if still open, end the session.
 6. Re-fetch the contract → resume implement.
 
-Do not invent a "ready" endpoint. Tell the user in Brazilian Portuguese (draft link).
+Do not invent a "ready" endpoint. Tell the user in English (draft link).
 
 ### 4) Reviewer → tester → blast → thermo → ship → **CI green**
 
@@ -92,7 +92,7 @@ Do not invent a "ready" endpoint. Tell the user in Brazilian Portuguese (draft l
    - fail → fix + push + re-check (until green or escalate)
 5. Fullstack: **both** PRs green.
 6. **`status: done` / "delivered" only with CI green.**
-7. Never merge. Short Brazilian Portuguese summary (S/D/P) with PR + green checks.
+7. Never merge. Short English summary (S/D/P) with PR + green checks.
 
 ### Token economy
 

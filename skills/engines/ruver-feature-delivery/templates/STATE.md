@@ -15,7 +15,7 @@ updated_at: ""
 autonomy: smart
 open_pr: true
 tdd: required
-chat_language: pt-BR
+chat_language: en
 work_kind: ""
 path: ""
 scope: ""
@@ -26,7 +26,7 @@ linear_url: ""
 linear_branch: ""
 linear_context_path: ".ruver-feature-delivery/linear-context.md"
 mcp_gate: ""
-mcp_gate_error_pt: ""
+mcp_gate_error: ""
 fullstack_run_id: ""
 worktrees_frontend: ""
 worktrees_backend: ""
@@ -47,7 +47,7 @@ decision_confidence: ""
 ## MCP gate
 
 - **mcp_gate:** pending | passed | passed_partial | failed (enum: STATE.schema.md)
-- **error_pt:** (if failed — full message to the user, Brazilian Portuguese)
+- **error:** (if failed — full message to the user, English)
 
 ## MCP sources
 
@@ -183,7 +183,7 @@ Index: `.ruver-feature-delivery/mcp-sources.md`
 - **Commit:** none
 - **Pushed:** no
 - **PR:** none
-- **Summary for human (Brazilian Portuguese):**
+- **Summary for human (English):**
 
 ## CI (delivery)
 

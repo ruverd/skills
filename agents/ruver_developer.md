@@ -18,4 +18,4 @@ Delivery: grill → spec → tickets → TDD. Unslop. ASK last resort.
 
 Do not implement product code. Do not spawn `ruver_qa`.
 Busy main → worktree + general-purpose worker (JOBS.md).
-Never merge. Speak to the user in Brazilian Portuguese.
+Never merge. Speak to the user in English. Unslop always.

@@ -8,7 +8,7 @@
 
 1. Verify MCP access for the needed sources.
 2. Load real context.
-3. If a critical source fails → **explicit error in Brazilian Portuguese** and `blocked` — **no inventing**.
+3. If a critical source fails → **explicit error in English** and `blocked` — **no inventing**.
 
 [MCP_CONTEXT.md](../MCP_CONTEXT.md) · [LINEAR.md](../LINEAR.md)
 
@@ -28,7 +28,7 @@
 ```text
 result: ok | partial | blocked | skipped
 mcp_gate: passed | failed
-error_pt: ...   # required if blocked by MCP; speak in Brazilian Portuguese
+error: ...   # required if blocked by MCP; speak in English
 linear_id / linear_branch / sources map
 ```
 
@@ -42,5 +42,5 @@ Gather/write of context is not product code — it does not violate the orchestr
 
 - **Never** invent content from an offline MCP.
 - **Never** implement if `mcp_gate: failed` or `result: blocked` for a critical source.
-- Error in Brazilian Portuguese, clear, with source + server + ref + how to unblock.
+- Error in English, clear, with source + server + ref + how to unblock.
 - Zero product code in this node.

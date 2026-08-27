@@ -12,7 +12,7 @@ talk through files on a bus. They never nest as child agents. They
 never merge.
 
 TDD on behavior change. ASK the user only as a last resort. Chat
-with you in Brazilian Portuguese; skill files stay English.
+in English. Always apply bundled `unslop`.
 
 ```text
 /developer DEV-1234

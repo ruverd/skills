@@ -21,7 +21,7 @@ Follow:
 4. Prefer BE → FE when new API contract is required.
 5. Ticket context from MCP Linear files already in STATE — do not use `orca linear` for reading issues.
 6. Update STATE with run_id, worktree paths, task ids, PR URLs.
-7. No auto-merge. Chat summary in Brazilian Portuguese.
+7. No auto-merge. Chat summary in English.
 
 Do not implement product code yourself; workers do. You coordinate.
 

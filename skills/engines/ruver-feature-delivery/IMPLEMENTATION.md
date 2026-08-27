@@ -36,7 +36,7 @@ Do not dispatch implementers if `mcp_gate: failed`.
 
 ## What the orchestrator may do
 
-Read STATE, git status, logs. Update STATE. Dispatch. Answer `NEEDS_CONTEXT` with a repo fact. One PT-BR ASK if policy says so.
+Read STATE, git status, logs. Update STATE. Dispatch. Answer `NEEDS_CONTEXT` with a repo fact. One English ASK if policy says so.
 
 ## What the orchestrator may not do
 

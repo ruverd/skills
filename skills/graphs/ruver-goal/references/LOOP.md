@@ -32,7 +32,7 @@ Never start a second QA if qa_active is another PR.
 If CI is still pending, do nothing else and end the turn.
 If a ruver-qa marker comment exists for the current head SHA and
 includes a video URL, cancel_wake and stop.
-Do not merge. Chat PT-BR, one short S/D/P block.
+Do not merge. Chat English. Unslop always, one short S/D/P block.
 ```
 
 Interval **5m**. Min 60s. CI that takes longer than a tool timeout

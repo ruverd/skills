@@ -2,7 +2,7 @@
 
 **Verb:** summarize
 
-Chat in Brazilian Portuguese. Two to four sentences, then a table.
+Chat in English. Two to four sentences, then a table.
 Do not paste GitHub reply bodies.
 
 ```

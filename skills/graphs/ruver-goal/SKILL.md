@@ -16,7 +16,7 @@ skill keeps the session working until QA has **commented with video**.
 [LOOP.md](references/LOOP.md) · bus PROTOCOL.md ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
-Chat PT-BR.
+Chat English. Unslop always.
 
 ## Commands
 
@@ -74,4 +74,4 @@ Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
 
 ## After QA comment
 
-Cancel the loop. Report PT-BR: PR, SHA, QA verdict, comment URL, video URL.
+Cancel the loop. Report in English: PR, SHA, QA verdict, comment URL, video URL.

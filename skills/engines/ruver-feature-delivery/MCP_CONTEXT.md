@@ -69,7 +69,7 @@ Before calling tools on a source:
 | Notion URL and it is the main spec/AC | **Yes** | STOP + error |
 | Nice-to-have link / side attachment | No | `unavailable` + warning; may continue |
 
-### Error message (Brazilian Portuguese) — copy and stop (CANONICAL TEMPLATE — commands/adapters point here)
+### Error message (English) — copy and stop (CANONICAL TEMPLATE — commands/adapters point here)
 
 When a critical source fails, the orchestrator **prints and stops** (does not implement):
 
@@ -93,7 +93,7 @@ I could not reach the MCP needed to continue.
 2. Run again: `/ruver-fd <same goal>`
 ```
 
-Speak that block in Brazilian Portuguese. Without this message and without `result=blocked`, the run is **invalid**.
+Speak that block in English. Without this message and without `result=blocked`, the run is **invalid**.
 
 ## Playbooks per source
 
@@ -162,7 +162,7 @@ For any other connected MCP (Slack, Jira, Confluence, …):
 1. Detect refs (goal + user)
 2. For each needed source:
      a. pre-check MCP accessible?
-     b. if critical and fail → Brazilian Portuguese ERROR + result=blocked + STOP
+     b. if critical and fail → English ERROR + result=blocked + STOP
      c. if ok → fetch → file
 3. Linear ok → branch checkout
 4. Re-scan Linear body for more URLs → repeat 2

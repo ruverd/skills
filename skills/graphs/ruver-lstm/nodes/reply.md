@@ -6,8 +6,7 @@ Commands: [GITHUB.md](../references/GITHUB.md).
 
 Every GitHub reply body (inline thread, skip reason, body-only COMMENT)
 runs bundled **`unslop`** before POST. Load skill `unslop`. English on
-the PR. Never post a reply that skipped it. Chat with the user stays
-PT-BR and is separate.
+the PR. Never post a reply that skipped it. Chat with the user stays English and is separate. Unslop both.
 
 After analyze — **including skip**:
 

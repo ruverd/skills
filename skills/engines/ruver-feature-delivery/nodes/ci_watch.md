@@ -42,4 +42,4 @@ can take hours — never leave the handoff until after the blow-up.
 - Done **only** with green (if there was a PR).
 - Do not invent "CI should be ok".
 - Do not merge.
-- Speak real status to the user in Brazilian Portuguese.
+- Speak real status to the user in English.

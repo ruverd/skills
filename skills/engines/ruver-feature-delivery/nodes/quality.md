@@ -50,7 +50,7 @@ summary: ...
 - **Forbidden** merge.
 - Do not invent features; structural quality on the diff only.
 - If `fix all` breaks tests and cannot recover in 1 cycle → blocked / back to coder (orchestrator).
-- Speak to the user in Brazilian Portuguese if you need to explain residual issues.
+- Speak to the user in English if you need to explain residual issues.
 
 ## Orchestrator note
 

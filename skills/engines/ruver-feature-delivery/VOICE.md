@@ -1,13 +1,15 @@
 # Voice
 
-Speak to the user in **Brazilian Portuguese**.
-Code, identifiers, commits, PR technical text, CI: **English** (repo rule).
+Speak to the user in **English**. Never Portuguese.
 
-This file is English. The spoken chat is Portuguese.
+Load bundled `unslop` and apply it to every user-facing message, PR
+body, spec, ticket, and grill question. Skip nothing.
+
+Code, identifiers, commits, PR technical text, CI: **English**.
+
+This file is English. Chat is English.
 
 ## Unslop (always)
-
-Apply bundled `unslop` to every user-facing message, PR body, spec, ticket, and grill question.
 
 Hard cuts:
 
@@ -29,7 +31,7 @@ Write like a teammate. Not a form, a linter, or a status page.
 
 Short. Infrequent. Final message stands alone: what ran, what you decided, and the one question only if you ASK.
 
-Speak this shape in Brazilian Portuguese:
+Speak this shape in English:
 
 ```
 S: <current node>
@@ -41,4 +43,4 @@ On DECIDE, the D line names what you took. On ASK, P is the one question.
 
 ## Grill questions
 
-Only ask when [DECISION_POLICY.md](DECISION_POLICY.md) says ASK. Teammate voice. Include the recommendation and why you are not following it alone. Speak the question in Brazilian Portuguese.
+Only ask when [DECISION_POLICY.md](DECISION_POLICY.md) says ASK. Teammate voice. Include the recommendation and why you are not following it alone. Speak the question in English.

@@ -23,7 +23,7 @@ Load the skill, then follow the **adapted** node.
 | `to-issues` | `tickets` | Vertical slices into local `TICKETS.md`. Do **not** create Linear issues here. [BLOCKERS.md](BLOCKERS.md) is the only Linear-create path. |
 | `tdd` + this graph's [TDD.md](TDD.md) | `implement` | Iron law wins. Do not skip RED because bundled `tdd` says the path is expensive. |
 | `diagnose` | `diagnose` | Root cause. No product fix in this node. |
-| `unslop` | all chat | [VOICE.md](VOICE.md) |
+| `unslop` | all chat | Always. English. [VOICE.md](VOICE.md) |
 | `how` / `why` | grill, diagnose, review | Subsystem you will touch, one pass |
 | `blast-radius` | `blast` | Before quality/ship |
 | `architect` | grill (new module) | Checkpoint only as last-resort ASK |

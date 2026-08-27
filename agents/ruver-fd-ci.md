@@ -27,6 +27,6 @@ Follow:
 4. **Never** mark delivery complete while any required/attached check is fail or pending.
 5. Never merge. Never invent green status.
 6. Fullstack: both PRs must be green.
-7. User-facing status in Brazilian Portuguese.
+7. User-facing status in English.
 
 Return: result green|escalated, pr_url, checks_summary, fix_loops_used.

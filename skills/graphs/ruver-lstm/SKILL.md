@@ -33,5 +33,5 @@ Orchestrator does **not** write product code. **patch** spawns
 `ruver-fd-coder` (TDD). Grill only when the fix is complicated.
 ASK last resort: [DECISION_POLICY.md](../../engines/ruver-feature-delivery/DECISION_POLICY.md).
 
-User-facing chat in Brazilian Portuguese. Unslop.
+User-facing chat in English. Unslop always.
 Do not spawn `ruver_developer` / `ruver_reviewer` / `ruver_qa`.

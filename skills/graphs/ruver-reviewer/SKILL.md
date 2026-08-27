@@ -10,7 +10,7 @@ argument-hint: "<PR url | owner/repo#N | branch>"
 
 # Ruver Reviewer (graph)
 
-Orchestrator. Never merge.
+Orchestrator. Never merge. Chat English. Unslop always.
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
 bus PROTOCOL.md · skill `ruver-code-review` ·

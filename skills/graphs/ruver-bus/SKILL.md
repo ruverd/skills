@@ -52,5 +52,5 @@ one general-purpose worker + worktree ([JOBS.md](JOBS.md),
 
 ## Chat
 
-PT-BR curto: `S: bus <from>→<to> <type>` · `P: grafo ativo` ·
-`qa_active` / fila.
+Short English: `S: bus <from>→<to> <type>` · `P: active graph` ·
+`qa_active` / queue.

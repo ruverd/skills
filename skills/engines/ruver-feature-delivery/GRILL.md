@@ -30,7 +30,7 @@ New module: run `architect`. Take the synthesized sketch (DECIDE). Checkpoint on
 
 ## ASK format (rare)
 
-Speak in Brazilian Portuguese:
+Speak in English:
 
 ```
 Q: <only the tie lookup did not break>
@@ -67,5 +67,5 @@ Feel, layout, "one page or three": prototype, then DECIDE the smaller option tha
 
 ## Done
 
-Frontier empty → spec. Short Brazilian Portuguese rollup of decisions.
+Frontier empty → spec. short English rollup of decisions.
 Append rows to `decisions.tsv` (bundled `show-me-your-work` TSV format).

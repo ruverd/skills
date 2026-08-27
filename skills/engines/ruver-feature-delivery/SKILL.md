@@ -6,12 +6,12 @@ description: >
   /ruver-feature-delivery or /ruver-fd, or when resuming a run
   whose HANDOFF.md exists under $RUVER_ROOT/.ruver-feature-delivery/.
   Spine: grill-with-docs → spec → tickets → implement(tdd) → review.
-  User-facing chat in Brazilian Portuguese. Unslop. Never write .ruver-* inside a repo.
+  User-facing chat in English. Unslop always. Never write .ruver-* inside a repo.
 ---
 
 # Ruver feature delivery
 
-Orchestrator. Speak to the user in Brazilian Portuguese. Unslop. **No product code on the main thread.**
+Orchestrator. Speak to the user in English. Unslop. **No product code on the main thread.**
 
 Load now:
 
@@ -76,7 +76,7 @@ Ship: review → tester → blast (not light) → **thermo fix all** → commit 
 4. Implementation **only** in a subagent. Main does not edit product code.
 5. TDD on every behavior change. Thermo fix all before PR.
 6. UI: DS of the repo; Figma if present; else copy recent same-type screens.
-7. MCP: verify access. Critical offline → error in Brazilian Portuguese and stop.
+7. MCP: verify access. Critical offline → error in English and stop.
 8. Blocker: advance what you can → Draft Linear + contract comment → `waiting_blocker`.
 9. Tokens: [TOKEN_ECONOMY.md](TOKEN_ECONOMY.md).
 10. Limit near: [HANDOFF.md](HANDOFF.md).

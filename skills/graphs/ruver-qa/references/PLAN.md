@@ -75,5 +75,5 @@ Rules:
 PLAN.md must have: inventory table, ≥1 step, `pass_if` on every
 step. Empty plan → stop and ask (no surface found).
 
-Chat PT-BR: list the steps in one short block, then execute.
+Chat English: list the steps in one short block, then execute.
 Do not wait for approval unless the user asked to review the plan.

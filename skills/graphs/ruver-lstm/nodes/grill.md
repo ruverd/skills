@@ -10,7 +10,7 @@ Follow [GRILL.md](../../../engines/ruver-feature-delivery/GRILL.md) +
 
 Walk the tree internally. Look it up. **DECIDE**. Log in STATE
 `## Decisions`. ASK only if very important **and** high uncertainty
-after lookup. One question, PT-BR, `waiting_user`. Do not interview
+after lookup. One question, English, `waiting_user`. Do not interview
 through the tree.
 
 This is not a feature delivery. Frontier empty → **patch**, never spec,

@@ -14,8 +14,8 @@ Importance alone is not enough. Uncertainty on a small call is not enough. Pick 
 | Mode | When | Action |
 |---|---|---|
 | **DECIDE** | Default. You have a recommendation you can defend, or the call is not that important | Choose, log, continue. Do not wait. |
-| **ASK** | Last resort: very important **and** high uncertainty | One question in Brazilian Portuguese. Show the recommendation. Wait. Then continue. |
-| **ESCALATE** | Loops exhausted, missing critical MCP, cannot run the graph | Freeze. Summarize in Brazilian Portuguese. Wait. |
+| **ASK** | Last resort: very important **and** high uncertainty | One question in English. Show the recommendation. Wait. Then continue. |
+| **ESCALATE** | Loops exhausted, missing critical MCP, cannot run the graph | Freeze. Summarize in English. Wait. |
 
 Before ASK, spend the lookup: `how` / `why` / Linear / neighbor files / a throwaway prototype. If that produces a rec you would ship, **DECIDE**.
 
@@ -50,9 +50,9 @@ TDD looking impossible without a redesign: ASK the redesign. Do not skip TDD.
 
 ## How to ASK
 
-Brazilian Portuguese. **One question.** Then `waiting_user`. After the answer, DECIDE the rest. Do not restart.
+English. **One question.** Then `waiting_user`. After the answer, DECIDE the rest. Do not restart.
 
-Shape (speak this in Brazilian Portuguese):
+Shape (speak this in English):
 
 ```
 Q: <only the tie lookup did not break>
@@ -97,7 +97,7 @@ Also append `decisions.tsv` when grilling. Chat a short rollup of auto-decisions
 ## Escalate
 
 1. STATE `status: escalated`. No new dispatch.
-2. Brazilian Portuguese summary: PR / ticket / red checks.
+2. English summary: PR / ticket / red checks.
 3. Optional Linear comment with the same summary.
 4. End the turn. Resume at the named node.
 

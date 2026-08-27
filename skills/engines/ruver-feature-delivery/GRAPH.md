@@ -31,7 +31,7 @@ Grill, spec, and tickets run on the **main thread**. Implement / review / diagno
 | start | resume with live STATE | current node (skip finished) |
 | start | fresh goal / Linear | **mcp_context** |
 | mcp_context | mcp_gate=passed / passed_partial | **triage** |
-| mcp_context | mcp_gate=failed | **STOP** + PT-BR error |
+| mcp_context | mcp_gate=failed | **STOP** + English error |
 | triage | scope=fullstack | **fullstack** (FULLSTACK.md) |
 | triage | path=full_feature | **grill** |
 | triage | path=debug_fix | **diagnose** |
@@ -83,7 +83,8 @@ tdd: required_for_behavior_change
 subagents_on_implement: always
 never_merge: true
 stay_draft: true
-chat_language: pt-BR  # user-facing messages only; this file is English
+chat_language: en  # user-facing messages; this file is English
+voice: unslop
 decide_by_default: true
 ask_last_resort_only: true
 architect_checkpoint: last_resort_only

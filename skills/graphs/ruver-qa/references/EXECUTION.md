@@ -29,7 +29,7 @@ AC miss, unexpected 4xx/5xx from app code):
 
 1. Append `## F<n>` to `.ruver-qa/FINDINGS.md`
    ([templates/FINDINGS.md](../templates/FINDINGS.md)).
-2. Chat one PT-BR line: finding id + step + actual.
+2. Chat one English line: finding id + step + actual.
 3. **Continue** the remaining plan. Later steps are more evidence.
 
 Stop the plan only when QA cannot run: no PR, no env, no auth,

@@ -7,7 +7,7 @@
 
 1. Persist continuity in `$RUVER_ROOT/.ruver-feature-delivery/HANDOFF.md` + STATE (global, [DISK.md](../../../graphs/ruver-bus/DISK.md)).
 2. **Do not** `git add` / commit those files.
-3. Instruct the user (short Brazilian Portuguese) to open the **other** runtime and `/ruver-fd resume`.
+3. Instruct the user (short English) to open the **other** runtime and `/ruver-fd resume`.
 4. **Do not** abandon delivery (CI green remains the target on the other side).
 
 Follow [HANDOFF.md](../HANDOFF.md) + [TOKEN_ECONOMY.md](../TOKEN_ECONOMY.md).

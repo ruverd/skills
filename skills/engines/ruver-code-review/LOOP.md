@@ -59,7 +59,7 @@ load_skill ruver-reviewer and continue at diagnose → report.
 If required CI failed or is unknown, cancel_wake and DEFER
 (reason=ci_red or ci_unknown) with the issue comment in SKILL §9.
 If the PR is CLOSED or MERGED, cancel_wake and stop.
-Do not post while pending. Do not merge. Chat PT-BR.
+Do not post while pending. Do not merge. Chat English. Unslop always.
 ```
 
 Interval **5m**. Min 60s.

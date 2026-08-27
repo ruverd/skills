@@ -17,7 +17,7 @@ exposes it ([HOST.md](../../../HOST.md)).
 bus PROTOCOL.md ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
-PR link required. Init `.ruver-triage/STATE.md`. Walk GRAPH.
+Chat English. Unslop always. PR link required. Init `.ruver-triage/STATE.md`. Walk GRAPH.
 Classify **each** finding. `NEW_BUG` → Linear ticket (LINEAR.md).
 `PR_BUG` → `TRIAGE_RESULT` + pop to QA. Do **not** switch to
 developer. Do **not** spawn `ruver_developer`.

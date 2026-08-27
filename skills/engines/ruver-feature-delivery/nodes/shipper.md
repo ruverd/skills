@@ -28,7 +28,7 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
    One failed reviewer request must not block the rest.
 8. STATE: PR URL; `ci.status: pending`.
 9. **Hand off to ci_watch** (required with a PR).
-10. Short Brazilian Portuguese summary: "PR open; waiting on CI green to deliver."
+10. Short English summary: "PR open; waiting on CI green to deliver."
 
 ## Done
 

@@ -21,6 +21,6 @@ Follow:
 4. Preserve behavior and TDD; re-run typecheck/unit for touched area.
 5. Update STATE `## Quality (thermo-nuclear)`.
 6. **Do not** commit, push, or open PR — shipper does that only after you return `result=ok`.
-7. If you cannot fix a structural blocker safely, `result=blocked` with clear notes for the user in Brazilian Portuguese.
+7. If you cannot fix a structural blocker safely, `result=blocked` with clear notes for the user in English.
 
 Verb: **harden**. One job.
