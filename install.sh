@@ -16,6 +16,7 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN="$REPO/plugins/ruver"
+BACKUP_ROOT="${AI_SKILLS_BACKUP_ROOT:-$HOME/.ai-skills-backups}"
 DRY=0
 GROK_PLUGIN=0
 UNINSTALL=0
@@ -73,8 +74,10 @@ link_one() {
     return 0
   fi
   if [[ -e "$dest" ]]; then
-    local bak="${dest}.bak.$(ts)"
+    local bak_dir="$BACKUP_ROOT/$(ts)"
+    local bak="$bak_dir/$(basename "$dest")"
     echo "backup $dest -> $bak"
+    run mkdir -p "$bak_dir"
     run mv "$dest" "$bak"
   fi
   echo "link   $dest -> $src"

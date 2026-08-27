@@ -41,8 +41,9 @@ That links skills, agents, and commands into:
 | `~/.claude/skills` `~/.claude/agents` `~/.claude/commands` | Claude Code |
 | `~/.cursor/skills` | Cursor |
 
-Existing directories are moved to `*.bak.<timestamp>` before the
-symlink. `--dry-run` prints the plan. `--uninstall` removes only
+Existing files are moved to `~/.ai-skills-backups/<timestamp>/`
+(outside skill discovery paths, so Grok does not load them as
+duplicates). `--dry-run` prints the plan. `--uninstall` removes only
 symlinks that point at this clone.
 
 ```bash
