@@ -1,9 +1,8 @@
 # Skills
 
-A small circuit for shipping software with a coding agent: ticket →
-draft PR → CI green → QA in the browser (with video) → incoming
-review patched on the same branch. Works on **Grok**, **Claude
-Code**, **Codex**, and **Cursor**.
+Skills for coding agents. Give one a ticket and it writes the code,
+opens a draft PR, tests it in the browser (with video), and handles
+review. Works on **Grok**, **Claude Code**, **Codex**, and **Cursor**.
 
 The session you talk to is a **graph engineer**, not an implementer.
 It walks a GRAPH (nodes + edges). It writes state under `~/.ruver`.
