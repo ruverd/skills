@@ -10,8 +10,8 @@ Skill: [`../../skills/engines/ruver-feature-delivery`](../../skills/engines/ruve
 
 ## When
 
-- `/ruver-fd DEV-1212`
-- `/ruver-fd null crash in MembersTable`
+- `/ruver-fd ABC-123`
+- `/ruver-fd login button does nothing`
 - `/ruver-fd resume`
 - `/ruver-fd … --no-pr`
 - Implicitly, from developer `deliver`
@@ -39,7 +39,7 @@ tester / quality / shipper are workers (`ruver-fd-coder`, …).
 ## What “delivered” means here
 
 Draft PR **and** required CI green. Until then `status ≠ done`.
-Reviewers and assignee come from the target repo `AGENTS.md`.
+Reviewers and assignee: [PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md).
 
 ## Never
 
@@ -47,7 +47,7 @@ Reviewers and assignee come from the target repo `AGENTS.md`.
 - Product edits on the main thread.
 - Skip TDD on a behavior change.
 - Skip quality `fix all` before the PR.
-- Invent Linear AC when MCP is down — stop.
+- Invent tracker AC when that URL cannot be read — stop. Local goal is fine without a tracker.
 
 ## Related
 

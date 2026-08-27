@@ -1,8 +1,8 @@
 ---
 name: ruver-qa
 description: >
-  Graph: QA a GitHub PR. One slot (queue extras). Plan from the
-  diff, then Playwright + browser. Bus TRIAGE_REQUEST on product
+  Graph: QA a PR. One slot (queue extras). Plan from the
+  diff, then browser, e2e, or HTTP. Bus TRIAGE_REQUEST on product
   errors. Use when /qa, /ruver-qa, /ruver_qa, or a QA_REQUEST arrives.
 argument-hint: "<PR url or owner/repo#N>"
 ---
@@ -21,7 +21,7 @@ Chat English. Unslop always. PR link required (args or envelope).
 Init `.ruver-qa/STATE.md`. Walk GRAPH:
 **admit → resolve → plan → execute**.
 `admit` claims the single QA slot or **enqueues** (never two
-Playwright runs). `plan` writes `.ruver-qa/PLAN.md` from the diff
+executes). `plan` writes `.ruver-qa/PLAN.md` from the diff
 before any test. Spawn execute nodes only.
 Outbound triage → **bus switch** to `triage`. Never spawn `ruver_triage`.
 
@@ -31,6 +31,6 @@ When done: publish **video** via `scripts/publish-evidence.sh` (never
 ([references/COMMENT.md](references/COMMENT.md)), then write `QA_RESULT`
 and **pop** the bus stack. Chat-only is not done.
 
-Backend-only PRs: plan still maps the API change to the **frontend
-route** that calls it, exercises that screen, and records video.
+Backend-only PRs: HTTP the changed endpoints unless a frontend
+sibling is resolved ([PRODUCT.md](../../engines/ruver-feature-delivery/PRODUCT.md)).
 Unit/CI/`git show` alone is not a complete QA execute.

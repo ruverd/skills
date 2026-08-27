@@ -11,4 +11,4 @@ Follow [../references/PLAN.md](../references/PLAN.md).
    = routes/endpoints/specs listed.
 4. Chat the step list (English). Then **execute**.
 
-No Playwright, no browser, no verdict in this node.
+No e2e, no browser, no HTTP execute, no verdict in this node.

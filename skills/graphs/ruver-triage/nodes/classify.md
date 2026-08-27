@@ -18,7 +18,7 @@ Write the per-finding table into the envelope body:
 ```text
 | id | class | linear | notes |
 | F1 | PR_BUG | | in this PR's diff |
-| F2 | NEW_BUG | DEV-XXXX | unrelated screen |
+| F2 | NEW_BUG | ABC-123 | unrelated screen |
 ```
 
 `NEW_BUG` only when the bug is real **and** not caused by this PR.

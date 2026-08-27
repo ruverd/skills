@@ -1,7 +1,7 @@
 ---
 name: ruver-feature-delivery
 description: >
-  Use when delivering a Linear ticket, bug, or chore end-to-end
+  Use when delivering a ticket, bug, or chore end-to-end
   (implementation through draft PR with CI green) via
   /ruver-feature-delivery or /ruver-fd, or when resuming a run
   whose HANDOFF.md exists under $RUVER_ROOT/.ruver-feature-delivery/.
@@ -18,6 +18,7 @@ Load now:
 - [GRAPH.md](GRAPH.md)
 - [STATE.schema.md](STATE.schema.md)
 - [ROUTING.md](ROUTING.md)
+- [PRODUCT.md](PRODUCT.md)
 - [VOICE.md](VOICE.md)
 - [PSTACK.md](PSTACK.md)
 - [DECISION_POLICY.md](DECISION_POLICY.md)
@@ -34,14 +35,14 @@ Adapted grill: [GRILL.md](GRILL.md). ASK the user only as a last resort.
 ## Quick start
 
 ```text
-/ruver-fd DEV-1212
-/ruver-fd DEV-1212: extra note
-/ruver-fd null crash in MembersTable
+/ruver-fd ABC-123
+/ruver-fd ABC-123: extra note
+/ruver-fd login button does nothing
 /ruver-fd resume
 /ruver-fd … --no-pr
 ```
 
-Linear branch `feature/dev-xxxx` (or Linear `gitBranchName`).
+Branch from the tracker, or `feature/<id-lowercase>`, or the current branch.
 
 ## Orchestrator loop
 
@@ -62,10 +63,10 @@ Linear branch `feature/dev-xxxx` (or Linear `gitBranchName`).
 | **full_feature** | new behavior | grill → spec → tickets → TDD implement |
 | **debug_fix** | bug | diagnose → one TDD ticket |
 | **light_change** | chore | one ticket → one coder |
-| **`scope: fullstack`** | FE and BE | Orca worktrees, same branch ([FULLSTACK.md](FULLSTACK.md)) |
+| **`scope: fullstack`** | FE and BE, sibling resolved | same branch, git worktrees ([FULLSTACK.md](FULLSTACK.md); Orca optional) |
 
 Ship: review → tester → blast (not light) → **thermo fix all** → commit → push → draft PR
-(reviewers and assignee: current repo `AGENTS.md` / git defaults)
+(reviewers and assignee: [PRODUCT.md](PRODUCT.md))
 → **CI 100% green** (only then **delivered**).
 
 ## Intelligence
@@ -76,7 +77,7 @@ Ship: review → tester → blast (not light) → **thermo fix all** → commit 
 4. Implementation **only** in a subagent. Main does not edit product code.
 5. TDD on every behavior change. Thermo fix all before PR.
 6. UI: DS of the repo; Figma if present; else copy recent same-type screens.
-7. MCP: verify access. Critical offline → error in English and stop.
+7. Discover the repo first (PRODUCT.md). Critical tracker URL offline → error and stop. Local goal does not need Linear.
 8. Blocker: advance what you can → Draft Linear + contract comment → `waiting_blocker`.
 9. Tokens: [TOKEN_ECONOMY.md](TOKEN_ECONOMY.md).
 10. Limit near: [HANDOFF.md](HANDOFF.md).
@@ -89,7 +90,7 @@ Load on demand. This list is the index.
 ruver-feature-delivery/
 ├── SKILL.md GRAPH.md ROUTING.md PSTACK.md GRILL.md VOICE.md
 ├── DECISION_POLICY.md TDD.md IMPLEMENTATION.md
-├── MCP_CONTEXT.md LINEAR.md BLOCKERS.md FULLSTACK.md
+├── MCP_CONTEXT.md LINEAR.md BLOCKERS.md FULLSTACK.md PRODUCT.md
 ├── UI_DESIGN_SYSTEM.md CI_DELIVERY.md HANDOFF.md TOKEN_ECONOMY.md
 ├── STATE.schema.md
 ├── nodes/   templates/   adapters/

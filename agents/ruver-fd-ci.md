@@ -17,7 +17,7 @@ Follow:
 
 1. `gh pr checks` is source of truth (all PR-attached checks).
 2. Poll with SHORT calls (`gh pr checks --json name,bucket,state,link`) on an interval
-   sized to the repo's CI (empath-ui: 20-30 min total). NEVER rely on
+   sized to the repo's CI (poll, no assumed duration). NEVER rely on
    `gh pr checks --watch` finishing inside one tool call (10-min Bash cap) —
    a killed watch is NOT a CI failure; re-check.
 3. On fail: diagnose (extract first actionable failure), then dispatch a FRESH

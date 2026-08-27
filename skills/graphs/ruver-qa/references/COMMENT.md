@@ -83,8 +83,9 @@ One comment per SHA. If a comment with the same
 
 - No verdict without this comment.
 - No comment without attempting a video upload when a `.webm` exists.
-- **PASS requires a video** of the FE route (including backend PRs
-  that map to a screen). If video capture failed, say so in the
-  comment and do **not** treat the run as a complete PASS.
+- **PASS requires evidence.** UI: video of the route. API-only: HTTP
+  record of the changed endpoints (video if captured). If capture
+  failed on a UI run, say so in the comment and do **not** treat
+  the run as a complete PASS.
 - Do not commit videos to the PR branch.
 - Do not paste credentials or raw `.env`.

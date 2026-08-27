@@ -12,8 +12,8 @@ PR: https://github.com/<org>/<repo>/pull/<n>
 Repo: <org/repo>
 Branch: <head>
 SHA: <sha>
-Job: <dev-DEV-XXXX>
-Linear: <DEV-XXXX or none>
+Job: <dev-<ticket>>
+Linear: <ticket or none>
 Environment: <local / preview / notes>
 
 Ticket requires:

@@ -12,7 +12,7 @@ Follow `../../ruver-bus/JOBS.md` “Enqueue or start QA”.
 4. If `qa_active` is **another** id → append `qa_waiting`,
    park the envelope at `jobs/<id>/qa-request.md`.
    Do **not** change `.ruver-qa/STATE.md`.
-   Do **not** start Playwright, browser, or plan.
+   Do **not** start e2e, browser, HTTP QA, or plan.
    Chat English: queue + position. **Stop.**
 
 Never two QA `execute` runs.

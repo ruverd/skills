@@ -21,7 +21,7 @@ init | delivering | fixing | mergeable | qa_requested | applying_qa | waiting_us
 | `mergeable` | MERGEABLE \| … |
 | `qa_verdict` | after QA_RESULT (`PASS`/`FAIL`/`BLOCKED`) |
 | `triage_class` | rollup from QA notes when present |
-| `job_id` | bus JOBS id (`dev-DEV-XXXX`) |
+| `job_id` | bus JOBS id (`dev-<ticket>`) |
 | `lane` | `foreground` \| `worker` |
 | `worktree` | path if lane=worker |
 | `worker_id` | spawn id if lane=worker |

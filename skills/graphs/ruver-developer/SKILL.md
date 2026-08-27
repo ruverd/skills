@@ -3,11 +3,11 @@ name: ruver-developer
 description: >
   Graph: deliver a Linear ticket via grill → spec → tickets → TDD
   (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus.
-  Use when /developer, /ruver-developer, /ruver_developer, a DEV
-  ticket, or a
-  QA_RESULT FAIL+PR_BUG. Follow grill recommendations. ASK the user
-  only as a last resort. User-facing chat in English. Unslop always.
-argument-hint: "<DEV-XXXX | goal | PR url | resume>"
+  Use when /developer, /ruver-developer, /ruver_developer, a
+  ticket, or a QA_RESULT FAIL+PR_BUG. Follow grill recommendations.
+  ASK the user only as a last resort. User-facing chat in English.
+  Unslop always.
+argument-hint: "<ticket | goal | PR url | resume>"
 ---
 
 # Ruver developer (graph)
@@ -41,7 +41,7 @@ Parse `$ARGUMENTS` with [ARGS.md](ARGS.md) **before** anything else.
 5. Walk GRAPH. Spawn **nodes**, never other graphs as subagents.
 6. Outbound QA → enqueue-or-start (JOBS.md), never spawn `ruver_qa`.
 
-`/ruver-developer <goal>`, `/ruver-developer DEV-1212`, and `/ruver-developer resume` are first-class.
+`/ruver-developer <goal>`, `/ruver-developer ABC-123`, and `/ruver-developer resume` are first-class.
 
 ## Modes
 
@@ -63,8 +63,8 @@ Full rules: [ARGS.md](ARGS.md). STATE + delivery STATE/HANDOFF + bus stack. Do n
 
 ```text
 /ruver-developer the notification inbox on the dashboard
-/ruver-developer DEV-1212
-/ruver-developer DEV-1212: extra note
+/ruver-developer ABC-123
+/ruver-developer ABC-123: extra note
 /ruver-developer resume
 /ruver-developer resume: the answer is B
 ```

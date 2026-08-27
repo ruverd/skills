@@ -18,17 +18,18 @@ A seam is the public boundary you observe. Use case, HTTP route, hook, screen be
 
 Before the first test of a ticket, pick the seam from the table (DECIDE, log). If two seams could work, pick the outer public one. Do not ASK.
 
-Empath defaults:
+Default seam: the **same layout as the nearest neighbor test** in this repo
+(DECIDE, log). If two seams could work, pick the outer public one.
 
-| Change | Default seam |
+| Change | If the repo already does this |
 |---|---|
-| API service / use case | co-located `file.test.ts` |
-| HTTP contract | controller test + TypeBox schema |
-| Prisma / tenant | repository test |
-| UI behavior | co-located `Component.test.tsx` |
+| API / use case | co-located unit test |
+| HTTP contract | controller or request test + the repo's schema style |
+| Persistence | repository test |
+| UI behavior | co-located component test |
 | Bug | failing test that reproduces the bug |
 
-`it('should ...')`. Tests live next to the code when the repo already does that.
+Match the neighbor test's naming and runner (`test_cmd` in STATE). Tests live next to the code when the repo already does that.
 
 ## Loop
 
@@ -67,6 +68,6 @@ Only with an explicit log in Decisions, and only:
 - Generated config
 - Pure CSS with no behavior
 
-## Playwright / E2E
+## E2E
 
-Only if done criteria needs an end-to-end UI flow. Unit/integration first. E2E does not replace TDD of logic.
+Only if done criteria needs an end-to-end UI flow. Use `e2e_cmd` / `qa_tool` from STATE. Unit/integration first. E2E does not replace TDD of logic.

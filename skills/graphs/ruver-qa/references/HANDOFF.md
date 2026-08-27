@@ -32,7 +32,7 @@ PR number: <n>
 PR title: <title>
 Repository: <org/repo>
 Feature: <feature>
-Linear: <DEV-XXXX or none>
+Linear: <ticket or none>
 Branch: <head>
 Commit: <sha>
 Plan: .ruver-qa/PLAN.md

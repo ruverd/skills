@@ -14,7 +14,8 @@ Do not implement. Do not debug in depth (that is **diagnose** on path debug_fix)
 1. Read the goal (+ ticket if a URL/ID is in the text).
 2. Light repo scan if the goal cites files/errors (stack, test name).
 3. Classify `work_kind`: feature | bug | regression | chore | spike.
-4. Classify **`scope`**: frontend_only | backend_only | **fullstack**.
+4. Classify **`scope`**: frontend_only | backend_only | mono | **fullstack**
+   ([PRODUCT.md](../PRODUCT.md)). Fullstack only if a sibling resolved.
 5. Choose `path`: full_feature | debug_fix | light_change
    (if fullstack, path is the mode **per worker**; coordination is FULLSTACK.md).
 6. DECISION_POLICY: DECIDE the path. ASK only last-resort. Do not ASK "feature or bug?" when the title already says.
@@ -25,7 +26,7 @@ Do not implement. Do not debug in depth (that is **diagnose** on path debug_fix)
 ```text
 result: ok | ask | blocked
 work_kind: feature | bug | regression | chore | spike
-scope: frontend_only | backend_only | fullstack
+scope: frontend_only | backend_only | mono | fullstack
 path: full_feature | debug_fix | light_change
 confidence: high | medium | low
 route_reason: one sentence

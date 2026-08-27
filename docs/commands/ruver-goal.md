@@ -8,7 +8,7 @@ Skill: [`../../skills/graphs/ruver-goal`](../../skills/graphs/ruver-goal).
 
 ## When
 
-- `/ruver-goal DEV-1212`
+- `/ruver-goal ABC-123`
 - `/ruver-goal https://github.com/org/repo/pull/99`
 - `/ruver-goal status`
 - `/ruver-goal cancel`

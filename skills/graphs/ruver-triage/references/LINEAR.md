@@ -12,10 +12,9 @@ product bug** and **not PR-related** (`NEW_BUG` candidate).
 Search the workspace for the same **underlying** problem (title, symptoms,
 feature, endpoint, component). Wording differences are not a new bug.
 
-Search GitHub-linked work for both:
-
-- `EmpathMSP/empath-ui`
-- `EmpathMSP/empath-api-v2`
+Search GitHub-linked work for the **current** repo
+(`gh repo view --json nameWithOwner`). If [PRODUCT.md](../../../engines/ruver-feature-delivery/PRODUCT.md)
+resolved a sibling, search that too.
 
 Typical calls:
 
@@ -47,7 +46,7 @@ All four must hold for **that** finding:
 
 - `title` — actionable (what + where)
 - `team` — discover via `list_teams` (never hardcode a UUID)
-- `assignee` — `Ruver Dornelas`
+- `assignee` — current Linear user (session / git email). Never a hardcoded person
 - `state` — `Todo`
 - `labels` — include `Bug` if that label exists
 - `links` — `{ url: <PR link>, title: "Discovered during QA" }`

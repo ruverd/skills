@@ -1,6 +1,6 @@
 ---
-description: Deliver a Linear ticket or PR_BUG. Grill → spec → tickets → TDD. Draft PR, CI green + MERGEABLE, then QA.
-argument-hint: "<DEV-XXXX | goal | PR url | resume>"
+description: Deliver a ticket, goal, or PR_BUG. Grill → spec → tickets → TDD. Draft PR, CI green + MERGEABLE, then QA.
+argument-hint: "<ticket | goal | PR url | resume>"
 ---
 
 # /ruver-developer

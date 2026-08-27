@@ -1,46 +1,47 @@
 # Node: mcp_context
 
 **Verb:** gather + **verify**
-**Capability:** MCP read + git branch if Linear
+**Capability:** repo discovery + MCP/CLI read + git branch
 **When:** **always** at the start; **before** any implement
 
 ## Mission
 
-1. Verify MCP access for the needed sources.
-2. Load real context.
-3. If a critical source fails → **explicit error in English** and `blocked` — **no inventing**.
+1. Discover this repo ([PRODUCT.md](../PRODUCT.md)).
+2. Verify access for **detected** sources only.
+3. If a **critical** source fails → English error and `blocked`. No inventing.
 
-[MCP_CONTEXT.md](../MCP_CONTEXT.md) · [LINEAR.md](../LINEAR.md)
+[PRODUCT.md](../PRODUCT.md) · [MCP_CONTEXT.md](../MCP_CONTEXT.md) ·
+[LINEAR.md](../LINEAR.md) when `tracker: linear`
 
 ## Steps
 
-1. Scan the goal for IDs/URLs.
-2. For each source (Linear, Figma, Sentry, Notion, …):
-   - **Pre-check:** is the MCP server available in the session?
-   - If **critical** and unreachable → build the **ERROR: MCP unreachable** block (template in MCP_CONTEXT.md), write STATE `mcp_gate: failed`, **return blocked**.
-   - If ok → full fetch → `*-context.md`.
-3. Linear ok → checkout branch.
-4. Re-scan Linear body for links → more fetches.
-5. `mcp-sources.md` + STATE.
+1. Discover forge, tracker, toolchain, topology, QA tool. Write STATE.
+2. Scan the goal for IDs/URLs.
+3. For each **detected** source:
+   - Pre-check: MCP or CLI (`gh` / `glab`) available?
+   - Critical and unreachable → ERROR block (MCP_CONTEXT.md), `mcp_gate: failed`, **blocked**.
+   - Ok → fetch → `*-context.md`.
+4. Tracker ok → checkout branch (`gitBranchName` or `feature/<id-lowercase>` or keep current).
+5. Re-scan the ticket body for more URLs.
+6. `mcp-sources.md` + STATE.
 
 ## Output
 
 ```text
 result: ok | partial | blocked | skipped
-mcp_gate: passed | failed
-error: ...   # required if blocked by MCP; speak in English
-linear_id / linear_branch / sources map
+mcp_gate: passed | passed_partial | failed
+forge / tracker / pkg / typecheck_cmd / test_cmd / qa_tool / scope
+error: ...   # required if blocked; speak in English
 ```
 
 ## Runtime note
 
-If the runtime does not expose MCP to subagents (e.g. Claude Code with tool search —
-BASELINE smoke S1), this node runs **on the main thread** (orchestrator executes the steps).
-Gather/write of context is not product code — it does not violate the orchestrator rule.
+If the runtime does not expose MCP to subagents, this node runs **on
+the main thread**. Discovery is not product code.
 
 ## Hard rules
 
-- **Never** invent content from an offline MCP.
-- **Never** implement if `mcp_gate: failed` or `result: blocked` for a critical source.
-- Error in English, clear, with source + server + ref + how to unblock.
+- **Never** invent content from an offline tracker.
+- **Never** implement if `mcp_gate: failed` for a **critical** source.
+- Local goal + no tracker URL → `mcp_gate: passed` (or `passed_partial`). Continue.
 - Zero product code in this node.

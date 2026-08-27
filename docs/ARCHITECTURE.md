@@ -69,12 +69,12 @@ code. `ruver-fd-coder` does, one ticket at a time.
 PR from args or QA_REQUEST
   → admit          one slot; else enqueue
   → plan           from the diff, before any click
-  → execute        Playwright + browser, record video
+  → execute        browser, e2e, or HTTP; record evidence
   → triage?        product suspicion → bus → /ruver-triage
   → verdict        comment + video + QA_RESULT
 ```
 
-Backend-only PRs still map to the frontend route that calls the API.
+Backend-only PRs with no UI sibling: HTTP the changed endpoints.
 Unit tests or `git show` are not a complete execute.
 
 ## /ruver-lstm

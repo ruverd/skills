@@ -8,7 +8,7 @@ Bundled primitives.
 goal / resume
   → mcp_context
   → triage
-       ├ scope=fullstack → fullstack (Orca, same branch) then this path per worker
+       ├ scope=fullstack → fullstack (same branch, git worktrees; Orca optional) then this path per worker
        ├ full_feature → grill → spec → tickets → implement* → review → tester
        ├ debug_fix    → diagnose → one ticket → implement → review → tester
        └ light_change → tickets (single) → implement → review → tester

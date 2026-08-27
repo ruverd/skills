@@ -1,226 +1,104 @@
-# Full-stack (frontend + backend) via Orca orchestration + worktrees
+# Full-stack (frontend + backend)
 
-When the task spans **frontend and backend**, the orchestrator **does not**
-implement everything in one repo. It uses **Orca orchestration** + **worktrees**
-on **both** repositories, with the **same branch**.
+When the task spans **frontend and backend** in **two git roots**,
+the orchestrator does not implement everything in one repo. Same
+**branch** on both. Sibling names come from [PRODUCT.md](PRODUCT.md),
+never from this file.
 
-Ticket/design context still comes from the **project MCP** (Linear/Figma/…).
-Orca **coordinates workers and worktrees**. It does not replace Linear MCP.
+`scope: mono` (both apps in one git root) is **not** this path. Stay
+on the current checkout.
 
-## 1. Detect full-stack
+Ticket context still comes from the project MCP (Linear/Figma/…).
 
-Set `scope: fullstack` if **any** of these is true:
+## 1. Detect
 
-- Ticket/goal mentions API + UI, endpoint + screen, backend + frontend
-- Labels/AC ask for a REST/GraphQL contract change **and** UI consumption
-- Related tickets / paths in both repos
-- User explicitly says "fe+be", "api and ui", "two repos"
-
-Otherwise: `scope: frontend_only | backend_only | mono` (current single-repo path).
-
-Repos in STATE:
+Set `scope: fullstack` only if [PRODUCT.md](PRODUCT.md) resolved a
+sibling **and** the ticket/goal needs both sides.
 
 ```yaml
 scope: fullstack
 repos:
-  frontend: empath-ui   # or Orca path/selector
-  backend: empath-api-v2
-branch: feature/dev-1212   # SAME on both
+  frontend: <from env / AGENTS.md>
+  backend: <from env / AGENTS.md>
+branch: <linear_branch or feature/<id-lowercase>>
 ```
 
-Empath defaults (adjust if the project is different):
-
-| Role | Typical Orca project / repo |
-|---|---|
-| Frontend | `github:empathmsp/empath-ui` / empath-ui |
-| Backend | `github:empathmsp/empath-api-v2` / empath-api-v2 |
-
-Discover with `orca project list --json` if the defaults do not match.
+Empty sibling → do not enter this path.
 
 ## 2. One branch
 
-Branch name (same string on **both** repos):
-
 1. Linear `gitBranchName` if it exists
-2. else `feature/<id-lowercase>` → `feature/dev-1212`
+2. else `feature/<id-lowercase>`
 
-**Forbidden:** `feature/dev-1212-ui` vs `feature/dev-1212-api` unless the user asked.
+**Forbidden:** different branch names across repos unless the user asked.
 
-## 3. Orca worktrees (both repos)
+## 3. Worktrees
 
-Load live guides (do not invent flags):
-
-```bash
-orca skills get orca-cli
-orca skills get orchestration
-orca status --json
-```
-
-Create a worktree **per repo** with the **same** `--name` (= branch):
+Default (always works):
 
 ```bash
-# Backend
-orca worktree create \
-  --repo name:empath-api-v2 \
-  --name feature/dev-1212 \
-  --base-branch main \
-  --linear-issue DEV-1212 \
-  --json
-
-# Frontend
-orca worktree create \
-  --repo name:empath-ui \
-  --name feature/dev-1212 \
-  --base-branch main \
-  --linear-issue DEV-1212 \
-  --json
+git -C <backend-root> worktree add ../<backend>-<branch> -b <branch> origin/main
+git -C <frontend-root> worktree add ../<frontend>-<branch> -b <branch> origin/main
 ```
 
-Notes:
+Reuse if that worktree already exists. Store paths in STATE:
+`worktrees.backend`, `worktrees.frontend`.
 
-- Prefer selectors from `orca project list` / `orca worktree list` if `name:` fails
-  (e.g. `--project github:empathmsp/empath-ui`).
-- `--name` = working branch aligned on both.
-- If a worktree with that name already exists, reuse it (`orca worktree list --json`).
-- Store paths/handles in STATE: `worktrees.backend`, `worktrees.frontend`.
+If `orca` is on PATH and `orca status --json` works, you **may**
+create those worktrees with `orca worktree create` using the names
+from PRODUCT.md. Confirm flags with `orca skills get orca-cli`.
+Orca is optional. Missing Orca is not a blocker.
 
-Fallback **only if Orca worktree is unavailable** (document in STATE):
+## 4. Workers
 
-```bash
-git -C <backend-root> worktree add ../empath-api-v2-feature-dev-1212 -b feature/dev-1212 origin/main
-git -C <frontend-root> worktree add ../empath-ui-feature-dev-1212 -b feature/dev-1212 origin/main
-```
+Host `spawn_worker` ([HOST.md](../../../HOST.md)) on each worktree.
+Same branch. Prefer BE → FE when the UI needs a new contract.
 
-User preference: **Orca worktrees**, not a silent fallback.
-
-## 4. Orchestration (coordinator)
-
-The experimental orchestration feature must be on. Minimal flow:
-
-```bash
-orca orchestration run-create --json
-# keep run_id
-
-# Backend task (contract first, if the UI depends on the API)
-orca orchestration task-create \
-  --task-title "BE DEV-1212: ..." \
-  --spec "<backend spec: endpoints, migrations, TDD, worktree path, branch feature/dev-1212>" \
-  --run <run_id> --json
-
-# Frontend task (deps = [backend_task_id] if the contract must exist)
-orca orchestration task-create \
-  --task-title "FE DEV-1212: ..." \
-  --spec "<frontend spec: UI DS, consume API, TDD, worktree, SAME branch>" \
-  --deps '["<backend_task_id>"]' \
-  --run <run_id> --json
-```
-
-Supervised workers (example — confirm flags with `orca skills get orchestration`):
-
-```bash
-orca orchestration worker-start \
-  --task <backend_task_id> \
-  --worktree new-top-level \
-  --repo name:empath-api-v2 \
-  --name feature/dev-1212 \
-  --base-branch main \
-  --agent <claude|codex|...> \
-  --run <run_id> --json
-
-orca orchestration worker-start \
-  --task <frontend_task_id> \
-  --worktree new-top-level \
-  --repo name:empath-ui \
-  --name feature/dev-1212 \
-  --base-branch main \
-  --agent <...> \
-  --run <run_id> --json
-```
-
-Or `--worktree` pointing at worktrees already created (preferred if they exist).
+If Orca orchestration is up, you **may** use `run-create` /
+`task-create` / `worker-start` / `check`. Confirm flags with
+`orca skills get orchestration`. If it is not up, host workers on
+the git worktrees are the path. Do not stop.
 
 Coordinator:
 
-- `orca orchestration check --wait` / inbox per the skill
-- handles `worker_done`, `ask`, `escalation`
-- **does not** edit product code in place of the workers — "gates" may edit
-  **only** `.ruver-feature-delivery/*` and rebase conflict resolution; never `src/`
+- waits for both workers
+- does **not** edit product `src/`
+- may edit `$RUVER_ROOT/.ruver-feature-delivery/*` and rebase conflicts
 
-### Dep order
-
-| Situation | DAG |
-|---|---|
-| UI needs a new endpoint/contract | **BE → FE** (`deps`) |
-| BE only exposes a field already consumable / FE and BE independent | parallel (no deps) |
-| FE only + temporary mock | avoid; prefer BE first if the contract is new |
-
-If BE **has no ticket yet** or the contract is not Done: see [BLOCKERS.md](BLOCKERS.md) —
-create a Linear **Draft**, comment the endpoint interface, `blockedBy`, wait until Done,
-while advancing what you can on FE (shell/DS).
+Linear MCP for the ticket. Never `orca linear`.
 
 ## 5. Spec each worker receives
 
-Inject into `--spec` / worker prompt:
-
 - worktree path + **identical** branch
-- linear-context (AC) — copied file or summary; MCP in the worker if the environment has it
+- linear-context (AC)
 - backend: contracts, migrations, API TDD
-- frontend: UI_DESIGN_SYSTEM + Figma + contract consumption
-- **never merge**; draft PR at the end if open_pr
+- frontend: UI_DESIGN_SYSTEM + Figma if any + contract consumption
+- never merge; draft PR if `open_pr`
 - thermo fix all in that worker's repo before shipping that repo
 
 ## 6. Dual ship + CI green
 
-For **each** repo, after worker_done ok:
+For **each** repo, after the worker is ok:
 
-1. quality / thermo in that repo's worktree
+1. quality / thermo in that worktree
 2. commit + push on the **same** branch
 3. draft PR (base main) linking Linear + the sibling PR
-   - reviewers/assignee from each repo's `AGENTS.md`
-4. **ci_watch** on **each** PR (`gh pr checks` until green) — [CI_DELIVERY.md](CI_DELIVERY.md)
+   - reviewers/assignee per [PRODUCT.md](PRODUCT.md)
+4. **ci_watch** on **each** PR
 
 **Delivered** only when **FE and BE** are green.
 
-STATE:
-
 ```yaml
 prs:
-  backend: https://github.com/.../pull/N
-  frontend: https://github.com/.../pull/M
-ci:
-  backend: green|pending|fail
-  frontend: green|pending|fail
+  backend: https://github.com/<org>/<backend>/pull/N
+  frontend: https://github.com/<org>/<frontend>/pull/M
 ```
 
-## 7. Integration in the Ruver graph
-
-```
-mcp_context → triage
-  if scope=fullstack:
-    → fullstack_setup (worktrees + run + tasks)
-    → orchestration workers (BE/FE)
-    → aggregate results → dual ship
-  else:
-    → current single-repo path
-```
-
-Triage writes `scope`. Node/orchestrator writes `worktrees` + `run_id`.
-
-## 8. Anti-patterns
+## 7. Anti-patterns
 
 - Implementing BE+FE only in the frontend repo
 - Different branch names across repos
 - Worktree in only one repo
-- "Handoff" without orchestration when the user asked to coordinate FE+BE
-- Generic local subagent **instead of** `orca orchestration` for dual-repo
-- Using `orca linear` to read the ticket (Linear MCP wins)
-
-## 9. Checklist
-
-- [ ] `scope: fullstack` detected and logged
-- [ ] unique branch name
-- [ ] Orca worktree FE + BE with the same name
-- [ ] run + tasks + workers via orchestration
-- [ ] BE→FE deps if the contract is new
-- [ ] draft PRs on both (if open_pr)
-- [ ] English summary with paths, branch, 2 PRs
+- Treating Orca as required
+- Inventing a sibling repo name
+- Using `orca linear` to read the ticket

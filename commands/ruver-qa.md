@@ -1,5 +1,5 @@
 ---
-description: QA a GitHub PR (Playwright + browser). Hands potential bugs to ruver_triage.
+description: QA a PR (browser, e2e, or HTTP). Hands potential bugs to ruver_triage.
 argument-hint: "<PR url or owner/repo#N>"
 ---
 

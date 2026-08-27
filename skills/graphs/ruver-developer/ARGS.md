@@ -1,4 +1,4 @@
-# Args: Linear ticket, goal, or resume
+# Args: ticket, goal, or resume
 
 `$ARGUMENTS` (and the rest of the user message) must resolve to **one** of these. Do not ask which one if the text is enough.
 
@@ -10,24 +10,24 @@ Trim. Then, in order:
 |---|---|
 | empty, and STATE exists with `status` not in `done` / `done_notes` | **resume** the current job |
 | `resume` / `continue` (whole token, case-insensitive) | **resume** |
-| Linear URL (`linear.app/...`) | **ticket** |
-| issue id `[A-Z][A-Z0-9]+-\d+` | **ticket** |
-| GitHub PR URL, or envelope `QA_RESULT` FAIL+`PR_BUG` | **fix** (existing PR) |
+| Linear / Jira / GitHub issue / GitLab issue URL | **ticket** |
+| GitHub PR or GitLab MR URL, or envelope `QA_RESULT` FAIL+`PR_BUG` | **fix** (existing PR/MR) |
+| issue id `[A-Z][A-Z0-9]+-\d+` | **ticket** (resolve tracker in PRODUCT.md; not a Linear gate) |
 | free text with no resume, no STATE | **local goal** |
 | empty, no STATE, no goal text | **stop** — ask for the ticket or the goal |
 
 Examples:
 
 ```text
-/ruver-developer DEV-1212
-/ruver-developer DEV-1212: extra note
-/ruver-developer https://linear.app/empathmsp/issue/DEV-1212/...
-/ruver-developer null crash in MembersTable
+/ruver-developer ABC-123
+/ruver-developer ABC-123: extra note
+/ruver-developer https://linear.app/<workspace>/issue/ABC-123/...
+/ruver-developer login button does nothing
 /ruver-developer resume
 /ruver-developer resume: the answer is B
 ```
 
-`DEV-1212: note` → ticket `DEV-1212`, extra text is the note (and, if `waiting_user`, it is also the answer).
+`ABC-123: note` → ticket `ABC-123`, extra text is the note (and, if `waiting_user`, it is also the answer).
 
 ## Resume
 
@@ -46,7 +46,7 @@ Load, in order:
 
 Then continue at `next_node` / current graph status. Do **not**:
 
-- re-fetch Linear as a blank start
+- re-fetch the tracker as a blank start
 - re-grill settled `## Decisions`
 - skip an open ASK; the current user message **is** the answer
 - restart delivery if `fd_status=done` (go **mergeable** / QA instead)

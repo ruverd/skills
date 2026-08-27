@@ -14,4 +14,4 @@ Never hide a failure. Never `--no-verify` to "pass".
 
 Unrelated bugs: do not silently expand the PR. Record them. Recommend
 or create a separate Linear ticket when appropriate (search first;
-assignee Ruver Dornelas / Todo — same rules as `ruver-triage` LINEAR.md).
+assignee = current Linear user / Todo — same rules as `ruver-triage` LINEAR.md).

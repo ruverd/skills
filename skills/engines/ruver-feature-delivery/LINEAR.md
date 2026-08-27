@@ -1,7 +1,10 @@
 # Linear via the project's MCP
 
-Part of [MCP_CONTEXT.md](MCP_CONTEXT.md).
+Use this file only when [PRODUCT.md](PRODUCT.md) set `tracker: linear`.
 **Only** the `linear-server` (or the equivalent name in this project). **No** `orca linear`.
+
+A bare `ABC-123` with Linear MCP **offline** is a local goal, not this
+hard gate. This gate fires when the user pasted a `linear.app` URL.
 
 ## Fetch
 
@@ -15,7 +18,7 @@ extract_images if screenshots matter
 ## Branch
 
 1. Issue `gitBranchName` if it exists
-2. else `feature/<id-lowercase>` → `feature/dev-1212`
+2. else `feature/<id-lowercase>`
 
 Checkout before implementing. Shipper checks the branch.
 
@@ -23,7 +26,7 @@ Checkout before implementing. Shipper checks the branch.
 
 `.ruver-feature-delivery/linear-context.md` + STATE `linear_*` fields.
 
-If the goal has a ticket and MCP `linear-server` fails / is offline / needs auth:
+If `tracker: linear` (a Linear URL) and MCP `linear-server` fails / is offline / needs auth:
 
 1. **Do not** invent AC / description / comments.
 2. **Do not** implement.

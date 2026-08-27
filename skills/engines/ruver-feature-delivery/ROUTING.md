@@ -30,9 +30,10 @@ If the ticket is both a bug and a redesign: DECIDE `debug_fix` when the AC is "r
 
 | scope | When |
 |---|---|
-| `frontend_only` | empath-ui only |
-| `backend_only` | empath-api-v2 only |
-| `fullstack` | FE **and** BE. [FULLSTACK.md](FULLSTACK.md): Orca worktrees, same branch. |
+| `frontend_only` | this git root is UI only |
+| `backend_only` | this git root is API only |
+| `mono` | UI and API in **this** git root |
+| `fullstack` | ticket needs both sides **and** a sibling resolved ([PRODUCT.md](PRODUCT.md)) |
 
 Signals: new endpoint + screen; "backend and frontend"; AC on both repos.
 

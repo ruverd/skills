@@ -3,7 +3,8 @@
 **Graph done:** PR(s) open **and** **all** CI/CD checks green. Until then the
 task is **not** delivered (`status` ≠ `done`).
 
-Source of truth: **`gh pr checks`** (not only `gh run list`).
+Source of truth: **`gh pr checks`** on GitHub, **`glab ci status`** on GitLab
+(not only `gh run list`). `forge=git` → no PR CI; `done_local`.
 Wake: `schedule_wake` in [HOST.md](../../../HOST.md). Follow
 `nodes/ci_watch.md` + STATE `ci_fix_loops`.
 
@@ -13,14 +14,14 @@ Wake: `schedule_wake` in [HOST.md](../../../HOST.md). Follow
 quality ok
  → commit + push
  → create/update draft PR
-      reviewers/assignee: current repo AGENTS.md
+      reviewers/assignee: PRODUCT.md
  → ci_watch (required if open_pr)
-      pending → poll `gh pr checks` (short calls, ~5 min apart)
+      pending → poll checks (short calls, ~5 min apart)
       fail → diagnose + fix (coder subagent) + push → re-check
       green → status=done
 ```
 
-PR packaging (shipper): reviewers and assignee from the current repo.
+PR packaging (shipper): reviewers and assignee per [PRODUCT.md](PRODUCT.md).
 
 With **`--no-pr`**: local delivery = tester + quality ok; PR CI does not apply.
 If the user still says "deliver it", prefer opening a PR and waiting for green CI.
