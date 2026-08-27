@@ -1,6 +1,6 @@
 ---
 description: Ruver graph — grill → spec → tickets → TDD. MCP first, error if unavailable, no invent, then implement/ship
-argument-hint: "<goal|DEV-XXXX|resume> [--no-pr]"
+argument-hint: "<goal|ticket|resume> [--no-pr]"
 ---
 
 # /ruver-feature-delivery
@@ -9,10 +9,10 @@ Alias: `/ruver-fd` · **Args:** `$ARGUMENTS` · User-facing chat in short Englis
 
 ## Load (progressive — do not load everything up front)
 
-1. Always: `SKILL.md` + `PSTACK.md` + `VOICE.md` + `DECISION_POLICY.md` + `TOKEN_ECONOMY.md` + `MCP_CONTEXT.md` + `ROUTING.md`
+1. Always: `SKILL.md` + `PSTACK.md` + `VOICE.md` + `DECISION_POLICY.md` + `TOKEN_ECONOMY.md` + `MCP_CONTEXT.md` + `ROUTING.md` + `PRODUCT.md`
 2. On demand: `GRILL.md` · `TDD.md` · `IMPLEMENTATION.md` · `CI_DELIVERY.md` ·
    `HANDOFF.md` · `BLOCKERS.md` · `UI_DESIGN_SYSTEM.md`
-3. Fullstack: `FULLSTACK.md` + `orca skills get orca-cli` + `orca skills get orchestration`
+3. Fullstack: `FULLSTACK.md` (Orca only if `orca status` works)
 
 ## Orchestrator
 
@@ -46,7 +46,7 @@ For each needed source (Linear / Figma / Sentry / Notion / …):
    exact **«ERROR: MCP unreachable»** template from `MCP_CONTEXT.md` — single source,
    do not write your own variant. Speak it in English.
 3. STATE: `mcp_gate: failed` + `mcp_gate_error`.
-4. If ok: full fetch → `*-context.md`; Linear → branch `feature/dev-xxxx`.
+4. If ok: full fetch → `*-context.md`; Linear → branch `gitBranchName` or `feature/<id-lowercase>`.
 5. `mcp_gate: passed` only with critical sources ok.
 
 **If `mcp_gate: failed` → end the run.** No implement triage, no ship.
@@ -58,7 +58,7 @@ For each needed source (Linear / Figma / Sentry / Notion / …):
 - `full_feature` → grill (main thread) → spec → tickets → implement TDD
 - `debug_fix` → diagnose → one TDD ticket
 - `light_change` → one ticket
-- `fullstack` → Orca worktrees, same branch
+- `fullstack` → sibling from PRODUCT.md, same branch, git worktrees (Orca optional)
 
 Grill DECIDE internally. ASK last resort. Do not interview the tree.
 **UI:** repo DS; Figma if present; else recent same-type refs.
@@ -84,8 +84,7 @@ Do not invent a "ready" endpoint. Tell the user in English (draft link).
    the ticket loop (IMPLEMENTATION.md). Shipper **refuses** without those gates in STATE.
 2. Quality thermo fix all.
 3. Shipper: commit + push + draft PR
-   (no Co-Authored-By / trailers). Reviewers and assignee from the
-   current repo `AGENTS.md`.
+   (no Co-Authored-By / trailers). Reviewers and assignee per PRODUCT.md.
 4. **`ruver-fd-ci` / CI_DELIVERY.md:**
    - `gh pr checks` (source of truth)
    - pending → poll

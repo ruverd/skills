@@ -1,6 +1,6 @@
 ---
 description: Drive developer → CI green → QA comment+video via /goal and /loop.
-argument-hint: "<DEV-XXXX | PR url | status | cancel>"
+argument-hint: "<ticket | PR url | status | cancel>"
 ---
 
 # /ruver-goal

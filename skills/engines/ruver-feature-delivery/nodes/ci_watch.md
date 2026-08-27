@@ -15,7 +15,7 @@ Follow [CI_DELIVERY.md](../CI_DELIVERY.md) + the spirit of `loop-on-ci` / `fix-c
 1. Resolve the branch PR: `gh pr view --json number,url`.
 2. `gh pr checks --json name,bucket,state,workflow,link`.
 3. Pending → **poll** with short calls (`gh pr checks --json ...`) about
-   ~5 min apart (empath-ui CI: 20-30 min). Never trust `--watch` inside one
+   ~5 min apart. Never trust `--watch` inside one
    tool call (10 min cap); a dead watch is **not** a CI fail — re-check.
 4. Fail → extract the error → dispatch a **fresh** `ruver-fd-coder` with the fix
    (this node does not edit product code) → push → goto 2 (≤ `ci_fix_loops`).

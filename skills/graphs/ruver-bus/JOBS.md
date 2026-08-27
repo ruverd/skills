@@ -20,7 +20,7 @@ Init JOBS from [templates/JOBS.md](templates/JOBS.md) if missing.
 
 ## Job id
 
-`dev-<DEV-XXXX|pr-N>` · `rev-pr-N` · `lstm-pr-N` · `qa-pr-N`
+`dev-<TICKET|pr-N>` · `rev-pr-N` · `lstm-pr-N` · `qa-pr-N`
 
 ## Main is busy
 
@@ -64,7 +64,7 @@ Worker jobs use `.ruver-bus/jobs/<id>/STATE.md` only.
 Prefer host `spawn_worker` with worktree isolation ([HOST.md](../../../HOST.md)).
 Do not also pass `cwd` when isolation is a worktree.
 
-Else git fallback (`.worktrees/` is gitignored in empath-ui):
+Else git fallback (`.worktrees/` if the repo gitignores it, else a sibling dir):
 
 ```bash
 git rev-parse --show-toplevel          # repo root

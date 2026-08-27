@@ -19,15 +19,15 @@ Trim. Then, in order:
 Examples:
 
 ```text
-/ruver-developer DEV-1212
-/ruver-developer DEV-1212: extra note
-/ruver-developer https://linear.app/empathmsp/issue/DEV-1212/...
+/ruver-developer ABC-123
+/ruver-developer ABC-123: extra note
+/ruver-developer https://linear.app/<workspace>/issue/ABC-123/...
 /ruver-developer null crash in MembersTable
 /ruver-developer resume
 /ruver-developer resume: the answer is B
 ```
 
-`DEV-1212: note` → ticket `DEV-1212`, extra text is the note (and, if `waiting_user`, it is also the answer).
+`ABC-123: note` → ticket `ABC-123`, extra text is the note (and, if `waiting_user`, it is also the answer).
 
 ## Resume
 

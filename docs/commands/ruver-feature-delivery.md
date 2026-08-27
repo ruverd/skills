@@ -10,7 +10,7 @@ Skill: [`../../skills/engines/ruver-feature-delivery`](../../skills/engines/ruve
 
 ## When
 
-- `/ruver-fd DEV-1212`
+- `/ruver-fd ABC-123`
 - `/ruver-fd null crash in MembersTable`
 - `/ruver-fd resume`
 - `/ruver-fd … --no-pr`
@@ -39,7 +39,7 @@ tester / quality / shipper are workers (`ruver-fd-coder`, …).
 ## What “delivered” means here
 
 Draft PR **and** required CI green. Until then `status ≠ done`.
-Reviewers and assignee come from the target repo `AGENTS.md`.
+Reviewers and assignee: [PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md).
 
 ## Never
 

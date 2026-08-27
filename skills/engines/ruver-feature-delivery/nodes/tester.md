@@ -17,7 +17,7 @@ Objective hard gate with **real commands**.
 
 "Cheap" = **expected <3 min**. A command expected **>10 min** (tool cap)
 is **CI-only** — declare `ci_only` in STATE, never try it locally
-(empath-ui: lint and full suite are CI-only).
+(or listed in `AGENTS.md` / `$RUVER_CI_LOCAL_SKIP`).
 
 ## Output
 

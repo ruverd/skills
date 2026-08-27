@@ -56,11 +56,11 @@ rg -l "AlertDialog|Sheet" --glob "*.tsx" src/
 git log --oneline --diff-filter=A -- "*.tsx" | head
 ```
 
-Typical folders (empath-ui and similar):
+Typical folders (adapt to the repo):
 
-- `src/shared/ui/` · `src/shared/components/dialogs/` · `src/shared/components/`
-- feature under `src/App/<Domain>/`
-- Storybook next to the component
+- design system: `shared/ui`, `components`, `ui/`
+- feature screens: `src/App/<Domain>/`, `app/`, `pages/`, `views/`
+- Storybook next to the component if the repo uses it
 
 ### 3. Read the pattern (not just the path)
 
@@ -86,8 +86,8 @@ Record in STATE (spec/coder):
 ## UI references (no Figma, or complement)
 - type: Dialog
 - refs:
-  - src/shared/components/dialogs/FooDialog/...
-  - src/App/Members/.../BarDialog.tsx
+  - <dialog from this repo>
+  - <same-type screen from this repo>
 - extracted pattern: uses shared/ui Dialog + ...
 ```
 
@@ -116,14 +116,10 @@ Record in STATE (spec/coder):
 | 10 | **YAGNI visual** — no "improving" outside Figma/refs. |
 | 11 | **No Figma → recent refs required** (same UI type). |
 
-## empath-ui (example)
+## Find the DS in this repo
 
-- DS: `src/shared/ui/` (components, primitives, colors, `cn`)
-- Dialogs/modals: look in `shared/components/dialogs` and `App/**`
-- Named exports, `cn()`, project Radix + Tailwind
-- Neighbor feature under `src/App/...`
-
-Other repos: find `shared/ui`, `components.json`, Storybook — do not force empath paths.
+Look for `shared/ui`, `components.json`, Storybook, `src/components`.
+Follow **that** tree. Do not force a folder layout from another product.
 
 ## What each node does
 

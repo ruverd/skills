@@ -15,7 +15,7 @@ extract_images if screenshots matter
 ## Branch
 
 1. Issue `gitBranchName` if it exists
-2. else `feature/<id-lowercase>` → `feature/dev-1212`
+2. else `feature/<id-lowercase>`
 
 Checkout before implementing. Shipper checks the branch.
 

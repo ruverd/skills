@@ -1,6 +1,6 @@
 ---
 description: Alias /ruver_developer → same as /ruver-developer
-argument-hint: "<DEV-XXXX | PR url | resume>"
+argument-hint: "<ticket | PR url | resume>"
 ---
 
 # /ruver_developer

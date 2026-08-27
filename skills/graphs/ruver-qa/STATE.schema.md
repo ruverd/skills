@@ -6,13 +6,13 @@
 init | resolving | planning | executing | triage_requested | verdict | done | blocked
 ```
 
-| Campo | Uso |
+| Field | Use |
 |---|---|
 | `pr_url` | required |
 | `repo` | `owner/repo` |
 | `branch` | head |
 | `sha` | tested oid |
-| `linear` | `DEV-XXXX` or empty |
+| `linear` | ticket id or empty |
 | `surface` | routes / endpoints / specs from the plan |
 | `plan_path` | `.ruver-qa/PLAN.md` |
 | `findings_path` | `.ruver-qa/FINDINGS.md` when any finding exists |
@@ -20,4 +20,4 @@ init | resolving | planning | executing | triage_requested | verdict | done | bl
 | `triage_class` | after `TRIAGE_RESULT` |
 | `video_url` | gist (or empty if upload failed) |
 | `comment_url` | PR comment after verdict |
-| `job_id` | bus JOBS id (`qa-pr-N` / `dev-DEV-XXXX`) |
+| `job_id` | bus JOBS id (`qa-pr-N` / `dev-<ticket>`) |

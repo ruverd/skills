@@ -26,7 +26,7 @@ done_report | escalated
 |---|---|
 | `schema_version: 4` | resume compat |
 | `path` | full_feature \| debug_fix \| light_change |
-| `scope` | frontend_only \| backend_only \| fullstack |
+| `scope` | frontend_only \| backend_only \| mono \| fullstack |
 | `spec_path` | `$RUVER_ROOT/.ruver-feature-delivery/SPEC.md` |
 | `tickets_path` | `$RUVER_ROOT/.ruver-feature-delivery/TICKETS.md` |
 | `current_ticket` | |
@@ -39,7 +39,7 @@ done_report | escalated
 
 | Node | Reads | Writes |
 |---|---|---|
-| mcp_context | goal, refs | mcp_gate, linear_*, branch |
+| mcp_context | goal, refs, PRODUCT.md | mcp_gate, linear_*, branch, repos_* |
 | triage | goal, linear-context | work_kind, scope, path, route_* |
 | grill | goal, repo, Linear | decisions, approaches, `waiting_user` |
 | spec | decisions | SPEC.md, spec_path |

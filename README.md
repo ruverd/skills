@@ -13,7 +13,7 @@ never merge.
 TDD on behavior change. ASK the user only as a last resort.
 
 ```text
-/developer DEV-1234
+/developer ABC-123
 /qa https://github.com/org/repo/pull/99
 /reviewer https://github.com/org/repo/pull/99
 /lstm https://github.com/org/repo/pull/99
@@ -130,7 +130,7 @@ opens `src/` itself.
 |---|---|---|
 | Graph | `skills/*/*/GRAPH.md` | admit → deliver → mergeable → QA |
 | Host | [`HOST.md`](HOST.md) | how *this* harness spawns a child or wakes later |
-| Product | the target repo `AGENTS.md` | test command, reviewers, Linear team |
+| Product | target repo `AGENTS.md` + [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, sibling repos |
 
 A graph that says `spawn_subagent`, `model: grok-4.6`, or a company's
 GitHub handles has leaked. Host APIs stay in HOST.md. Product policy

@@ -275,7 +275,7 @@ Run in order. Do not begin a phase before the previous one is complete.
 - Repo conventions: `CLAUDE.md` at the repo root (deep only; light reuses what the
   diff needs). Read `AGENTS.md` only if `CLAUDE.md` is absent.
 - PR title and body: stated intent and acceptance criteria.
-- Linear ticket: extract `DEV-\d+` from `headRefName` or title. If found, one call
+- Linear ticket: extract `[A-Z][A-Z0-9]+-\d+` from `headRefName` or title. If found, one call
   `mcp__linear-server__get_issue`. If the MCP is unavailable or no ID exists, note
   it and continue on the PR body alone.
 
@@ -356,11 +356,9 @@ by a happy-path test is a **nit**.
 
 ### Phase 8 — Standards (never skipped)
 
-Only rules written in the repo's `CLAUDE.md`. For empath-ui that means: named
-exports only, React Query for server state (never Context or `useState`), existing
-service hooks instead of raw API calls, `cn()` for conditional classes, no `any`,
-no class components, tests co-located, code and comments in English. A repo rule
-broken is a **major**; a style preference not written down is a nit.
+Only rules written in the repo's `CLAUDE.md` / `AGENTS.md`. Quote the
+rule you are applying. A repo rule broken is a **major**; a style
+preference not written down is a nit.
 
 Structure checks also run here. They are not repo rules. No extra reads.
 

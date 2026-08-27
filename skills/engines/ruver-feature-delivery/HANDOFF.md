@@ -46,8 +46,8 @@ Claude and Grok on this Mac read the same `$RUVER_ROOT`. Do not commit.
 <one line>
 
 ## Linear
-- id: DEV-XXXX
-- branch: feature/dev-xxxx
+- id: <ticket>
+- branch: feature/<id-lowercase>
 - url:
 
 ## Position in graph
@@ -87,7 +87,7 @@ Claude and Grok on this Mac read the same `$RUVER_ROOT`. Do not commit.
 
 ## Commands for resume
 ```text
-# in the correct repo/worktree, on branch feature/dev-xxxx
+# in the correct repo/worktree, on branch feature/<id-lowercase>
 /ruver-fd resume
 # or
 /ruver-feature-delivery resume from $RUVER_ROOT/.ruver-feature-delivery/HANDOFF.md
@@ -118,9 +118,9 @@ must say that.
 Same: checkout branch, `/ruver-fd resume` (real command on Claude), **RECONCILE**,
 `active_runtime: claude-code`, follow HANDOFF.
 
-### Fullstack / Orca
+### Fullstack
 
-Include in HANDOFF: `run_id`, worktree selectors, which worker stopped.
+Include in HANDOFF: worktree paths, which worker stopped, Orca `run_id` if used.
 Resume workers with the same branch name; do not recreate worktrees if they exist.
 
 ## Message to the user (English, short)
@@ -128,7 +128,7 @@ Resume workers with the same branch name; do not recreate worktrees if they exis
 ```text
 S: limit near on this runtime (claude|grok)
 D: wrote $RUVER_ROOT/.ruver-feature-delivery/HANDOFF.md + STATE (global, not git)
-P: open the other runtime on branch <feature/dev-xxxx> and run:
+P: open the other runtime on branch <feature/<id-lowercase>> and run:
    Claude: /ruver-fd resume · Grok: /skills ruver-feature-delivery + "resume"
    (note: Grok runs always-approve — push/PR with no prompt)
    Continues from: <next>

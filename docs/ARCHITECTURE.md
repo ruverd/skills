@@ -74,7 +74,7 @@ PR from args or QA_REQUEST
   → verdict        comment + video + QA_RESULT
 ```
 
-Backend-only PRs still map to the frontend route that calls the API.
+Backend-only PRs with no UI sibling: HTTP the changed endpoints.
 Unit tests or `git show` are not a complete execute.
 
 ## /ruver-lstm

@@ -30,8 +30,8 @@ mcp_gate_error: ""
 fullstack_run_id: ""
 worktrees_frontend: ""
 worktrees_backend: ""
-repos_frontend: "empath-ui"
-repos_backend: "empath-api-v2"
+repos_frontend: ""
+repos_backend: ""
 review_fix_loops: 2
 review_fix_loops_used: 0
 test_fix_loops: 2
@@ -65,7 +65,7 @@ Index: `.ruver-feature-delivery/mcp-sources.md`
 
 - **ID:**
 - **URL:**
-- **Branch (gitBranchName / feature/dev-xxxx):**
+- **Branch (gitBranchName / feature/<id-lowercase>):**
 - **Context file:** `.ruver-feature-delivery/linear-context.md`
 - **Comments loaded:** no
 - **Related loaded:** no
@@ -73,7 +73,7 @@ Index: `.ruver-feature-delivery/mcp-sources.md`
 ## Route (triage)
 
 - **work_kind:** feature | bug | regression | chore | spike
-- **scope:** frontend_only | backend_only | fullstack
+- **scope:** frontend_only | backend_only | mono | fullstack
 - **path:** full_feature | debug_fix | light_change
 - **confidence:**
 - **reason:**

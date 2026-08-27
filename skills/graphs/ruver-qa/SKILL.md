@@ -31,6 +31,6 @@ When done: publish **video** via `scripts/publish-evidence.sh` (never
 ([references/COMMENT.md](references/COMMENT.md)), then write `QA_RESULT`
 and **pop** the bus stack. Chat-only is not done.
 
-Backend-only PRs: plan still maps the API change to the **frontend
-route** that calls it, exercises that screen, and records video.
+Backend-only PRs: HTTP the changed endpoints unless a frontend
+sibling is resolved ([PRODUCT.md](../../engines/ruver-feature-delivery/PRODUCT.md)).
 Unit/CI/`git show` alone is not a complete QA execute.

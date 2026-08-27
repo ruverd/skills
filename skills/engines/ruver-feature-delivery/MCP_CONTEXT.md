@@ -40,7 +40,7 @@ STATE: list `mcp_sources: [{name, status, path, refs}]`.
 
 | Source | Server (examples) | Detect |
 |---|---|---|
-| **Linear** | `linear-server` | `DEV-1234`, `linear.app/.../issue/` |
+| **Linear** | `linear-server` | `[A-Z][A-Z0-9]+-\d+`, `linear.app/.../issue/` |
 | **Figma** | `figma`, `figma-dev-mode-mcp-server`, Figma MCP | `figma.com/file|design/...`, `figma.com/proto/` |
 | **Sentry** | `sentry` | `sentry.io/...`, `SENTRY-...`, issue id in text |
 | **Notion** | `notion`, `notionApi` | `notion.so/...`, `notion.site/...` |
@@ -82,7 +82,7 @@ I could not reach the MCP needed to continue.
 |---|---|
 | Source | Linear / Figma / Sentry / Notion / … |
 | Expected server | linear-server / figma / sentry / … |
-| Ref | DEV-1212 / URL |
+| Ref | ABC-123 / URL |
 | Status | offline | auth_required | timeout | tool_error |
 | Detail | <short technical message from the runtime> |
 
@@ -165,9 +165,10 @@ For any other connected MCP (Slack, Jira, Confluence, …):
      b. if critical and fail → English ERROR + result=blocked + STOP
      c. if ok → fetch → file
 3. Linear ok → branch checkout
-4. Re-scan Linear body for more URLs → repeat 2
-5. mcp-sources.md (ok | error | unavailable | skipped)
-6. result: ok | partial | blocked
+4. Detect topology ([PRODUCT.md](PRODUCT.md))
+5. Re-scan Linear body for more URLs → repeat 2
+6. mcp-sources.md (ok | error | unavailable | skipped)
+7. result: ok | partial | blocked
 ```
 
 - `ok` = all critical sources ok

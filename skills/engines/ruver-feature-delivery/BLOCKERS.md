@@ -34,7 +34,7 @@ If the blocker **has no ticket** yet (e.g. missing API task):
 
 ```
 save_issue:
-  title: "[Draft] BE: <endpoint/contract> for <current DEV-XXXX>"
+  title: "[Draft] BE: <endpoint/contract> for <current ticket>"
   team: <same team as the current ticket>
   state: Draft  # or the team's "Draft" / "Backlog" name — discover via list_issue_statuses
   description: |  (template below)
@@ -43,14 +43,14 @@ save_issue:
   # relation: CURRENT is blockedBy the new draft
 ```
 
-After creating `DEV-NEW`:
+After creating the draft (`NEW-ID`):
 
 ```
 save_issue id=<CURRENT>:
-  blockedBy: ["DEV-NEW"]   # append-only
+  blockedBy: ["NEW-ID"]   # append-only
 
 # and/or on the draft:
-save_issue id=DEV-NEW:
+save_issue id=NEW-ID:
   blocks: ["CURRENT"]
 ```
 
@@ -61,9 +61,9 @@ If a blocking ticket already exists → **do not** duplicate; use it + contract 
 ```markdown
 ## Explicit dependency
 
-- **Blocks:** DEV-XXXX (<current ticket title>)
+- **Blocks:** <ticket> (<current ticket title>)
 - **Why:** current FE/work cannot finish without this contract/endpoint.
-- **Target branch (same family):** feature/dev-xxxx (align with the parent if fullstack)
+- **Target branch (same family):** feature/<id-lowercase> (align with the parent if fullstack)
 
 ## Expected contract (fill in and keep updated)
 
@@ -89,7 +89,7 @@ If a blocking ticket already exists → **do not** duplicate; use it + contract 
 - [ ] Stable contract (no breaking vs the sketch below)
 - [ ] Ticket marked Done
 
-## How the consumer (DEV-XXXX) will use it
+## How the consumer (<ticket>) will use it
 - Screen/flow X calls Y
 - Fields shown: ...
 
@@ -103,7 +103,7 @@ If a blocking ticket already exists → **do not** duplicate; use it + contract 
 On the **blocking** ticket (draft or existing), add comment(s) when detail is missing:
 
 ```markdown
-## Contract consumed by DEV-XXXX
+## Contract consumed by <ticket>
 
 **Endpoint:** `GET /api/v2/foo/:id`
 **Params:** `id` uuid; query `?include=bar`
@@ -122,7 +122,7 @@ export interface FooDto { id: string; name: string }
 
 **UI use:** Dialog X shows `name`; loading/empty per DS.
 
-**Do not:** change the shape without telling DEV-XXXX.
+**Do not:** change the shape without telling <ticket>.
 ```
 
 If the contract changes during the wait → **new comment** (do not erase history).
@@ -130,7 +130,7 @@ If the contract changes during the wait → **new comment** (do not erase histor
 On the **current** (blocked) ticket, optional comment:
 
 ```markdown
-## Waiting on DEV-NEW
+## Waiting on NEW-ID
 - Blocker: Foo endpoint
 - Advanced: UI shell / local types / ...
 - Next step when Done: wire the client + E2E tests
@@ -150,7 +150,7 @@ STATE status: waiting_blocker
    still open     → END THE SESSION:
      - STATE: waiting_blocker + blockers[].last_check
      - English message: what you are waiting on, draft link, and
-       "when DEV-NEW is Done, run /ruver-fd resume"
+       "when NEW-ID is Done, run /ruver-fd resume"
      - optional: external routine re-invokes (runtime cron) — never sleep
 ```
 
@@ -175,13 +175,13 @@ On resume:
  → quality → ship
 ```
 
-May run **in parallel** with Orca fullstack: BE task = draft ticket or BE worker; FE waits if deps.
+May run **in parallel** with fullstack workers: BE task = draft ticket or BE worker; FE waits if deps.
 
 ## 7. STATE
 
 ```yaml
 blockers:
-  - id: DEV-999
+  - id: ABC-999
     role: api_contract
     status: waiting | done | canceled
     draft_created: true

@@ -19,9 +19,10 @@
    - **Pre-check:** is the MCP server available in the session?
    - If **critical** and unreachable → build the **ERROR: MCP unreachable** block (template in MCP_CONTEXT.md), write STATE `mcp_gate: failed`, **return blocked**.
    - If ok → full fetch → `*-context.md`.
-3. Linear ok → checkout branch.
-4. Re-scan Linear body for links → more fetches.
-5. `mcp-sources.md` + STATE.
+3. Linear ok → checkout branch (`gitBranchName` or `feature/<id-lowercase>`).
+4. Detect topology ([PRODUCT.md](../PRODUCT.md)): write `scope` hints + sibling env into STATE.
+5. Re-scan Linear body for links → more fetches.
+6. `mcp-sources.md` + STATE.
 
 ## Output
 

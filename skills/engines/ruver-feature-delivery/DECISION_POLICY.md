@@ -23,7 +23,7 @@ Test: would you stop a senior engineer at 11pm for this. If no, DECIDE.
 
 ## How to DECIDE when you are not 100% sure
 
-Prefer, in order: stated Linear AC, existing pattern in the same feature, YAGNI (smaller change), CLAUDE.md / AGENTS.md / TypeBox / module isolation.
+Prefer, in order: stated Linear AC, existing pattern in the same feature, YAGNI (smaller change), CLAUDE.md / AGENTS.md / the repo's schema and module rules.
 
 Log residual risk. Do not convert leftover doubt into a question.
 
@@ -68,7 +68,7 @@ Grill decides internally. Implement does not reopen the plan. `NEEDS_CONTEXT` fr
 
 ## Facts
 
-Never ask for a fact you can grep. Missing Linear on a **fresh Empath start**: you may run as a local goal, but prefer the ticket id if the user gave one. Do not invent ACs.
+Never ask for a fact you can grep. Missing Linear on a **fresh start**: you may run as a local goal, but prefer the ticket id if the user gave one. Do not invent ACs.
 
 ## Anti-invention
 

@@ -11,6 +11,7 @@ Follow:
 - `../skills/engines/ruver-feature-delivery/nodes/mcp_context.md`
 - `../skills/engines/ruver-feature-delivery/MCP_CONTEXT.md`
 - `../skills/engines/ruver-feature-delivery/LINEAR.md`
+- `../skills/engines/ruver-feature-delivery/PRODUCT.md`
 
 ## Hard gate
 
@@ -29,7 +30,7 @@ Follow:
    - Print the exact error block from MCP_CONTEXT.md ("ERROR: MCP unreachable"), in English.
    - Return `result: blocked`. Stop. No implement.
 4. If accessible: fetch fully → `*-context.md` + `mcp-sources.md`.
-5. Linear OK → checkout `gitBranchName` or `feature/dev-xxxx`.
+5. Linear OK → checkout `gitBranchName` or `feature/<id-lowercase>`.
 6. Critical sources all OK → `mcp_gate: passed`.
 
 Never use `orca linear`. Never implement product code.

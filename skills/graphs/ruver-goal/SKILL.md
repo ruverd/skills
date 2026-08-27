@@ -4,7 +4,7 @@ description: >
   Drive developer → CI green → QA comment+video across turns with
   schedule_wake (HOST.md). Use when /ruver-goal, /ruver_goal, or after
   a draft PR is opened and CI is still pending.
-argument-hint: "<DEV-XXXX | PR url | status | cancel>"
+argument-hint: "<ticket | PR url | status | cancel>"
 ---
 
 # Ruver goal / loop
@@ -22,7 +22,7 @@ Chat English. Unslop always.
 
 | Args | Action |
 |---|---|
-| `DEV-XXXX` / feature text | Start goal + developer graph |
+| ticket id / feature text | Start goal + developer graph |
 | PR url / `owner/repo#N` | Start goal on that PR (skip implement if it exists) |
 | `status` | Read `.ruver-goal/STATE.md` + `gh pr checks` + last QA comment |
 | `cancel` | Delete the scheduler loop; leave graphs as-is |

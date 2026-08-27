@@ -15,7 +15,7 @@ Command pages: [commands/](commands/README.md).
 |---|---|---|
 | **Graph** | this repo (`skills/{graphs,engines,lib}/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
 | **Host** | [HOST.md](../HOST.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
-| **Product** | the target repo `AGENTS.md` / `CLAUDE.md` | test command, reviewers, Linear team, design system |
+| **Product** | target repo `AGENTS.md` / `CLAUDE.md` + [PRODUCT.md](../skills/engines/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, Linear team, design system, sibling repos |
 
 A graph that says `spawn_subagent` or `model: grok-4.6` or
 `reviewers: izaiasneto4` is no longer a graph. It is a host or a

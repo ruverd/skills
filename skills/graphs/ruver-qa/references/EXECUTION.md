@@ -7,15 +7,17 @@ is impossible without them (record the extra step in PLAN.md first).
 ## Per step
 
 1. Run the Playwright spec if the step names one (`--video=on`).
-2. Exercise the route / endpoint in the browser the way a user would.
-   Backend PRs: open the **mapped FE route**, click through the
-   flow that hits the changed API, record video.
+2. Exercise the route or endpoint the way a user (or API client) would.
+   UI: browser. Backend with a resolved frontend sibling: mapped FE
+   route if a caller exists. Backend with no UI: HTTP the changed
+   endpoints. Do not invent a screen.
 3. Check `pass_if` and the listed variants.
 4. Record: command + exit, failing names, `test-results/**` paths,
    a short excerpt — not the full log.
-5. **Video is mandatory** for every execute (FE or BE). Prefer
-   Playwright `--video=on` or `playwright-cli video-start`. A gist
-   of notes without media is not enough for PASS.
+5. **Evidence is mandatory.** UI: Playwright `--video=on` (or
+   `playwright-cli video-start`). API-only: recorded HTTP (status +
+   body excerpt); video if you captured it. A gist of notes without
+   that evidence is not enough for PASS.
 
 One screenshot is not enough for a screen step.
 A unit/CI-only walk is not enough when a FE route exists.

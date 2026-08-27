@@ -15,17 +15,19 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
    confirm exit codes in `.ruver-feature-delivery/gates.log` if it exists.
 2. Branch == `linear_branch` if Linear.
 3. Idempotency: `gh pr list --head <branch>` — PR already exists → update, do not recreate.
-4. Commit (cite DEV-XXXX). **No Co-Authored-By, no "Generated with", no trailers.**
+4. Commit (cite Linear id if any). **No Co-Authored-By, no "Generated with", no trailers.**
 5. Push (`-u`, no force).
 6. Draft PR (default) with Linear link (body via repo `pr-description` skill if it exists).
-7. **Reviewers + assignee** from the current repo `AGENTS.md` / `CLAUDE.md`
-   (or git `user.name` as assignee if none listed). On create and update:
+7. **Reviewers + assignee** per [PRODUCT.md](../PRODUCT.md). On create and update:
    ```bash
+   ME=$(gh api user --jq .login)
    gh pr create --draft --title "..." --body "..." \
-     --reviewer "<from-repo>" --assignee "<from-repo>"
-   gh pr edit --add-reviewer "<from-repo>" --add-assignee "<from-repo>"
+     --assignee "${ASSIGNEE:-$ME}"
+   # --reviewer only if AGENTS.md listed handles
+   gh pr edit --add-assignee "${ASSIGNEE:-$ME}"
    ```
-   One failed reviewer request must not block the rest.
+   One failed reviewer request must not block the rest. Never pass
+   `git user.name` to `--assignee`.
 8. STATE: PR URL; `ci.status: pending`.
 9. **Hand off to ci_watch** (required with a PR).
 10. Short English summary: "PR open; waiting on CI green to deliver."
@@ -43,4 +45,4 @@ Then the orchestrator **always** runs **ci_watch** if `open_pr: true`.
 - Never merge / force-push.
 - Never "delivered" with failing checks.
 - Fullstack: ship per repo + ci_watch on **each** PR.
-- Every PR (create or update): reviewers/assignee from the current repo.
+- Every PR (create or update): reviewers/assignee per PRODUCT.md.

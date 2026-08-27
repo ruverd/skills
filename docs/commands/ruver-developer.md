@@ -9,7 +9,7 @@ Engine: [`/ruver-feature-delivery`](ruver-feature-delivery.md).
 
 ## When
 
-- `/developer DEV-1212`
+- `/developer ABC-123`
 - `/developer the notification inbox on the dashboard`
 - `/developer resume`
 - Envelope: `QA_RESULT` FAIL + `PR_BUG` (from [QA](ruver-qa.md))

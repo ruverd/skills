@@ -28,8 +28,8 @@ PR from args or QA_REQUEST
 A GitHub PR comment on the **head SHA** with a video URL. Chat-only
 is not done. Unit tests or `git show` are not a complete execute.
 
-Backend-only PRs still map to the **frontend route** that calls the
-API, hit that screen, and record it.
+Backend-only PRs with no frontend sibling: HTTP the changed
+endpoints. With a sibling UI: hit that screen when a caller exists.
 
 ## Slot
 
@@ -45,7 +45,7 @@ The graph engineer does **not** classify bugs. Suspicion →
 - Spawn `ruver_triage` as a child.
 - Skip the PR comment.
 - `gh gist create` on `.webm` (use `scripts/publish-evidence.sh`).
-- PASS without a video of the FE route.
+- PASS without evidence (FE video, or HTTP record on API-only).
 
 ## Related
 

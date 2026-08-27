@@ -6,7 +6,7 @@
 Follow `../../ruver-bus/JOBS.md`.
 
 1. Init `.ruver-bus/JOBS.md` if missing.
-2. `job_id` = `dev-<DEV-XXXX>` or `dev-pr-<n>`.
+2. `job_id` = `dev-<ticket>` or `dev-pr-<n>`.
 3. Idle main → `lane=foreground`, write
    `.ruver-developer/STATE.md` (`job_id`, `lane`), then
    **deliver** or **fix**.
