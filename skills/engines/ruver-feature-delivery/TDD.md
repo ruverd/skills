@@ -29,7 +29,7 @@ Default seam: the **same layout as the nearest neighbor test** in this repo
 | UI behavior | co-located component test |
 | Bug | failing test that reproduces the bug |
 
-Match the repo's `it(...)` style. Tests live next to the code when the repo already does that.
+Match the neighbor test's naming and runner (`test_cmd` in STATE). Tests live next to the code when the repo already does that.
 
 ## Loop
 
@@ -68,6 +68,6 @@ Only with an explicit log in Decisions, and only:
 - Generated config
 - Pure CSS with no behavior
 
-## Playwright / E2E
+## E2E
 
-Only if done criteria needs an end-to-end UI flow. Unit/integration first. E2E does not replace TDD of logic.
+Only if done criteria needs an end-to-end UI flow. Use `e2e_cmd` / `qa_tool` from STATE. Unit/integration first. E2E does not replace TDD of logic.

@@ -1,7 +1,7 @@
 ---
 name: ruver-feature-delivery
 description: >
-  Use when delivering a Linear ticket, bug, or chore end-to-end
+  Use when delivering a ticket, bug, or chore end-to-end
   (implementation through draft PR with CI green) via
   /ruver-feature-delivery or /ruver-fd, or when resuming a run
   whose HANDOFF.md exists under $RUVER_ROOT/.ruver-feature-delivery/.
@@ -37,12 +37,12 @@ Adapted grill: [GRILL.md](GRILL.md). ASK the user only as a last resort.
 ```text
 /ruver-fd ABC-123
 /ruver-fd ABC-123: extra note
-/ruver-fd null crash in MembersTable
+/ruver-fd login button does nothing
 /ruver-fd resume
 /ruver-fd … --no-pr
 ```
 
-Linear branch `gitBranchName` or `feature/<id-lowercase>`.
+Branch from the tracker, or `feature/<id-lowercase>`, or the current branch.
 
 ## Orchestrator loop
 
@@ -77,7 +77,7 @@ Ship: review → tester → blast (not light) → **thermo fix all** → commit 
 4. Implementation **only** in a subagent. Main does not edit product code.
 5. TDD on every behavior change. Thermo fix all before PR.
 6. UI: DS of the repo; Figma if present; else copy recent same-type screens.
-7. MCP: verify access. Critical offline → error in English and stop.
+7. Discover the repo first (PRODUCT.md). Critical tracker URL offline → error and stop. Local goal does not need Linear.
 8. Blocker: advance what you can → Draft Linear + contract comment → `waiting_blocker`.
 9. Tokens: [TOKEN_ECONOMY.md](TOKEN_ECONOMY.md).
 10. Limit near: [HANDOFF.md](HANDOFF.md).

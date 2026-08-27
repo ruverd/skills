@@ -1,8 +1,8 @@
 # `/ruver-qa`
 
 Alias: **`/qa`**. Graph engineer for **product QA**. One
-Playwright/browser slot. Plan from the diff before any click.
-Comment with video.
+QA execute slot. Plan from the diff before any click.
+Comment with evidence.
 
 Skill: [`../../skills/graphs/ruver-qa`](../../skills/graphs/ruver-qa).
 
@@ -18,15 +18,15 @@ Skill: [`../../skills/graphs/ruver-qa`](../../skills/graphs/ruver-qa).
 PR from args or QA_REQUEST
   → admit          one slot; else enqueue
   → plan           from the diff, before any click
-  → execute        browser + Playwright, record video
+  → execute        browser, e2e, or HTTP; record evidence
   → triage?        product suspicion → bus → /ruver-triage
-  → verdict        comment + video + QA_RESULT
+  → verdict        comment + evidence + QA_RESULT
 ```
 
 ## What “done” means
 
-A GitHub PR comment on the **head SHA** with a video URL. Chat-only
-is not done. Unit tests or `git show` are not a complete execute.
+A PR comment on the **head SHA** with evidence (video and/or HTTP).
+Chat-only is not done. Unit tests or `git show` are not a complete execute.
 
 Backend-only PRs with no frontend sibling: HTTP the changed
 endpoints. With a sibling UI: hit that screen when a caller exists.

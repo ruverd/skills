@@ -1,6 +1,6 @@
 # QA test plan (from the PR diff)
 
-Write `.ruver-qa/PLAN.md` **before** any Playwright or browser step.
+Write `.ruver-qa/PLAN.md` **before** any browser or HTTP step.
 Do not execute until the inventory and numbered steps exist.
 
 Source of truth for *how* to plan. Execute walks that file.
@@ -12,9 +12,9 @@ gh pr view "$PR" --json number,title,url,body,files,headRefOid,headRefName
 gh pr diff "$PR" --name-only
 ```
 
-Also: Linear ACs when `[A-Z][A-Z0-9]+-\d+` exists; envelope `QA_REQUEST` ACs.
+Also: tracker ACs when a ticket id exists; envelope `QA_REQUEST` ACs.
 
-Never invent ACs. If Linear is down, plan from PR body + diff only.
+Never invent ACs. If the tracker is down, plan from PR body + diff only.
 
 ## Inventory
 
@@ -49,7 +49,7 @@ Each step is one user-visible path or one endpoint check:
 - acs: <AC ids / quotes this step covers>
 - how:
   1. ...
-- playwright: <spec or none>
+- e2e: <spec or none>
 - variants: happy | empty | error | flag-off | unauthorized
 - pass_if: <observable>
 ```
@@ -60,8 +60,8 @@ Rules:
 - Variants the change actually touches — not a generic checklist.
 - Other screens that **read the same state**.
 - Desktop + mobile only when layout/CSS changed.
-- Prefer an existing Playwright spec that already covers the route.
-- Full `npm run test:e2e` only if the user asks or the change is
+- Prefer an existing e2e spec that already covers the route (`e2e_cmd` / `qa_tool` from PRODUCT.md).
+- Full e2e suite only if the user asks or the change is
   auth / router / middleware.
 - Targeted REST/GQL checks when the PR changes a service/endpoint
   even if a spec already exists (spec can miss the contract).

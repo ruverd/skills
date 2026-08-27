@@ -22,7 +22,7 @@ TDD on behavior change. ASK the user only as a last resort.
 | You type | What happens |
 |---|---|
 | `/developer` | Grill, spec, tickets, TDD, draft PR, CI, then QA |
-| `/qa` | Exercise the PR in the browser. Comment with video |
+| `/qa` | Exercise the PR (browser, e2e, or HTTP). Comment with evidence |
 | `/reviewer` | Review the PR. Diagnose CI |
 | `/lstm` | Incoming review. Patch the same branch |
 | `/ruver-triage` | Classify a QA finding. Not a ticket bot |
@@ -104,9 +104,9 @@ app, and in the agent session.
 
 | Need | Used by |
 |---|---|
-| [`gh`](https://cli.github.com/) authenticated | `/developer`, `/reviewer`, `/lstm`, `/qa` |
-| A browser | `/qa` |
-| Playwright on the target app | `/qa` |
+| `gh` or `glab` authenticated (the forge this repo uses) | `/developer`, `/reviewer`, `/lstm`, `/qa` |
+| A browser | `/qa` on UI changes |
+| The app's e2e runner if it has one (Playwright, Cypress, …) | `/qa` on UI |
 
 **Links in the goal**
 

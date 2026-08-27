@@ -11,7 +11,7 @@ Skill: [`../../skills/engines/ruver-feature-delivery`](../../skills/engines/ruve
 ## When
 
 - `/ruver-fd ABC-123`
-- `/ruver-fd null crash in MembersTable`
+- `/ruver-fd login button does nothing`
 - `/ruver-fd resume`
 - `/ruver-fd … --no-pr`
 - Implicitly, from developer `deliver`
@@ -47,7 +47,7 @@ Reviewers and assignee: [PRODUCT.md](../../skills/engines/ruver-feature-delivery
 - Product edits on the main thread.
 - Skip TDD on a behavior change.
 - Skip quality `fix all` before the PR.
-- Invent Linear AC when MCP is down — stop.
+- Invent tracker AC when that URL cannot be read — stop. Local goal is fine without a tracker.
 
 ## Related
 

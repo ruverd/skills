@@ -2,7 +2,7 @@
 
 PR:
 SHA:
-Linear:
+Ticket:
 
 ## Inventory
 
@@ -21,7 +21,7 @@ Linear:
 - acs:
 - how:
   1.
-- playwright:
+- e2e:
 - variants:
 - pass_if:
 

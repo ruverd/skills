@@ -13,7 +13,7 @@ Follow [CI_DELIVERY.md](../CI_DELIVERY.md) + the spirit of `loop-on-ci` / `fix-c
 ## Steps
 
 1. Resolve the branch PR: `gh pr view --json number,url`.
-2. `gh pr checks --json name,bucket,state,workflow,link`.
+2. `gh pr checks --json name,bucket,state,workflow,link` (or `glab ci status`).
 3. Pending → **poll** with short calls (`gh pr checks --json ...`) about
    ~5 min apart. Never trust `--watch` inside one
    tool call (10 min cap); a dead watch is **not** a CI fail — re-check.

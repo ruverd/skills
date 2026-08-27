@@ -6,18 +6,18 @@ is impossible without them (record the extra step in PLAN.md first).
 
 ## Per step
 
-1. Run the Playwright spec if the step names one (`--video=on`).
+1. Run the e2e spec if the step names one (`qa_tool` from PRODUCT.md:
+   Playwright `--video=on`, Cypress record, or the repo's command).
 2. Exercise the route or endpoint the way a user (or API client) would.
    UI: browser. Backend with a resolved frontend sibling: mapped FE
    route if a caller exists. Backend with no UI: HTTP the changed
    endpoints. Do not invent a screen.
 3. Check `pass_if` and the listed variants.
-4. Record: command + exit, failing names, `test-results/**` paths,
+4. Record: command + exit, failing names, artifact paths,
    a short excerpt — not the full log.
-5. **Evidence is mandatory.** UI: Playwright `--video=on` (or
-   `playwright-cli video-start`). API-only: recorded HTTP (status +
-   body excerpt); video if you captured it. A gist of notes without
-   that evidence is not enough for PASS.
+5. **Evidence is mandatory.** UI: video if the tool can record, else
+   screenshots + steps. API-only: recorded HTTP (status + body excerpt).
+   Notes without that evidence are not enough for PASS.
 
 One screenshot is not enough for a screen step.
 A unit/CI-only walk is not enough when a FE route exists.
@@ -40,7 +40,7 @@ app will not start → `BLOCKED`. That is not a finding.
 Clearly infra (dev server down, expired login, missing fixture)
 with no product smell → `BLOCKED`, no triage.
 
-A red Playwright test is **not** a verdict. It is evidence for a
+A red e2e test is **not** a verdict. It is evidence for a
 finding or for `BLOCKED`.
 
 ## After the last step

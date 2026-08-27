@@ -41,7 +41,7 @@ Idle: empty stack, or only terminal jobs.
 | `QA_REQUEST` / `/ruver-qa` | no `qa_active` | start QA (claim `qa_active`). |
 | developer / reviewer / lstm | QA or triage on main | worker + worktree. **Do not abort QA.** |
 
-Never two `plan`/`execute` QA runs. Playwright + browser + video
+Never two `plan`/`execute` QA runs. Browser / e2e / HTTP QA
 on this machine is **one slot**.
 
 ## Developer / reviewer / lstm — admit
@@ -75,8 +75,8 @@ git worktree add ".worktrees/<id>" -b "<branch>" origin/main
 Reuse the ticket branch if it already exists
 (`feature/<id-lowercase>` or Linear `gitBranchName`).
 Do not nest a worktree inside another worktree.
-Do not `npm test` as a baseline (too heavy). `npm install` only
-if `node_modules` is missing in that worktree.
+Do not run the full test suite as a baseline (too heavy). Install
+deps with the discovered `pkg` only if they are missing in that worktree.
 
 ## Worker
 
@@ -86,7 +86,7 @@ Child type: general-purpose ([HOST.md](../../../HOST.md) `spawn_worker`).
 Worker **must not** spawn children.
 
 Prompt must include: job id, worktree path (or “host worktree”),
-PR/Linear, “execute the skill **yourself** — no ruver-* / ruver-fd-*
+PR/ticket, “execute the skill **yourself** — no ruver-* / ruver-fd-*
 spawns”, never merge, stay draft.
 
 | kind | Worker does |
@@ -126,7 +126,7 @@ after verdict.
 
 ## Anti-patterns
 
-- Two Playwright / two QA `execute` at once
+- Two QA `execute` at once
 - Aborting QA because a new ticket arrived
 - Spawning a graph type as the worker
 - Worker spawning fd coder / another graph

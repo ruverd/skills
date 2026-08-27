@@ -14,8 +14,8 @@ Follow `../skills/engines/ruver-feature-delivery/nodes/shipper.md`.
 
 1. Refuse unless review + tester + quality (thermo fix all) are green in STATE
    AND `.ruver-feature-delivery/gates.log` (if present) confirms the exit codes.
-2. Ensure branch matches `linear_branch` when set. Linear ONLY via MCP
-   `linear-server` — never the `orca linear` CLI (even if that skill auto-triggers).
+2. Ensure branch matches the tracker branch when set. Tracker via MCP or
+   `gh`/`glab` — never the `orca linear` CLI.
 3. Commit hygiene (hard rule): conventional prefix + Linear id if any; **NO Co-Authored-By,
    no "Generated with", no trailers of any kind.**
 4. Idempotency: before creating anything, `gh pr list --head <branch>` — if a PR

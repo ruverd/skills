@@ -39,7 +39,7 @@ If **limit near** mid-run:
 
 ### 1) MCP verify + load (`ruver-fd-context`) — **before implementing**
 
-For each needed source (Linear / Figma / Sentry / Notion / …):
+For each **detected** source (tracker URL, Figma, Sentry, Notion, …):
 
 1. **Verify** the project MCP is reachable.
 2. If **critical** and **unreachable** → **STOP** (do not invent, do not coder): print the

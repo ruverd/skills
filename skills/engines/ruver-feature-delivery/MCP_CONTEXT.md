@@ -16,9 +16,10 @@ enters **only through MCP of the current workspace/project**.
 
 Always at the start of `/ruver-fd`, **before** triage:
 
-1. Scan the **user goal**
-2. Scan **Linear** (if there is a ticket) — description, comments, attachments
-3. Any detected URL/ID → load via the matching MCP
+1. Discover the repo ([PRODUCT.md](PRODUCT.md)): forge, tracker, toolchain, topology
+2. Scan the **user goal** for URLs/IDs
+3. Load the **detected** tracker (Linear, GitHub Issues, Jira, …) if any
+4. Any other URL → matching MCP
 
 Persist under:
 
@@ -60,9 +61,11 @@ Before calling tools on a source:
 
 ### Critical vs optional sources
 
-| Detected in goal/ticket | Critical? | If MCP fails |
+| Detected in goal/ticket | Critical? | If it fails |
 |---|---|---|
-| Linear ID/URL | **Yes** | STOP + error |
+| Tracker **URL** (Linear/Jira/GitHub issue) | **Yes** | STOP + error |
+| Bare `ABC-123`, no URL | No | Try the connected tracker. Else local goal |
+| Local goal, no ticket | No | Continue. No tracker MCP needed |
 | Figma URL and the task is UI | **Yes** (only if a URL exists) | STOP + error |
 | UI task **with no** Figma URL | Figma not required | Follow DS + recent code refs |
 | Sentry URL and the task is bug/debug | **Yes** | STOP + error |
@@ -159,14 +162,14 @@ For any other connected MCP (Slack, Jira, Confluence, …):
 ## Execution order (node `mcp_context`)
 
 ```
-1. Detect refs (goal + user)
-2. For each needed source:
-     a. pre-check MCP accessible?
+1. Discover repo (PRODUCT.md) → STATE forge/tracker/pkg/cmds/scope
+2. Detect refs (goal + user)
+3. For each needed source:
+     a. pre-check MCP or CLI accessible?
      b. if critical and fail → English ERROR + result=blocked + STOP
      c. if ok → fetch → file
-3. Linear ok → branch checkout
-4. Detect topology ([PRODUCT.md](PRODUCT.md))
-5. Re-scan Linear body for more URLs → repeat 2
+4. Tracker ok → branch checkout
+5. Re-scan ticket body for more URLs → repeat 3
 6. mcp-sources.md (ok | error | unavailable | skipped)
 7. result: ok | partial | blocked
 ```
@@ -179,17 +182,17 @@ For any other connected MCP (Slack, Jira, Confluence, …):
 
 | Node | Consumes |
 |---|---|
-| triage | Linear labels + Sentry? → bug path |
-| grill / spec / tickets | Linear AC + Figma + Notion |
-| diagnose | Sentry + Linear bug comments |
+| triage | tracker labels + Sentry? → bug path |
+| grill / spec / tickets | tracker AC + Figma + Notion |
+| diagnose | Sentry + tracker bug comments |
 | implement | excerpts of `*-context.md` relevant to the ticket |
-| reviewer | Linear/Figma/Notion AC |
-| shipper | links in the PR body |
+| reviewer | tracker/Figma/Notion AC |
+| shipper | links in the PR/MR body |
 
 ## Anti-patterns
 
 - Ignoring a Figma/Sentry link on the ticket
 - Using Orca/CLI instead of MCP
-- "I read the Linear title, that is enough"
+- "I read the ticket title, that is enough"
 - Inventing a Sentry stack or a Figma layout
 - Blocking the graph on optional Notion that is not AC

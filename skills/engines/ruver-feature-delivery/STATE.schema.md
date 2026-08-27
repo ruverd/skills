@@ -27,6 +27,9 @@ done_report | escalated
 | `schema_version: 4` | resume compat |
 | `path` | full_feature \| debug_fix \| light_change |
 | `scope` | frontend_only \| backend_only \| mono \| fullstack |
+| `forge` | github \| gitlab \| git |
+| `tracker` | linear \| github_issues \| gitlab \| jira \| none |
+| `pkg` / `*_cmd` / `qa_tool` | from PRODUCT.md |
 | `spec_path` | `$RUVER_ROOT/.ruver-feature-delivery/SPEC.md` |
 | `tickets_path` | `$RUVER_ROOT/.ruver-feature-delivery/TICKETS.md` |
 | `current_ticket` | |
@@ -39,7 +42,7 @@ done_report | escalated
 
 | Node | Reads | Writes |
 |---|---|---|
-| mcp_context | goal, refs, PRODUCT.md | mcp_gate, linear_*, branch, repos_* |
+| mcp_context | goal, refs, PRODUCT.md | mcp_gate, forge, tracker, pkg, *_cmd, qa_tool, linear_*, branch, repos_* |
 | triage | goal, linear-context | work_kind, scope, path, route_* |
 | grill | goal, repo, Linear | decisions, approaches, `waiting_user` |
 | spec | decisions | SPEC.md, spec_path |

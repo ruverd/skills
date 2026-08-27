@@ -1,8 +1,8 @@
 ---
 name: ruver-qa
 description: >
-  Graph: QA a GitHub PR. One slot (queue extras). Plan from the
-  diff, then Playwright + browser. Bus TRIAGE_REQUEST on product
+  Graph: QA a PR. One slot (queue extras). Plan from the
+  diff, then browser, e2e, or HTTP. Bus TRIAGE_REQUEST on product
   errors. Use when /qa, /ruver-qa, /ruver_qa, or a QA_REQUEST arrives.
 argument-hint: "<PR url or owner/repo#N>"
 ---
@@ -21,7 +21,7 @@ Chat English. Unslop always. PR link required (args or envelope).
 Init `.ruver-qa/STATE.md`. Walk GRAPH:
 **admit → resolve → plan → execute**.
 `admit` claims the single QA slot or **enqueues** (never two
-Playwright runs). `plan` writes `.ruver-qa/PLAN.md` from the diff
+executes). `plan` writes `.ruver-qa/PLAN.md` from the diff
 before any test. Spawn execute nodes only.
 Outbound triage → **bus switch** to `triage`. Never spawn `ruver_triage`.
 

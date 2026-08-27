@@ -1,10 +1,17 @@
-# Blockers: advance as far as you can + Linear draft + wait
+# Blockers: advance as far as you can + draft + wait
 
 When current work **depends** on something that does not exist / is not done
 (another ticket, BE endpoint, flag, decision), the graph **does not stop at zero**.
-**Advance everything you can** and leave the blocker **explicit and actionable** on Linear.
+**Advance everything you can** and leave the blocker **explicit** on the
+**same tracker** as the current ticket ([PRODUCT.md](PRODUCT.md)).
 
-All via **Linear MCP** (`linear-server`): `save_issue`, `save_comment`, `get_issue`.
+| `tracker` | Create / comment |
+|---|---|
+| `linear` | Linear MCP (`save_issue`, `save_comment`, `get_issue`) |
+| `github_issues` | `gh issue create` / `gh issue comment` |
+| `gitlab` | `glab issue create` |
+| `none` | Write STATE. Tell the user. Do not invent a Linear workspace |
+
 **Do not** invent that the blocker "is already ready".
 
 ## 1. Detect a blocker
@@ -28,7 +35,7 @@ Whenever the blocker does not stop 100%:
 
 Record in STATE what shipped and what is still pending.
 
-## 3. Create a Linear draft ticket (MCP)
+## 3. Create a draft ticket (same tracker)
 
 If the blocker **has no ticket** yet (e.g. missing API task):
 
