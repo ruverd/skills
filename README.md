@@ -1,22 +1,37 @@
 # Skills
 
-Agent graphs I run every day on **Grok**, **Claude Code**, **Codex**,
-and **Cursor**. Delivery, QA, review, incoming review comments.
+A small circuit for shipping software with a coding agent: ticket →
+draft PR → CI green → QA in the browser (with video) → incoming
+review patched on the same branch. Works on **Grok**, **Claude
+Code**, **Codex**, and **Cursor**.
+
+The session you talk to is a **graph engineer**, not an implementer.
+It walks a GRAPH (nodes + edges). It writes state under `~/.ruver`.
+When a node must touch product code, it spawns a **worker**. Graphs
+talk through files on a bus. They never nest as child agents. They
+never merge.
+
+TDD on behavior change. ASK the user only as a last resort. Chat
+with you in Brazilian Portuguese; skill files stay English.
 
 ```text
 /developer DEV-1234
+/qa https://github.com/org/repo/pull/99
 /reviewer https://github.com/org/repo/pull/99
 /lstm https://github.com/org/repo/pull/99
-/qa https://github.com/org/repo/pull/99
 ```
 
-Those are command aliases of `/ruver-developer`, `/ruver-reviewer`,
-`/ruver-lstm`, and `/ruver-qa`. Skill ids stay `ruver-*`. The short
-slashes ship as `commands/` (Grok and Claude). Cursor / Codex still
-use the `ruver-*` skill name.
+| You type | What happens |
+|---|---|
+| `/developer` | Grill, spec, tickets, TDD, draft PR, CI, then QA |
+| `/qa` | Exercise the PR in the browser. Comment with video |
+| `/reviewer` | Review the PR. Diagnose CI |
+| `/lstm` | Incoming review. Patch the same branch |
+| `/ruver-triage` | Classify a QA finding. Not a ticket bot |
 
-This is the source of truth for the graphs I actually run. It is not a
-dump of every third-party skill on the machine.
+Short slashes (`/developer`, `/qa`, `/reviewer`, `/lstm`) are aliases
+of `/ruver-*`. Skill ids stay `ruver-*`. This repo is those graphs,
+not a dump of every third-party skill on a machine.
 
 ## Installation (30-second setup)
 
