@@ -2,7 +2,7 @@
 
 Every slash command the graph engineer runs. Skill ids stay `ruver-*`.
 Short aliases (`/developer`, `/reviewer`, `/lstm`, `/qa`) are command
-files. Underscore aliases (`/ruver_developer`) are the same skill.
+files.
 
 ## Graphs (main thread)
 

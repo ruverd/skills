@@ -72,7 +72,7 @@ The wake prompt is in the skill's `LOOP.md`. It must `load_skill` by
 
 Short command aliases (Grok / Claude, via `commands/`): `/developer`,
 `/reviewer`, `/lstm`, `/qa`. Same skill. Skill folder names stay
-`ruver-*`. Underscore aliases (`/ruver_developer`) are the same skill.
+`ruver-*`.
 
 ## Disk
 

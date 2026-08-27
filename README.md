@@ -130,7 +130,7 @@ Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
 
 - **[ruver-developer](skills/graphs/ruver-developer/SKILL.md)** (`/developer`, `/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
 - **[ruver-qa](skills/graphs/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR in the browser. Comment with video. [page](docs/commands/ruver-qa.md)
-- **[ruver-triage](skills/graphs/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. No short alias — `/triage` is Matt Pocock’s issue tracker. [page](docs/commands/ruver-triage.md)
+- **[ruver-triage](skills/graphs/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
 - **[ruver-reviewer](skills/graphs/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
 - **[ruver-lstm](skills/graphs/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
 - **[ruver-goal](skills/graphs/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA + video on the head SHA. [page](docs/commands/ruver-goal.md)
@@ -138,10 +138,6 @@ Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
 **Model-invoked**
 
 - **[ruver-bus](skills/graphs/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
-
-Underscore aliases (`/ruver_developer`, …) are the same skill. Short
-aliases are not added for `/triage`, `/review`, `/code-review`, `/bus`,
-or `/goal` — those collide with Matt Pocock or Grok builtins.
 
 ### Engines
 
