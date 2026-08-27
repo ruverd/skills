@@ -204,24 +204,16 @@ skills/                         # this repo
   commands/                     # slash aliases
 ```
 
-In git, skills are nested by category (same idea as
-[mattpocock/skills](https://github.com/mattpocock/skills)). After
-`install.sh`, they flatten so `/ruver-developer` still works. Graphs
-in the same category keep `../ruver-bus/...`. Cross-category links
-go through `../../engines/...` (and resolve via the real path).
+Skills are nested by category in git. After `install.sh`, they flatten
+so `/ruver-developer` still works. Graphs in the same category keep
+`../ruver-bus/...`. Cross-category links go through
+`../../engines/...` (and resolve via the real path).
 
 ## What this repo does not include
 
 - Runtime `.ruver-*` state. That stays in `~/.ruver/`.
 - Optional extras you may already have (caveman, cmux). The graphs
   do not load them.
-
-Primitives the graphs load (`unslop`, `grill-with-docs`,
-`receiving-code-review`, `tdd`, `how`, `why`, the `principle-*`
-files, `show-me-your-work`, …) live in
-[`skills/lib/`](skills/lib/README.md). Sources:
-[THIRD_PARTY.md](THIRD_PARTY.md). A clone of this repo is enough;
-do not install pstack, Matt Pocock, or Superpowers separately.
 
 QA still expects `gh`, a browser, and Playwright on the target app.
 
@@ -238,6 +230,21 @@ Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 grok plugin validate .
 ```
 
+## External references
+
+Primitives the graphs load live in
+[`skills/lib/`](skills/lib/README.md). They are copied into this repo
+so a clone is enough. Full list and licenses:
+[THIRD_PARTY.md](THIRD_PARTY.md).
+
+| Origin | Copied skills |
+|---|---|
+| [mattpocock/skills](https://github.com/mattpocock/skills) | `grill-with-docs`, `grill-me`, `diagnose`, `to-prd`, `to-issues` |
+| [pstack](https://github.com/poteto/pstack) | `unslop`, `tdd`, `how`, `why`, `principle-*`, … |
+| [superpowers](https://github.com/obra/superpowers) | `receiving-code-review` |
+| Cursor team kit | `thermo-nuclear-code-quality-review` |
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). Bundled copies in `skills/lib/` keep
+their original licenses.

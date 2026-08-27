@@ -1,6 +1,5 @@
 # Skills
 
-Nested like [mattpocock/skills](https://github.com/mattpocock/skills).
 Slash names stay flat after install (`/ruver-developer`).
 
 | Category | Job |
