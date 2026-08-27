@@ -215,7 +215,16 @@ so `/ruver-developer` still works. Graphs in the same category keep
 - Optional extras you may already have (caveman, cmux). The graphs
   do not load them.
 
-QA still expects `gh`, a browser, and Playwright on the target app.
+## Dependencies
+
+Not skills. They must already exist on the machine and in the target
+app:
+
+| Need | Used by |
+|---|---|
+| [`gh`](https://cli.github.com/) authenticated | developer, reviewer, lstm, qa |
+| A browser | `/qa` |
+| Playwright on the target app | `/qa` |
 
 ## Add or edit a skill
 
