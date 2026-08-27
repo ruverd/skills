@@ -21,40 +21,13 @@ dump of every third-party skill on the machine.
 ## Installation (30-second setup)
 
 Two ways in. **Plugin** installs the whole set as a managed bundle.
-**`install.sh`** (or [skills.sh](https://skills.sh)) copies / links
-editable skill files into your agent homes so slash names stay flat
+**[skills.sh](https://skills.sh/ruverd/skills)** copies editable skill
+files into your agent homes so slash names stay flat
 (`/ruver-developer`, not `/graphs/ruver-developer`). Pick one.
 
 ### 1. Get the skills
 
-**Symlink install (any harness)**
-
-```bash
-git clone https://github.com/ruverd/skills.git ~/Developer/skills
-~/Developer/skills/install.sh
-```
-
-```bash
-./install.sh --dry-run
-./install.sh --plugin          # also register the Grok marketplace
-./install.sh --uninstall
-```
-
-That flattens `skills/{graphs,engines,branch,lib}/<name>` into:
-
-| Path | Host |
-|---|---|
-| `~/.agents/skills` | shared (Grok, Codex, others that scan `.agents`) |
-| `~/.grok/skills` `~/.grok/agents` `~/.grok/commands` | Grok |
-| `~/.claude/skills` `~/.claude/agents` `~/.claude/commands` | Claude Code |
-| `~/.cursor/skills` | Cursor |
-| `~/.codex/skills` | Codex |
-
-Runtime disk is **`~/.ruver/<slug>/`**, shared across hosts. If you
-already had `~/.grok/ruver`, install.sh symlinks `~/.ruver` to it so
-live jobs keep running.
-
-**Grok plugin**
+**Grok**
 
 ```bash
 grok plugin marketplace add ruverd/skills
@@ -78,6 +51,28 @@ npx skills@latest add ruverd/skills
 ```
 
 Pick the skills you want, and which coding agents to install them on.
+
+**From a clone**
+
+```bash
+git clone https://github.com/ruverd/skills.git
+cd skills
+./install.sh
+```
+
+```bash
+./install.sh --dry-run
+./install.sh --plugin
+./install.sh --uninstall
+```
+
+That flattens `skills/{graphs,engines,branch,lib}/<name>` into
+`~/.agents/skills`, plus the matching homes for Grok, Claude, Cursor,
+and Codex.
+
+Runtime disk is **`~/.ruver/<slug>/`**, shared across hosts. If
+`~/.grok/ruver` already exists, install.sh links `~/.ruver` to it so
+live jobs keep running.
 
 ### 2. Restart the session
 
