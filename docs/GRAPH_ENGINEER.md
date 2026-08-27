@@ -13,8 +13,8 @@ Command pages: [commands/](commands/README.md).
 
 | Layer | Where it lives | What it names |
 |---|---|---|
-| **Graph** | this plugin (`skills/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
-| **Host** | [HOST.md](../plugins/ruver/HOST.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
+| **Graph** | this repo (`skills/{graphs,engines,branch}/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
+| **Host** | [HOST.md](../HOST.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
 | **Product** | the target repo `AGENTS.md` / `CLAUDE.md` | test command, reviewers, Linear team, design system |
 
 A graph that says `spawn_subagent` or `model: grok-4.6` or
@@ -29,7 +29,7 @@ For each graph:
 - `GRAPH.md` — nodes and edges
 - `STATE.schema.md` + `templates/STATE.md`
 - `nodes/*.md` — one file per node
-- bus types, if it talks to another graph ([PROTOCOL.md](../plugins/ruver/skills/ruver-bus/PROTOCOL.md))
+- bus types, if it talks to another graph ([PROTOCOL.md](../skills/graphs/ruver-bus/PROTOCOL.md))
 
 Worker contracts (`agents/ruver-fd-coder.md`, …) are **not** graphs.
 They implement one ticket. The graph engineer writes the contract;
@@ -55,12 +55,16 @@ Never spawn another **graph** as a child (`ruver_qa`, `ruver_developer`,
 
 ## Adding a graph
 
-1. Sibling folder under `plugins/ruver/skills/<name>/`.
-2. Relative links only (`../ruver-bus/JOBS.md`). No `~/.claude`,
+1. Folder under `skills/graphs/<name>/` (engines go in `skills/engines/`,
+   local helpers in `skills/branch/`).
+2. Relative links only. Same category: `../ruver-bus/JOBS.md`. Cross
+   category: `../../engines/ruver-feature-delivery/...`. No `~/.claude`,
    `~/.grok`, `~/.codex`, `~/.agents`.
 3. Need a child agent? Call it `spawn_worker` and point at HOST.md.
 4. Need a later turn (CI)? Call it `schedule_wake` and point at HOST.md.
 5. Product policy (who reviews, which test binary) comes from the
    **current repo**, not from this plugin.
+6. List the path in `plugin.json`.
 
-Then `./install.sh` and a commit.
+Then `./install.sh` and a commit. Slash names stay the skill folder
+name (`/ruver-developer`) because install.sh flattens categories.

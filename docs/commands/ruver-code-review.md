@@ -4,7 +4,7 @@ Review **engine**. One GitHub artifact per PR: `APPROVE`,
 `REQUEST_CHANGES`, or `DEFER`. Called by [`/ruver-reviewer`](ruver-reviewer.md)
 or run alone.
 
-Skill: [`plugins/ruver/skills/ruver-code-review`](../../plugins/ruver/skills/ruver-code-review).
+Skill: [`../../skills/engines/ruver-code-review`](../../skills/engines/ruver-code-review).
 
 ## When
 

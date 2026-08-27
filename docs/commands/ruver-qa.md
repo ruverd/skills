@@ -3,7 +3,7 @@
 Graph engineer for **product QA**. One Playwright/browser slot.
 Plan from the diff before any click. Comment with video.
 
-Skill: [`plugins/ruver/skills/ruver-qa`](../../plugins/ruver/skills/ruver-qa).
+Skill: [`../../skills/graphs/ruver-qa`](../../skills/graphs/ruver-qa).
 
 ## When
 
@@ -33,7 +33,7 @@ API, hit that screen, and record it.
 ## Slot
 
 Never two executes. If another PR holds `qa_active`, this one
-**enqueues** ([ruver-bus JOBS](../../plugins/ruver/skills/ruver-bus/JOBS.md)).
+**enqueues** ([ruver-bus JOBS](../../skills/graphs/ruver-bus/JOBS.md)).
 
 The graph engineer does **not** classify bugs. Suspicion →
 [`/ruver-triage`](ruver-triage.md). After `TRIAGE_RESULT`, continue at

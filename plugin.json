@@ -1,0 +1,47 @@
+{
+  "name": "ruver",
+  "displayName": "Ruver",
+  "version": "0.3.0",
+  "description": "Agent graphs that deliver a Linear ticket, QA a PR with video, and handle incoming review comments. Never merges.",
+  "author": {
+    "name": "Ruver Dornelas",
+    "email": "ruverd@gmail.com",
+    "url": "https://github.com/ruverd"
+  },
+  "homepage": "https://github.com/ruverd/skills",
+  "repository": "https://github.com/ruverd/skills",
+  "license": "MIT",
+  "keywords": [
+    "ruver",
+    "ruver-developer",
+    "ruver-lstm",
+    "ruver-qa",
+    "tdd",
+    "code-review",
+    "playwright",
+    "linear"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "workflow",
+    "delivery",
+    "qa",
+    "review"
+  ],
+  "skills": [
+    "./skills/graphs/ruver-developer",
+    "./skills/graphs/ruver-qa",
+    "./skills/graphs/ruver-triage",
+    "./skills/graphs/ruver-reviewer",
+    "./skills/graphs/ruver-lstm",
+    "./skills/graphs/ruver-bus",
+    "./skills/graphs/ruver-goal",
+    "./skills/engines/ruver-feature-delivery",
+    "./skills/engines/ruver-code-review",
+    "./skills/branch/ruver-validate-branch",
+    "./skills/branch/ruver-create-pr-frontend",
+    "./skills/branch/ruver-create-pr-backend"
+  ],
+  "agents": "./agents/",
+  "commands": "./commands/"
+}

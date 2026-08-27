@@ -7,7 +7,7 @@ branch**. Rebase conflicts. Reply, resolve threads, re-request.
 
 Never opens a new PR. Draft stays draft.
 
-Skill: [`plugins/ruver/skills/ruver-lstm`](../../plugins/ruver/skills/ruver-lstm).
+Skill: [`../../skills/graphs/ruver-lstm`](../../skills/graphs/ruver-lstm).
 
 ## When
 

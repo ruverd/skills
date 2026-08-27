@@ -1,5 +1,5 @@
 {
-  "name": "ai-skills",
+  "name": "skills",
   "owner": {
     "name": "Ruver Dornelas",
     "email": "ruverd@gmail.com"
@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "ruver",
-      "source": "plugins/ruver",
+      "source": "./",
       "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
       "category": "developer-tools",
       "tags": [

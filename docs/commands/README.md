@@ -37,4 +37,4 @@ Called by a graph, or run alone.
 
 How they connect: [../ARCHITECTURE.md](../ARCHITECTURE.md).
 Role: [../GRAPH_ENGINEER.md](../GRAPH_ENGINEER.md).
-Host mapping: [../../plugins/ruver/HOST.md](../../plugins/ruver/HOST.md).
+Host mapping: [../../HOST.md](../../HOST.md).

@@ -9,8 +9,8 @@ Draft a PR **description**. Do **not** open the PR. The author runs
 | `/ruver-create-pr-backend` | backend (API layout) |
 
 Skills:
-[`ruver-create-pr-frontend`](../../plugins/ruver/skills/ruver-create-pr-frontend),
-[`ruver-create-pr-backend`](../../plugins/ruver/skills/ruver-create-pr-backend).
+[`ruver-create-pr-frontend`](../../skills/branch/ruver-create-pr-frontend),
+[`ruver-create-pr-backend`](../../skills/branch/ruver-create-pr-backend).
 
 These two are **product extras** (wired for empath-ui / empath-api-v2
 detection). The core graphs do not depend on them.

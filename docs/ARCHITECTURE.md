@@ -15,7 +15,7 @@ The **main thread** is the only graph runner. Outbound work writes an
 envelope under `$RUVER_ROOT/.ruver-bus/`, pushes the stack, and loads
 the target graph. Graphs never `spawn_worker` another graph
 (`load_graph` on this thread). See [GRAPH_ENGINEER.md](GRAPH_ENGINEER.md)
-and [HOST.md](../plugins/ruver/HOST.md).
+and [HOST.md](../HOST.md).
 
 Worker subagents (`ruver-fd-coder`, `ruver-fd-tester`, …) implement
 product code. They are not graphs.
@@ -28,7 +28,7 @@ RUVER_ROOT="${RUVER_HOME:-$HOME/.ruver}/$slug"
 ```
 
 Every `.ruver-*` directory lives under `$RUVER_ROOT`. See
-`plugins/ruver/skills/ruver-bus/DISK.md`.
+`../skills/graphs/ruver-bus/DISK.md`.
 
 ## /ruver-developer
 

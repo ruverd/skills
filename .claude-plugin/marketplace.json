@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "ai-skills",
+  "name": "skills",
   "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments.",
   "owner": {
     "name": "Ruver Dornelas",
@@ -11,12 +11,12 @@
     {
       "name": "ruver",
       "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": {
         "name": "Ruver Dornelas",
         "email": "ruverd@gmail.com"
       },
-      "source": "./plugins/ruver",
+      "source": "./",
       "category": "development",
       "tags": [
         "ruver",

@@ -4,7 +4,7 @@ Pre-PR (or existing-PR) **local** validation. Take a branch from
 “I think it’s done” to typecheck/lint/tests green, then ask before
 push.
 
-Skill: [`plugins/ruver/skills/ruver-validate-branch`](../../plugins/ruver/skills/ruver-validate-branch).
+Skill: [`../../skills/branch/ruver-validate-branch`](../../skills/branch/ruver-validate-branch).
 
 ## When
 

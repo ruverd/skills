@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Install the Ruver plugin into the local agent homes.
+# Install Ruver skills into the local agent homes.
 #
-# Default: symlink skills, agents, and commands into
+# Default: flatten skills/{graphs,engines,branch}/<name> into
 #   ~/.agents  ~/.grok  ~/.claude  ~/.cursor  ~/.codex
-# so /ruver-developer, /ruver-lstm, and /ruver-qa work on any harness.
+# so /ruver-developer, /ruver-lstm, and /ruver-qa stay flat slash names.
 #
 # Usage:
 #   ./install.sh
@@ -14,8 +14,7 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")" && pwd)"
-PLUGIN="$REPO/plugins/ruver"
-BACKUP_ROOT="${AI_SKILLS_BACKUP_ROOT:-$HOME/.ai-skills-backups}"
+BACKUP_ROOT="${SKILLS_BACKUP_ROOT:-${AI_SKILLS_BACKUP_ROOT:-$HOME/.skills-backups}}"
 DRY=0
 GROK_PLUGIN=0
 UNINSTALL=0
@@ -34,8 +33,8 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ ! -d "$PLUGIN/skills" ]]; then
-  echo "missing $PLUGIN/skills" >&2
+if [[ ! -d "$REPO/skills" ]]; then
+  echo "missing $REPO/skills" >&2
   exit 1
 fi
 
@@ -46,7 +45,7 @@ is_ours() {
   [[ -L "$dest" ]] || return 1
   local target
   target="$(readlink "$dest")"
-  [[ "$target" == "$PLUGIN/"* ]] || [[ "$target" == "$REPO/"* ]]
+  [[ "$target" == "$REPO/"* ]]
 }
 
 run() {
@@ -93,10 +92,10 @@ unlink_one() {
   fi
 }
 
+# Flat kinds (agents, commands): dest gets the same basename.
 install_tree() {
-  local kind="$1"
-  local src_dir="$2"
-  shift 2
+  local src_dir="$1"
+  shift
   local dest_dirs=("$@")
   [[ -d "$src_dir" ]] || return 0
   local src dest dest_dir name
@@ -114,8 +113,30 @@ install_tree() {
   done
 }
 
+# Nested skills/{graphs,engines,branch}/<name> → dest/<name>
+install_skills() {
+  local dest_dirs=("$@")
+  local cat src_dir src dest dest_dir name
+  for cat in graphs engines branch; do
+    src_dir="$REPO/skills/$cat"
+    [[ -d "$src_dir" ]] || continue
+    for src in "$src_dir"/*; do
+      [[ -d "$src" ]] || continue
+      [[ -f "$src/SKILL.md" ]] || continue
+      name="$(basename "$src")"
+      for dest_dir in "${dest_dirs[@]}"; do
+        dest="$dest_dir/$name"
+        if [[ "$UNINSTALL" -eq 1 ]]; then
+          unlink_one "$dest"
+        else
+          link_one "$src" "$dest"
+        fi
+      done
+    done
+  done
+}
+
 echo "repo    $REPO"
-echo "plugin  $PLUGIN"
 echo
 
 # Harness-neutral disk. Keep existing ~/.grok/ruver jobs alive.
@@ -128,18 +149,18 @@ if [[ "$UNINSTALL" -eq 0 ]]; then
   fi
 fi
 
-install_tree skills "$PLUGIN/skills" \
+install_skills \
   "$HOME/.agents/skills" \
   "$HOME/.grok/skills" \
   "$HOME/.claude/skills" \
   "$HOME/.cursor/skills" \
   "$HOME/.codex/skills"
 
-install_tree agents "$PLUGIN/agents" \
+install_tree "$REPO/agents" \
   "$HOME/.grok/agents" \
   "$HOME/.claude/agents"
 
-install_tree commands "$PLUGIN/commands" \
+install_tree "$REPO/commands" \
   "$HOME/.grok/commands" \
   "$HOME/.claude/commands"
 
@@ -149,8 +170,8 @@ if [[ "$GROK_PLUGIN" -eq 1 ]]; then
   elif [[ "$UNINSTALL" -eq 1 ]]; then
     echo "plugin uninstall is: grok plugin uninstall ruver --confirm"
   else
-    if grok plugin marketplace list 2>/dev/null | grep -q 'ai-skills\|ruverd/ai-skills'; then
-      echo "ok     grok marketplace already lists ai-skills"
+    if grok plugin marketplace list 2>/dev/null | grep -qE 'ruverd/skills|ruverd/ai-skills|\bskills\b'; then
+      echo "ok     grok marketplace already lists this repo"
     else
       echo "add    grok plugin marketplace add $REPO"
       run grok plugin marketplace add "$REPO"

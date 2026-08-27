@@ -1,0 +1,34 @@
+{
+  "name": "ruver",
+  "version": "0.3.0",
+  "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments. Never merges.",
+  "author": {
+    "name": "Ruver Dornelas",
+    "url": "https://github.com/ruverd"
+  },
+  "homepage": "https://github.com/ruverd/skills",
+  "repository": "https://github.com/ruverd/skills",
+  "license": "MIT",
+  "keywords": [
+    "ruver",
+    "tdd",
+    "qa",
+    "review"
+  ],
+  "skills": [
+    "./skills/graphs/ruver-developer",
+    "./skills/graphs/ruver-qa",
+    "./skills/graphs/ruver-triage",
+    "./skills/graphs/ruver-reviewer",
+    "./skills/graphs/ruver-lstm",
+    "./skills/graphs/ruver-bus",
+    "./skills/graphs/ruver-goal",
+    "./skills/engines/ruver-feature-delivery",
+    "./skills/engines/ruver-code-review",
+    "./skills/branch/ruver-validate-branch",
+    "./skills/branch/ruver-create-pr-frontend",
+    "./skills/branch/ruver-create-pr-backend"
+  ],
+  "agents": "./agents/",
+  "commands": "./commands/"
+}

@@ -6,7 +6,7 @@ Delivery **engine** inside [`/ruver-developer`](ruver-developer.md).
 Grill → spec → tickets → TDD implement → review → CI. The main thread
 still does not write product code.
 
-Skill: [`plugins/ruver/skills/ruver-feature-delivery`](../../plugins/ruver/skills/ruver-feature-delivery).
+Skill: [`../../skills/engines/ruver-feature-delivery`](../../skills/engines/ruver-feature-delivery).
 
 ## When
 

@@ -5,7 +5,7 @@ classifies CI / mergeability, optionally buses a `REVIEW_RESULT`.
 
 Never merges. Not the fd worker `ruver-fd-reviewer`.
 
-Skill: [`plugins/ruver/skills/ruver-reviewer`](../../plugins/ruver/skills/ruver-reviewer).
+Skill: [`../../skills/graphs/ruver-reviewer`](../../skills/graphs/ruver-reviewer).
 
 ## When
 
