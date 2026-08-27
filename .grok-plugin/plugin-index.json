@@ -63,6 +63,10 @@
           { "name": "ruver-fd-shipper", "description": "Commit, push, draft PR. Never merge." }
         ],
         "commands": [
+          { "name": "developer" },
+          { "name": "reviewer" },
+          { "name": "lstm" },
+          { "name": "qa" },
           { "name": "ruver-developer" },
           { "name": "ruver-lstm" },
           { "name": "ruver-qa" },

@@ -1,7 +1,8 @@
 # `/ruver-reviewer`
 
-Graph engineer for **review**. Runs [`/ruver-code-review`](ruver-code-review.md),
-classifies CI / mergeability, optionally buses a `REVIEW_RESULT`.
+Alias: **`/reviewer`**. Graph engineer for **review**. Runs
+[`/ruver-code-review`](ruver-code-review.md), classifies CI /
+mergeability, optionally buses a `REVIEW_RESULT`.
 
 Never merges. Not the fd worker `ruver-fd-reviewer`.
 
@@ -9,9 +10,9 @@ Skill: [`../../skills/graphs/ruver-reviewer`](../../skills/graphs/ruver-reviewer
 
 ## When
 
-- `/ruver-reviewer https://github.com/org/repo/pull/99`
-- `/ruver-reviewer owner/repo#99`
-- `/ruver-reviewer` on the current branch’s PR
+- `/reviewer https://github.com/org/repo/pull/99`
+- `/reviewer owner/repo#99`
+- `/reviewer` on the current branch’s PR
 - Envelope: `REVIEW_REQUEST`
 
 `--force` reviews while CI is red. Pending required CI waits 5m

@@ -4,11 +4,16 @@ Agent graphs I run every day on **Grok**, **Claude Code**, **Codex**,
 and **Cursor**. Delivery, QA, review, incoming review comments.
 
 ```text
-/ruver-developer DEV-1234
-/ruver-reviewer https://github.com/org/repo/pull/99
-/ruver-lstm https://github.com/org/repo/pull/99
-/ruver-qa https://github.com/org/repo/pull/99
+/developer DEV-1234
+/reviewer https://github.com/org/repo/pull/99
+/lstm https://github.com/org/repo/pull/99
+/qa https://github.com/org/repo/pull/99
 ```
+
+Those are command aliases of `/ruver-developer`, `/ruver-reviewer`,
+`/ruver-lstm`, and `/ruver-qa`. Skill ids stay `ruver-*`. The short
+slashes ship as `commands/` (Grok and Claude). Cursor / Codex still
+use the `ruver-*` skill name.
 
 This is the source of truth for the graphs I actually run. It is not a
 dump of every third-party skill on the machine.
@@ -82,7 +87,7 @@ Pick the skills you want, and which coding agents to install them on.
 Then run a graph:
 
 ```text
-/ruver-developer
+/developer
 ```
 
 ## Graph engineer
@@ -126,19 +131,20 @@ Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
 
 **User-invoked**
 
-- **[ruver-developer](skills/graphs/ruver-developer/SKILL.md)** (`/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
-- **[ruver-qa](skills/graphs/ruver-qa/SKILL.md)** (`/ruver-qa`): Exercise a PR in the browser. Comment with video. [page](docs/commands/ruver-qa.md)
-- **[ruver-triage](skills/graphs/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
-- **[ruver-reviewer](skills/graphs/ruver-reviewer/SKILL.md)** (`/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
-- **[ruver-lstm](skills/graphs/ruver-lstm/SKILL.md)** (`/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
+- **[ruver-developer](skills/graphs/ruver-developer/SKILL.md)** (`/developer`, `/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
+- **[ruver-qa](skills/graphs/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR in the browser. Comment with video. [page](docs/commands/ruver-qa.md)
+- **[ruver-triage](skills/graphs/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. No short alias — `/triage` is Matt Pocock’s issue tracker. [page](docs/commands/ruver-triage.md)
+- **[ruver-reviewer](skills/graphs/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
+- **[ruver-lstm](skills/graphs/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
 - **[ruver-goal](skills/graphs/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA + video on the head SHA. [page](docs/commands/ruver-goal.md)
 
 **Model-invoked**
 
 - **[ruver-bus](skills/graphs/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
 
-Aliases: `/ruver_developer`, `/ruver_qa`, `/ruver_triage`,
-`/ruver_reviewer`, `/ruver_lstm`, `/ruver_bus`, `/ruver_goal`.
+Underscore aliases (`/ruver_developer`, …) are the same skill. Short
+aliases are not added for `/triage`, `/review`, `/code-review`, `/bus`,
+or `/goal` — those collide with Matt Pocock or Grok builtins.
 
 ### Engines
 

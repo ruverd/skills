@@ -64,12 +64,14 @@ The wake prompt is in the skill's `LOOP.md`. It must `load_skill` by
 
 | Host | How the user starts a graph |
 |---|---|
-| Grok | `/ruver-developer` (skill name) |
-| Claude Code | `/ruver-developer` |
+| Grok | `/developer` (command alias) or `/ruver-developer` (skill name) |
+| Claude Code | `/developer` or `/ruver-developer` |
 | Codex | `$ruver-developer` or the skill menu |
 | Cursor | `/ruver-developer` |
 
-Underscore aliases (`/ruver_developer`) are the same skill.
+Short command aliases (Grok / Claude, via `commands/`): `/developer`,
+`/reviewer`, `/lstm`, `/qa`. Same skill. Skill folder names stay
+`ruver-*`. Underscore aliases (`/ruver_developer`) are the same skill.
 
 ## Disk
 

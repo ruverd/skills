@@ -1,6 +1,7 @@
 # `/ruver-lstm`
 
-Looks shit to me. Graph engineer on the **author** side of a review.
+Alias: **`/lstm`**. Looks shit to me. Graph engineer on the **author**
+side of a review.
 
 Ingest a PR / review / comment URL. Patch should-fix on the **same
 branch**. Rebase conflicts. Reply, resolve threads, re-request.
@@ -11,9 +12,9 @@ Skill: [`../../skills/graphs/ruver-lstm`](../../skills/graphs/ruver-lstm).
 
 ## When
 
-- `/ruver-lstm https://github.com/org/repo/pull/99`
-- `/ruver-lstm <review or comment URL>`
-- `/ruver-lstm resume`
+- `/lstm https://github.com/org/repo/pull/99`
+- `/lstm <review or comment URL>`
+- `/lstm resume`
 - Envelope: `LSTM_REQUEST`
 - GitHub `CHANGES_REQUESTED` on a PR you own
 

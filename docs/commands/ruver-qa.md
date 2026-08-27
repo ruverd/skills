@@ -1,14 +1,15 @@
 # `/ruver-qa`
 
-Graph engineer for **product QA**. One Playwright/browser slot.
-Plan from the diff before any click. Comment with video.
+Alias: **`/qa`**. Graph engineer for **product QA**. One
+Playwright/browser slot. Plan from the diff before any click.
+Comment with video.
 
 Skill: [`../../skills/graphs/ruver-qa`](../../skills/graphs/ruver-qa).
 
 ## When
 
-- `/ruver-qa https://github.com/org/repo/pull/99`
-- `/ruver-qa owner/repo#99`
+- `/qa https://github.com/org/repo/pull/99`
+- `/qa owner/repo#99`
 - Envelope: `QA_REQUEST` from [developer](ruver-developer.md)
 
 ## Graph

@@ -5,6 +5,8 @@ argument-hint: "<PR url or owner/repo#N>"
 
 # /ruver-qa
 
+Short alias: **`/qa`**.
+
 Follow **`../skills/graphs/ruver-qa/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`

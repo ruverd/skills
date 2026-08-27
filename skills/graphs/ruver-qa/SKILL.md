@@ -3,7 +3,7 @@ name: ruver-qa
 description: >
   Graph: QA a GitHub PR. One slot (queue extras). Plan from the
   diff, then Playwright + browser. Bus TRIAGE_REQUEST on product
-  errors. Use when /ruver-qa, /ruver_qa, or a QA_REQUEST arrives.
+  errors. Use when /qa, /ruver-qa, /ruver_qa, or a QA_REQUEST arrives.
 argument-hint: "<PR url or owner/repo#N>"
 ---
 

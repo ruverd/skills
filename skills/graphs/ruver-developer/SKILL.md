@@ -3,7 +3,8 @@ name: ruver-developer
 description: >
   Graph: deliver a Linear ticket via grill → spec → tickets → TDD
   (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus.
-  Use when /ruver-developer, /ruver_developer, a DEV ticket, or a
+  Use when /developer, /ruver-developer, /ruver_developer, a DEV
+  ticket, or a
   QA_RESULT FAIL+PR_BUG. Follow grill recommendations. ASK the user
   only as a last resort. Unslop. User-facing chat in Brazilian Portuguese.
 argument-hint: "<DEV-XXXX | goal | PR url | resume>"

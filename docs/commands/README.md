@@ -1,22 +1,23 @@
 # Commands
 
-Every slash command the graph engineer runs. Aliases with underscores
-(` /ruver_developer `) are the same skill.
+Every slash command the graph engineer runs. Skill ids stay `ruver-*`.
+Short aliases (`/developer`, `/reviewer`, `/lstm`, `/qa`) are command
+files. Underscore aliases (`/ruver_developer`) are the same skill.
 
 ## Graphs (main thread)
 
 These **are** the graph engineer. They walk a GRAPH. They do not
 implement product code.
 
-| Command | When | Page |
-|---|---|---|
-| `/ruver-developer` | Ticket, goal, or PR_BUG fix | [ruver-developer](ruver-developer.md) |
-| `/ruver-qa` | Exercise a PR in the browser | [ruver-qa](ruver-qa.md) |
-| `/ruver-triage` | Classify a QA finding | [ruver-triage](ruver-triage.md) |
-| `/ruver-reviewer` | Review a PR / diagnose CI | [ruver-reviewer](ruver-reviewer.md) |
-| `/ruver-lstm` | Incoming review comments | [ruver-lstm](ruver-lstm.md) |
-| `/ruver-bus` | Resume or inspect the stack | [ruver-bus](ruver-bus.md) |
-| `/ruver-goal` | Keep going until QA+video | [ruver-goal](ruver-goal.md) |
+| Command | Short | When | Page |
+|---|---|---|---|
+| `/ruver-developer` | `/developer` | Ticket, goal, or PR_BUG fix | [ruver-developer](ruver-developer.md) |
+| `/ruver-qa` | `/qa` | Exercise a PR in the browser | [ruver-qa](ruver-qa.md) |
+| `/ruver-triage` | — | Classify a QA finding | [ruver-triage](ruver-triage.md) |
+| `/ruver-reviewer` | `/reviewer` | Review a PR / diagnose CI | [ruver-reviewer](ruver-reviewer.md) |
+| `/ruver-lstm` | `/lstm` | Incoming review comments | [ruver-lstm](ruver-lstm.md) |
+| `/ruver-bus` | — | Resume or inspect the stack | [ruver-bus](ruver-bus.md) |
+| `/ruver-goal` | — | Keep going until QA+video | [ruver-goal](ruver-goal.md) |
 
 ## Engines
 

@@ -5,6 +5,8 @@ argument-hint: "<DEV-XXXX | goal | PR url | resume>"
 
 # /ruver-developer
 
+Short alias: **`/developer`**.
+
 Follow **`../skills/graphs/ruver-developer/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`

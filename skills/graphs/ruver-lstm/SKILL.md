@@ -4,8 +4,9 @@ description: >
   Graph: Looks shit to me. Author-side of review. Ingest a PR / review /
   inline thread / issue-comment URL, verify with receiving-code-review,
   patch should-fix on the same branch, always rebase merge conflicts,
-  then 👍 + reply + resolve threads + re-request. Use when /ruver-lstm,
-  /ruver_lstm, CHANGES_REQUESTED, review comments, or LSTM_REQUEST.
+  then 👍 + reply + resolve threads + re-request. Use when /lstm,
+  /ruver-lstm, /ruver_lstm, CHANGES_REQUESTED, review comments, or
+  LSTM_REQUEST.
 argument-hint: "<PR | review | comment URL> [--force]"
 ---
 

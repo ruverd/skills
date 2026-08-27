@@ -5,6 +5,8 @@ argument-hint: "<PR | review | comment URL>"
 
 # /ruver-lstm
 
+Short alias: **`/lstm`**.
+
 Follow **`../skills/graphs/ruver-lstm/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`

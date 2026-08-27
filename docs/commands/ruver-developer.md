@@ -1,16 +1,17 @@
 # `/ruver-developer`
 
-Graph engineer for **delivery**. Ticket, free-text goal, or a
-`QA_RESULT` FAIL + `PR_BUG`. Never implements product code. Never merges.
+Alias: **`/developer`**. Graph engineer for **delivery**. Ticket,
+free-text goal, or a `QA_RESULT` FAIL + `PR_BUG`. Never implements
+product code. Never merges.
 
 Skill: [`../../skills/graphs/ruver-developer`](../../skills/graphs/ruver-developer).
 Engine: [`/ruver-feature-delivery`](ruver-feature-delivery.md).
 
 ## When
 
-- `/ruver-developer DEV-1212`
-- `/ruver-developer the notification inbox on the dashboard`
-- `/ruver-developer resume`
+- `/developer DEV-1212`
+- `/developer the notification inbox on the dashboard`
+- `/developer resume`
 - Envelope: `QA_RESULT` FAIL + `PR_BUG` (from [QA](ruver-qa.md))
 
 ## Graph
