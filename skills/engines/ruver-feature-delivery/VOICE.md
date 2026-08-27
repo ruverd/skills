@@ -7,7 +7,7 @@ This file is English. The spoken chat is Portuguese.
 
 ## Unslop (always)
 
-Apply pstack `unslop` to every user-facing message, PR body, spec, ticket, and grill question.
+Apply bundled `unslop` to every user-facing message, PR body, spec, ticket, and grill question.
 
 Hard cuts:
 

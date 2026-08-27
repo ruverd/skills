@@ -4,8 +4,9 @@ Graphs name **primitives**. This file maps them onto the harness in
 front of you. If a node mentions a primitive, do that mapping here.
 Do not copy harness APIs into GRAPH.md.
 
-In this repo, skills live under `skills/{graphs,engines,branch}/`.
-After install they flatten to siblings (`ruver-qa` next to `ruver-bus`).
+In this repo, skills live under `skills/{graphs,engines,branch,lib}/`.
+After install they flatten to siblings (`ruver-qa` next to `ruver-bus`
+and `unslop`).
 Resolve a skill **by name** via the host skill loader, or by the
 relative path in git. Never hardcode `~/.agents/skills`, `~/.grok`,
 `~/.claude`, or `~/.codex`.
@@ -80,9 +81,9 @@ Claude, Codex, Grok, and Cursor on one machine **share** that tree.
 
 ## Quality rubric
 
-`ruver-fd-quality` loads `thermo-nuclear-code-quality-review` **if
-that skill is installed**. If it is missing, run the quality node
-against the repo's own review rules and note the skip.
+`ruver-fd-quality` loads bundled
+`thermo-nuclear-code-quality-review` (`skills/lib/`). Always run
+`fix all`. Do not skip.
 
 ## Product policy
 

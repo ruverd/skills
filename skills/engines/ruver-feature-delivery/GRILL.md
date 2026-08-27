@@ -1,6 +1,9 @@
 # Grill (Matt Pocock, last-resort ASK)
 
-Source: `grill-with-docs` + `grill-me`. Policy: [DECISION_POLICY.md](DECISION_POLICY.md).
+Source: bundled `grill-with-docs` + `grill-me` (`skills/lib/`).
+This file is the adapted loop. Policy: [DECISION_POLICY.md](DECISION_POLICY.md).
+Formats: [CONTEXT-FORMAT.md](../../lib/grill-with-docs/CONTEXT-FORMAT.md),
+[ADR-FORMAT.md](../../lib/grill-with-docs/ADR-FORMAT.md).
 
 ASK is last resort: very important **and** high uncertainty, after lookup.
 
@@ -19,7 +22,9 @@ Walk the design tree until the frontier is empty. For each question: look it up,
 
 Most runs never hit step 5.
 
-Load `how` / `why` for the subsystem you will touch, not the whole monorepo. One pass. Do not spawn a how-explorer swarm on a small change.
+Load bundled `how` / `why` for the subsystem you will touch, not the
+whole monorepo. One pass. Do not spawn a how-explorer swarm on a small
+change. Do **not** run vanilla grill-with-docs interview-and-wait.
 
 New module: run `architect`. Take the synthesized sketch (DECIDE). Checkpoint only as last-resort policy.
 

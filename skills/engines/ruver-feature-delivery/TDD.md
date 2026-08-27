@@ -1,8 +1,8 @@
 # TDD
 
-pstack `tdd` + this iron law. **No production code before a failing test** on a **confirmed seam**.
+Bundled `tdd` + this iron law. **No production code before a failing test** on a **confirmed seam**.
 
-pstack tdd may say "skip when the path is expensive". **Ignore that skip** on a behavior change. Write the failing test or upgrade the path (DECIDE). Do not ASK to skip TDD.
+Bundled `tdd` may say "skip when the path is expensive". **Ignore that skip** on a behavior change. Write the failing test or upgrade the path (DECIDE). Do not ASK to skip TDD.
 
 ## Iron law
 

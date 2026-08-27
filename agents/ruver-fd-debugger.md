@@ -11,7 +11,7 @@ You are the **diagnose** node of ruver-feature-delivery (path `debug_fix`).
 Follow:
 
 - `../skills/engines/ruver-feature-delivery/nodes/diagnose.md`
-- pstack `diagnose` (reproduce → minimise → hypothesise → instrument)
+- bundled `diagnose` (reproduce → minimise → hypothesise → instrument)
 - `principle-fix-root-causes`
 - Hard / no playbook: `figure-it-out`
 

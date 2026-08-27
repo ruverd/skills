@@ -43,7 +43,7 @@ git clone https://github.com/ruverd/skills.git ~/Developer/skills
 ./install.sh --uninstall
 ```
 
-That flattens `skills/{graphs,engines,branch}/<name>` into:
+That flattens `skills/{graphs,engines,branch,lib}/<name>` into:
 
 | Path | Host |
 |---|---|
@@ -224,6 +224,7 @@ skills/                         # this repo
     graphs/                     # main-thread graph engineer
     engines/                    # delivery + review engines
     branch/                     # local validation + PR body
+    lib/                        # bundled primitives (unslop, grill, tdd, …)
   agents/                       # fd workers + graph roles
   commands/                     # slash aliases
 ```
@@ -236,11 +237,16 @@ go through `../../engines/...` (and resolve via the real path).
 
 ## What this repo does not include
 
-- Third-party skills (pstack, caveman, Cursor team kit, cmux, …).
 - Runtime `.ruver-*` state. That stays in `~/.ruver/`.
+- Optional extras you may already have (caveman, cmux, …). The graphs
+  do not need them.
 
-LSTM expects `receiving-code-review` and `unslop` if those skills are
-installed. QA expects `gh`, a browser, and Playwright on the target app.
+Primitives the graphs load (`unslop`, `grill-with-docs`,
+`receiving-code-review`, `tdd`, `how`, `why`, …) live in
+[`skills/lib/`](skills/lib/README.md). Sources:
+[THIRD_PARTY.md](THIRD_PARTY.md).
+
+QA still expects `gh`, a browser, and Playwright on the target app.
 
 ## Add or edit a skill
 

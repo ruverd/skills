@@ -20,10 +20,9 @@ Before **shipper**. Thermo `fix all` is still required before any PR.
 1. Collect context (orchestrator or this node):
    - `git diff <base_branch>...HEAD` (and unstaged if not committed yet)
    - contents of the touched files
-2. Invoke the thermo-nuclear review with the full skill:
-   - skill `thermo-nuclear-code-quality-review` if installed
-     ([HOST.md](../../../../HOST.md) quality rubric)
-   - else the repo's own review rules, and note the skip
+2. Invoke the thermo-nuclear review with the bundled skill
+   `thermo-nuclear-code-quality-review` (`skills/lib/`). Always.
+   Do not skip.
 3. Required mode: **`fix all`**
    - Do not only list findings.
    - Apply **every** quality fix in the code (code judo, decomposition, anti-spaghetti, etc.).

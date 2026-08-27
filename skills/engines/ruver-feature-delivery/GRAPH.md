@@ -2,7 +2,7 @@
 
 ## Spine
 
-Matt Pocock + pstack. Not Superpowers brainstorm / writing-plans / SDD.
+Bundled primitives. Not Superpowers brainstorm / writing-plans / SDD.
 
 ```
 goal / resume

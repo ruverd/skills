@@ -5,7 +5,7 @@ Canonical contract: [implement.md](implement.md). This file is the `ruver-fd-cod
 **Verb:** implement (TDD)
 **Role:** always a fresh subagent. Never the main thread.
 **Capability:** read-write source + tests. No merge. No PR.
-**Skills:** [../TDD.md](../TDD.md) iron law + pstack `tdd`. One ticket, not the whole plan.
+**Skills:** [../TDD.md](../TDD.md) iron law + bundled `tdd`. One ticket, not the whole plan.
 
 ## Mission
 

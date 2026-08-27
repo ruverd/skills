@@ -1,7 +1,7 @@
 {
   "name": "ruver",
   "displayName": "Ruver",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Agent graphs that deliver a Linear ticket, QA a PR with video, and handle incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",
@@ -40,7 +40,25 @@
     "./skills/engines/ruver-code-review",
     "./skills/branch/ruver-validate-branch",
     "./skills/branch/ruver-create-pr-frontend",
-    "./skills/branch/ruver-create-pr-backend"
+    "./skills/branch/ruver-create-pr-backend",
+    "./skills/lib/architect",
+    "./skills/lib/blast-radius",
+    "./skills/lib/diagnose",
+    "./skills/lib/figure-it-out",
+    "./skills/lib/grill-me",
+    "./skills/lib/grill-with-docs",
+    "./skills/lib/how",
+    "./skills/lib/interrogate",
+    "./skills/lib/no-comments",
+    "./skills/lib/receiving-code-review",
+    "./skills/lib/tdd",
+    "./skills/lib/technical-writing",
+    "./skills/lib/thermo-nuclear-code-quality-review",
+    "./skills/lib/to-issues",
+    "./skills/lib/to-prd",
+    "./skills/lib/typescript-best-practices",
+    "./skills/lib/unslop",
+    "./skills/lib/why"
   ],
   "agents": "./agents/",
   "commands": "./commands/"

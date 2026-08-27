@@ -15,4 +15,4 @@ Same PR. Same branch. Draft stays draft. Always rebase conflicts.
 Load `receiving-code-review` before any patch.
 Patch via `ruver-fd-coder` + TDD. Grill only if the fix is complicated.
 ASK last resort (same rule as `/ruver-developer`).
-Every GitHub reply runs `/pstack:unslop` first.
+Every GitHub reply runs bundled `unslop` first.

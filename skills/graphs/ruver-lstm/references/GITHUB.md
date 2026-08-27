@@ -29,7 +29,7 @@ Never put 👍 in the reply body.
 
 ## Reply
 
-Unslop first. `/pstack:unslop` on the body, then POST. English.
+Unslop first. Load bundled `unslop` on the body, then POST. English.
 
 Inline thread:
 

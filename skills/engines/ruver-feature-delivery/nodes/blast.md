@@ -1,6 +1,6 @@
 # Node: blast
 
-**Verb:** pstack `blast-radius`. Read-only.
+**Verb:** bundled `blast-radius`. Read-only.
 
 Find the one fact the change is safe because of. Prove it by running code, not a writeup. Mark unproven facts as unproven.
 

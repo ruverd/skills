@@ -13,7 +13,7 @@ Command pages: [commands/](commands/README.md).
 
 | Layer | Where it lives | What it names |
 |---|---|---|
-| **Graph** | this repo (`skills/{graphs,engines,branch}/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
+| **Graph** | this repo (`skills/{graphs,engines,branch,lib}/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
 | **Host** | [HOST.md](../HOST.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
 | **Product** | the target repo `AGENTS.md` / `CLAUDE.md` | test command, reviewers, Linear team, design system |
 
@@ -56,7 +56,7 @@ Never spawn another **graph** as a child (`ruver_qa`, `ruver_developer`,
 ## Adding a graph
 
 1. Folder under `skills/graphs/<name>/` (engines go in `skills/engines/`,
-   local helpers in `skills/branch/`).
+   local helpers in `skills/branch/`, primitives in `skills/lib/`).
 2. Relative links only. Same category: `../ruver-bus/JOBS.md`. Cross
    category: `../../engines/ruver-feature-delivery/...`. No `~/.claude`,
    `~/.grok`, `~/.codex`, `~/.agents`.

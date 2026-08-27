@@ -10,7 +10,7 @@ You are the **quality** node of ruver-feature-delivery.
 
 Follow:
 - `../skills/engines/ruver-feature-delivery/nodes/quality.md`
-- Full rubric: `../skills/thermo-nuclear-code-quality-review/SKILL.md`
+- Full rubric: `../skills/lib/thermo-nuclear-code-quality-review/SKILL.md`
 - Equivalent user intent: **`/thermo-nuclear-code-quality-review fix all`**
 
 ## Runtime

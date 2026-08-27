@@ -23,7 +23,7 @@ Load now:
 - [DECISION_POLICY.md](DECISION_POLICY.md)
 - `ruver-bus` [DISK.md](../../graphs/ruver-bus/DISK.md)
 
-Spine (Matt Pocock + pstack, not Superpowers):
+Spine (bundled primitives, not Superpowers):
 
 ```
 grill-with-docs → to-spec → to-tickets → implement(/tdd) → code-review

@@ -11,5 +11,5 @@ Follow **`../skills/graphs/ruver-developer/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 
-Parse ARGS first. Delivery → `/ruver-feature-delivery` (Matt Pocock + pstack, not Superpowers brainstorm). Then gates. Then `ruver_qa`.
+Parse ARGS first. Delivery → `/ruver-feature-delivery`. Then gates. Then `ruver_qa`.
 Unslop. ASK last resort. User-facing chat in Brazilian Portuguese. Never merge. Ready only after QA PASS.

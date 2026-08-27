@@ -113,11 +113,11 @@ install_tree() {
   done
 }
 
-# Nested skills/{graphs,engines,branch}/<name> → dest/<name>
+# Nested skills/{graphs,engines,branch,lib}/<name> → dest/<name>
 install_skills() {
   local dest_dirs=("$@")
   local cat src_dir src dest dest_dir name
-  for cat in graphs engines branch; do
+  for cat in graphs engines branch lib; do
     src_dir="$REPO/skills/$cat"
     [[ -d "$src_dir" ]] || continue
     for src in "$src_dir"/*; do

@@ -2,9 +2,9 @@
 
 **Verb:** root cause. No product fix in this node.
 
-pstack / Matt `diagnose`: reproduce → minimise → hypothesise → instrument → (stop).
+Bundled `diagnose`: reproduce → minimise → hypothesise → instrument → (stop).
 
-Hard / no playbook: pstack `figure-it-out` Phase A–C, then hand a single fix slice to implement.
+Hard / no playbook: bundled `figure-it-out` Phase A–C, then hand a single fix slice to implement.
 
 `how` / `why` on the broken subsystem. `principle-fix-root-causes`.
 
