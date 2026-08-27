@@ -95,18 +95,13 @@ app, and in the agent session.
 | A browser | `/qa` |
 | Playwright on the target app | `/qa` |
 
-**MCP** (connected in this session)
+**Links in the goal**
 
-| Server (typical name) | Required when |
-|---|---|
-| Linear (`linear-server`) | `/developer` with a ticket (`DEV-1234`). `/triage` when filing `NEW_BUG` |
-| Figma | Ticket has a Figma URL (UI work) |
-| Sentry | Ticket has a Sentry URL (bug) |
-| Notion | Ticket points at Notion as the spec / AC |
-
-Linear is the usual one. The others are a hard gate **only if** the
-ticket or goal names them. A missing **critical** MCP stops the
-graph; it does not invent the ticket.
+If you pass a ticket, spec, or design URL, this session must be able
+to open it (MCP or equivalent). That can be Linear, Notion, Jira,
+GitHub Issues, Figma, Sentry, or any other tracker. There is no
+fixed vendor. A URL we cannot read stops the graph; it does not
+invent the ticket.
 
 ## Graph engineer
 
