@@ -11,8 +11,7 @@ When a node must touch product code, it spawns a **worker**. Graphs
 talk through files on a bus. They never nest as child agents. They
 never merge.
 
-TDD on behavior change. ASK the user only as a last resort. Chat
-in English. Always apply bundled `unslop`.
+TDD on behavior change. ASK the user only as a last resort.
 
 ```text
 /developer DEV-1234
