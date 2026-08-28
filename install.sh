@@ -192,6 +192,7 @@ ensure_path_snippet() {
     echo "skip   shell rc files (--no-path). Add this yourself:"
     return 0
   fi
+  # shellcheck disable=SC2016  # $PATH must reach the rc file unexpanded
   block=$(printf '%s\nexport PATH="%s:$PATH"\n' "$line" "$BIN_DIR")
   for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
     if [[ -f "$rc" ]] && grep -q "$line" "$rc"; then
@@ -622,8 +623,9 @@ link_one() {
     return 0
   fi
   if [[ -e "$dest" ]]; then
-    local bak_dir="$BACKUP_ROOT/$(ts)"
-    local bak="$bak_dir/$(basename "$dest")"
+    local bak_dir bak
+    bak_dir="$BACKUP_ROOT/$(ts)"
+    bak="$bak_dir/$(basename "$dest")"
     echo "backup $dest -> $bak"
     run mkdir -p "$bak_dir"
     run mv "$dest" "$bak"

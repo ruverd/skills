@@ -18,7 +18,11 @@ check() {
     ok "$name"
   else
     bad "$name"
-    [[ -n "$out" ]] && echo "$out" | sed 's/^/      /' >&2
+    if [[ -n "$out" ]]; then
+      while IFS= read -r line; do
+        printf '      %s\n' "$line" >&2
+      done <<<"$out"
+    fi
   fi
 }
 
@@ -29,6 +33,16 @@ need_python() {
 }
 
 need_python
+
+# CI lints every tracked script. Locally the linter is optional, so this suite
+# still works on a machine that does not have it. (Do not start a comment with
+# the linter's name: it gets parsed as a directive.)
+if command -v shellcheck >/dev/null 2>&1; then
+  # shellcheck disable=SC2046  # word splitting is what we want here
+  check shellcheck shellcheck $(git -C "$ROOT" ls-files '*.sh' | sed "s|^|$ROOT/|")
+else
+  echo "skip shellcheck (not installed)"
+fi
 
 check links python3 "$LIB/check_links.py" "$ROOT"
 check frontmatter env PYTHONPATH="$LIB" python3 "$LIB/check_frontmatter.py" "$ROOT"

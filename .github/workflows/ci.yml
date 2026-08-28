@@ -7,6 +7,17 @@ on:
   pull_request:
 
 jobs:
+  # shellcheck is platform independent, so one runner is enough.
+  lint:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mapfile -t files < <(git ls-files '*.sh')
+          printf '%s\n' "${files[@]}"
+          shellcheck "${files[@]}"
+
   validate:
     name: repo invariants
     runs-on: ubuntu-latest
