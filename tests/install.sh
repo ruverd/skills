@@ -86,4 +86,9 @@ assert_not "$DRY_HOME/.local/bin/ruver"
 rm -rf "$DRY_HOME"
 ok dry-run-setup
 
+run_install setup >/tmp/ruver-setup2.out
+grep -q '^ok ' /tmp/ruver-setup2.out || fail "second setup has no ok lines"
+assert_link "$TEST_HOME/.agents/skills/unslop"
+ok setup-idempotent
+
 echo "all passed"
