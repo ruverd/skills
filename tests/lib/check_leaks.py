@@ -12,7 +12,9 @@ RULES = [
     (
         "vendor-specific state field; use tracker_* and select the adapter with tracker:",
         re.compile(r"\blinear_[a-z_*]+|^\s*linear:\s"),
-        lambda rel: rel.endswith("LINEAR.md") or "/adapters/" in rel,
+        # A changelog has to be able to name the field it renamed.
+        lambda rel: rel.endswith("LINEAR.md") or "/adapters/" in rel
+        or rel == "CHANGELOG.md",
     ),
     (
         "a real person's handle; use a placeholder such as octocat",
