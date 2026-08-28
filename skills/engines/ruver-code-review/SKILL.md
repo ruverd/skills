@@ -278,9 +278,9 @@ Run in order. Do not begin a phase before the previous one is complete.
 - Repo conventions: `CLAUDE.md` at the repo root (deep only; light reuses what the
   diff needs). Read `AGENTS.md` only if `CLAUDE.md` is absent.
 - PR title and body: stated intent and acceptance criteria.
-- Linear ticket: extract `[A-Z][A-Z0-9]+-\d+` from `headRefName` or title. If found, one call
-  `mcp__linear-server__get_issue`. If the MCP is unavailable or no ID exists, note
-  it and continue on the PR body alone.
+- Tracker ticket: extract `[A-Z][A-Z0-9]+-\d+` from `headRefName` or title. If found,
+  one `tracker_fetch_issue` call (HOST.md, Optional MCP). If the capability is
+  absent or no ID exists, note it and continue on the PR body alone.
 
 ### Phase 2 — Plan
 
@@ -309,10 +309,11 @@ existing flows. Wording mismatches are nits — silent.
 For each changed exported symbol, find who else uses it:
 
 ```
-mcp__codegraph__codegraph_explore  →  "<ChangedSymbol> <OtherSymbol> callers"
+code_graph_explore  →  "<ChangedSymbol> <OtherSymbol> callers"
 ```
 
-Codegraph unavailable → `Grep` the symbol name, same cap. Then check:
+`code_graph_explore` is HOST.md, Optional MCP. Absent → `Grep` the symbol name,
+same cap. Then check:
 
 - signature, prop, return-shape or enum change that its callers do not handle
 - null / undefined reaching a call that assumes a value

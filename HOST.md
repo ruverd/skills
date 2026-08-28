@@ -61,6 +61,27 @@ One wake per PR. Store the host's id in STATE as `loop_id`.
 The wake prompt is in the skill's `LOOP.md`. It must `load_skill` by
 **name**, not by an absolute home path.
 
+## Optional MCP
+
+Some nodes read better context when an MCP server happens to be installed. None
+of them require it. A graph names the **capability**; this table maps it, and
+every row degrades to the fallback rather than blocking.
+
+| Capability | Tool when present | Fallback when absent |
+|---|---|---|
+| `tracker_fetch_issue` | Linear: `mcp__linear-server__get_issue` | The PR body and title alone. Never invent AC |
+| `tracker_save_issue` | Linear: `mcp__linear-server__save_issue` | `gh issue create` / `glab issue create` ([BLOCKERS.md](skills/engines/ruver-feature-delivery/BLOCKERS.md)) |
+| `tracker_save_comment` | Linear: `mcp__linear-server__save_comment` | Comment on the PR instead |
+| `code_graph_explore` | `mcp__codegraph__codegraph_explore` | `Grep` the symbol name, same result cap |
+
+Tools may be **deferred**: absent from the initial function list until a tool
+search selects them. Try the search before concluding a capability is missing.
+
+A missing optional capability is never `mcp_gate: failed`. That flag means a
+**detected, critical** source is unreachable, such as a ticket URL the goal
+depends on. See
+[MCP_CONTEXT.md](skills/engines/ruver-feature-delivery/MCP_CONTEXT.md).
+
 ## Slash / invoke
 
 | Host | How the user starts a graph |
