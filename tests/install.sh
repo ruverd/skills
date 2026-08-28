@@ -36,4 +36,24 @@ set -e
 assert_eq "$got" "1" "unknown command exit"
 ok unknown-command
 
+TEST_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-cli.XXXXXX")"
+trap 'rm -rf "$TEST_HOME"' EXIT
+
+run_install setup >/tmp/ruver-setup.out
+assert_file "$TEST_HOME/.config/ruver/config"
+grep -q "^repo=" "$TEST_HOME/.config/ruver/config" || fail "config missing repo="
+assert_link "$TEST_HOME/.agents/skills/unslop"
+assert_link "$TEST_HOME/.local/bin/ruver"
+readlink "$TEST_HOME/.local/bin/ruver" | grep -q 'install.sh' || fail "bin not install.sh"
+assert_file "$TEST_HOME/.ruver"
+assert_not "$TEST_HOME/.ruver/memory.md"
+ok setup
+
+# PATH snippet once
+grep -q '# ruver PATH' "$TEST_HOME/.zshrc" || fail "missing zshrc PATH block"
+run_install setup >/dev/null
+count="$(grep -c '# ruver PATH' "$TEST_HOME/.zshrc" || true)"
+assert_eq "$count" "1" "PATH block duplicated"
+ok setup-path-once
+
 echo "all passed"

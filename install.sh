@@ -45,7 +45,6 @@ DRY=0
 YES=0
 PURGE=0
 UNINSTALL=0
-GROK_PLUGIN=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -93,13 +92,112 @@ if [[ "$CMD" == "uninstall" ]]; then
   UNINSTALL=1
 fi
 
-REPO="$(cd "$(dirname "$0")" && pwd)"
-BACKUP_ROOT="${SKILLS_BACKUP_ROOT:-${AI_SKILLS_BACKUP_ROOT:-$HOME/.skills-backups}}"
+resolve_file() {
+  local target="$1"
+  local dir dest
+  while [[ -L "$target" ]]; do
+    dir="$(cd "$(dirname "$target")" && pwd)"
+    dest="$(readlink "$target")"
+    case "$dest" in
+      /*) target="$dest" ;;
+      *) target="$dir/$dest" ;;
+    esac
+  done
+  dir="$(cd "$(dirname "$target")" && pwd)"
+  echo "$dir/$(basename "$target")"
+}
 
-if [[ ! -d "$REPO/skills" ]]; then
-  echo "missing $REPO/skills" >&2
-  exit 1
-fi
+SELF="$(resolve_file "${BASH_SOURCE[0]:-$0}")"
+REPO="$(cd "$(dirname "$SELF")" && pwd)"
+BACKUP_ROOT="${SKILLS_BACKUP_ROOT:-${AI_SKILLS_BACKUP_ROOT:-$HOME/.skills-backups}}"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ruver"
+CONFIG_FILE="$CONFIG_DIR/config"
+DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+MANAGED_REPO="$DATA_HOME/ruver/repo"
+DEFAULT_ORIGIN="https://github.com/ruverd/skills.git"
+BIN_DIR="$HOME/.local/bin"
+BIN_LINK="$BIN_DIR/ruver"
+
+config_get() {
+  local key="$1"
+  [[ -f "$CONFIG_FILE" ]] || return 0
+  sed -n "s/^${key}=//p" "$CONFIG_FILE" | head -1
+}
+
+config_set_repo() {
+  run mkdir -p "$CONFIG_DIR"
+  if [[ "$DRY" -eq 1 ]]; then
+    echo "dry-run: write $CONFIG_FILE repo=$1"
+    return 0
+  fi
+  printf 'repo=%s\norigin=%s\n' "$1" "${2:-$DEFAULT_ORIGIN}" >"$CONFIG_FILE"
+}
+
+plugin_version() {
+  sed -n 's/.*"version": "\([^"]*\)".*/\1/p' "$REPO/plugin.json" | head -1
+}
+
+ensure_ruver_home() {
+  if [[ -d "$HOME/.grok/ruver" && ! -e "$HOME/.ruver" ]]; then
+    echo "link   $HOME/.ruver -> $HOME/.grok/ruver"
+    run ln -sfn "$HOME/.grok/ruver" "$HOME/.ruver"
+  else
+    run mkdir -p "$HOME/.ruver"
+  fi
+}
+
+ensure_bin() {
+  run mkdir -p "$BIN_DIR"
+  run ln -sfn "$SELF" "$BIN_LINK"
+  echo "link   $BIN_LINK -> $SELF"
+}
+
+ensure_path_snippet() {
+  local line='# ruver PATH'
+  local block
+  block=$(printf '%s\nexport PATH="%s:$PATH"\n' "$line" "$BIN_DIR")
+  local rc
+  for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
+    if [[ -f "$rc" ]] && grep -q "$line" "$rc"; then
+      continue
+    fi
+    if [[ "$DRY" -eq 1 ]]; then
+      echo "dry-run: append PATH to $rc"
+      continue
+    fi
+    mkdir -p "$(dirname "$rc")"
+    touch "$rc"
+    printf '\n%s\n' "$block" >>"$rc"
+  done
+}
+
+cmd_setup() {
+  if [[ ! -d "$REPO/skills" ]]; then
+    echo "missing $REPO/skills" >&2
+    exit 1
+  fi
+  echo "repo    $REPO"
+  echo
+  config_set_repo "$REPO"
+  ensure_ruver_home
+  install_skills \
+    "$HOME/.agents/skills" \
+    "$HOME/.grok/skills" \
+    "$HOME/.claude/skills" \
+    "$HOME/.cursor/skills" \
+    "$HOME/.codex/skills"
+  install_tree "$REPO/agents" \
+    "$HOME/.grok/agents" \
+    "$HOME/.claude/agents"
+  install_tree "$REPO/commands" \
+    "$HOME/.grok/commands" \
+    "$HOME/.claude/commands"
+  ensure_bin
+  ensure_path_snippet
+  echo
+  echo "done. restart the agent session, then run /developer"
+  echo "  export PATH=\"$BIN_DIR:\$PATH\""
+}
 
 ts() { date +%Y%m%d%H%M%S; }
 
@@ -199,57 +297,27 @@ install_skills() {
   done
 }
 
-echo "repo    $REPO"
-echo
-
-# Harness-neutral disk. Keep existing ~/.grok/ruver jobs alive.
-if [[ "$UNINSTALL" -eq 0 ]]; then
-  if [[ -d "$HOME/.grok/ruver" && ! -e "$HOME/.ruver" ]]; then
-    echo "link   $HOME/.ruver -> $HOME/.grok/ruver"
-    run ln -sfn "$HOME/.grok/ruver" "$HOME/.ruver"
-  else
-    run mkdir -p "$HOME/.ruver"
-  fi
+if [[ ! -d "$REPO/skills" && "$CMD" != "" && "$CMD" != "help" ]]; then
+  echo "missing $REPO/skills" >&2
+  exit 1
 fi
 
-install_skills \
-  "$HOME/.agents/skills" \
-  "$HOME/.grok/skills" \
-  "$HOME/.claude/skills" \
-  "$HOME/.cursor/skills" \
-  "$HOME/.codex/skills"
-
-install_tree "$REPO/agents" \
-  "$HOME/.grok/agents" \
-  "$HOME/.claude/agents"
-
-install_tree "$REPO/commands" \
-  "$HOME/.grok/commands" \
-  "$HOME/.claude/commands"
-
-if [[ "$GROK_PLUGIN" -eq 1 ]]; then
-  if ! command -v grok >/dev/null 2>&1; then
-    echo "grok CLI not on PATH; skip --plugin" >&2
-  elif [[ "$UNINSTALL" -eq 1 ]]; then
-    echo "plugin uninstall is: grok plugin uninstall ruver --confirm"
-  else
-    if grok plugin marketplace list 2>/dev/null | grep -qE 'ruverd/skills|\bskills\b'; then
-      echo "ok     grok marketplace already lists this repo"
-    else
-      echo "add    grok plugin marketplace add $REPO"
-      run grok plugin marketplace add "$REPO"
-    fi
-    echo "install grok plugin install ruver --trust"
-    run grok plugin install ruver --trust
-  fi
-fi
-
-echo
-if [[ "$UNINSTALL" -eq 1 ]]; then
-  echo "unlinked this repo from local agent homes."
-else
-  echo "done. restart the agent session, then run:"
-  echo "  /ruver-developer"
-  echo "  /ruver-lstm"
-  echo "  /ruver-qa"
-fi
+case "${CMD:-setup}" in
+  setup) cmd_setup ;;
+  uninstall)
+    UNINSTALL=1
+    echo "repo    $REPO"
+    echo
+    install_skills \
+      "$HOME/.agents/skills" \
+      "$HOME/.grok/skills" \
+      "$HOME/.claude/skills" \
+      "$HOME/.cursor/skills" \
+      "$HOME/.codex/skills"
+    install_tree "$REPO/agents" "$HOME/.grok/agents" "$HOME/.claude/agents"
+    install_tree "$REPO/commands" "$HOME/.grok/commands" "$HOME/.claude/commands"
+    echo
+    echo "unlinked this repo from local agent homes."
+    ;;
+  *) echo "not implemented: $CMD" >&2; exit 1 ;;
+esac
