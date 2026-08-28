@@ -172,4 +172,36 @@ if grep -qi 'not a git clone' /tmp/ruver-wt.err /tmp/ruver-wt.out; then
 fi
 ok update-worktree
 
+mkdir -p "$TEST_HOME/.ruver"
+echo '# Memory' >"$TEST_HOME/.ruver/memory.md"
+mkdir -p "$TEST_HOME/.agents/skills"
+echo mine >"$TEST_HOME/.agents/skills/foreign-file"
+run_install uninstall >/tmp/ruver-un.out
+assert_not "$TEST_HOME/.agents/skills/unslop"
+assert_file "$TEST_HOME/.ruver/memory.md"
+assert_file "$TEST_HOME/.agents/skills/foreign-file"
+ok uninstall-keeps-memory
+
+set +e
+HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
+  XDG_DATA_HOME="$TEST_HOME/.local/share" \
+  "$INSTALL" uninstall --purge --yes >/tmp/ruver-purge.out 2>/tmp/ruver-purge.err
+got=$?
+set -e
+assert_eq "$got" "1" "purge of checkout clone must fail"
+assert_file "$TEST_HOME/.ruver/memory.md"
+ok purge-refuses-checkout
+
+man="$TEST_HOME/.local/share/ruver/repo"
+mkdir -p "$man"
+git -C "$man" init -q
+printf 'repo=%s\norigin=%s\n' "$man" "https://github.com/ruverd/skills.git" \
+  >"$TEST_HOME/.config/ruver/config"
+HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
+  XDG_DATA_HOME="$TEST_HOME/.local/share" \
+  "$INSTALL" uninstall --purge --yes
+assert_not "$man"
+assert_file "$TEST_HOME/.ruver/memory.md"
+ok purge-managed
+
 echo "all passed"

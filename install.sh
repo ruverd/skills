@@ -238,6 +238,50 @@ cmd_update() {
   cmd_setup
 }
 
+cmd_uninstall() {
+  UNINSTALL=1
+  install_skills \
+    "$HOME/.agents/skills" \
+    "$HOME/.grok/skills" \
+    "$HOME/.claude/skills" \
+    "$HOME/.cursor/skills" \
+    "$HOME/.codex/skills"
+  install_tree "$REPO/agents" \
+    "$HOME/.grok/agents" \
+    "$HOME/.claude/agents"
+  install_tree "$REPO/commands" \
+    "$HOME/.grok/commands" \
+    "$HOME/.claude/commands"
+  if [[ -L "$BIN_LINK" ]]; then
+    local t
+    t="$(readlink "$BIN_LINK")"
+    if [[ "$t" == "$SELF" || "$t" == "$REPO/install.sh" ]]; then
+      echo "rm     $BIN_LINK"
+      run rm "$BIN_LINK"
+    fi
+  fi
+  echo "unlinked this repo from local agent homes."
+  if [[ "$PURGE" -ne 1 ]]; then
+    return 0
+  fi
+  local repo
+  repo="$(config_get repo)"
+  if [[ "$repo" != "$MANAGED_REPO" ]]; then
+    echo "this is your development clone: $repo" >&2
+    echo "refusing --purge" >&2
+    exit 1
+  fi
+  if [[ "$YES" -ne 1 && -t 0 ]]; then
+    printf 'Delete %s ? [y/N] ' "$MANAGED_REPO"
+    read -r ans
+    case "$ans" in y|Y|yes) ;; *) echo "aborted."; return 0 ;; esac
+  fi
+  echo "rm     $MANAGED_REPO"
+  run rm -rf "$MANAGED_REPO"
+  echo "rm     $CONFIG_FILE"
+  run rm -f "$CONFIG_FILE"
+}
+
 ts() { date +%Y%m%d%H%M%S; }
 
 is_ours() {
@@ -344,20 +388,6 @@ fi
 case "${CMD:-setup}" in
   setup) cmd_setup ;;
   update) cmd_update ;;
-  uninstall)
-    UNINSTALL=1
-    echo "repo    $REPO"
-    echo
-    install_skills \
-      "$HOME/.agents/skills" \
-      "$HOME/.grok/skills" \
-      "$HOME/.claude/skills" \
-      "$HOME/.cursor/skills" \
-      "$HOME/.codex/skills"
-    install_tree "$REPO/agents" "$HOME/.grok/agents" "$HOME/.claude/agents"
-    install_tree "$REPO/commands" "$HOME/.grok/commands" "$HOME/.claude/commands"
-    echo
-    echo "unlinked this repo from local agent homes."
-    ;;
+  uninstall) cmd_uninstall ;;
   *) echo "not implemented: $CMD" >&2; exit 1 ;;
 esac
