@@ -3,8 +3,8 @@
 Alias: **`/memory`**. Durable prefs **outside git**. Not a graph.
 Does not walk STATE. Does not open a PR.
 
-Skill: [`../../skills/lib/ruver-memory`](../../skills/lib/ruver-memory).
-Disk: [`../../skills/graphs/ruver-bus/DISK.md`](../../skills/graphs/ruver-bus/DISK.md).
+Skill: [`../../skills/ruver-memory`](../../skills/ruver-memory).
+Disk: [`../../skills/ruver-bus/DISK.md`](../../skills/ruver-bus/DISK.md).
 
 ## When
 
@@ -14,7 +14,7 @@ Disk: [`../../skills/graphs/ruver-bus/DISK.md`](../../skills/graphs/ruver-bus/DI
 - A ruver graph starts (admit / fd / code-review) — **read**, do not wait
 
 Reviewer fallback when `AGENTS.md` and `CODEOWNERS` are empty:
-[PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md) §6.
+[PRODUCT.md](../../skills/ruver-feature-delivery/PRODUCT.md) §6.
 Ship requests. `/reviewer` does not.
 
 ## Never
@@ -26,4 +26,4 @@ Ship requests. `/reviewer` does not.
 ## Related
 
 [`/ruver-developer`](ruver-developer.md) ·
-[PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md)
+[PRODUCT.md](../../skills/ruver-feature-delivery/PRODUCT.md)

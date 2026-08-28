@@ -2,11 +2,13 @@
 
 Marketplace of Ruver agent skills. Not an application repo.
 
-- Canonical skill files live under `skills/{graphs,engines,lib}/`.
-- `skills/lib/` is the bundled primitives (`unslop`, `grill-with-docs`, `receiving-code-review`, `principle-*`, …). Graphs must load those, not an external marketplace.
-- Graphs in the same category stay siblings (`../ruver-bus/PROTOCOL.md`).
-- Cross-category links use `../../engines/...` / `../../graphs/...`.
-- After `ruver setup`, skills flatten into `~/.agents/skills/<name>` so slash names stay flat.
+- Canonical skill files live under `skills/<name>/`, one flat directory each, with `category: graph | engine | lib` in the frontmatter.
+- `category: lib` marks bundled primitives (`unslop`, `grill-with-docs`, `receiving-code-review`, `principle-*`, the `ruver-bus` protocol, the `ruver-host` contract). Graphs must load those, not an external marketplace.
+- Every skill is a sibling of every other, so all cross-skill links are
+  `../<name>/FILE.md` (`../ruver-bus/PROTOCOL.md`). No link may leave the skills
+  root: the repo root is unreachable once a skill is installed. `HOST.md` is the
+  `ruver-host` skill for this reason.
+- `ruver setup` links `skills/<name>` to `~/.agents/skills/<name>`. Git and installed layouts match, so no link may leave the skills root.
 - Short command aliases (`/developer`, `/reviewer`, `/lstm`, `/qa`) live in `commands/`. Skill ids stay `ruver-*`.
 - Do not write `.ruver-*` state in this repo. Runtime state belongs in `~/.ruver/<slug>/`. User/project memory: `~/.ruver/memory.md` and `$RUVER_ROOT/memory.md` (`ruver-memory`).
 - Graphs are host-agnostic. Harness APIs live in `HOST.md`. See `docs/GRAPH_ENGINEER.md`.

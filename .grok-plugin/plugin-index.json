@@ -81,6 +81,10 @@
             "description": "Drive developer → CI green → QA comment+evidence across turns with schedule_wake (HOST.md)."
           },
           {
+            "name": "ruver-host",
+            "description": "Host contract."
+          },
+          {
             "name": "ruver-lstm",
             "description": "Graph: author-side of review."
           },

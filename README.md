@@ -46,7 +46,7 @@ Developer Mode is on and `MSYS=winsymlinks:nativestrict` is set, so `setup`
 checks whether symlinks actually work and refuses rather than installing
 something that will never update. WSL is the supported path on Windows.
 
-That clones the repo, flattens `skills/{graphs,engines,lib}/<name>` into
+That clones the repo, links `skills/<name>` into
 `~/.agents/skills` (and Grok, Claude, Cursor, Codex), and puts `ruver`
 on your PATH.
 
@@ -106,7 +106,7 @@ app, and in the agent session.
 | The app's e2e runner if it has one (Playwright, Cypress, …) | `/qa` on UI |
 
 Which of those you need is discovered per repo
-([PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md)).
+([PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md)).
 A local goal does not need a tracker. API-only QA does not need a
 browser. `--no-pr` or a git-only remote ships a commit, not a PR.
 
@@ -131,8 +131,8 @@ opens `src/` itself.
 | Layer | Lives in | Example |
 |---|---|---|
 | Graph | `skills/*/*/GRAPH.md` | admit → deliver → mergeable → QA |
-| Host | [`HOST.md`](HOST.md) | how *this* harness spawns a child or wakes later |
-| Product | target repo `AGENTS.md` + [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, sibling repos |
+| Host | [`ruver-host`](skills/ruver-host/SKILL.md) | how *this* harness spawns a child or wakes later |
+| Product | target repo `AGENTS.md` + [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, sibling repos |
 
 A graph that says `spawn_subagent`, `model: grok-4.6`, or a company's
 GitHub handles has leaked. Host APIs stay in HOST.md. Product policy
@@ -155,36 +155,36 @@ Deep pages live under [docs/commands](docs/commands/README.md).
 
 ### Graphs
 
-Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
+Main-thread graph engineer. `category: graph`. Source: [`skills/`](skills/README.md).
 
 **User-invoked**
 
-- **[ruver-developer](skills/graphs/ruver-developer/SKILL.md)** (`/developer`, `/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
-- **[ruver-qa](skills/graphs/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR (browser, e2e, or HTTP). Comment with evidence. [page](docs/commands/ruver-qa.md)
-- **[ruver-triage](skills/graphs/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
-- **[ruver-reviewer](skills/graphs/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
-- **[ruver-lstm](skills/graphs/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
-- **[ruver-goal](skills/graphs/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA evidence on the head SHA. [page](docs/commands/ruver-goal.md)
+- **[ruver-developer](skills/ruver-developer/SKILL.md)** (`/developer`, `/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
+- **[ruver-qa](skills/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR (browser, e2e, or HTTP). Comment with evidence. [page](docs/commands/ruver-qa.md)
+- **[ruver-triage](skills/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
+- **[ruver-reviewer](skills/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
+- **[ruver-lstm](skills/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
+- **[ruver-goal](skills/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA evidence on the head SHA. [page](docs/commands/ruver-goal.md)
 
 ### Protocol (model-invoked)
 
 Not a graph. It has no nodes and walks no edges. The graphs load it by name for
 the shared envelope, stack and QA-slot rules.
 
-- **[ruver-bus](skills/graphs/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
+- **[ruver-bus](skills/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
 
 ### Lib (user-invoked)
 
-- **[ruver-memory](skills/lib/ruver-memory/SKILL.md)** (`/memory`, `/ruver-memory`): Chat language, confirmed reviewers, open questions. Outside git. [page](docs/commands/memory.md)
+- **[ruver-memory](skills/ruver-memory/SKILL.md)** (`/memory`, `/ruver-memory`): Chat language, confirmed reviewers, open questions. Outside git. [page](docs/commands/memory.md)
 
 ### Engines
 
-Called by a graph, or run alone. Source: [`skills/engines`](skills/engines).
+Called by a graph, or run alone. `category: engine`. Source: [`skills/`](skills/README.md).
 
 **User-invoked**
 
-- **[ruver-feature-delivery](skills/engines/ruver-feature-delivery/SKILL.md)** (`/ruver-feature-delivery`, `/ruver-fd`): Grill → spec → tickets → TDD → draft PR, CI green. [page](docs/commands/ruver-feature-delivery.md)
-- **[ruver-code-review](skills/engines/ruver-code-review/SKILL.md)** (`/ruver-code-review`): One GitHub review artifact. [page](docs/commands/ruver-code-review.md)
+- **[ruver-feature-delivery](skills/ruver-feature-delivery/SKILL.md)** (`/ruver-feature-delivery`, `/ruver-fd`): Grill → spec → tickets → TDD → draft PR, CI green. [page](docs/commands/ruver-feature-delivery.md)
+- **[ruver-code-review](skills/ruver-code-review/SKILL.md)** (`/ruver-code-review`): One GitHub review artifact. [page](docs/commands/ruver-code-review.md)
 
 Prefer `/ruver-developer` over raw `/ruver-fd` when you also want
 MERGEABLE + QA. Prefer `/ruver-reviewer` over raw `/ruver-code-review`
@@ -224,7 +224,7 @@ Runtime state:
 ```
 
 `<slug>` is the git toplevel with `/` replaced by `-`. Details:
-[`ruver-bus/DISK.md`](skills/graphs/ruver-bus/DISK.md).
+[`ruver-bus/DISK.md`](skills/ruver-bus/DISK.md).
 
 Workers (`ruver-fd-coder`, tester, shipper, …) write product code.
 Graph names (`ruver_developer`, `ruver_qa`, …) are **roles for the
@@ -249,10 +249,12 @@ skills/                         # this repo
   commands/                     # slash aliases
 ```
 
-Skills are nested by category in git. After `ruver setup`, they flatten
-so `/ruver-developer` still works. Graphs in the same category keep
-`../ruver-bus/...`. Cross-category links go through
-`../../engines/...` (and resolve via the real path).
+One flat directory per skill, in git and after install alike. That is what
+makes `../other-skill/FILE.md` resolve in both places, and `tests/repo.sh`
+fails any link that leaves the skills root. `category` in the frontmatter says
+whether a skill is a graph, an engine, or a lib primitive. Slash names stay
+so `/ruver-developer` still works. Every skill is a sibling, so cross-skill links are `../<name>/FILE.md` and
+resolve identically in git and after install.
 
 ## What this repo does not include
 
@@ -264,9 +266,9 @@ so `/ruver-developer` still works. Graphs in the same category keep
 
 Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 
-1. Folder under `skills/graphs/<name>/` (or `engines/`).
+1. Folder under `skills/<name>/` with `category: graph | engine | lib`.
 2. Relative links only. No `~/.claude`, `~/.grok`, `~/.codex`.
-3. Host primitives → HOST.md. Product policy → [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md) plus the target repo.
+3. Host primitives → HOST.md. Product policy → [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) plus the target repo.
 4. Add the path to `plugin.json`, then `ruver setup` (or `./install.sh setup`) and commit.
 
 ```bash
@@ -276,7 +278,7 @@ grok plugin validate .
 ## External references
 
 Primitives the graphs load live in
-[`skills/lib/`](skills/lib/README.md). They are copied into this repo
+[`skills/`](skills/README.md). They are copied into this repo
 so a clone is enough. Full list and licenses:
 [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -289,5 +291,5 @@ so a clone is enough. Full list and licenses:
 
 ## License
 
-MIT. See [LICENSE](LICENSE). Bundled copies in `skills/lib/` keep
+MIT. See [LICENSE](LICENSE). Bundled third-party copies keep
 their original licenses.

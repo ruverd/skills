@@ -22,7 +22,7 @@ RULES = [
     (
         "harness MCP tool name",
         re.compile(r"mcp__[a-z0-9_-]+"),
-        lambda rel: rel == "HOST.md"
+        lambda rel: rel == "skills/ruver-host/SKILL.md"
         or "/adapters/" in rel
         or rel.startswith("agents/")
         or rel.startswith("docs/"),

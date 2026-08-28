@@ -1,0 +1,37 @@
+---
+name: ruver-qa
+category: graph
+description: >
+  Graph: QA a PR. One slot (queue extras). Plan from the
+  diff, then browser, e2e, or HTTP. Bus TRIAGE_REQUEST on product
+  errors. Use when /qa, /ruver-qa, or a QA_REQUEST arrives.
+argument-hint: "<PR url or owner/repo#N>"
+---
+
+# Ruver QA (graph)
+
+Orchestrator. You do **not** make the final bug call.
+
+**REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
+[ruver-host](../ruver-host/SKILL.md) ·
+`ruver-bus` PROTOCOL.md · `ruver-memory` ·
+[DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
+
+Chat: `ruver-memory`. Unslop always. PR link required (args or envelope).
+
+Init `.ruver-qa/STATE.md`. Walk GRAPH:
+**admit → resolve → plan → execute**.
+`admit` claims the single QA slot or **enqueues** (never two
+executes). `plan` writes `.ruver-qa/PLAN.md` from the diff
+before any test. Spawn execute nodes only.
+Outbound triage → **bus switch** to `triage`. Never spawn `ruver_triage`.
+
+On `TRIAGE_RESULT`, continue at **verdict** (do not re-run execute).
+When done: publish evidence via `scripts/publish-evidence.sh` (never
+`gh gist create` on binaries), **post `gh pr comment` with QA + evidence**
+([references/COMMENT.md](references/COMMENT.md)), then write `QA_RESULT`
+and **pop** the bus stack. Chat-only is not done.
+
+Backend-only PRs: HTTP the changed endpoints unless a frontend
+sibling is resolved ([PRODUCT.md](../ruver-feature-delivery/PRODUCT.md)).
+Unit/CI/`git show` alone is not a complete QA execute.

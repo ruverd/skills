@@ -3,7 +3,7 @@
 Graph engineer for **bug classification**. Investigate first. Decide
 second. Act third. Not a ticket bot.
 
-Skill: [`../../skills/graphs/ruver-triage`](../../skills/graphs/ruver-triage).
+Skill: [`../../skills/ruver-triage`](../../skills/ruver-triage).
 
 ## When
 

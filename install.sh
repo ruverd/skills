@@ -260,6 +260,12 @@ install_for_hosts() {
     install_tree "$REPO/agents" "${agents_dirs[@]}"
     install_tree "$REPO/commands" "${commands_dirs[@]}"
   fi
+  if [[ "$UNINSTALL" -ne 1 ]]; then
+    prune_stale "${skills_dirs[@]}"
+    if [[ "${#agents_dirs[@]}" -gt 0 ]]; then
+      prune_stale "${agents_dirs[@]}" "${commands_dirs[@]}"
+    fi
+  fi
 }
 
 cmd_setup() {
@@ -636,6 +642,23 @@ link_one() {
   run ln -sfn "$src" "$dest"
 }
 
+# Drop links we own whose target no longer exists. Without this, renaming or
+# deleting a skill or command leaves a dead entry in every agent home forever,
+# and the host still offers it in the picker.
+prune_stale() {
+  local dest_dir dest
+  for dest_dir in "$@"; do
+    [[ -d "$dest_dir" ]] || continue
+    for dest in "$dest_dir"/*; do
+      [[ -L "$dest" ]] || continue
+      is_ours "$dest" || continue
+      [[ -e "$dest" ]] && continue
+      echo "prune  $dest"
+      run rm "$dest"
+    done
+  done
+}
+
 unlink_one() {
   local dest="$1"
   if is_ours "$dest"; then
@@ -667,25 +690,23 @@ install_tree() {
   done
 }
 
-# Nested skills/{graphs,engines,lib}/<name> → dest/<name>
+# skills/<name> → dest/<name>. The layout in git already matches the layout
+# after install, which is why a link like ../other-skill/FILE.md resolves the
+# same in both places.
 install_skills() {
   local dest_dirs=("$@")
-  local cat src_dir src dest dest_dir name
-  for cat in graphs engines lib; do
-    src_dir="$REPO/skills/$cat"
-    [[ -d "$src_dir" ]] || continue
-    for src in "$src_dir"/*; do
-      [[ -d "$src" ]] || continue
-      [[ -f "$src/SKILL.md" ]] || continue
-      name="$(basename "$src")"
-      for dest_dir in "${dest_dirs[@]}"; do
-        dest="$dest_dir/$name"
-        if [[ "$UNINSTALL" -eq 1 ]]; then
-          unlink_one "$dest"
-        else
-          link_one "$src" "$dest"
-        fi
-      done
+  local src dest dest_dir name
+  for src in "$REPO/skills"/*; do
+    [[ -d "$src" ]] || continue
+    [[ -f "$src/SKILL.md" ]] || continue
+    name="$(basename "$src")"
+    for dest_dir in "${dest_dirs[@]}"; do
+      dest="$dest_dir/$name"
+      if [[ "$UNINSTALL" -eq 1 ]]; then
+        unlink_one "$dest"
+      else
+        link_one "$src" "$dest"
+      fi
     done
   done
 }

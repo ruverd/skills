@@ -2,7 +2,7 @@
 
 Shared stack and envelopes. Five graphs, one session. They **do not nest**.
 
-Skill: [`../../skills/graphs/ruver-bus`](../../skills/graphs/ruver-bus).
+Skill: [`../../skills/ruver-bus`](../../skills/ruver-bus).
 
 ## When
 
@@ -19,7 +19,7 @@ developer ⇄ qa ⇄ triage
 ```
 
 Communication is files under `$RUVER_ROOT/.ruver-bus/` — never the git
-root. See [DISK.md](../../skills/graphs/ruver-bus/DISK.md).
+root. See [DISK.md](../../skills/ruver-bus/DISK.md).
 
 ```
 .ruver-bus/
@@ -69,4 +69,4 @@ general-purpose worker + worktree. Never spawn a graph as a child.
 ## Related
 
 All graphs. Protocol:
-[PROTOCOL.md](../../skills/graphs/ruver-bus/PROTOCOL.md).
+[PROTOCOL.md](../../skills/ruver-bus/PROTOCOL.md).

@@ -9,7 +9,7 @@ resolve threads, dismiss `CHANGES_REQUESTED`, re-request.
 
 Never opens a new PR. Draft stays draft.
 
-Skill: [`../../skills/graphs/ruver-lstm`](../../skills/graphs/ruver-lstm).
+Skill: [`../../skills/ruver-lstm`](../../skills/ruver-lstm).
 
 ## When
 
