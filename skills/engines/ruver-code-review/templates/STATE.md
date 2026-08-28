@@ -1,16 +1,29 @@
 ---
 schema_version: 1
 status: init
+pr: ""
 pr_url: ""
 repo: ""
-pr: ""
 sha: ""
 ci: ""
+pass: ""
+verdict: ""
+defer_reason: ""
+reviewed_shas: ""
 loop_id: ""
 caller: ruver-code-review
 updated_at: ""
 ---
 
-# Code-review wait state
+# Code review state
 
-`status`: `init` | `waiting_ci` | `reviewing` | `deferred` | `done`
+Fields and rules: [../STATE.schema.md](../STATE.schema.md).
+
+`status`: `init` | `waiting_ci` | `reviewing` | `published` | `deferred` | `done`
+
+## Passes
+
+One row per pass, so the next one knows the carry-forward.
+
+| SHA | pass | verdict | note |
+|---|---|---|---|

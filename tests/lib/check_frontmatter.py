@@ -27,6 +27,9 @@ AGENT_KEYS = {
 COMMAND_KEYS = {"name", "description", "argument-hint"}
 CATEGORIES = {"graph", "engine", "lib"}
 MAX_DESCRIPTION = 1024
+# Progressive disclosure: SKILL.md says when to run and what the invariants are,
+# then points at GRAPH.md, nodes/ and references/ for the detail.
+MAX_SKILL_LINES = 250
 
 # Item 1: the LSTM acronym stays in bodies, never in a description a picker or
 # a marketplace listing renders.
@@ -70,6 +73,12 @@ def main():
             continue
         check_common(errors, path, root, fields, SKILL_KEYS,
                      want_name=os.path.basename(os.path.dirname(path)))
+        with open(path, encoding="utf-8") as handle:
+            lines = sum(1 for _ in handle)
+        if lines > MAX_SKILL_LINES:
+            report(errors, path, root,
+                   f"SKILL.md is {lines} lines, max {MAX_SKILL_LINES}; "
+                   "move detail into nodes/ or references/")
         category = fields.get("category", "")
         if not category:
             report(errors, path, root, "missing category (graph|engine|lib)")
