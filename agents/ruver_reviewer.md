@@ -5,6 +5,7 @@ description: >
   CI/test/branch failures, classifies root cause. Never merges.
   Use when reviewing a PR or diagnosing CI.
 prompt_mode: full
+tools: Read, Write, Edit, Grep, Glob, Bash, Agent
 model: inherit
 permission_mode: default
 agents_md: true

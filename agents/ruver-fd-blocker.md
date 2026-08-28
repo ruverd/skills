@@ -1,6 +1,7 @@
 ---
 name: ruver-fd-blocker
 description: Use when the ruver-feature-delivery graph hits a dependency blocker (missing contract, open ticket, absent BE work).
+tools: Read, Write, Edit, Grep, Glob, Bash
 model: inherit
 color: orange
 ---

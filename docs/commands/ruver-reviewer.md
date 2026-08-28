@@ -6,7 +6,7 @@ mergeability, optionally buses a `REVIEW_RESULT`.
 
 Never merges. Not the fd worker `ruver-fd-reviewer`.
 
-Skill: [`../../skills/graphs/ruver-reviewer`](../../skills/graphs/ruver-reviewer).
+Skill: [`../../skills/ruver-reviewer`](../../skills/ruver-reviewer).
 
 ## When
 

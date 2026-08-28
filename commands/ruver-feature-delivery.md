@@ -96,5 +96,5 @@ Do not invent a "ready" endpoint. Tell the user in English (draft link).
 ### Token economy
 
 - MCP/plan contexts in **files**; subagent gets only the ticket + paths
-- Do not re-paste the whole linear-context; do not re-fetch MCP if gate passed
+- Do not re-paste the whole tracker-context; do not re-fetch MCP if gate passed
 - Chat without narrating every tool (`TOKEN_ECONOMY.md`)

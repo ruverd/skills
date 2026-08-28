@@ -14,6 +14,6 @@ marketplaces. Original licenses apply to those copies. Graph files
 
 The delivery graph **adapts** grill (ASK last resort, DECIDE internally).
 Vanilla `grill-with-docs` interview-and-wait is off. See
-[`GRILL.md`](skills/engines/ruver-feature-delivery/GRILL.md).
-TDD iron law in [`TDD.md`](skills/engines/ruver-feature-delivery/TDD.md)
+[`GRILL.md`](skills/ruver-feature-delivery/GRILL.md).
+TDD iron law in [`TDD.md`](skills/ruver-feature-delivery/TDD.md)
 wins over any skip in bundled `tdd`.

@@ -4,7 +4,7 @@ Keeps delivery alive **across turns**. CI is often longer than a tool
 timeout. This graph `schedule_wake`s until QA has commented **with
 evidence** on the head SHA.
 
-Skill: [`../../skills/graphs/ruver-goal`](../../skills/graphs/ruver-goal).
+Skill: [`../../skills/ruver-goal`](../../skills/ruver-goal).
 
 ## When
 
@@ -25,7 +25,7 @@ All must hold on the **current** head SHA:
 5. That comment has evidence (Video URL when recorded; HTTP record
    is enough on API-only)
 
-See [COMPLETE.md](../../skills/graphs/ruver-goal/references/COMPLETE.md).
+See [COMPLETE.md](../../skills/ruver-goal/references/COMPLETE.md).
 
 ## Each wake
 
@@ -41,7 +41,7 @@ One step, then stop:
 | QA FAIL + PR_BUG | developer `fix` |
 | QA comment on this SHA (PASS / other) | **complete**, `cancel_wake` |
 
-Wake primitive: [HOST.md](../../HOST.md) `schedule_wake`
+Wake primitive: [ruver-host](../../skills/ruver-host/SKILL.md) `schedule_wake`
 (Grok `/loop`, otherwise ask the user to re-run).
 
 ## Never

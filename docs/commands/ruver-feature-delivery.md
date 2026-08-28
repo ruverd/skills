@@ -6,7 +6,7 @@ Delivery **engine** inside [`/ruver-developer`](ruver-developer.md).
 Grill → spec → tickets → TDD implement → review → CI. The main thread
 still does not write product code.
 
-Skill: [`../../skills/engines/ruver-feature-delivery`](../../skills/engines/ruver-feature-delivery).
+Skill: [`../../skills/ruver-feature-delivery`](../../skills/ruver-feature-delivery).
 
 ## When
 
@@ -41,7 +41,7 @@ tester / quality / shipper are workers (`ruver-fd-coder`, …).
 Draft PR **and** required CI green. `--no-pr` or `forge=git`: commit
 (+ push). No PR. Until then `status ≠ done`.
 Forge, tracker, toolchain, reviewers, assignee:
-[PRODUCT.md](../../skills/engines/ruver-feature-delivery/PRODUCT.md).
+[PRODUCT.md](../../skills/ruver-feature-delivery/PRODUCT.md).
 
 ## Never
 

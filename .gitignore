@@ -4,7 +4,8 @@
 *.bak.*
 .ruver-*/
 .grok/
-.claude/
+.claude/*
+!.claude/settings.json
 .cursor/
 node_modules/
 .worktrees/

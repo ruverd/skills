@@ -4,7 +4,7 @@ Alias: **`/qa`**. Graph engineer for **product QA**. One
 QA execute slot. Plan from the diff before any click.
 Comment with evidence.
 
-Skill: [`../../skills/graphs/ruver-qa`](../../skills/graphs/ruver-qa).
+Skill: [`../../skills/ruver-qa`](../../skills/ruver-qa).
 
 ## When
 
@@ -34,7 +34,7 @@ endpoints. With a sibling UI: hit that screen when a caller exists.
 ## Slot
 
 Never two executes. If another PR holds `qa_active`, this one
-**enqueues** ([ruver-bus JOBS](../../skills/graphs/ruver-bus/JOBS.md)).
+**enqueues** ([ruver-bus JOBS](../../skills/ruver-bus/JOBS.md)).
 
 The graph engineer does **not** classify bugs. Suspicion →
 [`/ruver-triage`](ruver-triage.md). After `TRIAGE_RESULT`, continue at

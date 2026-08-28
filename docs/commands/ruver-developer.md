@@ -4,7 +4,7 @@ Alias: **`/developer`**. Graph engineer for **delivery**. Ticket,
 free-text goal, or a `QA_RESULT` FAIL + `PR_BUG`. Never implements
 product code. Never merges.
 
-Skill: [`../../skills/graphs/ruver-developer`](../../skills/graphs/ruver-developer).
+Skill: [`../../skills/ruver-developer`](../../skills/ruver-developer).
 Engine: [`/ruver-feature-delivery`](ruver-feature-delivery.md).
 
 ## When
@@ -40,7 +40,7 @@ deliver      fix
 
 ## What the main thread does
 
-1. Parse args ([ARGS.md](../../skills/graphs/ruver-developer/ARGS.md)).
+1. Parse args ([ARGS.md](../../skills/ruver-developer/ARGS.md)).
 2. Claim the lane ([ruver-bus](ruver-bus.md) JOBS). Busy main → worker + worktree.
 3. **deliver** runs [feature-delivery](ruver-feature-delivery.md) until CI green.
 4. **fix** stays on the existing PR branch.

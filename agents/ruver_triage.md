@@ -6,6 +6,7 @@ description: >
   Use when ruver_qa hands off a potential bug or the user runs
   /ruver-triage.
 prompt_mode: full
+tools: Read, Write, Edit, Grep, Glob, Bash, Agent
 model: inherit
 permission_mode: default
 agents_md: true
