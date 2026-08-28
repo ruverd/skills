@@ -8,7 +8,7 @@ for the end (CI green / handoff).
 
 | Do | Avoid |
 |---|---|
-| STATE + files under `.ruver-feature-delivery/` as memory | Re-pasting the whole linear-context into every subagent |
+| STATE + files under `.ruver-feature-delivery/` as memory | Re-pasting the whole tracker-context into every subagent |
 | Whitelist per node (this ticket + refs) | "Read the whole monorepo" |
 | Paths + 20–40 line excerpts | Dumping whole files into the prompt |
 | Fresh subagent **with a minimal prompt** | Passing the session history to the subagent |
@@ -23,7 +23,7 @@ for the end (CI green / handoff).
 - Do not reprint the full description in the orchestrator.
 
 ### triage / grill / spec
-- Read the **summary** of linear-context (AC bullets), not the raw 10k tokens again if it is already on disk.
+- Read the **summary** of tracker-context (AC bullets), not the raw 10k tokens again if it is already on disk.
 - Grill is the expensive model. Spec/tickets are synthesis, not a second interview.
 - Coder prompt = this ticket + decisions + whitelist. Not the grill transcript.
 

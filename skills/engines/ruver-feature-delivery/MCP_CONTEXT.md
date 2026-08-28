@@ -25,7 +25,7 @@ Persist under:
 
 ```
 .ruver-feature-delivery/
-  linear-context.md      # if Linear
+  tracker-context.md      # if Linear
   figma-context.md       # if Figma
   sentry-context.md      # if Sentry
   notion-context.md      # if Notion

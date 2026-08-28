@@ -24,7 +24,9 @@ Checkout before implementing. Shipper checks the branch.
 
 ## Persistence
 
-`.ruver-feature-delivery/linear-context.md` + STATE `linear_*` fields.
+`.ruver-feature-delivery/tracker-context.md` + STATE `tracker_*` fields.
+This file is the **Linear adapter**, selected when `tracker: linear`. The
+field names are vendor-neutral so another tracker can fill the same slots.
 
 If `tracker: linear` (a Linear URL) and MCP `linear-server` fails / is offline / needs auth:
 

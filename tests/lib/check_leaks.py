@@ -10,6 +10,11 @@ PRUNE = {".git", ".worktrees", "node_modules"}
 RULES = [
     # (label, pattern, predicate deciding whether the file may contain it)
     (
+        "vendor-specific state field; use tracker_* and select the adapter with tracker:",
+        re.compile(r"\blinear_[a-z_*]+|^\s*linear:\s"),
+        lambda rel: rel.endswith("LINEAR.md") or "/adapters/" in rel,
+    ),
+    (
         "a real person's handle; use a placeholder such as octocat",
         re.compile(r"izaiasneto4"),
         lambda rel: False,
@@ -45,7 +50,7 @@ def main():
                         continue
                     found = pattern.search(line)
                     if found:
-                        errors.append(f"{rel}:{lineno}: {label}: {found.group(0)}")
+                        errors.append(f"{rel}:{lineno}: {label} -> {found.group(0)!r}")
     for line in errors:
         print(line)
     if errors:

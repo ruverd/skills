@@ -3,7 +3,8 @@ schema_version: 1
 status: init
 mode: ""
 goal: ""
-linear_id: ""
+tracker: ""
+tracker_id: ""
 pr_url: ""
 repo: ""
 branch: ""

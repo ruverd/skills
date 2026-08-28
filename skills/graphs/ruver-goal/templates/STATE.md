@@ -2,7 +2,8 @@
 schema_version: 1
 status: init
 goal: ""
-linear_id: ""
+tracker: ""
+tracker_id: ""
 pr_url: ""
 repo: ""
 sha: ""

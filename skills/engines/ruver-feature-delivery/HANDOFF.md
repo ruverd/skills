@@ -25,7 +25,7 @@ the git root, a worktree, or `git add`:
 $RUVER_ROOT/.ruver-feature-delivery/
   STATE.md              # current status (already exists)
   HANDOFF.md            # this handoff (template below)
-  linear-context.md     # if any
+  tracker-context.md     # if any
   mcp-sources.md
   *-context.md
 ```
@@ -145,6 +145,6 @@ P: open the other runtime on branch <feature/<id-lowercase>> and run:
 - Resuming without RECONCILE (git/gh vs STATE) — duplicate PR, reimplemented ticket
 - Two runtimes active on the same branch (check `active_runtime` before acting)
 - Stopping at the limit without HANDOFF
-- Asking the user to "explain the ticket again" if linear-context.md exists
+- Asking the user to "explain the ticket again" if tracker-context.md exists
 - Re-grilling from zero on runtime B
 - Declaring delivered without CI green after handoff

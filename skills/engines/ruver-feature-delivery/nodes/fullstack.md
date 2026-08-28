@@ -15,7 +15,7 @@ Follow [FULLSTACK.md](../FULLSTACK.md).
 ## Steps
 
 1. Resolve sibling names ([PRODUCT.md](../PRODUCT.md)). Empty → do not run this node.
-2. Resolve `linear_branch` (STATE) = unique name.
+2. Resolve `tracker_branch` (STATE) = unique name.
 3. Worktree on **backend** and **frontend** (`git worktree add`, or Orca if it is up).
 4. `spawn_worker` on each (HOST.md). BE first when the contract is new.
 5. Wait until both done/escalation.

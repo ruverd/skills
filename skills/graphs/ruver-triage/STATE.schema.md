@@ -11,4 +11,4 @@ init | receiving | inspecting | reproducing | classifying | acting | done | bloc
 | `pr_url` | required |
 | `classification` | PR rollup: `PR_BUG` \| `EXISTING_BUG` \| `NEW_BUG` \| `NOT_A_BUG` \| `BLOCKED` |
 | `findings_count` | number of `## F<n>` classified |
-| `linear_created` | comma-separated ids/urls from `NEW_BUG` tickets |
+| `tracker_issue_created` | comma-separated ids/urls from `NEW_BUG` tickets |

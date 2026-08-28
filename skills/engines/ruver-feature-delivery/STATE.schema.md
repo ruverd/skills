@@ -36,7 +36,7 @@ done_report | escalated
 | `tickets_path` | `$RUVER_ROOT/.ruver-feature-delivery/TICKETS.md` |
 | `current_ticket` | |
 | `seams` | confirmed in spec/tickets |
-| `linear_id` | |
+| `tracker_id` | |
 | `pr_url` / `sha` | |
 | `review_fix_loops` / `test_fix_loops` / `ci_fix_loops` | remaining + `*_used` |
 
@@ -44,8 +44,8 @@ done_report | escalated
 
 | Node | Reads | Writes |
 |---|---|---|
-| mcp_context | goal, refs, PRODUCT.md, ruver-memory | mcp_gate, forge, tracker, pkg, *_cmd, qa_tool, linear_*, branch, repos_*, assignee, reviewers, reviewers_status, chat_language |
-| triage | goal, linear-context | work_kind, scope, path, route_* |
+| mcp_context | goal, refs, PRODUCT.md, ruver-memory | mcp_gate, forge, tracker, pkg, *_cmd, qa_tool, tracker_*, branch, repos_*, assignee, reviewers, reviewers_status, chat_language |
+| triage | goal, tracker-context | work_kind, scope, path, route_* |
 | grill | goal, repo, Linear | decisions, approaches, `waiting_user` |
 | spec | decisions | SPEC.md, spec_path |
 | tickets | SPEC.md | TICKETS.md, seams, tickets_path |

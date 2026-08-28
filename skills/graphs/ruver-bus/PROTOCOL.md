@@ -59,7 +59,7 @@ pr_number:
 repo:
 branch:
 sha:
-linear:
+tracker_id:
 feature:
 payload_path:   # extra file if the body would be huge
 job_id:         # bus JOBS.md id when concurrent

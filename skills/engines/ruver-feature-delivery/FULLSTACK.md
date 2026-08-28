@@ -20,7 +20,7 @@ scope: fullstack
 repos:
   frontend: <from env / AGENTS.md>
   backend: <from env / AGENTS.md>
-branch: <linear_branch or feature/<id-lowercase>>
+branch: <tracker_branch or feature/<id-lowercase>>
 ```
 
 Empty sibling → do not enter this path.
@@ -70,7 +70,7 @@ Linear MCP for the ticket. Never `orca linear`.
 ## 5. Spec each worker receives
 
 - worktree path + **identical** branch
-- linear-context (AC)
+- tracker-context (AC)
 - backend: contracts, migrations, API TDD
 - frontend: UI_DESIGN_SYSTEM + Figma if any + contract consumption
 - never merge; draft PR if `open_pr`

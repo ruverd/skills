@@ -4,7 +4,8 @@ status: init
 pr_url: ""
 classification: ""
 findings_count: ""
-linear_created: ""
+tracker: ""
+tracker_issue_created: ""
 updated_at: ""
 ---
 
