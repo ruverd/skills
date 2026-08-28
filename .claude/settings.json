@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash tests/install.sh)",
+      "Bash(bash tests/repo.sh)",
+      "Bash(shellcheck:*)"
+    ]
+  }
+}
