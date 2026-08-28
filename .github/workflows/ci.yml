@@ -1,0 +1,26 @@
+name: ci
+
+# No path filters. Repo invariants depend on nearly every tracked file, and an
+# incomplete filter is how the manifest drift reached main in the first place.
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    name: repo invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tests/repo.sh
+
+  cli:
+    name: cli (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash tests/install.sh
