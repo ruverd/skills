@@ -6,11 +6,11 @@ Marketplace of Ruver agent skills. Not an application repo.
 - `category: lib` marks bundled primitives (`unslop`, `grill-with-docs`, `receiving-code-review`, `principle-*`, the `ruver-bus` protocol, the `ruver-host` contract). Graphs must load those, not an external marketplace.
 - Every skill is a sibling of every other, so all cross-skill links are
   `../<name>/FILE.md` (`../ruver-bus/PROTOCOL.md`). No link may leave the skills
-  root: the repo root is unreachable once a skill is installed. `HOST.md` is the
-  `ruver-host` skill for this reason.
+  root: the repo root is unreachable once a skill is installed. The host contract
+  is the `ruver-host` skill, not a root file, for this reason.
 - `ruver setup` links `skills/<name>` to `~/.agents/skills/<name>`. Git and installed layouts match, so no link may leave the skills root.
 - Short command aliases (`/developer`, `/reviewer`, `/lstm`, `/qa`) live in `commands/`. Skill ids stay `ruver-*`.
 - Do not write `.ruver-*` state in this repo. Runtime state belongs in `~/.ruver/<slug>/`. User/project memory: `~/.ruver/memory.md` and `$RUVER_ROOT/memory.md` (`ruver-memory`).
-- Graphs are host-agnostic. Harness APIs live in `HOST.md`. See `docs/GRAPH_ENGINEER.md`.
+- Graphs are host-agnostic. Harness APIs live in `ruver-host`. See `docs/GRAPH_ENGINEER.md`.
 - After a skill edit, run `ruver setup` (or `./install.sh setup`) if you use the symlink install. Plugin installs pick up git updates with `grok plugin update ruver`. End users: `ruver update`.
 - Skill bodies stay in English. Chat follows `ruver-memory` (default English). Forge text (PR, review, comments) stays English. Unslop always.

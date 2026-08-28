@@ -17,7 +17,7 @@ Follow [FULLSTACK.md](../FULLSTACK.md).
 1. Resolve sibling names ([PRODUCT.md](../PRODUCT.md)). Empty → do not run this node.
 2. Resolve `tracker_branch` (STATE) = unique name.
 3. Worktree on **backend** and **frontend** (`git worktree add`, or Orca if it is up).
-4. `spawn_worker` on each (HOST.md). BE first when the contract is new.
+4. `spawn_worker` on each ([ruver-host](../../ruver-host/SKILL.md)). BE first when the contract is new.
 5. Wait until both done/escalation.
 6. Update STATE: worktree paths, task/worker ids, status per repo.
 
@@ -34,5 +34,5 @@ frontend_worktree: ...
 
 - Same branch on both repos.
 - Orca is optional. Host workers on git worktrees always work.
-- Linear MCP for the ticket; never `orca linear`.
+- Tracker MCP for the ticket, never a vendor CLI.
 - No automatic merge.

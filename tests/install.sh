@@ -390,4 +390,81 @@ grep -q 'ruver setup' <<< "$out" || fail "no-tty list missing setup"
 grep -q 'ruver update' <<< "$out" || fail "no-tty list missing update"
 ok no-tty-list
 
+# --- report: read the run ledger, surface laps and a dead QA lease ---
+REP_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-report.XXXXXX")"
+BUS="$REP_HOME/.ruver/some-repo/.ruver-bus"
+mkdir -p "$BUS"
+now=$(date -u +%s)
+{
+  printf 'ts_iso\tepoch\tgraph\tnode\tevent\tlap\tsha\tresult\tdetail\n'
+  printf 'x\t%s\tdeveloper\tdeliver\tenter\t1\tabc\t\t\n' "$((now - 900))"
+  printf 'x\t%s\tdeveloper\tdeliver\texit\t1\tabc\tdone\t\n' "$((now - 300))"
+  for lap in 1 2 3; do
+    printf 'x\t%s\tqa\texecute\tenter\t%s\tabc\t\t\n' "$((now - 280 + lap))" "$lap"
+    printf 'x\t%s\tqa\texecute\texit\t%s\tabc\tFAIL\t\n' "$((now - 200 + lap))" "$lap"
+  done
+} >"$BUS/RUN_LOG.tsv"
+# A claim from four hours ago is past any sane lease.
+claimed="$(date -u -r $((now - 14400)) +%Y-%m-%dT%H:%M:%SZ 2>/dev/null \
+  || date -u -d "@$((now - 14400))" +%Y-%m-%dT%H:%M:%SZ)"
+cat >"$BUS/JOBS.md" <<EOF
+---
+schema: 2
+qa_active: "qa-pr-42"
+qa_claimed_at: "$claimed"
+qa_waiting: "dev-ABC-1"
+updated_at: ""
+---
+EOF
+
+set +e
+out="$(HOME="$REP_HOME" XDG_CONFIG_HOME="$REP_HOME/.config" \
+  XDG_DATA_HOME="$REP_HOME/.local/share" "$INSTALL" report 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "report exit"
+echo "$out" | grep -q 'some-repo' || fail "report missing the repo slug: $out"
+echo "$out" | grep -q 'developer/deliver' || fail "report missing developer/deliver"
+echo "$out" | grep -qE 'qa/execute.*3' || fail "report should show 3 laps of qa/execute: $out"
+echo "$out" | grep -q '10m00s' || fail "report should total developer/deliver at 10m00s: $out"
+echo "$out" | grep -qi 'lease' || fail "report should flag the dead QA lease: $out"
+echo "$out" | grep -q 'qa-pr-42' || fail "report should name the stuck claim: $out"
+rm -rf "$REP_HOME"
+ok report
+
+# --- report: nothing recorded yet is not an error ---
+EMPTY_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-report-empty.XXXXXX")"
+set +e
+out="$(HOME="$EMPTY_HOME" XDG_CONFIG_HOME="$EMPTY_HOME/.config" \
+  XDG_DATA_HOME="$EMPTY_HOME/.local/share" "$INSTALL" report 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "report on an empty home exit"
+echo "$out" | grep -qi 'no run' || fail "report should say nothing is recorded: $out"
+rm -rf "$EMPTY_HOME"
+ok report-empty
+
+# --- report: a repo with an idle JOBS.md and no ledger says nothing at all ---
+QUIET_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-report-quiet.XXXXXX")"
+mkdir -p "$QUIET_HOME/.ruver/old-repo/.ruver-bus"
+cat >"$QUIET_HOME/.ruver/old-repo/.ruver-bus/JOBS.md" <<'EOF'
+---
+schema: 2
+qa_active: ""
+qa_claimed_at: ""
+qa_waiting: ""
+updated_at: ""
+---
+EOF
+set +e
+out="$(HOME="$QUIET_HOME" XDG_CONFIG_HOME="$QUIET_HOME/.config" \
+  XDG_DATA_HOME="$QUIET_HOME/.local/share" "$INSTALL" report 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "report on an idle repo exit"
+echo "$out" | grep -q 'old-repo' && fail "report printed an empty header: $out"
+echo "$out" | grep -qi 'no run' || fail "report should say nothing is recorded: $out"
+rm -rf "$QUIET_HOME"
+ok report-quiet
+
 echo "all passed"

@@ -51,17 +51,18 @@ User slash / envelope
 ```
 
 Never spawn another **graph** as a child (`ruver_qa`, `ruver_developer`,
-…). Load it on this thread after the bus write. See HOST.md
-`load_graph` vs `spawn_worker`.
+…). Load it on this thread after the bus write. See
+[ruver-host](../skills/ruver-host/SKILL.md) for `load_graph` vs `spawn_worker`.
 
 ## Adding a graph
 
 1. Folder under `skills/<name>/` with `category: graph` (`engine` for an engine, `lib` for a primitive).
-2. Relative links only. Same category: `../ruver-bus/JOBS.md`. Cross
-   category: `../../engines/ruver-feature-delivery/...`. No `~/.claude`,
-   `~/.grok`, `~/.codex`, `~/.agents`.
-3. Need a child agent? Call it `spawn_worker` and point at HOST.md.
-4. Need a later turn (CI)? Call it `schedule_wake` and point at HOST.md.
+2. Relative links only. Every skill is a sibling of every other, whatever the
+   categories, so a cross-skill link is always `../<name>/FILE.md`
+   (`../ruver-bus/JOBS.md`). No link may leave the skills root, and no
+   `~/.claude`, `~/.grok`, `~/.codex`, `~/.agents`.
+3. Need a child agent? Call it `spawn_worker` and point at `ruver-host`.
+4. Need a later turn (CI)? Call it `schedule_wake` and point at `ruver-host`.
 5. Product policy (who reviews, which test binary, which forge)
    comes from [PRODUCT.md](../skills/ruver-feature-delivery/PRODUCT.md),
    the **current repo**, and `ruver-memory`. Not from this plugin.

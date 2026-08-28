@@ -1,7 +1,11 @@
 ---
 name: technical-writing
 category: lib
-description: "Layered technical-writing standard: Diátaxis structure, Google developer style sentences, STE instruction rules, Global English syntax. Use for /technical-writing or when writing or reviewing docs, RFCs, readmes, PR descriptions, or commit messages."
+description: >
+  Layered technical-writing standard: Diataxis structure, Google developer
+  style, STE instruction rules, Global English syntax. Use for
+  /technical-writing or when writing or reviewing docs, RFCs, readmes, or PR
+  descriptions.
 disable-model-invocation: true
 ---
 

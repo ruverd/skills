@@ -6,7 +6,7 @@
 | repo or PR unresolvable | stop, never guess |
 | review call fails after the one 422 retry | print the error, post nothing else, report in chat |
 | codegraph unavailable | `Grep` fallback, note it in the chat summary |
-| Linear MCP unavailable | continue on the PR body, note it |
+| Tracker MCP unavailable | continue on the PR body, note it |
 | compare endpoint 404 (force-push) | full diff, `stale_base`, stay light |
 | cannot prove a suspected bug | drop it in silence, or `uncertainties` if outside the repo |
 | user asks for a second opinion on the **same** PR | refuse; that is a separate run, not nested subagents |

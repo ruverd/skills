@@ -13,7 +13,7 @@ findings. Do not spawn a second triage run per finding.
 
 * **PR link (required)**
 * PR number, title, repository, branch, commit
-* Linear issue, when available
+* tracker issue, when available
 * plan path (`.ruver-qa/PLAN.md`)
 * each finding: step, surface, expected, actual, reproducible,
   evidence (Playwright / video / screenshots / API / logs),
@@ -32,7 +32,7 @@ PR number: <n>
 PR title: <title>
 Repository: <org/repo>
 Feature: <feature>
-Linear: <ticket or none>
+Tracker: <ticket or none>
 Branch: <head>
 Commit: <sha>
 Plan: .ruver-qa/PLAN.md
@@ -60,20 +60,20 @@ Suspected root cause: <or unknown>
 ## F2
 ...
 
-Please classify **each** finding. Open Linear only for findings
+Please classify **each** finding. Open a tracker issue only for findings
 that are real product bugs and **not** caused by this PR.
 ```
 
 ## After triage returns
 
 Use `TRIAGE_RESULT.classification` for the **PR** verdict
-(PR_BUG wins if any finding is PR_BUG). Per-finding Linear ids
+(PR_BUG wins if any finding is PR_BUG). Per-finding tracker ids
 go in the QA comment notes.
 
 | Classification | QA verdict |
 |---|---|
 | `PR_BUG` | `FAIL` |
-| `NEW_BUG` / `EXISTING_BUG` | Do **not** fail the PR. Report Linear. QA = `PASS` with notes, unless an AC of *this* PR is also broken. |
+| `NEW_BUG` / `EXISTING_BUG` | Do **not** fail the PR. Report the tracker ids. QA = `PASS` with notes, unless an AC of *this* PR is also broken. |
 | `NOT_A_BUG` | Continue / `PASS` if the rest of the surface holds |
 | `BLOCKED` | `PENDING_TRIAGE` or `BLOCKED` — do not invent a bug |
 

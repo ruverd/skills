@@ -46,7 +46,7 @@ For each **detected** source (tracker URL, Figma, Sentry, Notion, …):
    exact **«ERROR: MCP unreachable»** template from `MCP_CONTEXT.md` — single source,
    do not write your own variant. Speak it in English.
 3. STATE: `mcp_gate: failed` + `mcp_gate_error`.
-4. If ok: full fetch → `*-context.md`; Linear → branch `gitBranchName` or `feature/<id-lowercase>`.
+4. If ok: full fetch → `*-context.md`; tracker → its branch name or `feature/<id-lowercase>`.
 5. `mcp_gate: passed` only with critical sources ok.
 
 **If `mcp_gate: failed` → end the run.** No implement triage, no ship.
@@ -68,7 +68,7 @@ Grill DECIDE internally. ASK last resort. Do not interview the tree.
 If a dependency is missing:
 
 1. **Advance** tickets that do not depend on the blocker.
-2. Linear MCP: create a **Draft** issue (if none exists) with an
+2. Tracker MCP: create a **Draft** issue (if none exists) with an
    **explicit dependency** description to the current ticket.
 3. `blockedBy` / `blocks` relation.
 4. `save_comment` on the blocking ticket with the consumed **contract**:

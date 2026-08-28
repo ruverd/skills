@@ -1,7 +1,10 @@
 ---
 name: receiving-code-review
 category: lib
-description: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation
+description: >
+  Use when receiving code review feedback, before implementing any suggestion,
+  especially when the feedback is unclear or technically questionable. Verify
+  before agreeing; no performative agreement, no blind implementation.
 ---
 
 # Code Review Reception

@@ -13,10 +13,22 @@ VERSIONED = [
     (".claude-plugin/plugin.json", ("version",)),
     (".claude-plugin/marketplace.json", ("plugins", 0, "version")),
     (".grok-plugin/marketplace.json", ("plugins", 0, "version")),
+    (".codex-plugin/marketplace.json", ("plugins", 0, "version")),
+    (".cursor-plugin/marketplace.json", ("plugins", 0, "version")),
 ]
 # Manifests that enumerate skill paths and must list every skill.
 SKILL_LISTS = ["plugin.json", ".claude-plugin/plugin.json"]
 INDEX = ".grok-plugin/plugin-index.json"
+# One marketplace, one plugin in it, on every host. A host that reads a
+# different name installs something the docs never mention.
+MARKETPLACE_NAME = "skills"
+PLUGIN_NAME = "ruver"
+MARKETPLACES = [
+    ".claude-plugin/marketplace.json",
+    ".grok-plugin/marketplace.json",
+    ".codex-plugin/marketplace.json",
+    ".cursor-plugin/marketplace.json",
+]
 
 
 def dig(blob, path):
@@ -57,6 +69,15 @@ def main():
                 errors.append(f"{rel}: skill not listed: {wanted}")
         for extra in sorted(listed - set(skill_dirs.values())):
             errors.append(f"{rel}: listed path is not a skill directory: {extra}")
+
+    for rel in MARKETPLACES:
+        blob = load(root, rel)
+        if blob.get("name") != MARKETPLACE_NAME:
+            errors.append(f"{rel}: marketplace name is {blob.get('name')!r}, "
+                          f"expected {MARKETPLACE_NAME!r}")
+        names = [plugin.get("name") for plugin in blob.get("plugins", [])]
+        if names != [PLUGIN_NAME]:
+            errors.append(f"{rel}: plugins are {names!r}, expected [{PLUGIN_NAME!r}]")
 
     index = load(root, INDEX)
     components = index["plugins"]["ruver"]["components"]

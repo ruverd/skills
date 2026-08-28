@@ -38,4 +38,4 @@ Called by a graph.
 
 How they connect: [../ARCHITECTURE.md](../ARCHITECTURE.md).
 Role: [../GRAPH_ENGINEER.md](../GRAPH_ENGINEER.md).
-Host mapping: [../../HOST.md](../../skills/ruver-host/SKILL.md).
+Host mapping: [ruver-host](../../skills/ruver-host/SKILL.md).

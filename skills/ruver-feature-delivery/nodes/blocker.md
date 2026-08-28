@@ -1,7 +1,7 @@
 # Node: blocker_handler
 
 **Verb:** unblock-prep + wait
-**Capability:** Linear MCP write (issue draft, comments, relations); read get_issue; **no** inventing API
+**Capability:** tracker MCP write (issue draft, comments, relations); read get_issue; **no** inventing API
 **When:** dependency gap (contract, open ticket, missing BE)
 
 ## Mission
@@ -37,7 +37,7 @@ advanced_slices: [...]
 
 ## Hard rules
 
-- Linear MCP only (not orca linear).
+- Tracker MCP only, never a vendor CLI.
 - Draft is **never** empty: description with dependency + contract.
 - Do not implement the blocked part "by feel".
-- Chat (`ruver-memory`): tell the user what is waiting and the draft link. Linear comment stays English.
+- Chat (`ruver-memory`): tell the user what is waiting and the draft link. tracker comment stays English.

@@ -25,10 +25,12 @@ TDD on behavior change. ASK the user only as a last resort.
 | `/qa` | Exercise the PR (browser, e2e, or HTTP). Comment with evidence |
 | `/reviewer` | Review the PR. Diagnose CI |
 | `/lstm` | Incoming review. Patch the same branch |
+| `/goal` | Keep going until QA evidence lands on the head SHA |
 | `/ruver-triage` | Classify a QA finding. Not a ticket bot |
 | `/memory` | Durable prefs outside git (chat language, reviewers) |
 
-Short slashes (`/developer`, `/qa`, `/reviewer`, `/lstm`, `/memory`) are
+Short slashes (`/developer`, `/qa`, `/reviewer`, `/lstm`, `/goal`,
+`/memory`) are
 aliases of `/ruver-*`. Skill ids stay `ruver-*`. This repo is those
 graphs, not a dump of every third-party skill on a machine.
 
@@ -53,8 +55,13 @@ on your PATH.
 ```bash
 ruver update     # git pull --ff-only main, then relink
 ruver status
+ruver report     # wall time and laps per graph node
 ruver uninstall
 ```
+
+`ruver report` reads the run ledger the graphs write as they walk: wall time and
+lap count per node, plus the age of the QA claim. See
+[Measuring it](#measuring-it).
 
 **This checkout** (developing the repo): `./install.sh setup`
 points `ruver` at this tree. `ruver update` is `git pull` here.
@@ -130,12 +137,12 @@ opens `src/` itself.
 
 | Layer | Lives in | Example |
 |---|---|---|
-| Graph | `skills/*/*/GRAPH.md` | admit → deliver → mergeable → QA |
+| Graph | `skills/<name>/GRAPH.md` | admit → deliver → mergeable → QA |
 | Host | [`ruver-host`](skills/ruver-host/SKILL.md) | how *this* harness spawns a child or wakes later |
 | Product | target repo `AGENTS.md` + [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, sibling repos |
 
 A graph that says `spawn_subagent`, `model: grok-4.6`, or a company's
-GitHub handles has leaked. Host APIs stay in HOST.md. Product policy
+GitHub handles has leaked. Host APIs stay in `ruver-host`. Product policy
 stays in the repo you are in.
 
 Full write-up: [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md).
@@ -164,7 +171,7 @@ Main-thread graph engineer. `category: graph`. Source: [`skills/`](skills/README
 - **[ruver-triage](skills/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
 - **[ruver-reviewer](skills/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
 - **[ruver-lstm](skills/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
-- **[ruver-goal](skills/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA evidence on the head SHA. [page](docs/commands/ruver-goal.md)
+- **[ruver-goal](skills/ruver-goal/SKILL.md)** (`/goal`, `/ruver-goal`): Wake until QA evidence on the head SHA. [page](docs/commands/ruver-goal.md)
 
 ### Protocol (model-invoked)
 
@@ -173,9 +180,16 @@ the shared envelope, stack and QA-slot rules.
 
 - **[ruver-bus](skills/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
 
-### Lib (user-invoked)
+### Lib
+
+**User-invoked**
 
 - **[ruver-memory](skills/ruver-memory/SKILL.md)** (`/memory`, `/ruver-memory`): Chat language, confirmed reviewers, open questions. Outside git. [page](docs/commands/memory.md)
+
+**Model-invoked**
+
+- **[ruver-host](skills/ruver-host/SKILL.md)**: the host contract. Maps `load_skill`, `spawn_worker`, `worktree`, `schedule_wake`, `session_model` and the optional MCP capabilities onto whatever harness you are on. A graph loads it by name when a node mentions a primitive.
+- The bundled primitives (`unslop`, `tdd`, `how`, `why`, `grill-*`, `principle-*`, …) reach themselves when the task fits. Origins: [External references](#external-references).
 
 ### Engines
 
@@ -213,14 +227,54 @@ when CI / mergeability need a graph around the engine.
 
 They talk through **ruver-bus** files, not nested graph agents.
 
+### What bounds a run
+
+A run that fails does not fail quietly, and a run that dies does not take the
+queue with it.
+
+| Bound | Default | What it stops |
+|---|---|---|
+| `qa_lease_minutes` | 90 | A QA that died `handed_off`, `escalated`, or with its session used to hold the single QA slot for good, parking every later PR behind a queue position that would never move. A claim past the lease is free, and the next QA takes it over and says so |
+| `qa_fix_loops` | 2 | QA FAIL → fix → QA is the most expensive loop here: a full QA, a triage, and a fix per lap. A finding id that repeats across laps escalates at once, because a fix that did not hold will not hold on the next lap either |
+| `ci_fix_loops` · `review_fix_loops` · `test_fix_loops` | 5 · 2 · 2 | The cheaper loops inside delivery |
+| stack depth | 3 | `developer → qa → triage` is the deepest real chain. A fourth frame means an edge points back into a graph already running, so it is a cycle |
+
+Every QA lap is appended to `qa_verdict_log` in the developer STATE, so a loop
+is readable after the fact rather than inferred.
+
+### Measuring it
+
+The graphs append one row per transition to `.ruver-bus/RUN_LOG.tsv` — two lines
+per node, no LLM cost. `ruver report` turns that into wall time and lap count
+per `graph/node`, widest first:
+
+```text
+repo app
+  graph/node                         run     total   longest
+  qa/execute                           2    50m00s    26m40s   <- 2 laps
+  developer/fix                        1    10m00s    10m00s
+  QA lease: qa-pr-77 held 150m, cap 90m - dead claim, the queue is stuck
+```
+
+Nothing gates on it. The table above is the control; this is the instrument.
+Token counts are deliberately absent: a node cannot see its own usage, and an
+invented number is worse than none, so
+[`LEDGER.md`](skills/ruver-bus/LEDGER.md) points at the host transcript instead.
+
 Runtime state:
 
 ```text
-~/.ruver/memory.md
-~/.ruver/<slug>/memory.md
-~/.ruver/<slug>/.ruver-developer/
-~/.ruver/<slug>/.ruver-qa/
+~/.ruver/memory.md                       # you, every repo
+~/.ruver/<slug>/memory.md                # this git toplevel
 ~/.ruver/<slug>/.ruver-bus/
+                  STACK.md               # which graph is active
+                  ENVELOPE.md            # the message being handed over
+                  JOBS.md                # workers + the QA lease
+                  RUN_LOG.tsv            # transitions, timing, laps
+~/.ruver/<slug>/.ruver-developer/        # one dir per graph or engine
+~/.ruver/<slug>/.ruver-qa/               # .ruver-triage, -reviewer, -lstm,
+                                         # -goal, -code-review,
+                                         # -feature-delivery
 ```
 
 `<slug>` is the git toplevel with `/` replaced by `-`. Details:
@@ -235,16 +289,17 @@ main thread**. Do not spawn those. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.
 ```text
 skills/                         # this repo
   README.md
-  HOST.md                       # harness primitives
   install.sh
   plugin.json
   docs/GRAPH_ENGINEER.md
   docs/ARCHITECTURE.md
   docs/commands/                # one page per slash command
-  skills/
-    graphs/                     # main-thread graph engineer
-    engines/                    # delivery + review engines
-    lib/                        # bundled primitives (unslop, grill, tdd, …)
+  skills/                       # one flat directory per skill
+    ruver-developer/            # category: graph
+    ruver-feature-delivery/     # category: engine
+    ruver-host/                 # category: lib, harness primitives
+    unslop/                     # category: lib
+    …
   agents/                       # fd workers + graph roles
   commands/                     # slash aliases
 ```
@@ -268,8 +323,12 @@ Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 
 1. Folder under `skills/<name>/` with `category: graph | engine | lib`.
 2. Relative links only. No `~/.claude`, `~/.grok`, `~/.codex`.
-3. Host primitives → HOST.md. Product policy → [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) plus the target repo.
-4. Add the path to `plugin.json`, then `ruver setup` (or `./install.sh setup`) and commit.
+3. Host primitives → [ruver-host](skills/ruver-host/SKILL.md). Product policy → [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) plus the target repo.
+4. Add the path to **both** `plugin.json` and `.claude-plugin/plugin.json`,
+   and the name to `.grok-plugin/plugin-index.json`. `tests/repo.sh` fails if
+   any of them disagrees with the tree.
+5. Run `ruver setup` (or `./install.sh setup`), then `bash tests/repo.sh` and
+   `bash tests/install.sh`, then commit.
 
 ```bash
 grok plugin validate .

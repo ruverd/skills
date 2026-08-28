@@ -4,7 +4,21 @@
 **Capability:** read envelope, write STATE
 
 Read `QA_RESULT`. Follow the GRAPH apply_qa edges.
-Write `qa_verdict` and any Linear ids from the envelope notes.
+Write `qa_verdict` and any tracker ids from the envelope notes.
+
+**Log the lap before routing.** Append one row to `qa_verdict_log`: lap number,
+tested sha, verdict, `triage_class`, and the finding ids the envelope carries.
+`qa_verdict` is a single field that the next lap overwrites, so this table is
+the only record that the ring turned at all.
+
+Then decide, in this order:
+
+1. Finding id already in the log from an earlier lap → **escalate**. The same
+   defect survived a fix, so another lap buys nothing. Cheaper than waiting out
+   the cap, and it is the failure that actually happens.
+2. `qa_fix_loops_used` has reached `qa_fix_loops` → **escalate**, quoting the
+   log so the reader sees what changed each lap.
+3. Otherwise increment `qa_fix_loops_used` and route per the GRAPH edge.
 `PENDING_TRIAGE` → stay put. `PASS` with `NEW_BUG` → cite tickets,
 do not pad this PR.
 

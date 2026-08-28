@@ -7,10 +7,10 @@ When current work **depends** on something that does not exist / is not done
 
 | `tracker` | Create / comment |
 |---|---|
-| `linear` | Linear MCP (`save_issue`, `save_comment`, `get_issue`) |
+| `linear` | tracker MCP `save_issue` / `save_comment` / `get_issue` ([LINEAR.md](LINEAR.md)) |
 | `github_issues` | `gh issue create` / `gh issue comment` |
 | `gitlab` | `glab issue create` |
-| `none` | Write STATE. Tell the user. Do not invent a Linear workspace |
+| `none` | Write STATE. Tell the user. Do not invent a tracker workspace |
 
 **Do not** invent that the blocker "is already ready".
 
@@ -208,7 +208,7 @@ blockers:
 
 - [ ] Unblocked tickets advanced
 - [ ] Draft or blocking ticket with a dependency description
-- [ ] Linear `blockedBy` / `blocks` relation
+- [ ] tracker blocked-by / blocks relation
 - [ ] Comment with endpoint, params, request/response, types
 - [ ] Wait until Done (MCP get_issue)
 - [ ] Re-fetch the contract before integrating

@@ -10,9 +10,9 @@ Trim. Then, in order:
 |---|---|
 | empty, and STATE exists with `status` not in `done` / `done_notes` | **resume** the current job |
 | `resume` / `continue` (whole token, case-insensitive) | **resume** |
-| Linear / Jira / GitHub issue / GitLab issue URL | **ticket** |
+| Tracker issue URL, any vendor (detection: PRODUCT.md) | **ticket** |
 | GitHub PR or GitLab MR URL, or envelope `QA_RESULT` FAIL+`PR_BUG` | **fix** (existing PR/MR) |
-| issue id `[A-Z][A-Z0-9]+-\d+` | **ticket** (resolve tracker in PRODUCT.md; not a Linear gate) |
+| issue id `[A-Z][A-Z0-9]+-\d+` | **ticket** (resolve tracker in PRODUCT.md; not a tracker gate) |
 | free text with no resume, no STATE | **local goal** |
 | empty, no STATE, no goal text | **stop** — ask for the ticket or the goal |
 

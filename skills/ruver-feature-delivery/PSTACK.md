@@ -19,8 +19,8 @@ Load the skill, then follow the **adapted** node.
 | Skill | Node | Adaptation |
 |---|---|---|
 | `grill-with-docs` + `grill-me` | `grill` | Recommend + follow. ASK last resort. See [GRILL.md](GRILL.md). Vanilla "ask every branch and wait" is **off**. |
-| `to-prd` | `spec` | Synthesize only. Write local `SPEC.md`. Do **not** publish a PRD to Linear. |
-| `to-issues` | `tickets` | Vertical slices into local `TICKETS.md`. Do **not** create Linear issues here. [BLOCKERS.md](BLOCKERS.md) is the only Linear-create path. |
+| `to-prd` | `spec` | Synthesize only. Write local `SPEC.md`. Do **not** publish a PRD to the tracker. |
+| `to-issues` | `tickets` | Vertical slices into local `TICKETS.md`. Do **not** create tracker issues here. [BLOCKERS.md](BLOCKERS.md) is the only tracker-create path. |
 | `tdd` + this graph's [TDD.md](TDD.md) | `implement` | Iron law wins. Do not skip RED because bundled `tdd` says the path is expensive. |
 | `diagnose` | `diagnose` | Root cause. No product fix in this node. |
 | `unslop` | all chat | Always. English. [VOICE.md](VOICE.md) |

@@ -2,12 +2,9 @@
 name: ruver-code-review
 category: engine
 description: >
-  Adaptive PR review via gh. One PR: main thread. Two or more PRs: one fresh
-  subagent per PR (full skill each), orchestrator only resolves list and
-  aggregates chat summary. Pending required CI waits 5m (no PR comment) then
-  reviews on green; defers on CI red, draft, or conflict. Deep then light on
-  SHA history. One artifact per PR: REQUEST_CHANGES / APPROVE / DEFER.
-  Use when /ruver-code-review with URL(s), number(s), or current branch.
+  Adaptive PR review via gh: one PR on the main thread, one fresh subagent per
+  extra PR, one verdict artifact each (REQUEST_CHANGES / APPROVE / DEFER). Use
+  when /ruver-code-review with PR URLs, numbers, or the current branch.
 ---
 
 # Ruver Code Review

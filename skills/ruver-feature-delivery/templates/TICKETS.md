@@ -1,6 +1,6 @@
 # Tickets
 
-Linear: <id>
+Tracker: <id>
 Spec: SPEC.md
 
 Each ticket is one implement window. Verify it before starting the next.

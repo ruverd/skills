@@ -11,5 +11,6 @@ Maps [ruver-host](../../ruver-host/SKILL.md) primitives. Graphs stay generic.
 | `cancel_wake` | stop that loop |
 | `session_model` | inherit (`model:` in agent files is inherit) |
 
-MCP on the **main thread** when a subagent cannot see MCP (HOST.md).
+MCP on the **main thread** when a subagent cannot see MCP
+([ruver-host](../../ruver-host/SKILL.md)).
 Disk: `$HOME/.ruver/<slug>`.

@@ -14,6 +14,29 @@ REQUIRED = [
 ]
 # Internal working notes do not belong on every user's disk.
 FORBIDDEN = ["docs/superpowers"]
+# Reference material sits exactly one directory below SKILL.md, so a partial read
+# of the skill shows an agent everything it can load. A second level hides
+# material nothing points at.
+MAX_REFERENCE_DEPTH = 1
+
+
+def reference_depth(root, errors):
+    from frontmatter import skill_files
+
+    for path in skill_files(root):
+        directory = os.path.dirname(path)
+        name = os.path.basename(directory)
+        for dirpath, _, filenames in os.walk(directory):
+            rel = os.path.relpath(dirpath, directory)
+            depth = 0 if rel == "." else rel.count(os.sep) + 1
+            if depth <= MAX_REFERENCE_DEPTH:
+                continue
+            for filename in sorted(filenames):
+                if filename.endswith(".md"):
+                    errors.append(
+                        f"{name}: {os.path.join(rel, filename)} is {depth} levels "
+                        f"below SKILL.md, max {MAX_REFERENCE_DEPTH}"
+                    )
 
 
 def graph_file_sets(root, errors):
@@ -42,6 +65,7 @@ def main():
     root = sys.argv[1] if len(sys.argv) > 1 else "."
     errors = []
     graph_file_sets(root, errors)
+    reference_depth(root, errors)
     for rel in REQUIRED:
         if not os.path.exists(os.path.join(root, rel)):
             errors.append(f"missing: {rel}")

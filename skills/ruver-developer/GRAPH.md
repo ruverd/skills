@@ -40,8 +40,8 @@
 
 | From | Condition | To |
 |---|---|---|
-| start | `resume` / same Linear id or goal slug with live STATE | **resume** (reconcile, continue) |
-| start | goal text, or Linear id / URL, no live STATE | **admit** |
+| start | `resume` / same tracker id or goal slug with live STATE | **resume** (reconcile, continue) |
+| start | goal text, or tracker id / URL, no live STATE | **admit** |
 | start | `QA_RESULT` FAIL + `PR_BUG` | **admit** then **fix** |
 | start | empty args and live STATE | **resume** |
 | start | no args, no STATE, no goal | **stop** (ask for the ticket or the goal) |
@@ -57,7 +57,9 @@
 | request_qa | QA slot free | **bus → qa** |
 | request_qa | QA slot taken | enqueue; stay on developer |
 | apply_qa | `QA_RESULT` PASS | **ready** (`gh pr ready`) then **done** |
-| apply_qa | FAIL and triage `PR_BUG` | **fix** |
+| apply_qa | FAIL + `PR_BUG` + loops left | **fix** (log the lap first) |
+| apply_qa | FAIL + `PR_BUG` + same finding id as a previous lap | **escalate** (the fix is not converging) |
+| apply_qa | FAIL + `PR_BUG` + loops exhausted | **escalate**, cite `qa_verdict_log` |
 | apply_qa | NEW_BUG / EXISTING_BUG / NOT_A_BUG | **ready** + **done** (notes) |
 | apply_qa | `PENDING_TRIAGE` | **wait** |
 | apply_qa | BLOCKED | **escalate** |
@@ -72,6 +74,8 @@
 ```yaml
 never_merge: true
 stay_draft: until_qa_pass
+qa_fix_loops: 2   # laps of QA→fix→QA. A lap costs a full QA plus a triage
+                  # plus a fix, so this is smaller than fd ci_fix_loops: 5
 open_pr: true
 reuse_fd_graph: true
 chat_language: en  # default; ruver-memory overrides. This file is English.

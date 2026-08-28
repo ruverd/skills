@@ -49,9 +49,13 @@ one general-purpose worker + worktree ([JOBS.md](JOBS.md),
 2. Read `.ruver-bus/ENVELOPE.md`.
 3. `load_graph` the last STACK line (`ruver-<name>` SKILL.md + GRAPH.md).
 4. Continue from that graph's STATE. Do not restart.
-5. Also print `JOBS.md`: `qa_active`, `qa_waiting`, worker rows.
+5. Also print `JOBS.md`: `qa_active` with its `qa_claimed_at` age,
+   `qa_waiting`, worker rows. Flag a claim past `qa_lease_minutes` — that
+   is a crashed QA, not a busy one.
 
 ## Chat
 
 Short, chat language (`ruver-memory`): `S: bus <from>→<to> <type>` ·
 `P: active graph` · `qa_active` / queue.
+
+Timing and laps: [LEDGER.md](LEDGER.md). `ruver report` reads it.

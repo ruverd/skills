@@ -25,7 +25,10 @@ done_report | escalated
 | Field | Use |
 |---|---|
 | `schema_version: 4` | resume compat |
+| `work_kind` | feature \| bug \| regression \| chore \| spike |
 | `path` | full_feature \| debug_fix \| light_change |
+| `route_confidence` | high \| medium \| low |
+| `route_reason` | one line, why this path |
 | `scope` | frontend_only \| backend_only \| mono \| fullstack |
 | `forge` | github \| gitlab \| git |
 | `tracker` | linear \| github_issues \| gitlab \| jira \| none |
@@ -46,7 +49,7 @@ done_report | escalated
 |---|---|---|
 | mcp_context | goal, refs, PRODUCT.md, ruver-memory | mcp_gate, forge, tracker, pkg, *_cmd, qa_tool, tracker_*, branch, repos_*, assignee, reviewers, reviewers_status, chat_language |
 | triage | goal, tracker-context | work_kind, scope, path, route_* |
-| grill | goal, repo, Linear | decisions, approaches, `waiting_user` |
+| grill | goal, repo, tracker | decisions, approaches, `waiting_user` |
 | spec | decisions | SPEC.md, spec_path |
 | tickets | SPEC.md | TICKETS.md, seams, tickets_path |
 | diagnose | sentry/linear, repo | debug (root cause, evidence, one ticket) |

@@ -47,6 +47,7 @@ fi
 check links python3 "$LIB/check_links.py" "$ROOT"
 check frontmatter env PYTHONPATH="$LIB" python3 "$LIB/check_frontmatter.py" "$ROOT"
 check manifests env PYTHONPATH="$LIB" python3 "$LIB/check_manifests.py" "$ROOT"
+check enums env PYTHONPATH="$LIB" python3 "$LIB/check_enums.py" "$ROOT"
 check structure python3 "$LIB/check_structure.py" "$ROOT"
 check leaks python3 "$LIB/check_leaks.py" "$ROOT"
 

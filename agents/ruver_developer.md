@@ -3,7 +3,7 @@ name: ruver_developer
 description: >
   Senior delivery agent. Runs /ruver-feature-delivery, keeps the PR
   Draft, requires CI green AND MERGEABLE, then hands off to ruver_qa.
-  Use when implementing a Linear ticket or a PR_BUG fix.
+  Use when implementing a tracker ticket or a PR_BUG fix.
 prompt_mode: full
 tools: Read, Write, Edit, Grep, Glob, Bash, Agent
 model: inherit

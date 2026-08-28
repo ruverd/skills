@@ -2,12 +2,10 @@
 name: ruver-developer
 category: graph
 description: >
-  Graph: deliver a Linear ticket via grill → spec → tickets → TDD
-  (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus.
-  Use when /developer, /ruver-developer, a
-  ticket, or a QA_RESULT FAIL+PR_BUG. Follow grill recommendations.
-  ASK the user only as a last resort. Chat follows ruver-memory.
-  Unslop always.
+  Graph: deliver a ticket or a local goal via grill -> spec -> tickets -> TDD
+  (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus. Use when
+  /developer, /ruver-developer, a ticket, or a QA_RESULT FAIL+PR_BUG. ASK the
+  user only as a last resort.
 argument-hint: "<ticket | goal | PR url | resume>"
 ---
 
@@ -31,9 +29,9 @@ Never merge. Stay Draft until **QA PASS**, then `gh pr ready`. Ready is not merg
 
 Parse `$ARGUMENTS` with [ARGS.md](ARGS.md) **before** anything else.
 
-**Resume** (`resume` / same Linear id with existing STATE): reconcile, continue at the saved node. The current message is the answer if `waiting_user`. Do not re-init STATE. Do not re-grill settled decisions.
+**Resume** (`resume` / same tracker id with existing STATE): reconcile, continue at the saved node. The current message is the answer if `waiting_user`. Do not re-init STATE. Do not re-grill settled decisions.
 
-**Goal or ticket** (free text, or Linear id/URL, no live STATE for that id):
+**Goal or ticket** (free text, or tracker id/URL, no live STATE for that id):
 
 1. Resolve `$RUVER_ROOT` ([../ruver-bus/DISK.md](../ruver-bus/DISK.md)).
 2. Init `.ruver-developer/STATE.md` from [templates/STATE.md](templates/STATE.md).

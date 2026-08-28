@@ -3,8 +3,8 @@ name: ruver-goal
 category: graph
 description: >
   Drive developer → CI green → QA comment+evidence across turns with
-  schedule_wake (HOST.md). Use when /goal, /ruver-goal, or after
-  a draft PR is opened and CI is still pending.
+  schedule_wake. Use when /goal or /ruver-goal, or after a draft PR is
+  opened and CI is still pending.
 argument-hint: "<ticket | PR url | status | cancel>"
 ---
 
@@ -71,7 +71,7 @@ Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
 - Claim the goal done without the QA comment + evidence on **head** SHA
 - Sit in `--watch` (CI is longer than a tool timeout)
 - Spawn graph-agents as children (bus switch / load GRAPH)
-- Start a second QA while `qa_active` is another PR
+- Start a second QA while `qa_active` holds another **live** PR
 - Merge
 
 ## After QA comment

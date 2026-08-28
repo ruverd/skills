@@ -27,6 +27,13 @@ AGENT_KEYS = {
 COMMAND_KEYS = {"name", "description", "argument-hint"}
 CATEGORIES = {"graph", "engine", "lib"}
 MAX_DESCRIPTION = 1024
+# Every host pastes name + description for every skill into the system prompt on
+# every turn, so this block is the one cost the repo pays whether a skill runs or
+# not. Codex caps it at 2% of the context window, or 8,000 characters when it
+# cannot read the window; past the cap it shortens descriptions and can drop
+# skills entirely. Hold the sum under the documented floor, and spend the
+# characters on trigger phrases rather than on restating the body.
+MAX_DISCOVERY_CHARS = 8000
 # Progressive disclosure: SKILL.md says when to run and what the invariants are,
 # then points at GRAPH.md, nodes/ and references/ for the detail.
 MAX_SKILL_LINES = 250
@@ -62,17 +69,31 @@ def check_common(errors, path, root, fields, allowed, want_name=None):
             report(errors, path, root, f"description contains {word!r}; keep it in the body only")
 
 
+def check_discovery_budget(errors, entries):
+    """The always-on cost of this repo: what a host reads before any skill runs."""
+    total = sum(len(name) + len(description) + 4 for name, description in entries)
+    if total > MAX_DISCOVERY_CHARS:
+        widest = sorted(entries, key=lambda e: -(len(e[0]) + len(e[1])))[:5]
+        listed = ", ".join(f"{n} ({len(n) + len(d) + 4})" for n, d in widest)
+        errors.append(
+            f"skills: discovery block is {total} chars, max {MAX_DISCOVERY_CHARS}; "
+            f"shorten the widest descriptions: {listed}"
+        )
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else "."
     errors = []
+    discovery = []
 
     for path in skill_files(root):
         fields, _ = parse(path)
         if fields is None:
             report(errors, path, root, "no frontmatter")
             continue
-        check_common(errors, path, root, fields, SKILL_KEYS,
-                     want_name=os.path.basename(os.path.dirname(path)))
+        name = os.path.basename(os.path.dirname(path))
+        discovery.append((name, fields.get("description", "")))
+        check_common(errors, path, root, fields, SKILL_KEYS, want_name=name)
         with open(path, encoding="utf-8") as handle:
             lines = sum(1 for _ in handle)
         if lines > MAX_SKILL_LINES:
@@ -84,6 +105,8 @@ def main():
             report(errors, path, root, "missing category (graph|engine|lib)")
         elif category not in CATEGORIES:
             report(errors, path, root, f"category {category!r} not in {sorted(CATEGORIES)}")
+
+    check_discovery_budget(errors, discovery)
 
     for path in flat_files(root, "agents"):
         fields, _ = parse(path)

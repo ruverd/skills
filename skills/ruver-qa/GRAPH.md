@@ -25,8 +25,8 @@ start (PR from args or QA_REQUEST)
 |---|---|---|
 | start | no PR | **stop** (ask) |
 | start | PR present | **admit** |
-| admit | `qa_active` other PR | **enqueue** and **stop** |
-| admit | slot free or this job | **resolve** |
+| admit | `qa_active` holds another **live** PR | **enqueue** and **stop** |
+| admit | slot free, this job, or a claim that expired / was abandoned | **resolve** (claim, or take over and say so) |
 | resolve | ok | **plan** |
 | plan | PLAN.md has ≥1 step | **execute** |
 | plan | no surface | **stop** (ask) |
@@ -35,7 +35,8 @@ start (PR from args or QA_REQUEST)
 | execute | unambiguous FAIL (VERDICTS.md) | **verdict** `FAIL` |
 | execute | cannot run (env/auth/app) | **verdict** `BLOCKED` |
 | request_triage | envelope written | **bus → triage** |
-| verdict | after execute or TRIAGE_RESULT | comment + `QA_RESULT` + pop + apply_qa + **dequeue** |
+| verdict | after execute or TRIAGE_RESULT | comment + `QA_RESULT` + pop + apply_qa + **release lease** + **dequeue** |
+| any | `blocked` / `handed_off` / `escalated` | **release lease** then stop (`../ruver-bus/JOBS.md`) |
 
 Unambiguous FAIL: [references/VERDICTS.md](references/VERDICTS.md).  
 Plan how: [references/PLAN.md](references/PLAN.md).  
@@ -47,4 +48,5 @@ Execute how: [references/EXECUTION.md](references/EXECUTION.md).
 `nodes/admit.md` · `nodes/resolve.md` · `nodes/plan.md` ·
 `nodes/execute.md` · `nodes/request_triage.md` · `nodes/verdict.md`
 
-Queue: `../ruver-bus/JOBS.md`. Never two executes.
+Queue and lease: `../ruver-bus/JOBS.md`. Never two executes. The slot is a
+lease with an expiry, so a dead run cannot park the queue for good.

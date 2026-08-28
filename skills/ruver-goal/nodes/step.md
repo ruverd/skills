@@ -9,7 +9,8 @@
   ([PROTOCOL.md](../../ruver-bus/PROTOCOL.md)). Never spawn `ruver_developer`,
   `ruver_qa` or any other graph type as a child.
 - QA goes through enqueue-or-start ([JOBS.md](../../ruver-bus/JOBS.md)). If
-  `qa_active` is another PR, enqueue and say the queue position. Do not start a
+  `qa_active` is another **live** PR, enqueue and say the queue position. An
+   expired or abandoned claim is free — `../../ruver-bus/JOBS.md`. Do not start a
   second QA.
 - After dispatching, if work is still open, `schedule_wake`
   ([LOOP.md](../references/LOOP.md)) and stop.

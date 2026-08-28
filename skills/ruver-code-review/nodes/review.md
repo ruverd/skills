@@ -8,7 +8,8 @@ Run in order. Do not begin a phase before the previous one is complete.
   diff needs). Read `AGENTS.md` only if `CLAUDE.md` is absent.
 - PR title and body: stated intent and acceptance criteria.
 - Tracker ticket: extract `[A-Z][A-Z0-9]+-\d+` from `headRefName` or title. If found,
-  one `tracker_fetch_issue` call (HOST.md, Optional MCP). If the capability is
+  one `tracker_fetch_issue` call ([ruver-host](../../ruver-host/SKILL.md),
+  Optional MCP). If the capability is
   absent or no ID exists, note it and continue on the PR body alone.
 
 ### Phase 2 — Plan
@@ -41,7 +42,8 @@ For each changed exported symbol, find who else uses it:
 code_graph_explore  →  "<ChangedSymbol> <OtherSymbol> callers"
 ```
 
-`code_graph_explore` is HOST.md, Optional MCP. Absent → `Grep` the symbol name,
+`code_graph_explore` is an Optional MCP capability
+([ruver-host](../../ruver-host/SKILL.md)). Absent → `Grep` the symbol name,
 same cap. Then check:
 
 - signature, prop, return-shape or enum change that its callers do not handle

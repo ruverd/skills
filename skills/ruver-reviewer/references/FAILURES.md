@@ -9,7 +9,7 @@ Every relevant failure gets exactly one class.
 | `INFRASTRUCTURE FAILURE` | Runner, registry, network, Actions, external outage | Retry; no app-code workaround |
 | `ENVIRONMENT FAILURE` | Missing env, service, credentials, DB | Diagnose; never print secrets |
 | `BRANCH FAILURE` | Conflicts, stale head, wrong base, integration with base | Fix branch state, then re-check CI |
-| `UNRELATED FAILURE` | Same fail on base / untouched code / predates PR / many PRs | Do not pad this PR. Linear if needed |
+| `UNRELATED FAILURE` | Same fail on base / untouched code / predates PR / many PRs | Do not pad this PR. Tracker issue if needed |
 | `HUMAN INTERVENTION REQUIRED` | Ambiguous product, security, missing creds, destructive, architecture | Escalate |
 
 ## Base-branch compare

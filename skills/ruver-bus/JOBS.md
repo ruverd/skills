@@ -73,7 +73,7 @@ git worktree add ".worktrees/<id>" -b "<branch>" origin/main
 ```
 
 Reuse the ticket branch if it already exists
-(`feature/<id-lowercase>` or Linear `gitBranchName`).
+(`feature/<id-lowercase>` or the tracker's branch name).
 Do not nest a worktree inside another worktree.
 Do not run the full test suite as a baseline (too heavy). Install
 deps with the discovered `pkg` only if they are missing in that worktree.
@@ -99,13 +99,56 @@ On RESULT: update JOBS. Developer worker with green+MERGEABLE →
 [Enqueue or start QA](#enqueue-or-start-qa). CI pending → start
 `ruver-goal` loop for **that** PR (one loop per PR).
 
+## The QA slot is a lease, not a lock
+
+A QA run reaches `verdict` only on the happy path. It also dies `handed_off`
+on a context limit, `escalated`, or with the session — and `verdict` is the
+only node that clears the slot. A dead claim therefore parks every later QA in
+`qa_waiting` for good, while the graph keeps answering with a queue position,
+which reads exactly like working software. So the claim carries a timestamp and
+expires.
+
+```yaml
+qa_lease_minutes: 90   # default; raise on suites that legitimately run longer
+```
+
+Claim = write `qa_active` and `qa_claimed_at` in the same edit.
+
+The slot is **free** when any of these holds:
+
+| | Condition |
+|---|---|
+| 1 | `qa_active` is empty |
+| 2 | `qa_active` is **this** job id |
+| 3 | **expired** — `qa_claimed_at` is more than `qa_lease_minutes` in the past |
+| 4 | **abandoned** — the claiming job's row is terminal (`done`, `done_notes`, `escalated`, `handed_off`), or `jobs/<qa_active>/` is gone |
+
+**Renew** while you hold it. `execute` is the long node: rewrite
+`qa_claimed_at` every time you append to `FINDINGS.md`, so a slow but live QA
+never reads as expired.
+
+**Take over** an expired or abandoned claim:
+
+1. Append to `log.md`: `<ISO> reclaim qa_active=<old> reason=expired|abandoned`,
+   and a `reclaim` row to `RUN_LOG.tsv` ([LEDGER.md](LEDGER.md)).
+2. Overwrite `qa_active` and `qa_claimed_at` with your own.
+3. Reset `.ruver-qa/STATE.md` from the template. The old STATE describes
+   another PR.
+4. Say in chat which claim you took and why. A silent takeover hides a crash
+   the user needs to know happened.
+
+**Release** on every terminal exit, not only `verdict`: `blocked`,
+`handed_off`, `escalated`, and the `stop` edges out of `resolve` and `plan`.
+Clear both fields, then dequeue. Releasing a slot you no longer hold is a
+no-op, so check `qa_active` is still your id first.
+
 ## Enqueue or start QA
 
-Slot = `qa_active` empty.
+Slot free by the table above.
 
 1. Write `jobs/<id>/qa-request.md` (full `QA_REQUEST` body).
-2. **Free:** `qa_active=<id>`. Copy to `ENVELOPE.md`. Bus switch
-   to `qa`.
+2. **Free:** write `qa_active=<id>` and `qa_claimed_at=<ISO UTC>` in one
+   edit. Copy to `ENVELOPE.md`. Bus switch to `qa`.
 3. **Taken:** append `<id>` to `qa_waiting`. Do **not** switch.
    Do **not** touch `.ruver-qa/STATE.md`. Chat: queue position.
 
@@ -115,7 +158,7 @@ Triage stacked on QA still holds the slot (`qa_active` stays).
 
 1. Write `QA_RESULT`. Pop. Run developer `apply_qa` for that job
    **to completion** (do not skip).
-2. Clear `qa_active`.
+2. Clear `qa_active` and `qa_claimed_at`.
 3. If `qa_waiting` is non-empty: dequeue head → `qa_active`,
    copy `jobs/<id>/qa-request.md` → `ENVELOPE.md`, push `qa`,
    load QA graph. Reset `.ruver-qa/STATE.md` from the template
@@ -131,4 +174,6 @@ after verdict.
 - Spawning a graph type as the worker
 - Worker spawning fd coder / another graph
 - Overwriting `.ruver-qa/STATE.md` for a queued PR
+- Holding `qa_active` past a `handed_off`, `escalated` or `blocked` exit
+- Taking over an expired claim without saying so in chat
 - `git worktree add` when `isolation: "worktree"` is available
