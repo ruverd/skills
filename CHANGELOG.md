@@ -4,7 +4,7 @@ Notable changes per release. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html), pre-1.0.
 
-## [Unreleased]
+## [0.6.0] - 2026-08-28
 
 ### Added
 
@@ -54,6 +54,13 @@ Notable changes per release. Format follows
 - Twenty-two skill descriptions are shorter. Process detail moved into the
   bodies; the trigger phrases stayed, because that is what routing reads.
 - `skills/why/references/sources/*.md` are now `references/source-*.md`.
+- README brought back in line with the product: the layer table pointed at the
+  pre-flatten `skills/*/*/GRAPH.md`, `/goal` was missing from the command table
+  and the alias list even though `commands/goal.md` ships, `ruver-host` appeared
+  nowhere in the reference section despite being one of the 34 skills, the
+  runtime-state block showed three of the nine directories and none of the
+  ledger, and "add a skill" named one of the three manifests the gate checks.
+  New sections cover what bounds a run and how to measure one.
 - 107 places across 47 skill files, 6 agent contracts and one command named
   Linear as *the* tracker. The field rename in 0.5.0 covered `linear_*` but not
   prose, so `DECISION_POLICY.md` alone pointed at it eleven times and an agent
