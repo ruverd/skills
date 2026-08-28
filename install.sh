@@ -238,6 +238,52 @@ cmd_update() {
   cmd_setup
 }
 
+cmd_status() {
+  local repo sha behind dest
+  repo="$(config_get repo)"
+  repo="${repo:-$REPO}"
+  REPO="$repo"
+  echo "repo     $repo"
+  echo "version  $(plugin_version)"
+  if git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    sha="$(git -C "$repo" rev-parse --short HEAD)"
+    echo "sha      $sha"
+    git -C "$repo" fetch origin >/dev/null 2>&1 || true
+    behind="$(git -C "$repo" rev-list --count HEAD..origin/main 2>/dev/null || echo "?")"
+    echo "behind   $behind"
+  fi
+  if command -v ruver >/dev/null 2>&1; then
+    echo "path     $(command -v ruver)"
+  else
+    echo "path     ruver not on PATH (export PATH=\"$BIN_DIR:\$PATH\")"
+  fi
+  for dest in \
+    "$HOME/.agents/skills/unslop" \
+    "$HOME/.grok/skills/unslop" \
+    "$HOME/.claude/skills/unslop" \
+    "$HOME/.cursor/skills/unslop" \
+    "$HOME/.codex/skills/unslop"
+  do
+    if [[ -L "$dest" ]]; then
+      if is_ours "$dest"; then
+        echo "ok       $dest"
+      else
+        echo "not ours $dest"
+      fi
+    elif [[ -e "$dest" ]]; then
+      echo "not ours $dest"
+    else
+      echo "missing  $dest"
+    fi
+  done
+  if command -v grok >/dev/null 2>&1 && grok plugin list 2>/dev/null | grep -qi ruver; then
+    echo "warn     grok plugin ruver is also installed (duplicate skills)"
+  fi
+  if command -v claude >/dev/null 2>&1 && claude plugins list 2>/dev/null | grep -qi ruver; then
+    echo "warn     claude plugin ruver is also installed (duplicate skills)"
+  fi
+}
+
 cmd_uninstall() {
   UNINSTALL=1
   install_skills \
@@ -388,6 +434,7 @@ fi
 case "${CMD:-setup}" in
   setup) cmd_setup ;;
   update) cmd_update ;;
+  status) cmd_status ;;
   uninstall) cmd_uninstall ;;
   *) echo "not implemented: $CMD" >&2; exit 1 ;;
 esac

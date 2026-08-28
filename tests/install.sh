@@ -204,4 +204,21 @@ assert_not "$man"
 assert_file "$TEST_HOME/.ruver/memory.md"
 ok purge-managed
 
+# After purge, TEST_HOME may have uninstalled links and config pointing at a
+# managed clone that was deleted. Restore setup first.
+run_install setup >/dev/null
+out="$(run_install status)"
+echo "$out" | grep -q 'repo' || fail "status missing repo"
+echo "$out" | grep -q 'version' || fail "status missing version"
+echo "$out" | grep -q 'ok' || fail "status missing ok homes"
+ok status
+
+set +e
+HOME="$TEST_HOME" "$INSTALL" --plugin >/tmp/ruver-plugin.out 2>/tmp/ruver-plugin.err
+got=$?
+set -e
+assert_eq "$got" "1" "--plugin exit"
+grep -q 'grok plugin install ruver' /tmp/ruver-plugin.err || fail "--plugin message"
+ok plugin-refused
+
 echo "all passed"
