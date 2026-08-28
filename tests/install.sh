@@ -72,12 +72,14 @@ fi
 ok setup-path-skip-when-present
 
 DRY_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-dry.XXXXXX")"
-# grep -q SIGPIPEs the writer (141); pipefail would fail the pipeline.
-set +o pipefail
-HOME="$DRY_HOME" XDG_CONFIG_HOME="$DRY_HOME/.config" \
+set +e
+out="$(HOME="$DRY_HOME" XDG_CONFIG_HOME="$DRY_HOME/.config" \
   XDG_DATA_HOME="$DRY_HOME/.local/share" \
-  "$INSTALL" setup --dry-run | grep -q 'dry-run:' || fail "dry-run silent"
-set -o pipefail
+  "$INSTALL" setup --dry-run 2>&1)"
+got=$?
+set -e
+[[ "$got" -eq 0 ]] || fail "dry-run setup exit $got"
+grep -q 'dry-run:' <<< "$out" || fail "dry-run silent"
 assert_not "$DRY_HOME/.config/ruver/config"
 assert_not "$DRY_HOME/.agents/skills/unslop"
 assert_not "$DRY_HOME/.local/bin/ruver"
