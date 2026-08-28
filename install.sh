@@ -1,37 +1,100 @@
 #!/usr/bin/env bash
-# Install Ruver skills into the local agent homes.
-#
-# Default: flatten skills/{graphs,engines,lib}/<name> into
-#   ~/.agents  ~/.grok  ~/.claude  ~/.cursor  ~/.codex
-# so /ruver-developer, /ruver-lstm, and /ruver-qa stay flat slash names.
+# Install and update Ruver skills (flatten into agent homes).
 #
 # Usage:
-#   ./install.sh
-#   ./install.sh --dry-run
-#   ./install.sh --plugin          # also register this repo as a Grok marketplace
-#   ./install.sh --uninstall
+#   curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash
+#   ./install.sh setup
+#   ruver update
+#   ruver status
+#   ruver uninstall
+#
+# Options: --dry-run  --yes / -y  --help
+# Compat:  --uninstall  (same as uninstall)
 
 set -euo pipefail
 
-REPO="$(cd "$(dirname "$0")" && pwd)"
-BACKUP_ROOT="${SKILLS_BACKUP_ROOT:-${AI_SKILLS_BACKUP_ROOT:-$HOME/.skills-backups}}"
-DRY=0
-GROK_PLUGIN=0
-UNINSTALL=0
-
 usage() {
-  sed -n '2,16p' "$0" | sed 's/^# \?//'
+  cat <<'EOF'
+Install and update Ruver skills.
+
+Usage:
+  ruver                 Menu (TTY) or command list (no TTY)
+  ruver setup           Flatten skills into agent homes
+  ruver update          git pull --ff-only main, then setup
+  ruver status          Repo, version, SHA, homes
+  ruver uninstall       Remove our symlinks
+  ruver uninstall --purge
+                        Also delete the managed clone
+
+Options:
+  --dry-run     Print actions, write nothing
+  --yes, -y     Skip confirmations
+  -h, --help    Show this help
+
+Examples:
+  curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash
+  ruver setup
+  ruver update
+  ruver status
+  ruver uninstall
+EOF
 }
+
+CMD=""
+DRY=0
+YES=0
+PURGE=0
+UNINSTALL=0
+GROK_PLUGIN=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    setup|update|status|uninstall|menu|help)
+      if [[ -n "$CMD" && "$CMD" != "$1" ]]; then
+        echo "unknown arg: $1" >&2
+        usage
+        exit 1
+      fi
+      CMD="$1"
+      shift
+      ;;
     --dry-run) DRY=1; shift ;;
-    --plugin|--grok-plugin) GROK_PLUGIN=1; shift ;;
-    --uninstall) UNINSTALL=1; shift ;;
-    -h|--help) usage; exit 0 ;;
-    *) echo "unknown arg: $1" >&2; usage; exit 1 ;;
+    --yes|-y) YES=1; shift ;;
+    --purge) PURGE=1; shift ;;
+    --uninstall) CMD="uninstall"; UNINSTALL=1; shift ;;
+    --plugin|--grok-plugin)
+      echo "Plugin install is not part of ruver." >&2
+      echo "  grok plugin install ruver --trust" >&2
+      echo "  claude plugins install ruver" >&2
+      exit 1
+      ;;
+    -h|--help)
+      if [[ -n "$CMD" && "$CMD" != "help" ]]; then
+        usage
+        exit 0
+      fi
+      usage
+      exit 0
+      ;;
+    *)
+      echo "unknown arg: $1" >&2
+      usage
+      exit 1
+      ;;
   esac
 done
+
+if [[ "$CMD" == "help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ "$CMD" == "uninstall" ]]; then
+  UNINSTALL=1
+fi
+
+REPO="$(cd "$(dirname "$0")" && pwd)"
+BACKUP_ROOT="${SKILLS_BACKUP_ROOT:-${AI_SKILLS_BACKUP_ROOT:-$HOME/.skills-backups}}"
 
 if [[ ! -d "$REPO/skills" ]]; then
   echo "missing $REPO/skills" >&2
