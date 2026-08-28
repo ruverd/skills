@@ -71,4 +71,17 @@ if [[ -f "$SKIP_HOME/.zshrc" ]] && grep -q '# ruver PATH' "$SKIP_HOME/.zshrc"; t
 fi
 ok setup-path-skip-when-present
 
+DRY_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-dry.XXXXXX")"
+# grep -q SIGPIPEs the writer (141); pipefail would fail the pipeline.
+set +o pipefail
+HOME="$DRY_HOME" XDG_CONFIG_HOME="$DRY_HOME/.config" \
+  XDG_DATA_HOME="$DRY_HOME/.local/share" \
+  "$INSTALL" setup --dry-run | grep -q 'dry-run:' || fail "dry-run silent"
+set -o pipefail
+assert_not "$DRY_HOME/.config/ruver/config"
+assert_not "$DRY_HOME/.agents/skills/unslop"
+assert_not "$DRY_HOME/.local/bin/ruver"
+rm -rf "$DRY_HOME"
+ok dry-run-setup
+
 echo "all passed"
