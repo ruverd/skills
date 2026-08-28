@@ -1,7 +1,8 @@
 ---
 name: ruver-lstm
+category: graph
 description: >
-  Graph: Looks shit to me. Author-side of review. Ingest a PR / review /
+  Graph: author-side of review. Ingest a PR / review /
   inline thread / issue-comment URL, verify with receiving-code-review,
   patch should-fix on the same branch, always rebase merge conflicts,
   then 👍 + unslopped reply on every comment, resolve threads,

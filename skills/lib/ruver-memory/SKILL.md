@@ -1,5 +1,6 @@
 ---
 name: ruver-memory
+category: lib
 description: >
   Use when /memory, /ruver-memory, a ruver graph or engine starts,
   the first run in a repo, CODEOWNERS or AGENTS.md list no reviewers,

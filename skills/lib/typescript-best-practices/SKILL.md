@@ -1,5 +1,6 @@
 ---
 name: typescript-best-practices
+category: lib
 description: TypeScript best practices. Use when reading or editing any .ts or .tsx file.
 ---
 

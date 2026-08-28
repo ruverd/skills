@@ -1,5 +1,6 @@
 ---
 name: ruver-bus
+category: graph
 description: >
   Shared bus for the ruver agent graphs (developer, qa, triage, reviewer, lstm).
   Use when switching graphs, writing or reading a .ruver-bus envelope, or

@@ -1,5 +1,6 @@
 ---
 name: ruver-developer
+category: graph
 description: >
   Graph: deliver a Linear ticket via grill → spec → tickets → TDD
   (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus.

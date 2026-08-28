@@ -31,6 +31,7 @@ need_python() {
 need_python
 
 check links python3 "$LIB/check_links.py" "$ROOT"
+check frontmatter env PYTHONPATH="$LIB" python3 "$LIB/check_frontmatter.py" "$ROOT"
 
 if [[ "$FAILED" -ne 0 ]]; then
   echo "repo checks failed" >&2

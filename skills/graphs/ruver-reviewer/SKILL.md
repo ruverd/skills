@@ -1,5 +1,6 @@
 ---
 name: ruver-reviewer
+category: graph
 description: >
   Graph: review a PR/branch via /ruver-code-review, classify CI/test
   failures, optionally bus a REVIEW_RESULT. Use when /reviewer,

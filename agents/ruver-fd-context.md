@@ -1,6 +1,7 @@
 ---
 name: ruver-fd-context
 description: Use when the ruver-feature-delivery graph needs the mcp_context node (verify + fetch external context before implementing).
+tools: Read, Write, Edit, Grep, Glob, Bash
 model: inherit
 color: blue
 ---
@@ -24,13 +25,13 @@ Follow:
    do NOT write `mcp_gate: failed`. The orchestrator (main thread) has MCP access
    and must run this node's steps itself. `mcp_gate: failed` means the SOURCE is
    unreachable (auth/offline), never "this subagent lacks tools".
-3. If a **critical** source cannot be accessed:
+4. If a **critical** source cannot be accessed:
    - **Do not invent** any of its content.
    - Write STATE: `mcp_gate: failed`, full `mcp_gate_error`.
    - Print the exact error block from MCP_CONTEXT.md ("ERROR: MCP unreachable"), in English.
    - Return `result: blocked`. Stop. No implement.
-4. If accessible: fetch fully → `*-context.md` + `mcp-sources.md`.
-5. Linear OK → checkout `gitBranchName` or `feature/<id-lowercase>`.
-6. Critical sources all OK → `mcp_gate: passed`.
+5. If accessible: fetch fully → `*-context.md` + `mcp-sources.md`.
+6. Linear OK → checkout `gitBranchName` or `feature/<id-lowercase>`.
+7. Critical sources all OK → `mcp_gate: passed`.
 
 Never use `orca linear`. Never implement product code.

@@ -1,5 +1,6 @@
 ---
 name: unslop
+category: lib
 description: Cut AI tells from any writing. Must always apply.
 ---
 

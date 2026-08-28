@@ -1,5 +1,6 @@
 ---
 name: ruver-code-review
+category: engine
 description: >
   Adaptive PR review via gh. One PR: main thread. Two or more PRs: one fresh
   subagent per PR (full skill each), orchestrator only resolves list and

@@ -1,5 +1,6 @@
 ---
 name: ruver-qa
+category: graph
 description: >
   Graph: QA a PR. One slot (queue extras). Plan from the
   diff, then browser, e2e, or HTTP. Bus TRIAGE_REQUEST on product

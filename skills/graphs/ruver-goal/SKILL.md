@@ -1,5 +1,6 @@
 ---
 name: ruver-goal
+category: graph
 description: >
   Drive developer → CI green → QA comment+evidence across turns with
   schedule_wake (HOST.md). Use when /ruver-goal, /ruver_goal, or after

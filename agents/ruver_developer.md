@@ -5,6 +5,7 @@ description: >
   Draft, requires CI green AND MERGEABLE, then hands off to ruver_qa.
   Use when implementing a Linear ticket or a PR_BUG fix.
 prompt_mode: full
+tools: Read, Write, Edit, Grep, Glob, Bash, Agent
 model: inherit
 permission_mode: default
 agents_md: true

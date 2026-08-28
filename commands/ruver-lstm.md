@@ -1,5 +1,5 @@
 ---
-description: Looks shit to me. Address review comments and merge conflicts on an existing PR. Verify, patch, 👍 + unslopped reply on every comment, dismiss CHANGES_REQUESTED. Never merge.
+description: Address review comments and merge conflicts on an existing PR. Verify, patch, 👍 + unslopped reply on every comment, dismiss CHANGES_REQUESTED. Never merge.
 argument-hint: "<PR | review | comment URL>"
 ---
 

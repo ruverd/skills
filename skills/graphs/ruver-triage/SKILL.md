@@ -1,5 +1,6 @@
 ---
 name: ruver-triage
+category: graph
 description: >
   Graph: investigate a QA failure, classify PR_BUG / EXISTING_BUG /
   NEW_BUG / NOT_A_BUG / BLOCKED, route via the bus. Use when

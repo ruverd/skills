@@ -5,6 +5,7 @@ description: >
   then hands potential product errors to ruver_triage. Use when the
   user asks to QA a PR or runs /ruver-qa.
 prompt_mode: full
+tools: Read, Write, Edit, Grep, Glob, Bash, Agent
 model: inherit
 permission_mode: default
 agents_md: true
