@@ -154,9 +154,11 @@ ensure_bin() {
 
 ensure_path_snippet() {
   local line='# ruver PATH'
-  local block
+  local block rc
+  case ":$PATH:" in
+    *":$BIN_DIR:"*) return 0 ;;
+  esac
   block=$(printf '%s\nexport PATH="%s:$PATH"\n' "$line" "$BIN_DIR")
-  local rc
   for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
     if [[ -f "$rc" ]] && grep -q "$line" "$rc"; then
       continue
