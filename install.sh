@@ -351,9 +351,27 @@ is_bootstrap() {
   return 0
 }
 
-cmd_bootstrap() {
-  echo "bootstrap not wired" >&2
+need_bin() {
+  command -v "$1" >/dev/null 2>&1 && return 0
+  echo "missing $1" >&2
+  echo "  curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash" >&2
   exit 1
+}
+
+cmd_bootstrap() {
+  need_bin git
+  need_bin curl
+  local repo
+  repo="$(config_get repo)"
+  if [[ -n "$repo" && -f "$repo/plugin.json" ]] && grep -q '"name": "ruver"' "$repo/plugin.json"; then
+    exec "$repo/install.sh" update --yes
+  fi
+  run mkdir -p "$(dirname "$MANAGED_REPO")"
+  if ! git -C "$MANAGED_REPO" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    git clone --branch main "$DEFAULT_ORIGIN" "$MANAGED_REPO"
+  fi
+  config_set_repo "$MANAGED_REPO" "$DEFAULT_ORIGIN"
+  exec "$MANAGED_REPO/install.sh" setup --yes
 }
 
 cmd_menu() {

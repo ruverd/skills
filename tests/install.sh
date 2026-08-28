@@ -213,6 +213,15 @@ echo "$out" | grep -q 'version' || fail "status missing version"
 echo "$out" | grep -q 'ok' || fail "status missing ok homes"
 ok status
 
+# PATH symlink must resolve to the repo (not treat ~/.local/bin as bootstrap).
+run_install setup >/dev/null
+bin="$TEST_HOME/.local/bin/ruver"
+assert_link "$bin"
+out="$(HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
+  XDG_DATA_HOME="$TEST_HOME/.local/share" "$bin" status)"
+echo "$out" | grep -q 'repo' || fail "status via PATH symlink failed"
+ok status-via-symlink
+
 set +e
 HOME="$TEST_HOME" "$INSTALL" --plugin >/tmp/ruver-plugin.out 2>/tmp/ruver-plugin.err
 got=$?
