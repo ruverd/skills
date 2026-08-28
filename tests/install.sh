@@ -29,6 +29,19 @@ echo "$out" | grep -q 'ruver setup' || fail "help missing ruver setup"
 echo "$out" | grep -q 'curl -fsSL' || fail "help missing curl one-liner"
 ok help
 
+# --- version ---
+want="$(sed -n 's/.*"version": "\([^"]*\)".*/\1/p' "$ROOT/plugin.json" | head -1)"
+[[ -n "$want" ]] || fail "could not read version from plugin.json"
+for flag in --version -V; do
+  set +e
+  out="$(HOME=/tmp "$INSTALL" "$flag" 2>&1)"
+  got=$?
+  set -e
+  assert_eq "$got" "0" "$flag exit"
+  assert_eq "$out" "ruver $want" "$flag output"
+done
+ok version
+
 set +e
 HOME=/tmp "$INSTALL" not-a-command >/dev/null 2>&1
 got=$?
@@ -71,6 +84,55 @@ if [[ -f "$SKIP_HOME/.zshrc" ]] && grep -q '# ruver PATH' "$SKIP_HOME/.zshrc"; t
 fi
 ok setup-path-skip-when-present
 
+# --- rc files: opt out, and say so when opting in ---
+NP_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-nopath.XXXXXX")"
+set +e
+out="$(HOME="$NP_HOME" XDG_CONFIG_HOME="$NP_HOME/.config" \
+  XDG_DATA_HOME="$NP_HOME/.local/share" "$INSTALL" setup --no-path 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "setup --no-path exit"
+if [[ -f "$NP_HOME/.zshrc" ]] && grep -q '# ruver PATH' "$NP_HOME/.zshrc"; then
+  fail "--no-path must not write a PATH block"
+fi
+grep -q 'export PATH' <<< "$out" || fail "--no-path should still print the export line"
+ok setup-no-path
+
+AN_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-announce.XXXXXX")"
+out="$(HOME="$AN_HOME" XDG_CONFIG_HOME="$AN_HOME/.config" \
+  XDG_DATA_HOME="$AN_HOME/.local/share" "$INSTALL" setup 2>&1)"
+grep -q "$AN_HOME/.zshrc" <<< "$out" || fail "setup must name the rc file it edits"
+grep -q '# ruver PATH' "$AN_HOME/.zshrc" || fail "default setup should write the PATH block"
+ok setup-announces-rc-edit
+
+# --- Windows: symlinks are the whole design, so prove we notice when they fail ---
+WIN_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-win.XXXXXX")"
+set +e
+out="$(MSYSTEM=MINGW64 HOME="$WIN_HOME" XDG_CONFIG_HOME="$WIN_HOME/.config" \
+  XDG_DATA_HOME="$WIN_HOME/.local/share" "$INSTALL" setup 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "Git Bash with working symlinks should still install"
+grep -qi 'symlink' <<< "$out" || fail "Git Bash run should mention symlinks"
+grep -qi 'wsl' <<< "$out" || fail "Git Bash run should point at WSL"
+ok setup-warns-on-git-bash
+
+NOSYM_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-nosym.XXXXXX")"
+set +e
+out="$(RUVER_FORCE_NO_SYMLINK=1 HOME="$NOSYM_HOME" \
+  XDG_CONFIG_HOME="$NOSYM_HOME/.config" \
+  XDG_DATA_HOME="$NOSYM_HOME/.local/share" "$INSTALL" setup 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "1" "setup must refuse when symlinks do not work"
+grep -qi 'symlink' <<< "$out" || fail "refusal should explain symlinks"
+assert_not "$NOSYM_HOME/.agents/skills/unslop"
+ok setup-refuses-without-symlinks
+
+rm -rf "$WIN_HOME" "$NOSYM_HOME"
+
+rm -rf "$NP_HOME" "$AN_HOME"
+
 DRY_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-dry.XXXXXX")"
 set +e
 out="$(HOME="$DRY_HOME" XDG_CONFIG_HOME="$DRY_HOME/.config" \
@@ -90,6 +152,44 @@ run_install setup >/tmp/ruver-setup2.out
 grep -q '^ok ' /tmp/ruver-setup2.out || fail "second setup has no ok lines"
 assert_link "$TEST_HOME/.agents/skills/unslop"
 ok setup-idempotent
+
+# --- host homes: only the ones that already exist, unless told otherwise ---
+SEL_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-sel.XXXXXX")"
+mkdir -p "$SEL_HOME/.claude"
+HOME="$SEL_HOME" XDG_CONFIG_HOME="$SEL_HOME/.config" \
+  XDG_DATA_HOME="$SEL_HOME/.local/share" "$INSTALL" setup >/dev/null
+assert_link "$SEL_HOME/.claude/skills/unslop"
+assert_link "$SEL_HOME/.agents/skills/unslop"
+assert_not "$SEL_HOME/.codex/skills"
+assert_not "$SEL_HOME/.cursor/skills"
+assert_not "$SEL_HOME/.grok/skills"
+ok setup-only-existing-homes
+
+ALL_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-all.XXXXXX")"
+HOME="$ALL_HOME" XDG_CONFIG_HOME="$ALL_HOME/.config" \
+  XDG_DATA_HOME="$ALL_HOME/.local/share" "$INSTALL" setup --all >/dev/null
+for h in claude grok cursor codex; do
+  assert_link "$ALL_HOME/.$h/skills/unslop"
+done
+ok setup-all-hosts
+
+ONE_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-one.XXXXXX")"
+HOME="$ONE_HOME" XDG_CONFIG_HOME="$ONE_HOME/.config" \
+  XDG_DATA_HOME="$ONE_HOME/.local/share" "$INSTALL" setup --only cursor >/dev/null
+assert_link "$ONE_HOME/.cursor/skills/unslop"
+assert_not "$ONE_HOME/.claude/skills"
+assert_not "$ONE_HOME/.grok/skills"
+ok setup-only-flag
+
+set +e
+out="$(HOME="$ONE_HOME" "$INSTALL" setup --only nope 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "1" "--only with an unknown host exits 1"
+grep -qi 'nope' <<< "$out" || fail "--only error should name the bad host"
+ok setup-only-unknown-host
+
+rm -rf "$SEL_HOME" "$ALL_HOME" "$ONE_HOME"
 
 # --- update: dirty abort, then clean fast-forward ---
 mini="$(mktemp -d "${TMPDIR:-/tmp}/ruver-mini.XXXXXX")"

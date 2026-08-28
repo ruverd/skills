@@ -38,7 +38,13 @@ graphs, not a dump of every third-party skill on a machine.
 curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash
 ```
 
-Needs `git` and `curl`. macOS, Linux, Windows Git Bash or WSL. No Node.
+Needs `git` and `curl`. macOS, Linux, and WSL. No Node.
+
+Install works by symlinking, and `ruver update` relies on those links to pick
+up new commits. Windows Git Bash turns `ln -s` into a silent copy unless
+Developer Mode is on and `MSYS=winsymlinks:nativestrict` is set, so `setup`
+checks whether symlinks actually work and refuses rather than installing
+something that will never update. WSL is the supported path on Windows.
 
 That clones the repo, flattens `skills/{graphs,engines,lib}/<name>` into
 `~/.agents/skills` (and Grok, Claude, Cursor, Codex), and puts `ruver`

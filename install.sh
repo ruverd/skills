@@ -25,11 +25,16 @@ Usage:
   ruver uninstall       Remove our symlinks
   ruver uninstall --purge
                         Also delete the managed clone
+  ruver version         Print the version
 
 Options:
-  --dry-run     Print actions, write nothing
-  --yes, -y     Skip confirmations
-  -h, --help    Show this help
+  --dry-run       Print actions, write nothing
+  --yes, -y       Skip confirmations
+  --only <hosts>  Comma-separated: claude, grok, cursor, codex
+  --all           Every host, even ones not installed here
+  --no-path       Do not touch ~/.zshrc or ~/.bashrc
+  -h, --help      Show this help
+  -V, --version   Print the version
 
 Examples:
   curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash
@@ -45,10 +50,14 @@ DRY=0
 YES=0
 PURGE=0
 UNINSTALL=0
+ONLY=""
+ALL=0
+NO_PATH=0
+ALL_HOSTS="claude grok cursor codex"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    setup|update|status|uninstall|menu|help)
+    setup|update|status|uninstall|menu|help|version)
       if [[ -n "$CMD" && "$CMD" != "$1" ]]; then
         echo "unknown arg: $1" >&2
         usage
@@ -59,6 +68,23 @@ while [[ $# -gt 0 ]]; do
       ;;
     --dry-run) DRY=1; shift ;;
     --yes|-y) YES=1; shift ;;
+    --all) ALL=1; shift ;;
+    --no-path) NO_PATH=1; shift ;;
+    --only)
+      shift
+      if [[ $# -eq 0 ]]; then
+        echo "--only needs a host: $ALL_HOSTS" >&2
+        exit 1
+      fi
+      for h in ${1//,/ }; do
+        case " $ALL_HOSTS " in
+          *" $h "*) ;;
+          *) echo "unknown host: $h (known: $ALL_HOSTS)" >&2; exit 1 ;;
+        esac
+      done
+      ONLY="$1"
+      shift
+      ;;
     --purge) PURGE=1; shift ;;
     --uninstall) CMD="uninstall"; UNINSTALL=1; shift ;;
     --plugin|--grok-plugin)
@@ -74,6 +100,10 @@ while [[ $# -gt 0 ]]; do
       fi
       usage
       exit 0
+      ;;
+    --version|-V)
+      CMD="version"
+      shift
       ;;
     *)
       echo "unknown arg: $1" >&2
@@ -158,6 +188,10 @@ ensure_path_snippet() {
   case ":$PATH:" in
     *":$BIN_DIR:"*) return 0 ;;
   esac
+  if [[ "$NO_PATH" -eq 1 ]]; then
+    echo "skip   shell rc files (--no-path). Add this yourself:"
+    return 0
+  fi
   block=$(printf '%s\nexport PATH="%s:$PATH"\n' "$line" "$BIN_DIR")
   for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
     if [[ -f "$rc" ]] && grep -q "$line" "$rc"; then
@@ -167,10 +201,62 @@ ensure_path_snippet() {
       echo "dry-run: append PATH to $rc"
       continue
     fi
+    # Say which file is being edited. This runs under curl | bash, where a
+    # silent write to a shell rc is not something to spring on anyone.
+    echo "rc     append PATH block to $rc"
     mkdir -p "$(dirname "$rc")"
     touch "$rc"
     printf '\n%s\n' "$block" >>"$rc"
   done
+}
+
+# Which hosts to touch. Default is the ones already on this machine, so we do
+# not create ~/.codex for someone who has never installed Codex. --only and
+# --all are explicit overrides; uninstall always sweeps every host so it can
+# clean up an install made under a different selection.
+selected_hosts() {
+  local h out=""
+  if [[ -n "$ONLY" ]]; then
+    echo "${ONLY//,/ }"
+    return 0
+  fi
+  if [[ "$ALL" -eq 1 || "$UNINSTALL" -eq 1 ]]; then
+    echo "$ALL_HOSTS"
+    return 0
+  fi
+  for h in $ALL_HOSTS; do
+    [[ -d "$HOME/.$h" ]] && out="$out $h"
+  done
+  echo "$out"
+}
+
+# Grok and Claude read agents/ and commands/; Cursor and Codex do not.
+host_has_agents() {
+  case "$1" in
+    claude|grok) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+install_for_hosts() {
+  local hosts h
+  hosts="$(selected_hosts)"
+  local skills_dirs=("$HOME/.agents/skills")
+  local agents_dirs=()
+  local commands_dirs=()
+  for h in $hosts; do
+    skills_dirs+=("$HOME/.$h/skills")
+    if host_has_agents "$h"; then
+      agents_dirs+=("$HOME/.$h/agents")
+      commands_dirs+=("$HOME/.$h/commands")
+    fi
+  done
+  echo "hosts  ${hosts:-(none detected; ~/.agents/skills only)}"
+  install_skills "${skills_dirs[@]}"
+  if [[ "${#agents_dirs[@]}" -gt 0 ]]; then
+    install_tree "$REPO/agents" "${agents_dirs[@]}"
+    install_tree "$REPO/commands" "${commands_dirs[@]}"
+  fi
 }
 
 cmd_setup() {
@@ -180,20 +266,10 @@ cmd_setup() {
   fi
   echo "repo    $REPO"
   echo
+  check_symlinks
   config_set_repo "$REPO"
   ensure_ruver_home
-  install_skills \
-    "$HOME/.agents/skills" \
-    "$HOME/.grok/skills" \
-    "$HOME/.claude/skills" \
-    "$HOME/.cursor/skills" \
-    "$HOME/.codex/skills"
-  install_tree "$REPO/agents" \
-    "$HOME/.grok/agents" \
-    "$HOME/.claude/agents"
-  install_tree "$REPO/commands" \
-    "$HOME/.grok/commands" \
-    "$HOME/.claude/commands"
+  install_for_hosts
   ensure_bin
   ensure_path_snippet
   echo
@@ -286,18 +362,7 @@ cmd_status() {
 
 cmd_uninstall() {
   UNINSTALL=1
-  install_skills \
-    "$HOME/.agents/skills" \
-    "$HOME/.grok/skills" \
-    "$HOME/.claude/skills" \
-    "$HOME/.cursor/skills" \
-    "$HOME/.codex/skills"
-  install_tree "$REPO/agents" \
-    "$HOME/.grok/agents" \
-    "$HOME/.claude/agents"
-  install_tree "$REPO/commands" \
-    "$HOME/.grok/commands" \
-    "$HOME/.claude/commands"
+  install_for_hosts
   if [[ -L "$BIN_LINK" ]]; then
     local t
     t="$(readlink "$BIN_LINK")"
@@ -353,6 +418,43 @@ print_home() {
 is_bootstrap() {
   [[ -f "$REPO/plugin.json" && -d "$REPO/skills" ]] && return 1
   return 0
+}
+
+# The whole install is symlinks: ruver update pulls the clone and every agent
+# home follows through the link. On Windows Git Bash without Developer Mode or
+# MSYS=winsymlinks:nativestrict, ln -s silently copies instead, so updates stop
+# propagating and nothing tells you. Test the capability rather than guessing
+# from the OS name.
+symlinks_work() {
+  if [[ "${RUVER_FORCE_NO_SYMLINK:-0}" = "1" ]]; then
+    return 1
+  fi
+  local probe target
+  probe="$(mktemp -d "${TMPDIR:-/tmp}/ruver-symprobe.XXXXXX")" || return 1
+  target="$probe/target"
+  : >"$target"
+  if ln -s "$target" "$probe/link" 2>/dev/null && [[ -L "$probe/link" ]]; then
+    rm -rf "$probe"
+    return 0
+  fi
+  rm -rf "$probe"
+  return 1
+}
+
+check_symlinks() {
+  if symlinks_work; then
+    if [[ -n "${MSYSTEM:-}" ]] || case "${OSTYPE:-}" in msys*|cygwin*) true ;; *) false ;; esac; then
+      echo "note   Git Bash detected. Symlinks work here, but they break without"
+      echo "       Developer Mode. WSL is the supported path on Windows."
+    fi
+    return 0
+  fi
+  echo "error  this filesystem cannot create symlinks." >&2
+  echo "       ruver installs by symlinking skills into your agent homes, and" >&2
+  echo "       ruver update relies on those links to pick up new commits." >&2
+  echo "       On Windows: use WSL, or enable Developer Mode and set" >&2
+  echo "       MSYS=winsymlinks:nativestrict in Git Bash." >&2
+  exit 1
 }
 
 need_bin() {
@@ -461,6 +563,15 @@ cmd_menu() {
 }
 
 main() {
+  if [[ "$CMD" == "version" ]]; then
+    if [[ -f "$REPO/plugin.json" ]]; then
+      echo "ruver $(plugin_version)"
+    else
+      echo "ruver (no checkout here; run: ruver status)" >&2
+      exit 1
+    fi
+    return
+  fi
   if is_bootstrap; then
     cmd_bootstrap
     return
@@ -472,6 +583,7 @@ main() {
     status) cmd_status ;;
     uninstall) cmd_uninstall ;;
     help) usage ;;
+    version) echo "ruver $(plugin_version)" ;;
     *) usage; exit 1 ;;
   esac
 }
@@ -574,7 +686,7 @@ install_skills() {
   done
 }
 
-if [[ ! -d "$REPO/skills" && "$CMD" != "" && "$CMD" != "help" ]]; then
+if [[ ! -d "$REPO/skills" && "$CMD" != "" && "$CMD" != "help" && "$CMD" != "version" ]]; then
   echo "missing $REPO/skills" >&2
   exit 1
 fi
