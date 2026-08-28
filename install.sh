@@ -235,7 +235,7 @@ cmd_update() {
   newv="$(plugin_version)"
   echo "version: $oldv $old -> $newv $new"
   echo "sha: $old -> $new"
-  cmd_setup
+  exec "$SELF" setup
 }
 
 cmd_status() {
@@ -317,7 +317,11 @@ cmd_uninstall() {
     echo "refusing --purge" >&2
     exit 1
   fi
-  if [[ "$YES" -ne 1 && -t 0 ]]; then
+  if [[ "$YES" -ne 1 ]]; then
+    if [[ ! -t 0 ]]; then
+      echo "--yes is required to --purge when stdin is not a TTY" >&2
+      exit 1
+    fi
     printf 'Delete %s ? [y/N] ' "$MANAGED_REPO"
     read -r ans
     case "$ans" in y|Y|yes) ;; *) echo "aborted."; return 0 ;; esac

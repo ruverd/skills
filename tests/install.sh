@@ -130,7 +130,19 @@ git -C "$mini" checkout -q -- skills/lib/unslop/SKILL.md
 ahead="$(mktemp -d "${TMPDIR:-/tmp}/ruver-ahead.XXXXXX")"
 trap 'rm -rf "$TEST_HOME" "$SKIP_HOME" "$mini" "${mini}.git" "$MINI_HOME" "$ahead"' EXIT
 git clone -q "${mini}.git" "$ahead"
-git -C "$ahead" -c user.email=t@t -c user.name=t commit --allow-empty -qm second
+# After pull, setup is re-exec'd from the new install.sh so CLI changes take effect.
+awk '
+  /^cmd_setup\(\) \{/ {
+    print
+    print "  echo NEW_SETUP_RAN"
+    next
+  }
+  { print }
+' "$ahead/install.sh" >"$ahead/install.sh.new"
+mv "$ahead/install.sh.new" "$ahead/install.sh"
+chmod +x "$ahead/install.sh"
+git -C "$ahead" add install.sh
+git -C "$ahead" -c user.email=t@t -c user.name=t commit -qm second
 git -C "$ahead" push -q origin main
 
 set +e
@@ -146,7 +158,15 @@ old_sha="$(grep -oE '[0-9a-f]{7,}' <<< "$ver" | head -1)"
 new_sha="$(grep -oE '[0-9a-f]{7,}' <<< "$ver" | tail -1)"
 [[ -n "$old_sha" && -n "$new_sha" && "$old_sha" != "$new_sha" ]] \
   || fail "update did not advance SHA ($ver)"
+grep -q NEW_SETUP_RAN /tmp/ruver-ff.out \
+  || fail "update did not re-exec new install.sh setup"
 ok update-clean
+
+# cmd_update must exec the pulled install.sh (DRY=1 returns before this exec).
+update_fn="$(sed -n '/^cmd_update()/,/^cmd_status()/p' "$INSTALL")"
+echo "$update_fn" | grep -q 'exec ' \
+  || fail "cmd_update must exec setup after pull"
+ok update-exec-setup
 
 # Linked worktree: .git is a file, so [[ -d repo/.git ]] is the wrong check.
 mini_wt="${mini}-wt"
@@ -197,6 +217,18 @@ mkdir -p "$man"
 git -C "$man" init -q
 printf 'repo=%s\norigin=%s\n' "$man" "https://github.com/ruverd/skills.git" \
   >"$TEST_HOME/.config/ruver/config"
+set +e
+HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
+  XDG_DATA_HOME="$TEST_HOME/.local/share" \
+  "$INSTALL" uninstall --purge </dev/null >/tmp/ruver-purge-notty.out 2>/tmp/ruver-purge-notty.err
+got=$?
+set -e
+assert_eq "$got" "1" "purge without --yes on non-TTY must fail"
+[[ -d "$man" ]] || fail "purge without --yes deleted managed repo"
+grep -qi -- '--yes' /tmp/ruver-purge-notty.err /tmp/ruver-purge-notty.out \
+  || fail "purge without --yes should say --yes is required"
+ok purge-requires-yes-without-tty
+
 HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
   XDG_DATA_HOME="$TEST_HOME/.local/share" \
   "$INSTALL" uninstall --purge --yes
