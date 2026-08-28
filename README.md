@@ -135,7 +135,7 @@ opens `src/` itself.
 | Product | target repo `AGENTS.md` + [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, sibling repos |
 
 A graph that says `spawn_subagent`, `model: grok-4.6`, or a company's
-GitHub handles has leaked. Host APIs stay in HOST.md. Product policy
+GitHub handles has leaked. Host APIs stay in `ruver-host`. Product policy
 stays in the repo you are in.
 
 Full write-up: [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md).
@@ -235,16 +235,17 @@ main thread**. Do not spawn those. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.
 ```text
 skills/                         # this repo
   README.md
-  HOST.md                       # harness primitives
   install.sh
   plugin.json
   docs/GRAPH_ENGINEER.md
   docs/ARCHITECTURE.md
   docs/commands/                # one page per slash command
-  skills/
-    graphs/                     # main-thread graph engineer
-    engines/                    # delivery + review engines
-    lib/                        # bundled primitives (unslop, grill, tdd, …)
+  skills/                       # one flat directory per skill
+    ruver-developer/            # category: graph
+    ruver-feature-delivery/     # category: engine
+    ruver-host/                 # category: lib, harness primitives
+    unslop/                     # category: lib
+    …
   agents/                       # fd workers + graph roles
   commands/                     # slash aliases
 ```
@@ -268,7 +269,7 @@ Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 
 1. Folder under `skills/<name>/` with `category: graph | engine | lib`.
 2. Relative links only. No `~/.claude`, `~/.grok`, `~/.codex`.
-3. Host primitives → HOST.md. Product policy → [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) plus the target repo.
+3. Host primitives → [ruver-host](skills/ruver-host/SKILL.md). Product policy → [PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md) plus the target repo.
 4. Add the path to `plugin.json`, then `ruver setup` (or `./install.sh setup`) and commit.
 
 ```bash

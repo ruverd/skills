@@ -2,13 +2,10 @@
 name: ruver-lstm
 category: graph
 description: >
-  Graph: author-side of review. Ingest a PR / review /
-  inline thread / issue-comment URL, verify with receiving-code-review,
-  patch should-fix on the same branch, always rebase merge conflicts,
-  then 👍 + unslopped reply on every comment, resolve threads,
-  dismiss CHANGES_REQUESTED, re-request. Use when /lstm,
-  /ruver-lstm, CHANGES_REQUESTED, review comments, or
-  LSTM_REQUEST.
+  Graph: author-side of review. Ingest a PR, review, inline thread, or
+  issue-comment URL, verify with receiving-code-review, patch should-fix on the
+  same branch, and reply on every comment. Use when /lstm, /ruver-lstm,
+  CHANGES_REQUESTED, or LSTM_REQUEST.
 argument-hint: "<PR | review | comment URL> [--force]"
 ---
 

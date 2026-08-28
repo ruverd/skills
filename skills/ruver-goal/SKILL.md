@@ -3,8 +3,8 @@ name: ruver-goal
 category: graph
 description: >
   Drive developer → CI green → QA comment+evidence across turns with
-  schedule_wake (HOST.md). Use when /goal, /ruver-goal, or after
-  a draft PR is opened and CI is still pending.
+  schedule_wake. Use when /goal or /ruver-goal, or after a draft PR is
+  opened and CI is still pending.
 argument-hint: "<ticket | PR url | status | cancel>"
 ---
 

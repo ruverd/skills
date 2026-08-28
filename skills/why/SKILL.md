@@ -1,7 +1,11 @@
 ---
 name: why
 category: lib
-description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, long-form docs, real-time chat, infrastructure observability, error tracking, product analytics warehouse) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior."
+description: >
+  Use for 'why does X work this way', 'why we picked Y', design rationale,
+  regressions, postmortems, or data-backed thresholds. Queries every available
+  evidence MCP in parallel and returns a cited read on decisions and tradeoffs.
+  Use how for runtime behavior.
 ---
 
 # Why
@@ -123,8 +127,8 @@ Subagent config (each):
 
 Each investigator gets:
 1. The base prompt from `references/investigator-prompt.md`
-2. The category playbook `references/sources/<source>.md` for the selected MCP, adapted from the examples in `references/source-playbook.md`
-3. The cross-cutting `references/sources/incident-postmortem.md` **if the target code looks defensive** (null checks, retry logic, timeout handling, rate limiting, feature flags, egress guards, OOM handlers)
+2. The category playbook `references/source-<source>.md` for the selected MCP, adapted from the examples in `references/source-playbook.md`
+3. The cross-cutting `references/source-incident-postmortem.md` **if the target code looks defensive** (null checks, retry logic, timeout handling, rate limiting, feature flags, egress guards, OOM handlers)
 4. The code anchor from Step 2 (file paths, symbols, commit hashes, PR numbers, ticket IDs)
 5. The user's original question
 
@@ -225,6 +229,6 @@ After the Sources Consulted block, if the user's `why` question is a precursor t
 
 - `references/epistemics.md`. Confidence tiers and phrasing guide. The synthesizer must follow it.
 - `references/investigator-prompt.md`. Base prompt template for investigator subagents.
-- `references/source-playbook.md`. Index pointing at the category playbooks below.
-- `references/sources/*.md`. One self-contained example playbook per category, plus cross-cutting `incident-postmortem.md`. Give an investigator the single file that matches its category and adapt it to the available MCP.
+- `references/source-playbook.md`. Index pointing at the category playbooks beside it.
+- `references/source-<category>.md`. One self-contained example playbook per category, plus cross-cutting `incident-postmortem.md`. Give an investigator the single file that matches its category and adapt it to the available MCP.
 - `references/synthesizer-prompt.md`. Prompt template for the synthesizer subagent, including the output format.

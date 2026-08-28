@@ -2,12 +2,10 @@
 name: ruver-feature-delivery
 category: engine
 description: >
-  Use when delivering a ticket, bug, or chore end-to-end
-  (implementation through draft PR with CI green) via
-  /ruver-feature-delivery or /ruver-fd, or when resuming a run
-  whose HANDOFF.md exists under $RUVER_ROOT/.ruver-feature-delivery/.
-  Spine: grill-with-docs → spec → tickets → implement(tdd) → review.
-  Chat follows ruver-memory. Unslop always. Never write .ruver-* inside a repo.
+  Use when delivering a ticket, bug, or chore end-to-end (implementation
+  through draft PR with CI green) via /ruver-feature-delivery or /ruver-fd, or
+  when resuming a run whose HANDOFF.md exists. Spine: grill -> spec -> tickets
+  -> implement(tdd) -> review.
 ---
 
 # Ruver feature delivery

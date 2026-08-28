@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Host and vendor specifics belong in HOST.md, adapters and agent contracts.
+"""Host and vendor specifics belong in ruver-host, adapters and agent contracts.
 A skill that names a harness tool, a model id or a person is no longer portable."""
 import os
 import re
@@ -20,6 +20,12 @@ RULES = [
         "a real person's handle; use a placeholder such as octocat",
         re.compile(r"izaiasneto4"),
         lambda rel: False,
+    ),
+    (
+        "HOST.md is not a file any more; name the skill ruver-host",
+        re.compile(r"HOST\.md"),
+        # The changelog has to be able to name the file it moved.
+        lambda rel: rel == "CHANGELOG.md",
     ),
     (
         "harness MCP tool name",

@@ -104,7 +104,7 @@ Never opens a new PR. Draft stays draft.
 
 ## Goal loop
 
-`/ruver-goal` uses `schedule_wake` (HOST.md) until the draft PR is
+`/ruver-goal` uses `schedule_wake` (`ruver-host`) until the draft PR is
 CI-green, MERGEABLE, and has a QA comment with evidence on the head
 SHA. CI is often longer than a tool timeout, so the loop polls
 instead of `gh pr checks --watch`.

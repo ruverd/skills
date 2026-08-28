@@ -1,7 +1,10 @@
 ---
 name: no-comments
 category: lib
-description: "Spawn Comment Sicko, fix accepted findings, and offer encodings for claimed constraints."
+description: >
+  Spawn a comment auditor over the diff, fix the findings you accept, and offer
+  to encode any constraint a comment only claims. Use for /no-comments, or when
+  a review flags comment noise or stale comments.
 disable-model-invocation: true
 ---
 

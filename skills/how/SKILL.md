@@ -1,7 +1,11 @@
 ---
 name: how
 category: lib
-description: "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions (\"where should this live\", \"which package owns this\", \"is this the right layer\"). Explains subsystem architecture, runtime flow, onboarding mental models. Can critique architecture. Use why for motivation."
+description: >
+  Use for "how does X work", code walkthroughs before changing something, and
+  placement / ownership / layering questions ("where should this live",
+  "which package owns this"). Explains subsystem architecture and runtime
+  flow. Use why for motivation.
 ---
 
 # How

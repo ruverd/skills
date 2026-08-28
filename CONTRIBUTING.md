@@ -12,7 +12,7 @@ can be executed unambiguously by a model that has never seen this repo.
 | `agents/` | Worker and role contracts. Not skills |
 | `commands/` | Slash aliases. Each points at one skill and defines no steps |
 | `docs/` | Human-facing pages, one per command |
-| `HOST.md` | Harness primitives. Anything host-specific belongs here |
+| `skills/ruver-host/` | Harness primitives. Anything host-specific belongs here |
 | `tests/` | Two gates, described below |
 
 Read [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md) before adding a graph.
@@ -34,10 +34,10 @@ installing still needs only `git` and `curl`.
    that says *when* to use it, and `category`.
 2. Relative links only, and none that leave the skill's own directory. After
    install every skill is a sibling, so `../<other-skill>/FILE.md` resolves the
-   same in git and on disk. A link like `../../../HOST.md` only works on hosts
+   same in git and on disk. A link like `../../docs/ARCHITECTURE.md` only works on hosts
    that follow symlinks with the kernel and breaks on hosts that normalise the
    path string first.
-3. Host primitives go in `HOST.md`. Product policy goes in `PRODUCT.md` and the
+3. Host primitives go in `ruver-host`. Product policy goes in `PRODUCT.md` and the
    target repo. Never hardcode `~/.claude`, `~/.grok`, `~/.cursor`, `~/.codex`,
    a model id, or a company's handles.
 4. List the path in `plugin.json` and `.claude-plugin/plugin.json`. The Grok

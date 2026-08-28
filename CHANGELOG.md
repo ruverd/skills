@@ -4,6 +4,42 @@ Notable changes per release. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html), pre-1.0.
 
+## [Unreleased]
+
+### Added
+
+- `tests/repo.sh` gates the discovery block: the sum of every skill's name and
+  description, which every host pastes into the system prompt on every turn.
+  Codex caps that block at 8,000 characters and silently shortens or drops
+  skills past it. The repo was at 8,934; it is now 7,587.
+- `tests/repo.sh` holds reference files one directory below `SKILL.md`, so a
+  partial read of a skill shows an agent everything it can load.
+- `tests/repo.sh` reads the version out of `.codex-plugin/marketplace.json` and
+  `.cursor-plugin/marketplace.json`, and checks the marketplace and plugin names
+  across all four marketplaces. Those two files carried no version at all.
+- `version` in `.codex-plugin/marketplace.json` and
+  `.cursor-plugin/marketplace.json`.
+
+### Changed
+
+- Twenty-two skill descriptions are shorter. Process detail moved into the
+  bodies; the trigger phrases stayed, because that is what routing reads.
+- `skills/why/references/sources/*.md` are now `references/source-*.md`.
+
+### Fixed
+
+- `docs/GRAPH_ENGINEER.md` step 2 still taught the pre-flatten link layout
+  (`../../engines/<name>/...`). A contributor following it wrote links that
+  leave the skills root.
+- The README layout tree still showed `skills/graphs`, `skills/engines` and
+  `skills/lib`, contradicting the paragraph under it.
+- Prose across the docs and four skills still called the host contract
+  `HOST.md`, a file that no longer exists. `tests/repo.sh` now fails on the name.
+- `ruver-developer` described itself as delivering a *Linear* ticket, which the
+  tracker genericization missed because the description is not a state field.
+- `how` and `diagnose` carried `\"` inside a folded YAML scalar, so literal
+  backslashes reached the skill picker.
+
 ## [0.5.0] - 2026-08-28
 
 ### Added

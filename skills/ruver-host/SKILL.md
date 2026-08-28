@@ -2,11 +2,10 @@
 name: ruver-host
 category: lib
 description: >
-  Host contract. Maps the primitives graphs name (load_skill, spawn_worker,
-  worktree, schedule_wake, session_model) onto the harness in front of you, and
-  lists the optional MCP capabilities with their fallbacks. Load when a node
-  mentions a primitive, when wiring a new harness, or when a graph needs to know
-  how this host spawns a child or wakes later.
+  Host contract: maps the primitives graphs name (load_skill, spawn_worker,
+  worktree, schedule_wake, session_model) onto this harness, with fallbacks for
+  the optional MCP capabilities. Load when a node names a primitive or a new
+  harness needs wiring.
 ---
 
 # Host contract
