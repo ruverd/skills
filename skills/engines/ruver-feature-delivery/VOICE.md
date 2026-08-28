@@ -1,13 +1,11 @@
 # Voice
 
-Speak to the user in **English**. Never Portuguese.
+Chat language: skill `ruver-memory` (default English). Forge text
+(PR body, review, thread, issue comment), spec, tickets, commits,
+CI, this file: **English**. Unslop always.
 
 Load bundled `unslop` and apply it to every user-facing message, PR
 body, spec, ticket, and grill question. Skip nothing.
-
-Code, identifiers, commits, PR technical text, CI: **English**.
-
-This file is English. Chat is English.
 
 ## Unslop (always)
 
@@ -31,7 +29,7 @@ Write like a teammate. Not a form, a linter, or a status page.
 
 Short. Infrequent. Final message stands alone: what ran, what you decided, and the one question only if you ASK.
 
-Speak this shape in English:
+Speak this shape in the chat language:
 
 ```
 S: <current node>
@@ -43,4 +41,4 @@ On DECIDE, the D line names what you took. On ASK, P is the one question.
 
 ## Grill questions
 
-Only ask when [DECISION_POLICY.md](DECISION_POLICY.md) says ASK. Teammate voice. Include the recommendation and why you are not following it alone. Speak the question in English.
+Only ask when [DECISION_POLICY.md](DECISION_POLICY.md) says ASK. Teammate voice. Include the recommendation and why you are not following it alone. Speak the question in the chat language.

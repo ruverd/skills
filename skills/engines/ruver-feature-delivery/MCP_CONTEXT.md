@@ -96,7 +96,8 @@ I could not reach the MCP needed to continue.
 2. Run again: `/ruver-fd <same goal>`
 ```
 
-Speak that block in English. Without this message and without `result=blocked`, the run is **invalid**.
+Speak that block in the chat language (`ruver-memory`). Without this
+message and without `result=blocked`, the run is **invalid**.
 
 ## Playbooks per source
 
@@ -162,7 +163,7 @@ For any other connected MCP (Slack, Jira, Confluence, …):
 ## Execution order (node `mcp_context`)
 
 ```
-1. Discover repo (PRODUCT.md) → STATE forge/tracker/pkg/cmds/scope
+1. Discover repo (PRODUCT.md) → STATE forge/tracker/pkg/cmds/scope/assignee/reviewers
 2. Detect refs (goal + user)
 3. For each needed source:
      a. pre-check MCP or CLI accessible?

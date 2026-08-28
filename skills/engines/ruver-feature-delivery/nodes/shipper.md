@@ -19,17 +19,24 @@ Then the orchestrator runs **ci_watch** if a PR/MR exists.
 5. Commit (cite ticket id if any). **No Co-Authored-By, no "Generated with", no trailers.**
 6. Push (`-u`, no force).
 7. Draft PR/MR with the ticket link (body via repo `pr-description` skill if it exists).
-8. **Reviewers + assignee** per PRODUCT.md.
+8. **Reviewers + assignee** per PRODUCT.md §6 (re-read at PR open).
    ```bash
    ME=$(gh api user --jq .login)   # or glab equivalent
    gh pr create --draft --title "..." --body "..." \
      --assignee "${ASSIGNEE:-$ME}"
+   # only if reviewers_status=confirmed:
+   # gh pr edit "$PR" --add-reviewer "$LOGIN"   # one login per call
    ```
-   One failed reviewer request must not block the rest. Never pass
-   `git user.name` to `--assignee`.
-9. STATE: PR/MR URL; `ci.status: pending`.
+   Request only `confirmed`. `proposed` / `missing`: still open the
+   PR; orchestrator asks once (PRODUCT.md). One failed reviewer
+   request must not block the rest. Never pass `git user.name` to
+   `--assignee`.
+9. STATE: PR/MR URL; `ci.status: pending`; `reviewers` /
+   `reviewers_status` from PRODUCT.md §6.
 10. **Hand off to ci_watch** when a PR/MR exists.
-11. Short English summary: "PR open; waiting on CI green to deliver."
+11. Chat summary (`ruver-memory`): PR open; waiting on CI green.
+    If `reviewers_status` is `proposed` or `missing`, ask the one
+    PRODUCT.md question in the same turn. Do not wait to start CI.
 
 ## Done
 

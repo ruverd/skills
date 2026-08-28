@@ -7,6 +7,7 @@ install required.
 | Skill | Loaded by |
 |---|---|
 | `unslop` | all user-facing / PR text |
+| `ruver-memory` | admit of every graph; `/memory`; PRODUCT.md reviewers |
 | `receiving-code-review` | `/lstm` verify |
 | `grill-with-docs` / `grill-me` | formats + grill methodology (`GRILL.md` is the adapted loop) |
 | `how` / `why` | grill, diagnose, review |

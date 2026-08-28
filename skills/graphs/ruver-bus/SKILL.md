@@ -52,5 +52,5 @@ one general-purpose worker + worktree ([JOBS.md](JOBS.md),
 
 ## Chat
 
-Short English: `S: bus <from>→<to> <type>` · `P: active graph` ·
-`qa_active` / queue.
+Short, chat language (`ruver-memory`): `S: bus <from>→<to> <type>` ·
+`P: active graph` · `qa_active` / queue.

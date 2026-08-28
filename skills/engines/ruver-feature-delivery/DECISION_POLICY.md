@@ -1,6 +1,7 @@
 # Decision policy
 
 Talk to the user **as a last resort**. Almost every call is **DECIDE**.
+Chat language: `ruver-memory`. Forge text stays English.
 
 ASK only when **both** are true:
 
@@ -14,8 +15,8 @@ Importance alone is not enough. Uncertainty on a small call is not enough. Pick 
 | Mode | When | Action |
 |---|---|---|
 | **DECIDE** | Default. You have a recommendation you can defend, or the call is not that important | Choose, log, continue. Do not wait. |
-| **ASK** | Last resort: very important **and** high uncertainty | One question in English. Show the recommendation. Wait. Then continue. |
-| **ESCALATE** | Loops exhausted, missing critical MCP, cannot run the graph | Freeze. Summarize in English. Wait. |
+| **ASK** | Last resort: very important **and** high uncertainty | One question in the chat language. Show the recommendation. Wait. Then continue. |
+| **ESCALATE** | Loops exhausted, missing critical MCP, cannot run the graph | Freeze. Chat summary in the chat language. Linear/PR notes stay English. Wait. |
 
 Before ASK, spend the lookup: `how` / `why` / Linear / neighbor files / a throwaway prototype. If that produces a rec you would ship, **DECIDE**.
 
@@ -50,9 +51,9 @@ TDD looking impossible without a redesign: ASK the redesign. Do not skip TDD.
 
 ## How to ASK
 
-English. **One question.** Then `waiting_user`. After the answer, DECIDE the rest. Do not restart.
+Chat language. **One question.** Then `waiting_user`. After the answer, DECIDE the rest. Do not restart.
 
-Shape (speak this in English):
+Shape (speak this in the chat language):
 
 ```
 Q: <only the tie lookup did not break>
@@ -97,7 +98,7 @@ Also append `decisions.tsv` when grilling. Chat a short rollup of auto-decisions
 ## Escalate
 
 1. STATE `status: escalated`. No new dispatch.
-2. English summary: PR / ticket / red checks.
+2. Chat summary: PR / ticket / red checks. Linear comment if any: English.
 3. Optional Linear comment with the same summary.
 4. End the turn. Resume at the named node.
 

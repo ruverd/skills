@@ -71,8 +71,8 @@ The wake prompt is in the skill's `LOOP.md`. It must `load_skill` by
 | Cursor | `/ruver-developer` |
 
 Short command aliases (Grok / Claude, via `commands/`): `/developer`,
-`/reviewer`, `/lstm`, `/qa`. Same skill. Skill folder names stay
-`ruver-*`.
+`/reviewer`, `/lstm`, `/qa`, `/memory`. Same skill. Skill folder names
+stay `ruver-*`. `/memory` is `ruver-memory` (lib), not a graph.
 
 ## Disk
 
@@ -89,5 +89,6 @@ Claude, Codex, Grok, and Cursor on one machine **share** that tree.
 
 Reviewers, assignee, sibling repos, test command, tracker, design
 system: [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md)
-plus the **current repo** (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING`).
+plus the **current repo** (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING`)
+plus `ruver-memory` (confirmed reviewers, chat language).
 Do not bake a company's GitHub handles or repo names into a graph node.

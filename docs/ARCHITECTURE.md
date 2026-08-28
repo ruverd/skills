@@ -112,5 +112,5 @@ instead of `gh pr checks --watch`.
 ## Invariants
 
 - Never merge. Mark the PR ready only after QA PASS.
-- Chat with the user in English. Always apply bundled `unslop`. Never Portuguese.
+- Chat follows `ruver-memory` (default English). Forge text stays English. Unslop always.
 - ASK the user only as a last resort.

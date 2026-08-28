@@ -12,4 +12,4 @@ Follow **`../skills/graphs/ruver-developer/SKILL.md`** in full.
 **Args:** `$ARGUMENTS`
 
 Parse ARGS first. Delivery → `/ruver-feature-delivery`. Then gates. Then `ruver_qa`.
-ASK last resort. User-facing chat in English. Unslop always. Never merge. Ready only after QA PASS.
+ASK last resort. Chat: `ruver-memory`. Unslop always. Never merge. Ready only after QA PASS.

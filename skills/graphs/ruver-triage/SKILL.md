@@ -14,10 +14,10 @@ Not a ticket bot. Use the session model; high effort if the host
 exposes it ([HOST.md](../../../HOST.md)).
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
-bus PROTOCOL.md ·
+bus PROTOCOL.md · `ruver-memory` ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
-Chat English. Unslop always. PR link required. Init `.ruver-triage/STATE.md`. Walk GRAPH.
+Chat: `ruver-memory`. Unslop always. PR link required. Init `.ruver-triage/STATE.md`. Walk GRAPH.
 Classify **each** finding. `NEW_BUG` → Linear ticket (LINEAR.md).
 `PR_BUG` → `TRIAGE_RESULT` + pop to QA. Do **not** switch to
 developer. Do **not** spawn `ruver_developer`.

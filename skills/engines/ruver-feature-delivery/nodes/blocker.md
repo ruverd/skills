@@ -40,4 +40,4 @@ advanced_slices: [...]
 - Linear MCP only (not orca linear).
 - Draft is **never** empty: description with dependency + contract.
 - Do not implement the blocked part "by feel".
-- Speak in English: tell the user what is waiting and the draft link.
+- Chat (`ruver-memory`): tell the user what is waiting and the draft link. Linear comment stays English.

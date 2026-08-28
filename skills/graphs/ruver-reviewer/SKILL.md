@@ -10,10 +10,10 @@ argument-hint: "<PR url | owner/repo#N | branch>"
 
 # Ruver Reviewer (graph)
 
-Orchestrator. Never merge. Chat English. Unslop always.
+Orchestrator. Never merge. Chat: `ruver-memory`. Unslop always.
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
-bus PROTOCOL.md · skill `ruver-code-review` ·
+bus PROTOCOL.md · skill `ruver-code-review` · `ruver-memory` ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
 Init `.ruver-reviewer/STATE.md`. Walk GRAPH (**admit** first).

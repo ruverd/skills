@@ -21,7 +21,7 @@ Never merge. Same PR. Same branch. Draft stays draft. No new PR.
 [STATE.schema.md](STATE.schema.md) ·
 [HOST.md](../../../HOST.md) ·
 `receiving-code-review` ·
-`unslop` ·
+`unslop` · `ruver-memory` ·
 [GITHUB.md](references/GITHUB.md) ·
 bus [PROTOCOL.md](../ruver-bus/PROTOCOL.md) ·
 [DISK.md](../ruver-bus/DISK.md) ·
@@ -34,9 +34,9 @@ Orchestrator does **not** write product code. **patch** spawns
 `ruver-fd-coder` (TDD). Grill only when the fix is complicated.
 ASK last resort: [DECISION_POLICY.md](../../engines/ruver-feature-delivery/DECISION_POLICY.md).
 
-User-facing chat in English. Unslop always. Every GitHub reply
-(thread, skip reason, COMMENT review, dismiss message) is rewritten
-with bundled `unslop` before POST. Never POST the first draft.
+Chat: `ruver-memory`. Unslop always. Every GitHub reply
+(thread, skip reason, COMMENT review, dismiss message) is English,
+rewritten with bundled `unslop` before POST. Never POST the first draft.
 
 Reply is not optional. Every analyzed comment gets 👍 and a thread
 reply. Then dismiss `CHANGES_REQUESTED`. Then re-request if a fix

@@ -22,7 +22,7 @@ Follow:
 5. Prefer BE → FE when a new API contract is required.
 6. Ticket context from MCP Linear files already in STATE — do not use `orca linear`.
 7. Update STATE with worktree paths, worker ids, PR URLs.
-8. No auto-merge. Chat summary in English.
+8. No auto-merge. Chat summary: `ruver-memory`.
 
 Do not implement product code yourself; workers do. You coordinate.
 

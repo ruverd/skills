@@ -53,7 +53,7 @@ on this machine is **one slot**.
 3. If main is **busy** → `lane=worker`:
    - Create a worktree ([Worktree](#worktree)).
    - Spawn **one** `general-purpose` subagent ([Worker](#worker)).
-   - Record `worktree`, `worker_id`. Chat English: job id + path.
+   - Record `worktree`, `worker_id`. Chat (`ruver-memory`): job id + path.
    - **Do not** leave the graph that already owns main.
 
 Foreground job keeps `.ruver-developer/STATE.md` (or reviewer / lstm).

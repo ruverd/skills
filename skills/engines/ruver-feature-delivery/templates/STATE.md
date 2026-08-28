@@ -16,6 +16,9 @@ autonomy: smart
 open_pr: true
 tdd: required
 chat_language: en
+assignee: ""
+reviewers: ""
+reviewers_status: ""
 work_kind: ""
 path: ""
 scope: ""
@@ -75,6 +78,7 @@ Index: `.ruver-feature-delivery/mcp-sources.md`
 - **tracker:** linear | github_issues | gitlab | jira | none
 - **pkg / cmds:**
 - **qa_tool:** playwright | cypress | browser | http | none
+- **assignee / reviewers / reviewers_status:** (PRODUCT.md §6)
 - **ID / URL:**
 - **Branch:**
 - **Context file:**

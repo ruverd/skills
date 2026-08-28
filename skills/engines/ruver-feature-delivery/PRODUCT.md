@@ -2,6 +2,7 @@
 
 Graphs never name a company. Run this at `mcp_context`. Write STATE.
 Later nodes **read STATE**. They do not re-guess unless files appeared.
+Ship re-reads §6 (assignee / reviewers).
 
 If two options fit, pick what the **neighbor file already does**. Log DECIDE.
 ASK only when the ticket cannot be done without a fact you cannot discover.
@@ -103,11 +104,60 @@ record it. HTTP record is enough on `qa_tool=http`.
 
 ## 6. Assignee and reviewers
 
+Resolve **at PR open** (ship). mcp_context may prefill STATE. Shipper
+re-reads this section. Do not invent handles. Never request `$ME` or a
+bot.
+
 **Assignee:** `AGENTS.md` if listed, else forge user (`gh api user --jq .login`
 or `glab api user`). Never `git config user.name`.
 
-**Reviewers:** `AGENTS.md` if listed. Else `CODEOWNERS` on PR open.
-Do not invent handles.
+**Reviewers:**
+
+| Order | Source | `reviewers_status` |
+|---|---|---|
+| 1 | `AGENTS.md` listed reviewers | `confirmed` |
+| 2 | `CODEOWNERS` file with owners for the changed paths | `confirmed` |
+| 3 | `$RUVER_ROOT/memory.md` `## Product` reviewers (`ruver-memory`) | `confirmed` |
+| 4 | Merged-PR history (below) | `proposed` |
+| 5 | Still empty | `missing` |
+
+No `CODEOWNERS` file (`CODEOWNERS`, `.github/CODEOWNERS`,
+`docs/CODEOWNERS`), or none matching: skip row 2.
+
+Shipper requests only `confirmed` (`gh pr edit --add-reviewer` /
+`glab mr update --reviewer`, one failure must not block the rest).
+Open the draft PR anyway if `proposed` or `missing`. Do not block CI.
+
+Orchestrator, after ship, asks **one** question (chat language from
+`ruver-memory`). Next user message writes project `## Product`
+(that is confirmation) and adds the reviewers to the open PR. If
+they do not answer this turn, append the question to project
+`## Open`. After confirmation, DECIDE from memory. This ASK is
+last-resort: wrong humans on the PR is hard to reverse, and the list
+is uncertain until then.
+
+### History probe (GitHub)
+
+One call. Last 20 merged PRs. Count `APPROVED` + `CHANGES_REQUESTED`
+per human login. Drop the PR author, `$ME`, and bots (`[bot]`,
+dependabot, renovate, copilot, codecov). Top 3 → `proposed`.
+
+```bash
+gh api graphql -F owner=OWNER -F name=REPO -f query='
+query($owner:String!,$name:String!) {
+  repository(owner:$owner, name:$name) {
+    pullRequests(states: MERGED, last: 20,
+                 orderBy: {field: UPDATED_AT, direction: DESC}) {
+      nodes {
+        author { login }
+        reviews(last: 20) { nodes { state author { login } } }
+      }
+    }
+  }
+}'
+```
+
+GitLab: same idea on merged MRs (`glab api`). Same filters.
 
 Tracker **NEW_BUG** assignee: the session user on that tracker
 (email match). Never a hardcoded person.

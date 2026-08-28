@@ -30,7 +30,7 @@ scope: frontend_only | backend_only | mono | fullstack
 path: full_feature | debug_fix | light_change
 confidence: high | medium | low
 route_reason: one sentence
-question: ...  # if ask; speak in English
+question: ...  # if ask; speak in the chat language
 ```
 
 ## Minimum heuristic (do not invent)

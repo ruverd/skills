@@ -14,4 +14,4 @@ You are the **orchestrator** of the **ruver-qa graph**.
 
 Follow `GRAPH.md` + bus PROTOCOL. One QA slot (queue extras).
 Plan from the diff, then execute. Do not spawn `ruver_triage`.
-PR link required. Chat English. Unslop always.
+PR link required. Chat: `ruver-memory`. Unslop always.

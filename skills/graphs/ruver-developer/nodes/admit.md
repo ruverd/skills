@@ -4,6 +4,7 @@
 **Capability:** write JOBS, maybe spawn worker
 
 Follow `../../ruver-bus/JOBS.md`.
+Load `ruver-memory` (read both files). Chat follows that skill.
 
 1. Init `.ruver-bus/JOBS.md` if missing.
 2. `job_id` = `dev-<ticket>` or `dev-pr-<n>`.

@@ -6,16 +6,18 @@
 
 ## Mission
 
-1. Discover this repo ([PRODUCT.md](../PRODUCT.md)).
+1. Discover this repo ([PRODUCT.md](../PRODUCT.md)). Load `ruver-memory`.
 2. Verify access for **detected** sources only.
-3. If a **critical** source fails → English error and `blocked`. No inventing.
+3. If a **critical** source fails → error in the chat language and `blocked`. No inventing.
 
 [PRODUCT.md](../PRODUCT.md) · [MCP_CONTEXT.md](../MCP_CONTEXT.md) ·
 [LINEAR.md](../LINEAR.md) when `tracker: linear`
 
 ## Steps
 
-1. Discover forge, tracker, toolchain, topology, QA tool. Write STATE.
+1. Discover forge, tracker, toolchain, topology, QA tool, assignee,
+   reviewers (PRODUCT.md §6). Write STATE (`reviewers`,
+   `reviewers_status`, `assignee`, `chat_language` from `ruver-memory`).
 2. Scan the goal for IDs/URLs.
 3. For each **detected** source:
    - Pre-check: MCP or CLI (`gh` / `glab`) available?
@@ -31,7 +33,7 @@
 result: ok | partial | blocked | skipped
 mcp_gate: passed | passed_partial | failed
 forge / tracker / pkg / typecheck_cmd / test_cmd / qa_tool / scope
-error: ...   # required if blocked; speak in English
+error: ...   # required if blocked; speak in the chat language
 ```
 
 ## Runtime note

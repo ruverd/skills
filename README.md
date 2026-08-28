@@ -26,10 +26,11 @@ TDD on behavior change. ASK the user only as a last resort.
 | `/reviewer` | Review the PR. Diagnose CI |
 | `/lstm` | Incoming review. Patch the same branch |
 | `/ruver-triage` | Classify a QA finding. Not a ticket bot |
+| `/memory` | Durable prefs outside git (chat language, reviewers) |
 
-Short slashes (`/developer`, `/qa`, `/reviewer`, `/lstm`) are aliases
-of `/ruver-*`. Skill ids stay `ruver-*`. This repo is those graphs,
-not a dump of every third-party skill on a machine.
+Short slashes (`/developer`, `/qa`, `/reviewer`, `/lstm`, `/memory`) are
+aliases of `/ruver-*`. Skill ids stay `ruver-*`. This repo is those
+graphs, not a dump of every third-party skill on a machine.
 
 ## Installation (30-second setup)
 
@@ -173,6 +174,10 @@ Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
 
 - **[ruver-bus](skills/graphs/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
 
+### Lib (user-invoked)
+
+- **[ruver-memory](skills/lib/ruver-memory/SKILL.md)** (`/memory`, `/ruver-memory`): Chat language, confirmed reviewers, open questions. Outside git. [page](docs/commands/memory.md)
+
 ### Engines
 
 Called by a graph, or run alone. Source: [`skills/engines`](skills/engines).
@@ -212,6 +217,8 @@ They talk through **ruver-bus** files, not nested graph agents.
 Runtime state:
 
 ```text
+~/.ruver/memory.md
+~/.ruver/<slug>/memory.md
 ~/.ruver/<slug>/.ruver-developer/
 ~/.ruver/<slug>/.ruver-qa/
 ~/.ruver/<slug>/.ruver-bus/

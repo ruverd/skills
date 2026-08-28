@@ -30,6 +30,8 @@ done_report | escalated
 | `forge` | github \| gitlab \| git |
 | `tracker` | linear \| github_issues \| gitlab \| jira \| none |
 | `pkg` / `*_cmd` / `qa_tool` | from PRODUCT.md |
+| `assignee` / `reviewers` / `reviewers_status` | PRODUCT.md §6. `confirmed` \| `proposed` \| `missing` |
+| `chat_language` | from `ruver-memory` home file. Default `en` |
 | `spec_path` | `$RUVER_ROOT/.ruver-feature-delivery/SPEC.md` |
 | `tickets_path` | `$RUVER_ROOT/.ruver-feature-delivery/TICKETS.md` |
 | `current_ticket` | |
@@ -42,7 +44,7 @@ done_report | escalated
 
 | Node | Reads | Writes |
 |---|---|---|
-| mcp_context | goal, refs, PRODUCT.md | mcp_gate, forge, tracker, pkg, *_cmd, qa_tool, linear_*, branch, repos_* |
+| mcp_context | goal, refs, PRODUCT.md, ruver-memory | mcp_gate, forge, tracker, pkg, *_cmd, qa_tool, linear_*, branch, repos_*, assignee, reviewers, reviewers_status, chat_language |
 | triage | goal, linear-context | work_kind, scope, path, route_* |
 | grill | goal, repo, Linear | decisions, approaches, `waiting_user` |
 | spec | decisions | SPEC.md, spec_path |

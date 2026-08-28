@@ -13,10 +13,10 @@ Orchestrator. You do **not** make the final bug call.
 
 **REQUIRED:** [GRAPH.md](GRAPH.md) · [STATE.schema.md](STATE.schema.md) ·
 [HOST.md](../../../HOST.md) ·
-`ruver-bus` PROTOCOL.md ·
+`ruver-bus` PROTOCOL.md · `ruver-memory` ·
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
-Chat English. Unslop always. PR link required (args or envelope).
+Chat: `ruver-memory`. Unslop always. PR link required (args or envelope).
 
 Init `.ruver-qa/STATE.md`. Walk GRAPH:
 **admit → resolve → plan → execute**.

@@ -6,12 +6,12 @@ description: >
   /ruver-feature-delivery or /ruver-fd, or when resuming a run
   whose HANDOFF.md exists under $RUVER_ROOT/.ruver-feature-delivery/.
   Spine: grill-with-docs → spec → tickets → implement(tdd) → review.
-  User-facing chat in English. Unslop always. Never write .ruver-* inside a repo.
+  Chat follows ruver-memory. Unslop always. Never write .ruver-* inside a repo.
 ---
 
 # Ruver feature delivery
 
-Orchestrator. Speak to the user in English. Unslop. **No product code on the main thread.**
+Orchestrator. Chat: `ruver-memory`. Unslop. **No product code on the main thread.**
 
 Load now:
 
@@ -23,6 +23,7 @@ Load now:
 - [PSTACK.md](PSTACK.md)
 - [DECISION_POLICY.md](DECISION_POLICY.md)
 - `ruver-bus` [DISK.md](../../graphs/ruver-bus/DISK.md)
+- `ruver-memory`
 
 Spine (bundled primitives):
 
@@ -50,7 +51,7 @@ Branch from the tracker, or `feature/<id-lowercase>`, or the current branch.
 
 **Fresh:**
 
-1. Init STATE under `$RUVER_ROOT/.ruver-feature-delivery/`.
+1. Init STATE under `$RUVER_ROOT/.ruver-feature-delivery/`. Load `ruver-memory`.
 2. `mcp_context` then `triage`. Critical MCP down → STOP. Do not invent.
 3. Walk GRAPH. Grill / spec / tickets on the main thread. Spawn **one** node subagent at a time for implement / review / diagnose / tester / quality / shipper.
 4. Never merge. Draft PR only from `shipper`.

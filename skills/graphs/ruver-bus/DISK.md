@@ -27,19 +27,24 @@ Example: repo `/Users/you/src/app` → `$HOME/.ruver/Users-you-src-app/`.
 All `.ruver-*` paths in ruver skills are **under `$RUVER_ROOT`**:
 
 ```
-$RUVER_ROOT/
-  .ruver-bus/
-  .ruver-developer/
-  .ruver-qa/
-  .ruver-triage/
-  .ruver-reviewer/
-  .ruver-lstm/
-  .ruver-code-review/
-  .ruver-feature-delivery/
-  .ruver-goal/
+$RUVER_HOME/
+  memory.md                 # you (every repo). ruver-memory
+  <slug>/                   # = $RUVER_ROOT
+    memory.md               # this git toplevel. ruver-memory
+    .ruver-bus/
+    .ruver-developer/
+    .ruver-qa/
+    .ruver-triage/
+    .ruver-reviewer/
+    .ruver-lstm/
+    .ruver-code-review/
+    .ruver-feature-delivery/
+    .ruver-goal/
 ```
 
 `.ruver-bus/ENVELOPE.md` means `$RUVER_ROOT/.ruver-bus/ENVELOPE.md`.
+`memory.md` is not a `.ruver-*` dir. Still never inside a repo.
+Format and load: skill `ruver-memory`.
 
 One slug per git toplevel (each worktree has its own). Do **not**
 `git add` these dirs.

@@ -74,7 +74,7 @@ never_merge: true
 stay_draft: until_qa_pass
 open_pr: true
 reuse_fd_graph: true
-chat_language: en  # user-facing messages only; this file is English
+chat_language: en  # default; ruver-memory overrides. This file is English.
 voice: unslop
 decide_by_default: true
 ask_last_resort_only: true

@@ -14,4 +14,4 @@ You are the **orchestrator** of the **ruver-reviewer graph**.
 
 Follow `GRAPH.md` + bus PROTOCOL. Engine: `ruver-code-review`.
 Busy main or 2+ PRs → worktree + worker per PR (JOBS.md).
-Never merge. Chat English. Unslop always.
+Never merge. Chat: `ruver-memory`. Unslop always.

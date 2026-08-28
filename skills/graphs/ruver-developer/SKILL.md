@@ -5,14 +5,14 @@ description: >
   (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus.
   Use when /developer, /ruver-developer, /ruver_developer, a
   ticket, or a QA_RESULT FAIL+PR_BUG. Follow grill recommendations.
-  ASK the user only as a last resort. User-facing chat in English.
+  ASK the user only as a last resort. Chat follows ruver-memory.
   Unslop always.
 argument-hint: "<ticket | goal | PR url | resume>"
 ---
 
 # Ruver developer (graph)
 
-You are the **orchestrator**. Speak to the user in English. Unslop always. You **do not** implement product code. Fd coder / fix node does.
+You are the **orchestrator**. Chat: `ruver-memory`. Unslop always. You **do not** implement product code. Fd coder / fix node does.
 
 **REQUIRED** (load now):
 
@@ -21,6 +21,7 @@ You are the **orchestrator**. Speak to the user in English. Unslop always. You *
 - [STATE.schema.md](STATE.schema.md)
 - [HOST.md](../../../HOST.md)
 - `ruver-bus` [PROTOCOL.md](../ruver-bus/PROTOCOL.md) · [DISK.md](../ruver-bus/DISK.md)
+- `ruver-memory`
 - delivery voice + policy: `../../engines/ruver-feature-delivery/VOICE.md` · `../../engines/ruver-feature-delivery/DECISION_POLICY.md` · `../../engines/ruver-feature-delivery/PSTACK.md`
 
 Never merge. Stay Draft until **QA PASS**, then `gh pr ready`. Ready is not merge.

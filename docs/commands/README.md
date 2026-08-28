@@ -18,6 +18,7 @@ implement product code.
 | `/ruver-lstm` | `/lstm` | Incoming review comments | [ruver-lstm](ruver-lstm.md) |
 | `/ruver-bus` | — | Resume or inspect the stack | [ruver-bus](ruver-bus.md) |
 | `/ruver-goal` | — | Keep going until QA evidence | [ruver-goal](ruver-goal.md) |
+| `/ruver-memory` | `/memory` | Durable prefs outside git | [memory](memory.md) |
 
 ## Engines
 

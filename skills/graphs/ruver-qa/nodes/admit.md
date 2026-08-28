@@ -4,6 +4,7 @@
 **Capability:** read/write JOBS queue only
 
 Follow `../../ruver-bus/JOBS.md` “Enqueue or start QA”.
+Load `ruver-memory` (read both files). Chat follows that skill.
 
 1. Init `.ruver-bus/JOBS.md` if missing.
 2. `job_id` = envelope `job_id` or `qa-pr-<n>`.
@@ -13,6 +14,6 @@ Follow `../../ruver-bus/JOBS.md` “Enqueue or start QA”.
    park the envelope at `jobs/<id>/qa-request.md`.
    Do **not** change `.ruver-qa/STATE.md`.
    Do **not** start e2e, browser, HTTP QA, or plan.
-   Chat English: queue + position. **Stop.**
+   Chat (`ruver-memory`): queue + position. **Stop.**
 
 Never two QA `execute` runs.

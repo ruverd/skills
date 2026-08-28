@@ -14,9 +14,10 @@ skill keeps the session working until QA has **commented with evidence**.
 
 **REQUIRED:** [COMPLETE.md](references/COMPLETE.md) ·
 [LOOP.md](references/LOOP.md) · bus PROTOCOL.md ·
-[DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
+[DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root) ·
+`ruver-memory`
 
-Chat English. Unslop always.
+Chat: `ruver-memory`. Unslop always.
 
 ## Commands
 
@@ -29,7 +30,7 @@ Chat English. Unslop always.
 
 ## Start
 
-1. Write `.ruver-goal/STATE.md` from
+1. Load `ruver-memory`. Write `.ruver-goal/STATE.md` from
    [templates/STATE.md](templates/STATE.md).
 2. Name the completion bar (verifier / user):
 
@@ -74,4 +75,4 @@ Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
 
 ## After QA comment
 
-Cancel the loop. Report in English: PR, SHA, QA verdict, comment URL, evidence URL.
+Cancel the loop. Report in the chat language: PR, SHA, QA verdict, comment URL, evidence URL.

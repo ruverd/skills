@@ -5,7 +5,8 @@ A graph engineer writes **how the agent works**. Not the product.
 The main thread of `/ruver-developer`, `/ruver-qa`, `/ruver-triage`,
 `/ruver-reviewer`, `/ruver-lstm`, `/ruver-bus`, and `/ruver-goal`
 **is** that role. It walks a GRAPH. It writes STATE. It does not
-open `src/` and type the feature.
+open `src/` and type the feature. `/memory` is a lib command, not a
+graph.
 
 Command pages: [commands/](commands/README.md).
 
@@ -15,7 +16,7 @@ Command pages: [commands/](commands/README.md).
 |---|---|---|
 | **Graph** | this repo (`skills/{graphs,engines,lib}/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
 | **Host** | [HOST.md](../HOST.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
-| **Product** | target repo `AGENTS.md` / `CLAUDE.md` + [PRODUCT.md](../skills/engines/ruver-feature-delivery/PRODUCT.md) | test command, reviewers, tracker, design system, sibling repos |
+| **Product** | target repo `AGENTS.md` / `CLAUDE.md` + [PRODUCT.md](../skills/engines/ruver-feature-delivery/PRODUCT.md) + `ruver-memory` | test command, reviewers, tracker, design system, sibling repos, chat language |
 
 A graph that says `spawn_subagent` or `model: grok-4.6` or
 `reviewers: izaiasneto4` is no longer a graph. It is a host or a
@@ -63,10 +64,11 @@ Never spawn another **graph** as a child (`ruver_qa`, `ruver_developer`,
 3. Need a child agent? Call it `spawn_worker` and point at HOST.md.
 4. Need a later turn (CI)? Call it `schedule_wake` and point at HOST.md.
 5. Product policy (who reviews, which test binary, which forge)
-   comes from [PRODUCT.md](../skills/engines/ruver-feature-delivery/PRODUCT.md)
-   plus the **current repo**, not from this plugin.
+   comes from [PRODUCT.md](../skills/engines/ruver-feature-delivery/PRODUCT.md),
+   the **current repo**, and `ruver-memory`. Not from this plugin.
 6. List the path in `plugin.json`.
-7. User-facing chat is English. Always apply bundled `unslop`. Never Portuguese.
+7. Skill bodies stay in English. Chat follows `ruver-memory` (default
+   English). Forge text stays English. Unslop always.
 
 Then `./install.sh` and a commit. Slash names stay the skill folder
 name (`/ruver-developer`) because install.sh flattens categories.

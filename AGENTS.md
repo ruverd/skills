@@ -8,7 +8,7 @@ Marketplace of Ruver agent skills. Not an application repo.
 - Cross-category links use `../../engines/...` / `../../graphs/...`.
 - After `install.sh`, skills flatten into `~/.agents/skills/<name>` so slash names stay flat.
 - Short command aliases (`/developer`, `/reviewer`, `/lstm`, `/qa`) live in `commands/`. Skill ids stay `ruver-*`.
-- Do not write `.ruver-*` state in this repo. Runtime state belongs in `~/.ruver/<slug>/`.
+- Do not write `.ruver-*` state in this repo. Runtime state belongs in `~/.ruver/<slug>/`. User/project memory: `~/.ruver/memory.md` and `$RUVER_ROOT/memory.md` (`ruver-memory`).
 - Graphs are host-agnostic. Harness APIs live in `HOST.md`. See `docs/GRAPH_ENGINEER.md`.
 - After a skill edit, run `./install.sh` if you use the symlink install. Plugin installs pick up git updates with `grok plugin update ruver`.
-- User-facing chat is English. Always apply bundled `unslop`. Never Portuguese. Skill bodies stay in English.
+- Skill bodies stay in English. Chat follows `ruver-memory` (default English). Forge text (PR, review, comments) stays English. Unslop always.
