@@ -4,7 +4,7 @@ category: graph
 description: >
   Graph: investigate a QA failure, classify PR_BUG / EXISTING_BUG /
   NEW_BUG / NOT_A_BUG / BLOCKED, route via the bus. Use when
-  /ruver-triage, /ruver_triage, or a TRIAGE_REQUEST envelope arrives.
+  /ruver-triage, or a TRIAGE_REQUEST envelope arrives.
 argument-hint: "<QA handoff or PR url>"
 ---
 

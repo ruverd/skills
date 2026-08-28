@@ -87,6 +87,11 @@ def main():
             report(errors, path, root, "missing tools; declare least privilege explicitly")
 
     for path in flat_files(root, "commands"):
+        stem = os.path.basename(path)[: -len(".md")]
+        # Underscore slash aliases doubled the command picker on every host and
+        # were never documented. The role names ruver_* live in agents/ instead.
+        if "_" in stem:
+            report(errors, path, root, "underscore command alias; use the hyphen form")
         fields, _ = parse(path)
         if fields is None:
             report(errors, path, root, "no frontmatter")

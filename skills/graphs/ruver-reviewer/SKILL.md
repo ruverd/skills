@@ -4,7 +4,7 @@ category: graph
 description: >
   Graph: review a PR/branch via /ruver-code-review, classify CI/test
   failures, optionally bus a REVIEW_RESULT. Use when /reviewer,
-  /ruver-reviewer, /ruver_reviewer, or a REVIEW_REQUEST envelope
+  /ruver-reviewer, or a REVIEW_REQUEST envelope
   arrives.
 argument-hint: "<PR url | owner/repo#N | branch>"
 ---

@@ -31,9 +31,15 @@ def parse(path):
         value = value.strip()
         if value in (">", "|", ">-", "|-"):
             value = ""
-        fields[key] = value
+        fields[key] = _unquote(value)
         order.append(key)
-    return fields, order
+    return {k: _unquote(v) for k, v in fields.items()}, order
+
+
+def _unquote(value):
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        return value[1:-1]
+    return value
 
 
 def skill_files(root):

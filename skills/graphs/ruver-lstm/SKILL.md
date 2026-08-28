@@ -7,7 +7,7 @@ description: >
   patch should-fix on the same branch, always rebase merge conflicts,
   then 👍 + unslopped reply on every comment, resolve threads,
   dismiss CHANGES_REQUESTED, re-request. Use when /lstm,
-  /ruver-lstm, /ruver_lstm, CHANGES_REQUESTED, review comments, or
+  /ruver-lstm, CHANGES_REQUESTED, review comments, or
   LSTM_REQUEST.
 argument-hint: "<PR | review | comment URL> [--force]"
 ---
