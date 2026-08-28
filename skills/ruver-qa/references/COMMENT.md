@@ -60,7 +60,7 @@ gh pr comment "$PR" --repo "$REPO" --body-file "$BODY"
 | Plan | <step count> steps |
 | Findings | <n or none> |
 | Triage | <class or n/a> |
-| Linear | <NEW_BUG ids or n/a> |
+| Tracker | <NEW_BUG ids or n/a> |
 
 <summary of the plan + what passed>
 

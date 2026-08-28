@@ -16,7 +16,7 @@ Follow `../skills/engines/ruver-feature-delivery/nodes/shipper.md`.
    AND `.ruver-feature-delivery/gates.log` (if present) confirms the exit codes.
 2. Ensure branch matches the tracker branch when set. Tracker via MCP or
    `gh`/`glab` — never the `orca linear` CLI.
-3. Commit hygiene (hard rule): conventional prefix + Linear id if any; **NO Co-Authored-By,
+3. Commit hygiene (hard rule): conventional prefix + tracker id if any; **NO Co-Authored-By,
    no "Generated with", no trailers of any kind.**
 4. Idempotency: before creating anything, `gh pr list --head <branch>` — if a PR
    already exists, update it instead of creating a duplicate.

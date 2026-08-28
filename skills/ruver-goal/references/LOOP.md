@@ -28,7 +28,8 @@ Goal state: .ruver-goal/STATE.md
 Inspect gh (pr view, pr checks, issue comments) for this PR.
 Take exactly one next step from the ruver-goal table (wait / fix /
 mergeable / enqueue-or-start QA via ruver-bus/JOBS.md / complete).
-Never start a second QA if qa_active is another PR.
+Never start a second QA while qa_active holds another live PR. A claim past
+qa_lease_minutes is dead, and taking it over is correct (ruver-bus/JOBS.md).
 If CI is still pending, do nothing else and end the turn.
 If a ruver-qa marker comment exists for the current head SHA and
 includes a video URL, cancel_wake and stop.

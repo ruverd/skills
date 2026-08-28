@@ -8,6 +8,35 @@ Notable changes per release. Format follows
 
 ### Added
 
+- The QA slot is a lease. `qa_active` was cleared only by `ruver-qa`'s
+  `verdict` node, so any other exit — `handed_off` on a context limit,
+  `escalated`, a killed session — left the claim set for good. Every later
+  `QA_REQUEST` then parked in `qa_waiting` and never ran, while the graph kept
+  answering with a queue position. `qa_claimed_at` plus `qa_lease_minutes`
+  makes an old claim free, and every terminal exit now releases.
+- `qa_fix_loops` (default 2) bounds the `apply_qa` → `fix` → QA ring. fd bounds
+  its own rings, but mode `fix` never re-enters the fd graph, so the most
+  expensive loop in the system — a full QA plus a triage plus a fix — was the
+  only unbounded one. `apply_qa` also escalates immediately when a finding id
+  repeats across laps, which is the failure that actually happens.
+- `qa_verdict_log` in the developer STATE: one row per QA lap. `qa_verdict` is a
+  single overwritten field, so lap 6 used to leave a STATE identical to lap 1.
+- STACK.md depth is capped at 3, and a push of a graph already on the stack is
+  refused. `developer → qa → triage` is the deepest real chain; a fourth frame
+  is a cycle.
+- `tests/repo.sh` fails when a graph declares the same enum with different
+  values in different files. It found four, each losing information: `scope`
+  had `mono` in the schema and not in `ROUTING.md` or `HANDOFF.md`, `mcp_gate`
+  was `passed | failed` in `HANDOFF.md` so a handoff could not express
+  `passed_partial`, `ci.status` was missing `skipped_no_pr`, and the blocker
+  rollup was called `status`, colliding with the graph's own.
+- `$RUVER_ROOT/.ruver-bus/RUN_LOG.tsv`, a run ledger the graphs append to on
+  every transition, and `ruver report` to read it: wall time and lap count per
+  `graph/node`, plus the age of the QA claim. Observation only — nothing gates
+  on it. See `skills/ruver-bus/LEDGER.md`.
+- `version` in `.codex-plugin/marketplace.json` and
+  `.cursor-plugin/marketplace.json`.
+
 - `tests/repo.sh` gates the discovery block: the sum of every skill's name and
   description, which every host pastes into the system prompt on every turn.
   Codex caps that block at 8,000 characters and silently shortens or drops
@@ -25,9 +54,17 @@ Notable changes per release. Format follows
 - Twenty-two skill descriptions are shorter. Process detail moved into the
   bodies; the trigger phrases stayed, because that is what routing reads.
 - `skills/why/references/sources/*.md` are now `references/source-*.md`.
+- 107 places across 47 skill files, 6 agent contracts and one command named
+  Linear as *the* tracker. The field rename in 0.5.0 covered `linear_*` but not
+  prose, so `DECISION_POLICY.md` alone pointed at it eleven times and an agent
+  reading it would reach for Linear with `tracker: github_issues` in STATE.
+  `tests/repo.sh` now fails on the bare name outside the files whose job is
+  vendor mapping.
 
 ### Fixed
 
+- Two Portuguese strings in English skill bodies: `route_confidence: alta |
+  media | baixa` in `ROUTING.md` and `"fecha o spec?"` in `nodes/spec.md`.
 - `docs/GRAPH_ENGINEER.md` step 2 still taught the pre-flatten link layout
   (`../../engines/<name>/...`). A contributor following it wrote links that
   leave the skills root.

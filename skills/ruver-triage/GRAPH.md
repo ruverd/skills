@@ -3,11 +3,11 @@
 ```
 start (TRIAGE_REQUEST or args)
   → receive          # validate PR link
-  → inspect          # PR diff + Linear + each finding
+  → inspect          # PR diff + tracker + each finding
   → reproduce
   → classify         # one class per finding; STATE = PR rollup
   → act
-       ├ each NEW_BUG → Linear (LINEAR.md)
+       ├ each NEW_BUG → tracker issue (LINEAR.md)
        ├ PR_BUG       → no ticket, no switch to developer
        └ EXISTING / NOT_A_BUG / BLOCKED → no new ticket
        └ always: TRIAGE_RESULT → pop (back to qa)

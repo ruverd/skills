@@ -21,7 +21,7 @@ main thread — never fake them, never report the source itself as blocked.
 1. Identify all work that does **not** need the blocker and RETURN it as `advanced_slices`
    for the ORCHESTRATOR to dispatch to coders — you do not dispatch coders yourself.
 2. If no blocker ticket exists → MCP `save_issue` as **Draft** with explicit dependency on current ticket.
-3. Wire Linear relations: current `blockedBy` draft (or existing blocker).
+3. Wire tracker relations: current `blockedBy` draft (or existing blocker).
 4. MCP `save_comment` on the blocker with full consumer contract:
    - method + path, auth, params, request/response JSON, TypeScript interfaces, UI usage notes
 5. Check blocker status ONCE via MCP `get_issue`. If not Done: write STATE

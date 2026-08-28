@@ -9,8 +9,8 @@ Write into STATE:
 ```yaml
 work_kind: feature | bug | regression | chore | spike
 path: full_feature | debug_fix | light_change
-scope: frontend_only | backend_only | fullstack
-route_confidence: alta | media | baixa
+scope: frontend_only | backend_only | mono | fullstack
+route_confidence: high | medium | low
 route_reason: "..."
 ```
 
@@ -20,7 +20,7 @@ route_reason: "..."
 | Bug, regression, red test, "X is broken" | `debug_fix` |
 | Chore, rename, 1–2 obvious files, no product fork | `light_change` |
 
-If the ticket is both a bug and a redesign: DECIDE `debug_fix` when the AC is "restore X"; DECIDE `full_feature` when Linear asks for new behavior. Do not ASK the path.
+If the ticket is both a bug and a redesign: DECIDE `debug_fix` when the AC is "restore X"; DECIDE `full_feature` when the ticket asks for new behavior. Do not ASK the path.
 
 `debug_fix` never skips root cause. If diagnose finds a missing feature, re-route to `full_feature` (grill).
 

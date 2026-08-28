@@ -29,7 +29,7 @@ Grill, spec, and tickets run on the **main thread**. Implement / review / diagno
 | From | Condition | To |
 |---|---|---|
 | start | resume with live STATE | current node (skip finished) |
-| start | fresh goal / Linear | **mcp_context** |
+| start | fresh goal / ticket | **mcp_context** |
 | mcp_context | mcp_gate=passed / passed_partial | **triage** |
 | mcp_context | mcp_gate=failed | **STOP** + English error |
 | triage | scope=fullstack | **fullstack** (FULLSTACK.md) |

@@ -71,7 +71,7 @@ If loops blow / infinite flake / failure on main that is unrelated:
 
 ```yaml
 ci:
-  status: pending | watching | fixing | green | escalated
+  status: pending | watching | fixing | green | escalated | skipped_no_pr
   pr_url: ...
   last_checks: summary
   fix_loops_used: 0

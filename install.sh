@@ -22,6 +22,7 @@ Usage:
   ruver setup           Flatten skills into agent homes
   ruver update          git pull --ff-only main, then setup
   ruver status          Repo, version, SHA, homes
+  ruver report          Wall time and laps per graph node, from the run ledger
   ruver uninstall       Remove our symlinks
   ruver uninstall --purge
                         Also delete the managed clone
@@ -41,6 +42,7 @@ Examples:
   ruver setup
   ruver update
   ruver status
+  ruver report
   ruver uninstall
 EOF
 }
@@ -57,7 +59,7 @@ ALL_HOSTS="claude grok cursor codex"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    setup|update|status|uninstall|menu|help|version)
+    setup|update|status|report|uninstall|menu|help|version)
       if [[ -n "$CMD" && "$CMD" != "$1" ]]; then
         echo "unknown arg: $1" >&2
         usage
@@ -369,6 +371,100 @@ cmd_status() {
   fi
 }
 
+# ISO 8601 UTC to epoch seconds. GNU date and BSD date disagree on the flag,
+# so try both rather than depend on either.
+iso_epoch() {
+  local iso="$1"
+  date -u -d "$iso" +%s 2>/dev/null && return 0
+  date -u -j -f "%Y-%m-%dT%H:%M:%SZ" "$iso" +%s 2>/dev/null && return 0
+  return 1
+}
+
+hms() {
+  local total="$1"
+  printf '%dm%02ds' "$((total / 60))" "$((total % 60))"
+}
+
+# Where a stuck QA slot shows up. The graphs treat a claim past the lease as
+# free, but a human wants to see that it happened.
+report_lease() {
+  local jobs="$1"
+  local active claimed now age cap=90
+  active="$(sed -n 's/^qa_active: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' "$jobs" | head -1)"
+  [[ -n "$active" ]] || return 0
+  claimed="$(sed -n 's/^qa_claimed_at: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' "$jobs" | head -1)"
+  if [[ -z "$claimed" ]]; then
+    echo "  QA lease: $active holds the slot with no qa_claimed_at - age unknown"
+    return 0
+  fi
+  now="$(date -u +%s)"
+  if ! claimed="$(iso_epoch "$claimed")"; then
+    echo "  QA lease: $active claimed at an unparseable time"
+    return 0
+  fi
+  age=$(((now - claimed) / 60))
+  if ((age > cap)); then
+    echo "  QA lease: $active held ${age}m, cap ${cap}m - dead claim, the queue is stuck"
+  else
+    echo "  QA lease: $active held ${age}m of ${cap}m"
+  fi
+}
+
+report_ledger() {
+  local ledger="$1"
+  awk -F'\t' '
+    NR == 1 && $1 == "ts_iso" { next }
+    NF < 5 { next }
+    {
+      key = $3 "/" $4
+      if ($5 == "enter") { open[key] = $2; if (!($4 in seen) || $6 + 0 > laps[key]) laps[key] = $6 + 0 }
+      else if ($5 == "exit" && key in open) {
+        span = $2 - open[key]
+        total[key] += span
+        if (span > longest[key]) longest[key] = span
+        runs[key]++
+        delete open[key]
+      }
+    }
+    END {
+      for (key in total) printf "%s\t%d\t%d\t%d\n", key, runs[key], total[key], longest[key]
+    }
+  ' "$ledger" | sort -t"$(printf '\t')" -k3 -rn | while IFS="$(printf '\t')" read -r key runs total longest; do
+    local flag=""
+    ((runs > 1)) && flag="   <- $runs laps"
+    printf '  %-34s %3s  %8s  %8s%s\n' \
+      "$key" "$runs" "$(hms "$total")" "$(hms "$longest")" "$flag"
+  done
+}
+
+# Read-only. Aggregates what the graphs already append to the run ledger, so
+# a bottleneck is a number instead of a hunch.
+cmd_report() {
+  local home="${RUVER_HOME:-$HOME/.ruver}"
+  local found=0 dir slug ledger jobs
+  if [[ -d "$home" ]]; then
+    for dir in "$home"/*; do
+      [[ -d "$dir" ]] || continue
+      slug="$(basename "$dir")"
+      ledger="$dir/.ruver-bus/RUN_LOG.tsv"
+      jobs="$dir/.ruver-bus/JOBS.md"
+      [[ -f "$ledger" || -f "$jobs" ]] || continue
+      found=1
+      echo "repo $slug"
+      if [[ -f "$ledger" ]]; then
+        printf '  %-34s %3s  %8s  %8s\n' "graph/node" "run" "total" "longest"
+        report_ledger "$ledger"
+      fi
+      [[ -f "$jobs" ]] && report_lease "$jobs"
+      echo
+    done
+  fi
+  if [[ "$found" -eq 0 ]]; then
+    echo "no runs recorded under $home"
+    echo "The graphs append to .ruver-bus/RUN_LOG.tsv as they walk. Run one."
+  fi
+}
+
 cmd_uninstall() {
   UNINSTALL=1
   install_for_hosts
@@ -590,6 +686,7 @@ main() {
     setup) cmd_setup ;;
     update) cmd_update ;;
     status) cmd_status ;;
+    report) cmd_report ;;
     uninstall) cmd_uninstall ;;
     help) usage ;;
     version) echo "ruver $(plugin_version)" ;;
@@ -711,7 +808,8 @@ install_skills() {
   done
 }
 
-if [[ ! -d "$REPO/skills" && "$CMD" != "" && "$CMD" != "help" && "$CMD" != "version" ]]; then
+if [[ ! -d "$REPO/skills" && "$CMD" != "" && "$CMD" != "help" \
+   && "$CMD" != "version" && "$CMD" != "report" ]]; then
   echo "missing $REPO/skills" >&2
   exit 1
 fi

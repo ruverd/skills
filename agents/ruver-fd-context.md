@@ -16,7 +16,7 @@ Follow:
 
 ## Hard gate
 
-1. Detect required sources from goal/ticket (Linear ID, Figma/Sentry/Notion URLs).
+1. Detect required sources from goal/ticket (tracker id, design / error / doc URLs).
 2. **Before** fetch: verify the project MCP server is available. MCP tools may be
    DEFERRED (absent from your initial function list) — try your tool-search tool
    first (e.g. "select:mcp__linear-server__get_issue" or search "linear").
@@ -31,7 +31,7 @@ Follow:
    - Print the exact error block from MCP_CONTEXT.md ("ERROR: MCP unreachable"), in English.
    - Return `result: blocked`. Stop. No implement.
 5. If accessible: fetch fully → `*-context.md` + `mcp-sources.md`.
-6. Linear OK → checkout `gitBranchName` or `feature/<id-lowercase>`.
+6. Tracker OK → checkout its branch name or `feature/<id-lowercase>`.
 7. Critical sources all OK → `mcp_gate: passed`.
 
 Never use `orca linear`. Never implement product code.

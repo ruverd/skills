@@ -45,7 +45,7 @@ Claude and Grok on this Mac read the same `$RUVER_ROOT`. Do not commit.
 ## Goal
 <one line>
 
-## Linear
+## Tracker
 - id: <ticket>
 - branch: feature/<id-lowercase>
 - url:
@@ -53,10 +53,11 @@ Claude and Grok on this Mac read the same `$RUVER_ROOT`. Do not commit.
 ## Position in graph
 - status: handed_off (full enum: STATE.schema.md)
 - active_runtime: <to_runtime>
-- position: implementing | reviewing | quality | shipping | ci_watching | waiting_blocker | …
-- path: full_feature | debug_fix | light_change
-- scope: frontend_only | backend_only | fullstack
-- mcp_gate: passed | failed
+- position: <node> (full enum: STATE.schema.md `status`)
+- path: <path> (full enum: STATE.schema.md)
+- scope: <scope> (full enum: STATE.schema.md)
+- mcp_gate: <gate> (full enum: STATE.schema.md — `passed_partial` is real,
+  do not flatten it to passed or failed)
 
 ## Done so far
 - [ ] short bullets
@@ -100,7 +101,7 @@ Claude and Grok on this Mac read the same `$RUVER_ROOT`. Do not commit.
 
 1. Open a Grok session on the **same repo/worktree** (or `git fetch && checkout branch`).
 2. Confirm `$RUVER_ROOT/.ruver-feature-delivery/HANDOFF.md` + `STATE.md`. If missing:
-   **rebuild** from git/gh/Linear (fallback), do not restart from a raw goal.
+   **rebuild** from git/gh/tracker (fallback), do not restart from a raw goal.
 3. Invoke: **`/skills ruver-feature-delivery`** and ask **resume**
    (`/ruver-fd` **does not exist** as a Grok slash command — those are built-in).
 4. **RECONCILE first** (required): `git status` + `git log origin/<branch>..HEAD`

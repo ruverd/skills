@@ -100,7 +100,7 @@ Index: `.ruver-feature-delivery/mcp-sources.md`
 
 ## Blockers / wait
 
-- **status:** none | waiting_blocker | unblocked
+- **blocker_status:** none | waiting_blocker | unblocked
 - **blockers:**
   - id:
     role: api_contract | ticket | product

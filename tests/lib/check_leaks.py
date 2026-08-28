@@ -22,6 +22,19 @@ RULES = [
         lambda rel: False,
     ),
     (
+        "vendor named as *the* tracker; say tracker and let PRODUCT.md detect",
+        re.compile(r"\bLinear\b"),
+        # Files whose job is exactly to map a capability onto a vendor, plus the
+        # changelog, which has to be able to say what it renamed.
+        lambda rel: (
+            os.path.basename(rel) in ("LINEAR.md", "MCP_CONTEXT.md", "PRODUCT.md")
+            or rel.startswith("skills/why/")
+            or rel == "skills/ruver-host/SKILL.md"
+            or "/adapters/" in rel
+            or not rel.startswith(("skills/", "agents/", "commands/"))
+        ),
+    ),
+    (
         "HOST.md is not a file any more; name the skill ruver-host",
         re.compile(r"HOST\.md"),
         # The changelog has to be able to name the file it moved.

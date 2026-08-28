@@ -22,6 +22,6 @@ Write the per-finding table into the envelope body:
 ```
 
 `NEW_BUG` only when the bug is real **and** not caused by this PR.
-`EXISTING_BUG` when Linear already tracks that underlying problem.
+`EXISTING_BUG` when the tracker already tracks that underlying problem.
 `PR_BUG` when this PR introduced or exposed it.
 Do not invent product behavior — `BLOCKED` that finding.

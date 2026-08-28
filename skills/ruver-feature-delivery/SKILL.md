@@ -77,8 +77,8 @@ Ship: review → tester → blast (not light) → **thermo fix all** → commit 
 4. Implementation **only** in a subagent. Main does not edit product code.
 5. TDD on every behavior change. Thermo fix all before PR.
 6. UI: DS of the repo; Figma if present; else copy recent same-type screens.
-7. Discover the repo first (PRODUCT.md). Critical tracker URL offline → error and stop. Local goal does not need Linear.
-8. Blocker: advance what you can → Draft Linear + contract comment → `waiting_blocker`.
+7. Discover the repo first (PRODUCT.md). Critical tracker URL offline → error and stop. Local goal does not need a tracker.
+8. Blocker: advance what you can → Draft a tracker issue + contract comment → `waiting_blocker`.
 9. Tokens: [TOKEN_ECONOMY.md](TOKEN_ECONOMY.md).
 10. Limit near: [HANDOFF.md](HANDOFF.md).
 

@@ -53,8 +53,16 @@ on your PATH.
 ```bash
 ruver update     # git pull --ff-only main, then relink
 ruver status
+ruver report     # wall time and laps per graph node
 ruver uninstall
 ```
+
+`ruver report` reads `$RUVER_ROOT/.ruver-bus/RUN_LOG.tsv`, which the graphs
+append to as they walk — two lines per node. It prints wall time and lap count
+per `graph/node`, widest first, plus the age of the QA claim. A node with more
+than one lap is where a run paid twice. Nothing gates on it: the loop caps live
+in the graphs, this only records. Details:
+[`ruver-bus/LEDGER.md`](skills/ruver-bus/LEDGER.md).
 
 **This checkout** (developing the repo): `./install.sh setup`
 points `ruver` at this tree. `ruver update` is `git pull` here.

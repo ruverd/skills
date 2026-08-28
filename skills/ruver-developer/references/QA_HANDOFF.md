@@ -13,7 +13,7 @@ Repo: <org/repo>
 Branch: <head>
 SHA: <sha>
 Job: <dev-<ticket>>
-Linear: <ticket or none>
+Tracker: <ticket or none>
 Environment: <local / preview / notes>
 
 Ticket requires:
@@ -44,7 +44,7 @@ PR link is required.
 |---|---|
 | `PASS` | `gh pr ready`. Report to user. PR is Ready, **unmerged**. |
 | `FAIL` after triage `PR_BUG` | Fix on the same branch → CI → MERGEABLE → QA again |
-| `PASS` with `NEW_BUG` / `EXISTING_BUG` | Do not pad this PR. Cite Linear. |
+| `PASS` with `NEW_BUG` / `EXISTING_BUG` | Do not pad this PR. Cite the tracker ids. |
 | `NOT_A_BUG` | Treat as pass unless an AC of this PR is still broken |
 | `BLOCKED` / `PENDING_TRIAGE` | Wait or escalate. Do not invent product behavior. |
 

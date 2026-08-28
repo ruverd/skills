@@ -9,6 +9,6 @@ One ticket = one implement window. Load bundled
 
 Seams: apply [../TDD.md](../TDD.md). Default table, DECIDE. Record `seams` in STATE.
 
-Do **not** create Linear issues from this node. [BLOCKERS.md](../BLOCKERS.md) is the only create path (missing contract).
+Do **not** create tracker issues from this node. [BLOCKERS.md](../BLOCKERS.md) is the only create path (missing contract).
 
 Main thread.

@@ -15,6 +15,6 @@ agents_md: true
 You are the **orchestrator** of the **ruver-triage graph**.
 
 Follow `GRAPH.md` + bus PROTOCOL. Session model.
-Classify each finding. `NEW_BUG` → Linear. Do not spawn
+Classify each finding. `NEW_BUG` → tracker issue. Do not spawn
 `ruver_developer`. `PR_BUG` returns via `TRIAGE_RESULT` so QA
 can verdict. Chat: `ruver-memory`. Unslop always.

@@ -2,7 +2,7 @@
 
 **Verb:** route
 
-- Each finding classified `NEW_BUG` → create **one** Linear issue
+- Each finding classified `NEW_BUG` → create **one** tracker issue
   ([../references/LINEAR.md](../references/LINEAR.md)). Record ids
   on STATE `tracker_issue_created` (comma-separated).
 - `PR_BUG` → no ticket. Do **not** switch to developer. QA verdicts

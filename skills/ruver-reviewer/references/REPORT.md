@@ -24,10 +24,10 @@ ruver-code-review: APPROVED | CHANGES_REQUESTED | DEFERRED | SKIPPED
 <actual reason per failure>
 
 ### Evidence
-<PR, check, test, commit, file, Linear>
+<PR, check, test, commit, file, tracker id>
 
 ### Action
-<fixed / retry / Linear / human>
+<fixed / retry / tracker / human>
 ```
 
 Do not report only symptoms.

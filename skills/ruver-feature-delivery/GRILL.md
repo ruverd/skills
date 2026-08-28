@@ -14,7 +14,7 @@ Walk the design tree until the frontier is empty. For each question: look it up,
 ## Loop
 
 1. Compute the frontier.
-2. For each item, look it up (`how` / `why` / Linear / neighbor code / CLAUDE.md). Never ask a fact.
+2. For each item, look it up (`how` / `why` / the tracker / neighbor code / CLAUDE.md). Never ask a fact.
 3. Write a recommendation.
 4. **DECIDE**, log, recompute frontier. Chat one line in the S/D/P rollup.
 5. ASK only if the last-resort test passes. One question. `waiting_user`. Next user message (or `/ruver-developer resume`) is the answer. Continue. Do not restart.
@@ -39,7 +39,7 @@ A. ...
 B. ...
 
 Recommendation: A, because <fact>.
-I am asking because: important + high uncertainty after <paths / Linear>.
+I am asking because: important + high uncertainty after <paths / tracker>.
 ```
 
 ## Docs (grill-with-docs)
@@ -51,7 +51,7 @@ Read, in order, whatever exists:
 3. nearest `src/**/CLAUDE.md`
 4. `docs/en-US/` or `docs/adr/` if the area has them
 
-Code vs ticket wording: the code + docs win unless Linear AC explicitly overrides. DECIDE. ASK only if both readings are still plausible **and** the fork is very important.
+Code vs ticket wording: the code + docs win unless the ticket AC explicitly overrides. DECIDE. ASK only if both readings are still plausible **and** the fork is very important.
 
 Do **not** create a new `CONTEXT.md` or ADR in the git repo unless that tree already exists. Domain terms go in STATE `## Decisions`. If `CONTEXT.md` / `docs/adr/` already exist, update them lazily (domain language only).
 

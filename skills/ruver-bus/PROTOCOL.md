@@ -13,6 +13,7 @@ Do not `git add` this tree.
   STACK.md       # one graph name per line; last line = active
   ENVELOPE.md    # current message (overwrite per hop)
   log.md         # append-only one-liners
+  RUN_LOG.tsv    # transitions, timing, laps — see LEDGER.md
   JOBS.md        # workers + single QA slot — see JOBS.md
   jobs/<id>/     # parked envelopes, worker STATE/RESULT
 ```
@@ -31,6 +32,16 @@ Last line is the running graph. Push on switch-to-callee. Pop when the
 callee writes a `*_RESULT` and returns.
 
 Allowed names: `developer` · `qa` · `triage` · `reviewer` · `lstm`
+
+**Depth is capped at 3.** The deepest legitimate chain is
+`developer → qa → triage`; nothing in the graphs needs a fourth frame. A push
+that would make it four means an edge is pointing back into a graph already on
+the stack, so the push is a cycle, not a call. Refuse it: leave the stack
+alone, write a `*_RESULT` for the caller with the reason, and escalate. Do not
+pop your way down to make room — that abandons a graph mid-run.
+
+Before pushing, check `to` is not already on the stack. Same answer if it is:
+that is the cycle, one frame earlier.
 
 ## Envelope types
 
@@ -75,8 +86,10 @@ evidence / ACs as the callee's skill already specifies
 ## Switch (main thread only)
 
 ```
+0. Refuse if `to` is already on STACK.md, or the stack is already 3 deep
 1. Write .ruver-bus/ENVELOPE.md
-2. Append one line to log.md: ISO from→to type pr
+2. Append one line to log.md: ISO from→to type pr, and one `switch` row
+   to RUN_LOG.tsv ([LEDGER.md](LEDGER.md))
 3. Push `to` onto STACK.md
 4. Stop acting as `from`
 5. load_graph `<to>` (skill `ruver-<to>` SKILL.md + GRAPH.md). See
@@ -99,6 +112,8 @@ On `*_RESULT`:
   `_reviewer` / `_lstm`). Overflow work uses `general-purpose` workers (JOBS.md).
 - Two QA `execute` runs (Playwright) at once
 - Two graphs “active” without a stack
+- A fourth stack frame, or pushing a graph already on the stack
+- Popping a live graph to make room for a push
 - Copying this schema into five SKILL.md files
 - Switching without `pr_url` on QA/triage
 - Developer implementing product code on the main thread

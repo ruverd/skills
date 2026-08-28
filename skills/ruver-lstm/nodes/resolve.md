@@ -10,7 +10,7 @@ gh pr view "$PR" --repo "$REPO" --json number,url,title,isDraft,state,mergeable,
 ```
 
 Write `pr_url`, `repo`, `branch`, `sha`, `mergeable`, `ci`.
-Extract Linear `[A-Z][A-Z0-9]+-\d+` from branch or title when present.
+Extract the tracker id `[A-Z][A-Z0-9]+-\d+` from branch or title when present.
 
 CLOSED / MERGED → stop, chat only.
 

@@ -43,6 +43,11 @@ $RUVER_HOME/
 ```
 
 `.ruver-bus/ENVELOPE.md` means `$RUVER_ROOT/.ruver-bus/ENVELOPE.md`.
+
+Every graph appends one row per transition to
+`.ruver-bus/RUN_LOG.tsv` — [LEDGER.md](LEDGER.md). Two lines per node,
+and `ruver report` turns them into wall time and lap counts. It never
+gates anything.
 `memory.md` is not a `.ruver-*` dir. Still never inside a repo.
 Format and load: skill `ruver-memory`.
 

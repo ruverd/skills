@@ -34,5 +34,5 @@ frontend_worktree: ...
 
 - Same branch on both repos.
 - Orca is optional. Host workers on git worktrees always work.
-- Linear MCP for the ticket; never `orca linear`.
+- Tracker MCP for the ticket, never a vendor CLI.
 - No automatic merge.

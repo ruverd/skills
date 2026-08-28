@@ -1,6 +1,6 @@
 # Spec: <title>
 
-Linear: <id>
+Tracker: <id>
 Path: full_feature | debug_fix | light_change
 
 ## Problem

@@ -8,7 +8,7 @@ never from this file.
 `scope: mono` (both apps in one git root) is **not** this path. Stay
 on the current checkout.
 
-Ticket context still comes from the project MCP (Linear/Figma/…).
+Ticket context still comes from the project MCP (tracker, design tool, …).
 
 ## 1. Detect
 
@@ -27,7 +27,7 @@ Empty sibling → do not enter this path.
 
 ## 2. One branch
 
-1. Linear `gitBranchName` if it exists
+1. the tracker's branch name if it exists
 2. else `feature/<id-lowercase>`
 
 **Forbidden:** different branch names across repos unless the user asked.
@@ -65,7 +65,7 @@ Coordinator:
 - does **not** edit product `src/`
 - may edit `$RUVER_ROOT/.ruver-feature-delivery/*` and rebase conflicts
 
-Linear MCP for the ticket. Never `orca linear`.
+Tracker MCP for the ticket. Never a vendor CLI.
 
 ## 5. Spec each worker receives
 
@@ -82,7 +82,7 @@ For **each** repo, after the worker is ok:
 
 1. quality / thermo in that worktree
 2. commit + push on the **same** branch
-3. draft PR (base main) linking Linear + the sibling PR
+3. draft PR (base main) linking the ticket + the sibling PR
    - reviewers/assignee per [PRODUCT.md](PRODUCT.md)
 4. **ci_watch** on **each** PR
 

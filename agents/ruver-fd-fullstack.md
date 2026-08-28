@@ -20,7 +20,7 @@ Follow:
 3. Create or reuse **worktrees** on **both** repos with that name (`git worktree`; Orca if it is up).
 4. Host `spawn_worker` on each worktree. Orca orchestration is optional, not a gate.
 5. Prefer BE → FE when a new API contract is required.
-6. Ticket context from MCP Linear files already in STATE — do not use `orca linear`.
+6. Ticket context from the tracker MCP files already in STATE — no vendor CLI.
 7. Update STATE with worktree paths, worker ids, PR URLs.
 8. No auto-merge. Chat summary: `ruver-memory`.
 

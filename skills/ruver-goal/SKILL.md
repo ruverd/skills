@@ -71,7 +71,7 @@ Complete = [COMPLETE.md](references/COMPLETE.md) all true, then
 - Claim the goal done without the QA comment + evidence on **head** SHA
 - Sit in `--watch` (CI is longer than a tool timeout)
 - Spawn graph-agents as children (bus switch / load GRAPH)
-- Start a second QA while `qa_active` is another PR
+- Start a second QA while `qa_active` holds another **live** PR
 - Merge
 
 ## After QA comment
