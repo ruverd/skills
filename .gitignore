@@ -7,3 +7,4 @@
 .claude/
 .cursor/
 node_modules/
+.worktrees/
