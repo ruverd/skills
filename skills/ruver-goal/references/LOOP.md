@@ -1,6 +1,6 @@
 # CI / QA wake loop
 
-`schedule_wake` ([HOST.md](../../ruver-host/SKILL.md)). Do not block the turn
+`schedule_wake` ([ruver-host](../../ruver-host/SKILL.md)). Do not block the turn
 on `gh pr checks --watch`.
 
 ## Create (once per PR)

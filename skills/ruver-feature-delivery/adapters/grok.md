@@ -1,6 +1,6 @@
 # Adapter: Grok
 
-Maps [HOST.md](../../ruver-host/SKILL.md) primitives. Graphs stay generic.
+Maps [ruver-host](../../ruver-host/SKILL.md) primitives. Graphs stay generic.
 
 | Primitive | Grok |
 |---|---|

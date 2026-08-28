@@ -41,7 +41,7 @@ One step, then stop:
 | QA FAIL + PR_BUG | developer `fix` |
 | QA comment on this SHA (PASS / other) | **complete**, `cancel_wake` |
 
-Wake primitive: [HOST.md](../../skills/ruver-host/SKILL.md) `schedule_wake`
+Wake primitive: [ruver-host](../../skills/ruver-host/SKILL.md) `schedule_wake`
 (Grok `/loop`, otherwise ask the user to re-run).
 
 ## Never

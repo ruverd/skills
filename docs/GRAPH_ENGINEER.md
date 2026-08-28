@@ -15,7 +15,7 @@ Command pages: [commands/](commands/README.md).
 | Layer | Where it lives | What it names |
 |---|---|---|
 | **Graph** | this repo (`skills/<name>/`, `GRAPH.md`) | nodes, edges, stop conditions, envelopes |
-| **Host** | [HOST.md](../skills/ruver-host/SKILL.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
+| **Host** | [ruver-host](../skills/ruver-host/SKILL.md) | how *this* harness spawns a child, wakes later, isolates a worktree |
 | **Product** | target repo `AGENTS.md` / `CLAUDE.md` + [PRODUCT.md](../skills/ruver-feature-delivery/PRODUCT.md) + `ruver-memory` | test command, reviewers, tracker, design system, sibling repos, chat language |
 
 A graph that says `spawn_subagent` or `model: grok-4.6` or
