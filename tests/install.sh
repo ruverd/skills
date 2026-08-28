@@ -221,4 +221,11 @@ assert_eq "$got" "1" "--plugin exit"
 grep -q 'grok plugin install ruver' /tmp/ruver-plugin.err || fail "--plugin message"
 ok plugin-refused
 
+out="$(HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
+  XDG_DATA_HOME="$TEST_HOME/.local/share" \
+  "$INSTALL" </dev/null)"
+grep -q 'ruver setup' <<< "$out" || fail "no-tty list missing setup"
+grep -q 'ruver update' <<< "$out" || fail "no-tty list missing update"
+ok no-tty-list
+
 echo "all passed"

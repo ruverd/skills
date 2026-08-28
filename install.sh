@@ -328,6 +328,132 @@ cmd_uninstall() {
   run rm -f "$CONFIG_FILE"
 }
 
+print_banner() {
+  echo
+  echo "  RUVER"
+  echo "  Agent graphs. Flattened into your homes."
+  echo
+}
+
+print_home() {
+  print_banner
+  printf '  $ ruver setup      Flatten skills into agent homes\n'
+  printf '  $ ruver update     git pull --ff-only main\n'
+  printf '  $ ruver status     Repo, version, homes\n'
+  printf '  $ ruver uninstall  Remove our symlinks\n'
+  echo
+  echo "  try: ruver setup"
+  echo
+}
+
+is_bootstrap() {
+  [[ -f "$REPO/plugin.json" && -d "$REPO/skills" ]] && return 1
+  return 0
+}
+
+cmd_bootstrap() {
+  echo "bootstrap not wired" >&2
+  exit 1
+}
+
+cmd_menu() {
+  if [[ ! -t 0 || ! -t 1 ]]; then
+    print_home
+    return 0
+  fi
+  print_banner
+  echo "  ↑/↓ navigate · enter run · q quit"
+  echo
+  local labels="setup update status uninstall"
+  local descs="Flatten skills into agent homes|git pull --ff-only main|Repo, version, homes|Remove our symlinks"
+  local n=4 sel=1
+  local i label desc key rest
+  # Saved globally so the INT trap can restore cooked mode after Ctrl-C.
+  _RUVER_STTY="$(stty -g 2>/dev/null || true)"
+  restore() {
+    if [[ -n "${_RUVER_STTY:-}" ]]; then
+      stty "$_RUVER_STTY" 2>/dev/null || true
+    else
+      stty echo 2>/dev/null || true
+    fi
+    printf '\033[?25h'
+    trap - INT TERM
+    unset _RUVER_STTY
+  }
+  trap 'restore; exit 130' INT TERM
+  printf '\033[?25l'
+  stty -echo
+  draw() {
+    i=1
+    while [[ $i -le $n ]]; do
+      label="$(echo "$labels" | awk -v n="$i" '{print $n}')"
+      desc="$(echo "$descs" | awk -F'|' -v n="$i" '{print $n}')"
+      printf '\033[2K'
+      if [[ $i -eq $sel ]]; then
+        printf '  > %-12s  %s\n' "$label" "$desc"
+      else
+        printf '    %-12s  %s\n' "$label" "$desc"
+      fi
+      i=$((i + 1))
+    done
+  }
+  draw
+  while true; do
+    IFS= read -r -n 1 key || true
+    if [[ "$key" == $'\x03' ]]; then
+      restore
+      echo
+      echo "  Cancelled."
+      exit 130
+    fi
+    if [[ "$key" == "q" ]]; then
+      restore
+      echo
+      echo "  Cancelled."
+      return 0
+    fi
+    if [[ "$key" == "" ]]; then
+      restore
+      label="$(echo "$labels" | awk -v n="$sel" '{print $n}')"
+      echo
+      CMD="$label"
+      case "$CMD" in
+        setup) cmd_setup ;;
+        update) cmd_update ;;
+        status) cmd_status ;;
+        uninstall) cmd_uninstall ;;
+      esac
+      return 0
+    fi
+    if [[ "$key" == $'\x1b' ]]; then
+      read -r -n 2 rest || true
+      key="$key$rest"
+    fi
+    case "$key" in
+      $'\x1b[A'|k) sel=$((sel - 1)); [[ $sel -lt 1 ]] && sel=$n ;;
+      $'\x1b[B'|j) sel=$((sel + 1)); [[ $sel -gt $n ]] && sel=1 ;;
+    esac
+    printf '\033[%sA' "$n"
+    draw
+  done
+}
+
+main() {
+  if is_bootstrap; then
+    cmd_bootstrap
+    return
+  fi
+  case "${CMD}" in
+    ""|menu) cmd_menu ;;
+    setup) cmd_setup ;;
+    update) cmd_update ;;
+    status) cmd_status ;;
+    uninstall) cmd_uninstall ;;
+    help) usage ;;
+    *) usage; exit 1 ;;
+  esac
+}
+
 ts() { date +%Y%m%d%H%M%S; }
 
 is_ours() {
@@ -431,10 +557,4 @@ if [[ ! -d "$REPO/skills" && "$CMD" != "" && "$CMD" != "help" ]]; then
   exit 1
 fi
 
-case "${CMD:-setup}" in
-  setup) cmd_setup ;;
-  update) cmd_update ;;
-  status) cmd_status ;;
-  uninstall) cmd_uninstall ;;
-  *) echo "not implemented: $CMD" >&2; exit 1 ;;
-esac
+main
