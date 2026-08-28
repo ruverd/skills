@@ -19,7 +19,7 @@ Command pages: [commands/](commands/README.md).
 | **Product** | target repo `AGENTS.md` / `CLAUDE.md` + [PRODUCT.md](../skills/engines/ruver-feature-delivery/PRODUCT.md) + `ruver-memory` | test command, reviewers, tracker, design system, sibling repos, chat language |
 
 A graph that says `spawn_subagent` or `model: grok-4.6` or
-`reviewers: izaiasneto4` is no longer a graph. It is a host or a
+`reviewers: octocat` is no longer a graph. It is a host or a
 product leaking in.
 
 ## What you ship

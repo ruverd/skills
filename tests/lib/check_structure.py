@@ -25,6 +25,14 @@ def main():
     for rel in FORBIDDEN:
         if os.path.exists(os.path.join(root, rel)):
             errors.append(f"should not be published: {rel}")
+    # Claude Code is the biggest audience and .claude-plugin/marketplace.json
+    # exists, so the README has to say how to use it.
+    readme = os.path.join(root, "README.md")
+    if os.path.exists(readme):
+        text = open(readme, encoding="utf-8").read()
+        for needed in ("claude plugin marketplace add", "claude plugin install"):
+            if needed not in text:
+                errors.append(f"README.md does not document: {needed}")
     for line in errors:
         print(line)
     if errors:

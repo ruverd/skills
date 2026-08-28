@@ -59,15 +59,26 @@ ruver uninstall
 **This checkout** (developing the repo): `./install.sh setup`
 points `ruver` at this tree. `ruver update` is `git pull` here.
 
-**Plugin** (optional, not flattened the same way):
+**Plugin** (optional, not flattened the same way). Add the marketplace first,
+then install `ruver` from it:
 
 ```bash
+# Claude Code
+claude plugin marketplace add ruverd/skills
+claude plugin install ruver@skills
+
+# Grok
 grok plugin marketplace add ruverd/skills
 grok plugin install ruver --trust
 ```
 
-Do not combine plugin and `ruver setup` on the same host. `ruver status`
-warns if both are present.
+Inside a Claude Code session the same two steps are `/plugin marketplace add
+ruverd/skills` then `/plugin install ruver@skills`. `skills` is the marketplace
+name from `.claude-plugin/marketplace.json`; `ruver` is the plugin in it.
+
+The plugin route auto-updates through the host, but it does not flatten skills
+into slash names the way `ruver setup` does. Do not combine plugin and
+`ruver setup` on the same host. `ruver status` warns if both are present.
 
 Runtime disk is **`~/.ruver/`**, including `memory.md` (`/memory`).
 Install never creates `memory.md`. If `~/.grok/ruver` already exists,

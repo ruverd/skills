@@ -88,9 +88,11 @@ while [[ $# -gt 0 ]]; do
     --purge) PURGE=1; shift ;;
     --uninstall) CMD="uninstall"; UNINSTALL=1; shift ;;
     --plugin|--grok-plugin)
-      echo "Plugin install is not part of ruver." >&2
+      echo "Plugin install is not part of ruver. Add the marketplace first:" >&2
+      echo "  claude plugin marketplace add ruverd/skills" >&2
+      echo "  claude plugin install ruver@skills" >&2
+      echo "  grok plugin marketplace add ruverd/skills" >&2
       echo "  grok plugin install ruver --trust" >&2
-      echo "  claude plugins install ruver" >&2
       exit 1
       ;;
     -h|--help)

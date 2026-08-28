@@ -10,6 +10,11 @@ PRUNE = {".git", ".worktrees", "node_modules"}
 RULES = [
     # (label, pattern, predicate deciding whether the file may contain it)
     (
+        "a real person's handle; use a placeholder such as octocat",
+        re.compile(r"izaiasneto4"),
+        lambda rel: False,
+    ),
+    (
         "harness MCP tool name",
         re.compile(r"mcp__[a-z0-9_-]+"),
         lambda rel: rel == "HOST.md"
