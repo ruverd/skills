@@ -121,8 +121,8 @@ invent the ticket.
 ## Graph engineer
 
 The main thread of `/ruver-developer`, `/ruver-qa`, `/ruver-triage`,
-`/ruver-reviewer`, `/ruver-lstm`, `/ruver-bus`, and `/ruver-goal` is a
-**graph engineer**, not an implementer.
+`/ruver-reviewer`, `/ruver-lstm`, and `/ruver-goal` is a **graph engineer**, not
+an implementer. `/ruver-bus` is the protocol they share, not a graph of its own.
 
 It walks a GRAPH (nodes + edges). It writes STATE under `~/.ruver`.
 It spawns a **worker** when a node must touch product code. It never
@@ -166,7 +166,10 @@ Main-thread graph engineer. Source: [`skills/graphs`](skills/graphs).
 - **[ruver-lstm](skills/graphs/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
 - **[ruver-goal](skills/graphs/ruver-goal/SKILL.md)** (`/ruver-goal`): Wake until QA evidence on the head SHA. [page](docs/commands/ruver-goal.md)
 
-**Model-invoked**
+### Protocol (model-invoked)
+
+Not a graph. It has no nodes and walks no edges. The graphs load it by name for
+the shared envelope, stack and QA-slot rules.
 
 - **[ruver-bus](skills/graphs/ruver-bus/SKILL.md)** (`/ruver-bus`): Shared envelopes, stack, and the QA slot. Graphs talk through files, not nested agents. [page](docs/commands/ruver-bus.md)
 

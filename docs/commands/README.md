@@ -16,9 +16,16 @@ implement product code.
 | `/ruver-triage` | — | Classify a QA finding | [ruver-triage](ruver-triage.md) |
 | `/ruver-reviewer` | `/reviewer` | Review a PR / diagnose CI | [ruver-reviewer](ruver-reviewer.md) |
 | `/ruver-lstm` | `/lstm` | Incoming review comments | [ruver-lstm](ruver-lstm.md) |
-| `/ruver-bus` | — | Resume or inspect the stack | [ruver-bus](ruver-bus.md) |
 | `/ruver-goal` | — | Keep going until QA evidence | [ruver-goal](ruver-goal.md) |
 | `/ruver-memory` | `/memory` | Durable prefs outside git | [memory](memory.md) |
+
+## Protocol
+
+Not a graph: no nodes, no edges. The graphs load it by name.
+
+| Command | When | Page |
+|---|---|---|
+| `/ruver-bus` | Resume or inspect the stack | [ruver-bus](ruver-bus.md) |
 
 ## Engines
 

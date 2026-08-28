@@ -16,9 +16,32 @@ REQUIRED = [
 FORBIDDEN = ["docs/superpowers"]
 
 
+def graph_file_sets(root, errors):
+    """docs/GRAPH_ENGINEER.md lists what a graph ships. Hold it to that."""
+    sys.path.insert(0, os.path.join(root, "tests", "lib"))
+    from frontmatter import parse, skill_files
+
+    for path in skill_files(root):
+        fields, _ = parse(path)
+        if not fields or fields.get("category") != "graph":
+            continue
+        directory = os.path.dirname(path)
+        name = os.path.basename(directory)
+        for needed in ("GRAPH.md", "STATE.schema.md"):
+            if not os.path.exists(os.path.join(directory, needed)):
+                errors.append(
+                    f"{name}: category is graph but {needed} is missing "
+                    "(add it, or give the skill a category that fits)"
+                )
+        nodes = os.path.join(directory, "nodes")
+        if not os.path.isdir(nodes) or not os.listdir(nodes):
+            errors.append(f"{name}: category is graph but nodes/ is empty")
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else "."
     errors = []
+    graph_file_sets(root, errors)
     for rel in REQUIRED:
         if not os.path.exists(os.path.join(root, rel)):
             errors.append(f"missing: {rel}")
