@@ -32,63 +32,42 @@ Short slashes (`/developer`, `/qa`, `/reviewer`, `/lstm`, `/memory`) are
 aliases of `/ruver-*`. Skill ids stay `ruver-*`. This repo is those
 graphs, not a dump of every third-party skill on a machine.
 
-## Installation (30-second setup)
+## Installation
 
-Two ways in. **Plugin** installs the whole set as a managed bundle.
-**[skills.sh](https://skills.sh/ruverd/skills)** copies editable skill
-files into your agent homes so slash names stay flat
-(`/ruver-developer`, not `/graphs/ruver-developer`). Pick one.
+```bash
+curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash
+```
 
-### 1. Get the skills
+Needs `git` and `curl`. macOS, Linux, Windows Git Bash or WSL. No Node.
 
-**Grok**
+That clones the repo, flattens `skills/{graphs,engines,lib}/<name>` into
+`~/.agents/skills` (and Grok, Claude, Cursor, Codex), and puts `ruver`
+on your PATH.
+
+```bash
+ruver update     # git pull --ff-only main, then relink
+ruver status
+ruver uninstall
+```
+
+**This checkout** (developing the repo): `./install.sh setup`
+points `ruver` at this tree. `ruver update` is `git pull` here.
+
+**Plugin** (optional, not flattened the same way):
 
 ```bash
 grok plugin marketplace add ruverd/skills
 grok plugin install ruver --trust
 ```
 
-**Claude Code**
+Do not combine plugin and `ruver setup` on the same host. `ruver status`
+warns if both are present.
 
-```bash
-claude plugins marketplace add ruverd/skills
-claude plugins install ruver
-```
+Runtime disk is **`~/.ruver/`**, including `memory.md` (`/memory`).
+Install never creates `memory.md`. If `~/.grok/ruver` already exists,
+setup links `~/.ruver` to it so live jobs keep running.
 
-Or, from inside a session: `/plugin install ruver` after adding the
-marketplace.
-
-**Codex, Cursor, and other agents**
-
-```bash
-npx skills@latest add ruverd/skills
-```
-
-Pick the skills you want, and which coding agents to install them on.
-
-**From a clone**
-
-```bash
-git clone https://github.com/ruverd/skills.git
-cd skills
-./install.sh
-```
-
-```bash
-./install.sh --dry-run
-./install.sh --plugin
-./install.sh --uninstall
-```
-
-That flattens `skills/{graphs,engines,lib}/<name>` into
-`~/.agents/skills`, plus the matching homes for Grok, Claude, Cursor,
-and Codex.
-
-Runtime disk is **`~/.ruver/<slug>/`**, shared across hosts. If
-`~/.grok/ruver` already exists, install.sh links `~/.ruver` to it so
-live jobs keep running.
-
-### 2. Restart the session
+### Restart the session
 
 Then run a graph:
 
@@ -250,7 +229,7 @@ skills/                         # this repo
   commands/                     # slash aliases
 ```
 
-Skills are nested by category in git. After `install.sh`, they flatten
+Skills are nested by category in git. After `ruver setup`, they flatten
 so `/ruver-developer` still works. Graphs in the same category keep
 `../ruver-bus/...`. Cross-category links go through
 `../../engines/...` (and resolve via the real path).
@@ -268,7 +247,7 @@ Follow [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md). Short version:
 1. Folder under `skills/graphs/<name>/` (or `engines/`).
 2. Relative links only. No `~/.claude`, `~/.grok`, `~/.codex`.
 3. Host primitives → HOST.md. Product policy → [PRODUCT.md](skills/engines/ruver-feature-delivery/PRODUCT.md) plus the target repo.
-4. Add the path to `plugin.json`, then `./install.sh` and commit.
+4. Add the path to `plugin.json`, then `ruver setup` (or `./install.sh setup`) and commit.
 
 ```bash
 grok plugin validate .

@@ -1,0 +1,26 @@
+name: install-cli
+on:
+  push:
+    paths:
+      - install.sh
+      - tests/install.sh
+      - plugin.json
+      - skills/**
+      - .github/workflows/install-cli.yml
+  pull_request:
+    paths:
+      - install.sh
+      - tests/install.sh
+      - plugin.json
+      - skills/**
+      - .github/workflows/install-cli.yml
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: CLI tests
+        run: bash tests/install.sh

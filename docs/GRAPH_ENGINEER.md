@@ -70,5 +70,5 @@ Never spawn another **graph** as a child (`ruver_qa`, `ruver_developer`,
 7. Skill bodies stay in English. Chat follows `ruver-memory` (default
    English). Forge text stays English. Unslop always.
 
-Then `./install.sh` and a commit. Slash names stay the skill folder
+Then `ruver setup` (or `./install.sh setup`) and a commit. Slash names stay the skill folder
 name (`/ruver-developer`) because install.sh flattens categories.
