@@ -34,5 +34,5 @@ Fragments that count:
 
 Load `$RUVER_ROOT/.ruver-lstm/STATE.md` then bus STACK + ENVELOPE.
 
-The current message answers `waiting_user`. Do not re-verify review ids
-already in `processed_review_ids`.
+The current message answers `waiting_user`. Do not re-verify comment
+ids already in `processed_comment_ids`. Missing 👍 or reply → **reply**.

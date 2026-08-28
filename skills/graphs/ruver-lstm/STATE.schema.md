@@ -19,7 +19,8 @@ init | resolving | rebasing | verifying | grilling | patching | replying | waiti
 | `mergeable` | MERGEABLE / CONFLICTING / DIRTY / … |
 | `ci` | green / red / pending / unknown |
 | `review_ids` | comma list of review `databaseId` in this run |
-| `processed_review_ids` | ids that already have 👍 + reply on **that** id |
+| `processed_comment_ids` | inline comment ids that already have 👍 **and** a thread reply |
+| `processed_review_ids` | review ids whose every in-scope comment is acked, plus 👍 on the review body |
 | `dispositions` | `fix` / `skip` / `unclear` counts or path |
 | `conflict_fixed` | yes / no / n/a |
 | `patched` | yes / no |
@@ -31,6 +32,7 @@ init | resolving | rebasing | verifying | grilling | patching | replying | waiti
 | `worker_id` | spawn id if lane=worker |
 | `waiting_user` | ASK text if stopped |
 
-Processed means: **this** GitHub review `databaseId` has author 👍 on
-its body **and** a reply submitted after that review. A later re-review
-(new id) that restates old findings is still **new**.
+A comment is processed only when it has author 👍 **and** a thread
+reply. A review is processed only when every in-scope comment on it
+is in `processed_comment_ids` and the review body has 👍. A later
+re-review (new ids) that restates old findings is still **new**.

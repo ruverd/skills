@@ -88,7 +88,8 @@ URL | resume | LSTM_REQUEST
   → rebase if DIRTY / CONFLICTING
   → verify (receiving-code-review)
   → patch should-fix (ruver-fd-coder, TDD)
-  → 👍 + reply + resolve threads + re-request
+  → 👍 + unslopped reply on every comment
+  → resolve + dismiss CHANGES_REQUESTED + re-request
 ```
 
 Never opens a new PR. Draft stays draft.

@@ -7,8 +7,9 @@ Load skill **`receiving-code-review`**. Verify before implementing.
 Fetch reviews + inline comments + issue comments
 ([GITHUB.md](../references/GITHUB.md)).
 
-Skip a review `databaseId` only if STATE `processed_review_ids`
-already has 👍 **and** a reply **on that id**. A new id that
+Skip a comment only if STATE `processed_comment_ids` already has 👍
+**and** a reply on that comment. A review in `processed_review_ids`
+is not enough if any of its comments are missing. A new id that
 restates old F-ids is still new.
 
 `COMMENTED` is not a skip. Medium / High / Critical in a body-only

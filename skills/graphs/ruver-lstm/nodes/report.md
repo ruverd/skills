@@ -15,7 +15,8 @@ Do not paste GitHub reply bodies.
 | Reviews | ids … (new / already processed) |
 | Dispositions | N fix · N skip · N unclear |
 | Patched | yes \| no |
-| Ack | 👍 + reply on <ids> |
+| Ack | 👍 + reply on comment ids … (none missing) |
+| Dismissed | CHANGES_REQUESTED ids … \| none \| 403 |
 | Resolved | N threads |
 | Re-request | yes \| no |
 ```

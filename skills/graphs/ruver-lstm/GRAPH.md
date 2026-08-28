@@ -10,7 +10,7 @@ start (ARGS.md: URL | resume | LSTM_REQUEST)
   → verify           # receiving-code-review → fix | skip | unclear
   → grill?           # complicated should-fix only
   → patch            # ruver-fd-coder + TDD, same branch
-  → reply            # 👍 + thread replies + resolve + re-request
+  → reply            # 👍 + unslopped reply on every comment, resolve, dismiss CHANGES_REQUESTED, re-request
   → report
 ```
 

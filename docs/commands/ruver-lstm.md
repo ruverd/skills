@@ -4,7 +4,8 @@ Alias: **`/lstm`**. Looks shit to me. Graph engineer on the **author**
 side of a review.
 
 Ingest a PR / review / comment URL. Patch should-fix on the **same
-branch**. Rebase conflicts. Reply, resolve threads, re-request.
+branch**. Rebase conflicts. 👍 + unslopped reply on every comment,
+resolve threads, dismiss `CHANGES_REQUESTED`, re-request.
 
 Never opens a new PR. Draft stays draft.
 
@@ -27,7 +28,8 @@ URL | resume | LSTM_REQUEST
   → rebase if DIRTY / CONFLICTING
   → verify (receiving-code-review)
   → patch should-fix (ruver-fd-coder, TDD)
-  → 👍 + reply + resolve threads + re-request
+  → 👍 + unslopped reply on every comment
+  → resolve threads + dismiss CHANGES_REQUESTED + re-request
 ```
 
 ## What the main thread does
@@ -36,7 +38,8 @@ URL | resume | LSTM_REQUEST
 2. Always rebase if GitHub says dirty/conflicting.
 3. Verify each thread: fix / skip / unclear.
 4. Complicated should-fix → grill first. Else `ruver-fd-coder` (TDD).
-5. React 👍, reply, resolve, re-request review.
+5. 👍 + unslopped reply on **every** comment (fix and skip). Then
+   resolve, dismiss `CHANGES_REQUESTED`, re-request if a fix landed.
 
 The graph engineer does not type the patch. The coder worker does.
 
@@ -48,6 +51,9 @@ Uses bundled `receiving-code-review` and `unslop` (`skills/lib/`).
 - Merge.
 - Spawn `/ruver-developer` or `/ruver-reviewer`.
 - Skip rebase when the branch is conflicting.
+- Leave a comment without 👍 + reply.
+- POST a GitHub reply that skipped `unslop`.
+- Leave `CHANGES_REQUESTED` on a processed review.
 
 ## Related
 
