@@ -91,4 +91,52 @@ grep -q '^ok ' /tmp/ruver-setup2.out || fail "second setup has no ok lines"
 assert_link "$TEST_HOME/.agents/skills/unslop"
 ok setup-idempotent
 
+# --- update: dirty abort, then clean fast-forward ---
+mini="$(mktemp -d "${TMPDIR:-/tmp}/ruver-mini.XXXXXX")"
+mkdir -p "$mini/skills/lib/unslop" "$mini/agents" "$mini/commands"
+printf '%s\n' '{"name":"ruver","version":"0.0.1"}' >"$mini/plugin.json"
+echo '# unslop' >"$mini/skills/lib/unslop/SKILL.md"
+cp "$INSTALL" "$mini/install.sh"
+chmod +x "$mini/install.sh"
+git -C "$mini" init -q
+git -C "$mini" add .
+git -C "$mini" -c user.email=t@t -c user.name=t commit -qm init
+git -C "$mini" branch -M main
+git -C "$mini" clone --bare "$mini" "${mini}.git"
+git -C "$mini" remote add origin "${mini}.git"
+git -C "$mini" fetch origin
+git -C "$mini" branch --set-upstream-to=origin/main main 2>/dev/null || true
+
+MINI_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-mini-home.XXXXXX")"
+trap 'rm -rf "$TEST_HOME" "$SKIP_HOME" "$mini" "${mini}.git" "$MINI_HOME"' EXIT
+HOME="$MINI_HOME" XDG_CONFIG_HOME="$MINI_HOME/.config" \
+  XDG_DATA_HOME="$MINI_HOME/.local/share" \
+  "$mini/install.sh" setup >/dev/null
+
+echo dirty >>"$mini/skills/lib/unslop/SKILL.md"
+set +e
+HOME="$MINI_HOME" XDG_CONFIG_HOME="$MINI_HOME/.config" \
+  XDG_DATA_HOME="$MINI_HOME/.local/share" \
+  "$mini/install.sh" update >/tmp/ruver-dirty.out 2>/tmp/ruver-dirty.err
+got=$?
+set -e
+assert_eq "$got" "1" "dirty update should fail"
+grep -qi 'stash\|commit' /tmp/ruver-dirty.err /tmp/ruver-dirty.out \
+  || fail "dirty update message"
+ok update-dirty
+
+git -C "$mini" checkout -q -- skills/lib/unslop/SKILL.md
+git -C "$mini" -c user.email=t@t -c user.name=t commit --allow-empty -qm second
+git -C "$mini" push -q origin main
+
+set +e
+HOME="$MINI_HOME" XDG_CONFIG_HOME="$MINI_HOME/.config" \
+  XDG_DATA_HOME="$MINI_HOME/.local/share" \
+  "$mini/install.sh" update >/tmp/ruver-ff.out 2>/tmp/ruver-ff.err
+got=$?
+set -e
+[[ "$got" -eq 0 ]] || fail "clean update exit $got $(cat /tmp/ruver-ff.err)"
+grep -q 'version:' /tmp/ruver-ff.out || fail "update missing version:"
+ok update-clean
+
 echo "all passed"

@@ -201,6 +201,43 @@ cmd_setup() {
   echo "  export PATH=\"$BIN_DIR:\$PATH\""
 }
 
+cmd_update() {
+  local repo
+  repo="$(config_get repo)"
+  repo="${repo:-$REPO}"
+  if [[ ! -d "$repo/.git" ]]; then
+    echo "not a git clone: $repo" >&2
+    echo "  ruver setup" >&2
+    exit 1
+  fi
+  if [[ -n "$(git -C "$repo" status --porcelain)" ]]; then
+    echo "working tree is dirty. commit or stash, then ruver update" >&2
+    git -C "$repo" status -sb >&2
+    exit 1
+  fi
+  local old new oldv newv
+  old="$(git -C "$repo" rev-parse --short HEAD)"
+  oldv="$(plugin_version)"
+  if [[ "$DRY" -eq 1 ]]; then
+    echo "dry-run: git -C $repo fetch origin"
+    echo "dry-run: git -C $repo pull --ff-only origin main"
+    echo "version: $oldv $old -> (dry-run)"
+    return 0
+  fi
+  git -C "$repo" fetch origin
+  if ! git -C "$repo" pull --ff-only origin main; then
+    echo "clone diverged from main. ruver status" >&2
+    exit 1
+  fi
+  REPO="$repo"
+  SELF="$repo/install.sh"
+  new="$(git -C "$repo" rev-parse --short HEAD)"
+  newv="$(plugin_version)"
+  echo "version: $oldv $old -> $newv $new"
+  echo "sha: $old -> $new"
+  cmd_setup
+}
+
 ts() { date +%Y%m%d%H%M%S; }
 
 is_ours() {
@@ -306,6 +343,7 @@ fi
 
 case "${CMD:-setup}" in
   setup) cmd_setup ;;
+  update) cmd_update ;;
   uninstall)
     UNINSTALL=1
     echo "repo    $REPO"
