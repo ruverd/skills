@@ -441,21 +441,31 @@ report_ledger() {
 # a bottleneck is a number instead of a hunch.
 cmd_report() {
   local home="${RUVER_HOME:-$HOME/.ruver}"
-  local found=0 dir slug ledger jobs
+  local found=0 dir slug ledger jobs body
   if [[ -d "$home" ]]; then
     for dir in "$home"/*; do
       [[ -d "$dir" ]] || continue
       slug="$(basename "$dir")"
       ledger="$dir/.ruver-bus/RUN_LOG.tsv"
       jobs="$dir/.ruver-bus/JOBS.md"
-      [[ -f "$ledger" || -f "$jobs" ]] || continue
+      # A repo keeps its bus dir long after the last run. Build the body first
+      # and print the heading only if there is something under it, or every
+      # repo you ever touched shows up as an empty section.
+      body=""
+      if [[ -f "$ledger" ]]; then
+        body="$(report_ledger "$ledger")"
+        [[ -n "$body" ]] && body="$(printf '  %-34s %3s  %8s  %8s\n%s' \
+          "graph/node" "run" "total" "longest" "$body")"
+      fi
+      if [[ -f "$jobs" ]]; then
+        local lease
+        lease="$(report_lease "$jobs")"
+        [[ -n "$lease" ]] && body="${body:+$body$'\n'}$lease"
+      fi
+      [[ -n "$body" ]] || continue
       found=1
       echo "repo $slug"
-      if [[ -f "$ledger" ]]; then
-        printf '  %-34s %3s  %8s  %8s\n' "graph/node" "run" "total" "longest"
-        report_ledger "$ledger"
-      fi
-      [[ -f "$jobs" ]] && report_lease "$jobs"
+      echo "$body"
       echo
     done
   fi

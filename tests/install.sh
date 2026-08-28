@@ -444,4 +444,27 @@ echo "$out" | grep -qi 'no run' || fail "report should say nothing is recorded: 
 rm -rf "$EMPTY_HOME"
 ok report-empty
 
+# --- report: a repo with an idle JOBS.md and no ledger says nothing at all ---
+QUIET_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-report-quiet.XXXXXX")"
+mkdir -p "$QUIET_HOME/.ruver/old-repo/.ruver-bus"
+cat >"$QUIET_HOME/.ruver/old-repo/.ruver-bus/JOBS.md" <<'EOF'
+---
+schema: 2
+qa_active: ""
+qa_claimed_at: ""
+qa_waiting: ""
+updated_at: ""
+---
+EOF
+set +e
+out="$(HOME="$QUIET_HOME" XDG_CONFIG_HOME="$QUIET_HOME/.config" \
+  XDG_DATA_HOME="$QUIET_HOME/.local/share" "$INSTALL" report 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "report on an idle repo exit"
+echo "$out" | grep -q 'old-repo' && fail "report printed an empty header: $out"
+echo "$out" | grep -qi 'no run' || fail "report should say nothing is recorded: $out"
+rm -rf "$QUIET_HOME"
+ok report-quiet
+
 echo "all passed"
