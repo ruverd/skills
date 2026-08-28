@@ -148,4 +148,28 @@ new_sha="$(grep -oE '[0-9a-f]{7,}' <<< "$ver" | tail -1)"
   || fail "update did not advance SHA ($ver)"
 ok update-clean
 
+# Linked worktree: .git is a file, so [[ -d repo/.git ]] is the wrong check.
+mini_wt="${mini}-wt"
+git -C "$mini" worktree add "$mini_wt" -b wt-test >/dev/null
+[[ -f "$mini_wt/.git" ]] || fail "worktree .git should be a file"
+[[ ! -d "$mini_wt/.git" ]] || fail "worktree .git should not be a directory"
+WT_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-wt-home.XXXXXX")"
+trap 'rm -rf "$TEST_HOME" "$SKIP_HOME" "$mini" "${mini}.git" "$MINI_HOME" "$ahead" "$mini_wt" "$WT_HOME"' EXIT
+
+HOME="$WT_HOME" XDG_CONFIG_HOME="$WT_HOME/.config" \
+  XDG_DATA_HOME="$WT_HOME/.local/share" \
+  "$mini_wt/install.sh" setup >/dev/null
+
+set +e
+HOME="$WT_HOME" XDG_CONFIG_HOME="$WT_HOME/.config" \
+  XDG_DATA_HOME="$WT_HOME/.local/share" \
+  "$mini_wt/install.sh" update >/tmp/ruver-wt.out 2>/tmp/ruver-wt.err
+got=$?
+set -e
+[[ "$got" -eq 0 ]] || fail "worktree update exit $got $(cat /tmp/ruver-wt.err)"
+if grep -qi 'not a git clone' /tmp/ruver-wt.err /tmp/ruver-wt.out; then
+  fail "worktree treated as not a git clone"
+fi
+ok update-worktree
+
 echo "all passed"

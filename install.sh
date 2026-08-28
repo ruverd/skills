@@ -205,7 +205,7 @@ cmd_update() {
   local repo
   repo="$(config_get repo)"
   repo="${repo:-$REPO}"
-  if [[ ! -d "$repo/.git" ]]; then
+  if ! git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo "not a git clone: $repo" >&2
     echo "  ruver setup" >&2
     exit 1
