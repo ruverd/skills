@@ -210,6 +210,8 @@ cmd_update() {
     echo "  ruver setup" >&2
     exit 1
   fi
+  REPO="$repo"
+  SELF="$repo/install.sh"
   if [[ -n "$(git -C "$repo" status --porcelain)" ]]; then
     echo "working tree is dirty. commit or stash, then ruver update" >&2
     git -C "$repo" status -sb >&2
@@ -229,8 +231,6 @@ cmd_update() {
     echo "clone diverged from main. ruver status" >&2
     exit 1
   fi
-  REPO="$repo"
-  SELF="$repo/install.sh"
   new="$(git -C "$repo" rev-parse --short HEAD)"
   newv="$(plugin_version)"
   echo "version: $oldv $old -> $newv $new"

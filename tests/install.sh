@@ -94,7 +94,7 @@ ok setup-idempotent
 # --- update: dirty abort, then clean fast-forward ---
 mini="$(mktemp -d "${TMPDIR:-/tmp}/ruver-mini.XXXXXX")"
 mkdir -p "$mini/skills/lib/unslop" "$mini/agents" "$mini/commands"
-printf '%s\n' '{"name":"ruver","version":"0.0.1"}' >"$mini/plugin.json"
+printf '%s\n' '{"name": "ruver", "version": "0.0.1"}' >"$mini/plugin.json"
 echo '# unslop' >"$mini/skills/lib/unslop/SKILL.md"
 cp "$INSTALL" "$mini/install.sh"
 chmod +x "$mini/install.sh"
@@ -126,8 +126,12 @@ grep -qi 'stash\|commit' /tmp/ruver-dirty.err /tmp/ruver-dirty.out \
 ok update-dirty
 
 git -C "$mini" checkout -q -- skills/lib/unslop/SKILL.md
-git -C "$mini" -c user.email=t@t -c user.name=t commit --allow-empty -qm second
-git -C "$mini" push -q origin main
+
+ahead="$(mktemp -d "${TMPDIR:-/tmp}/ruver-ahead.XXXXXX")"
+trap 'rm -rf "$TEST_HOME" "$SKIP_HOME" "$mini" "${mini}.git" "$MINI_HOME" "$ahead"' EXIT
+git clone -q "${mini}.git" "$ahead"
+git -C "$ahead" -c user.email=t@t -c user.name=t commit --allow-empty -qm second
+git -C "$ahead" push -q origin main
 
 set +e
 HOME="$MINI_HOME" XDG_CONFIG_HOME="$MINI_HOME/.config" \
@@ -137,6 +141,11 @@ got=$?
 set -e
 [[ "$got" -eq 0 ]] || fail "clean update exit $got $(cat /tmp/ruver-ff.err)"
 grep -q 'version:' /tmp/ruver-ff.out || fail "update missing version:"
+ver="$(grep '^version:' /tmp/ruver-ff.out | head -1)"
+old_sha="$(grep -oE '[0-9a-f]{7,}' <<< "$ver" | head -1)"
+new_sha="$(grep -oE '[0-9a-f]{7,}' <<< "$ver" | tail -1)"
+[[ -n "$old_sha" && -n "$new_sha" && "$old_sha" != "$new_sha" ]] \
+  || fail "update did not advance SHA ($ver)"
 ok update-clean
 
 echo "all passed"
