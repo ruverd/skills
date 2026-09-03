@@ -21,7 +21,6 @@ Ticket:
 - acs:
 - how:
   1.
-- e2e:
 - variants:
 - pass_if:
 

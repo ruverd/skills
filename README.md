@@ -1,7 +1,7 @@
 # Skills
 
 Skills for coding agents. Give one a ticket or a local goal and it
-writes the code, opens a draft PR, exercises the change (browser, e2e,
+writes the code, opens a draft PR, exercises the change (agent-browser
 or HTTP), and handles review.
 
 The session you talk to is a **graph engineer**, not an implementer.
@@ -22,7 +22,7 @@ TDD on behavior change. ASK the user only as a last resort.
 | You type | What happens |
 |---|---|
 | `/developer` | Grill, spec, tickets, TDD, draft PR, CI, then QA |
-| `/qa` | Exercise the PR (browser, e2e, or HTTP). Comment with evidence |
+| `/qa` | Exercise the PR (agent-browser or HTTP). Comment with a video |
 | `/reviewer` | Review the PR. Diagnose CI |
 | `/lstm` | Incoming review. Patch the same branch |
 | `/goal` | Keep going until QA evidence lands on the head SHA |
@@ -40,7 +40,11 @@ graphs, not a dump of every third-party skill on a machine.
 curl -fsSL https://raw.githubusercontent.com/ruverd/skills/main/install.sh | bash
 ```
 
-Needs `git` and `curl`. macOS, Linux, and WSL. No Node.
+Needs `git` and `curl`. macOS, Linux, and WSL. `ruver setup` also
+installs [agent-browser](https://agent-browser.dev/) (Homebrew, else
+the official binary or npm) and Chrome, and warns if `gh` is older
+than 2.99 (`--attach`). Plugin install does not; run `ruver setup`
+for that CLI.
 
 Install works by symlinking, and `ruver update` relies on those links to pick
 up new commits. Windows Git Bash turns `ln -s` into a silent copy unless
@@ -109,13 +113,32 @@ app, and in the agent session.
 | Need | Used by |
 |---|---|
 | `gh` or `glab` authenticated (the forge this repo uses) | `/developer`, `/reviewer`, `/lstm`, `/qa` |
-| A browser | `/qa` on UI changes |
-| The app's e2e runner if it has one (Playwright, Cypress, …) | `/qa` on UI |
+| `agent-browser` + Chrome (`ruver setup`) | `/qa` on UI, and stills at PR open |
+| `gh` ≥ 2.99 | attach stills on the PR body and video on the QA comment |
+
+The app's Playwright/Cypress suite, if it has one, stays in **CI**.
+`/qa` does not run it.
 
 Which of those you need is discovered per repo
 ([PRODUCT.md](skills/ruver-feature-delivery/PRODUCT.md)).
 A local goal does not need a tracker. API-only QA does not need a
 browser. `--no-pr` or a git-only remote ships a commit, not a PR.
+
+### UI evidence
+
+On a GitHub PR that changes a screen, two artifacts:
+
+1. **Before/after stills** on the PR **body** at open (shipper). Two
+   worktrees (merge-base vs HEAD), desktop always, mobile only when
+   layout/CSS/media/DS changed. New route: after-only Preview. Lib:
+   [before-and-after](skills/before-and-after/SKILL.md).
+2. **Video of the walk** on the **QA comment** (`gh pr comment --attach`).
+   PASS on UI without that video is invalid.
+
+Login is reused from `$HOME/.ruver/agent-browser/ruver-<owner>-<repo>/`
+until it expires, then the repo's `qa:login` / `qa:otp` helper.
+
+API-only PRs skip stills and video. HTTP record is the evidence.
 
 **Links in the goal**
 
@@ -167,7 +190,8 @@ Main-thread graph engineer. `category: graph`. Source: [`skills/`](skills/README
 **User-invoked**
 
 - **[ruver-developer](skills/ruver-developer/SKILL.md)** (`/developer`, `/ruver-developer`): Ticket, goal, or PR_BUG fix. Draft PR, MERGEABLE, then QA. [page](docs/commands/ruver-developer.md)
-- **[ruver-qa](skills/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR (browser, e2e, or HTTP). Comment with evidence. [page](docs/commands/ruver-qa.md)
+- **[ruver-qa](skills/ruver-qa/SKILL.md)** (`/qa`, `/ruver-qa`): Exercise a PR (agent-browser or HTTP). Comment with a video. [page](docs/commands/ruver-qa.md)
+- **[before-and-after](skills/before-and-after/SKILL.md)**: UI stills on the GitHub PR body. Loaded by the shipper and `/qa`.
 - **[ruver-triage](skills/ruver-triage/SKILL.md)** (`/ruver-triage`): Classify a QA finding. [page](docs/commands/ruver-triage.md)
 - **[ruver-reviewer](skills/ruver-reviewer/SKILL.md)** (`/reviewer`, `/ruver-reviewer`): Review a PR. Diagnose CI. [page](docs/commands/ruver-reviewer.md)
 - **[ruver-lstm](skills/ruver-lstm/SKILL.md)** (`/lstm`, `/ruver-lstm`): Incoming review. Patch the same branch. [page](docs/commands/ruver-lstm.md)
@@ -189,7 +213,7 @@ the shared envelope, stack and QA-slot rules.
 **Model-invoked**
 
 - **[ruver-host](skills/ruver-host/SKILL.md)**: the host contract. Maps `load_skill`, `spawn_worker`, `worktree`, `schedule_wake`, `session_model` and the optional MCP capabilities onto whatever harness you are on. A graph loads it by name when a node mentions a primitive.
-- The bundled primitives (`unslop`, `tdd`, `how`, `why`, `grill-*`, `principle-*`, …) reach themselves when the task fits. Origins: [External references](#external-references).
+- The bundled primitives (`unslop`, `tdd`, `how`, `why`, `grill-*`, `principle-*`, `before-and-after`, …) reach themselves when the task fits. Origins: [External references](#external-references).
 
 ### Engines
 
@@ -347,6 +371,11 @@ so a clone is enough. Full list and licenses:
 | [pstack](https://github.com/poteto/pstack) | `unslop`, `tdd`, `how`, `why`, `principle-*`, … |
 | [superpowers](https://github.com/obra/superpowers) | `receiving-code-review` |
 | Cursor team kit | `thermo-nuclear-code-quality-review` |
+
+The before/after PR-body flow follows
+[vercel-labs/before-and-after](https://github.com/vercel-labs/before-and-after).
+Their `format.mjs` is PolyForm Shield, so this repo ships `format.sh` (MIT)
+instead of a copy.
 
 ## License
 

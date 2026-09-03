@@ -56,7 +56,7 @@ done_report | escalated
 | implement | one ticket + spec excerpt | code, tdd evidence, files_touched |
 | review | spec, ticket, diff, gates.log | review |
 | tester | files, scripts | hard gate + gates.log |
-| evidence | qa_tool, pr_url, sha | fragment, before/after urls |
+| evidence | qa_tool, pr_url, sha | fragment, before/after png paths |
 | blast | diff | blast section |
 | quality | diff, files | quality section |
 | shipper | gates | ship, ci.status=pending |

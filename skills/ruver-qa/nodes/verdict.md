@@ -3,11 +3,10 @@
 **Verb:** close
 
 1. Map TRIAGE_RESULT via [../references/HANDOFF.md](../references/HANDOFF.md).
-2. **Publish evidence** with
-   `../scripts/publish-evidence.sh`
-   (never `gh gist create` on binaries). Then **post the PR comment**
-   — [../references/COMMENT.md](../references/COMMENT.md).
-   No comment → this node has not finished.
+2. **Post the PR comment** with video attached —
+   [../references/COMMENT.md](../references/COMMENT.md)
+   (`../scripts/publish-evidence.sh`, never `gh gist create` on
+   binaries). No comment → this node has not finished.
    Write `video_url` and `comment_url` into STATE.
 3. Write `QA_RESULT` envelope. Pop stack.
 4. Run caller `apply_qa` (if developer is on the stack) **before**

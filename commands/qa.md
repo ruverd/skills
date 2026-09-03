@@ -1,5 +1,5 @@
 ---
-description: Alias /qa — same as /ruver-qa
+description: Alias /qa — same as /ruver-qa (agent-browser or HTTP)
 argument-hint: "<PR url or owner/repo#N>"
 ---
 

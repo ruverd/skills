@@ -12,7 +12,7 @@ implement product code.
 | Command | Short | When | Page |
 |---|---|---|---|
 | `/ruver-developer` | `/developer` | Ticket, goal, or PR_BUG fix | [ruver-developer](ruver-developer.md) |
-| `/ruver-qa` | `/qa` | Exercise a PR (browser, e2e, or HTTP) | [ruver-qa](ruver-qa.md) |
+| `/ruver-qa` | `/qa` | Exercise a PR (agent-browser or HTTP) | [ruver-qa](ruver-qa.md) |
 | `/ruver-triage` | — | Classify a QA finding | [ruver-triage](ruver-triage.md) |
 | `/ruver-reviewer` | `/reviewer` | Review a PR / diagnose CI | [ruver-reviewer](ruver-reviewer.md) |
 | `/ruver-lstm` | `/lstm` | Incoming review comments | [ruver-lstm](ruver-lstm.md) |

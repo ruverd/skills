@@ -30,7 +30,8 @@ Follow `../skills/ruver-feature-delivery/nodes/shipper.md`.
    AGENTS.md has no assignee). Never `git user.name`.
    Request only `confirmed` (PRODUCT.md §6). One failed reviewer
    request must not block the rest.
-   Then set `ci.status: pending`.
+   UI diff + GitHub: before-and-after stills on the body after create
+   (shipper.md). Then set `ci.status: pending`.
 7. **Do not** set graph `status: done` — orchestrator runs **ruver-fd-ci** next.
 8. Never merge. English summary: PR URL + "waiting on CI green to deliver".
 

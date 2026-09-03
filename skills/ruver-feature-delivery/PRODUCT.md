@@ -93,14 +93,17 @@ ASK only if the ticket cannot ship without the other side.
 
 | What exists | `qa_tool` |
 |---|---|
-| `playwright.config.*` | `playwright` |
-| `cypress.config.*` | `cypress` |
-| UI, no e2e runner | host browser (MCP / built-in). Still record evidence |
+| UI (routes, screens, widgets, layout) | `agent-browser`. Stills + video. [before-and-after](../before-and-after/SKILL.md) |
 | API, no UI, no sibling | `http`. Curl or the repo's request test. No invented screen |
-| API + resolved frontend | FE route if a caller exists, else `http` |
+| API + resolved frontend | FE route if a caller exists (`agent-browser`), else `http` |
+| Infra/docs, no screen | `none`. No browser QA |
 
-One execute slot. Never two browser runs. Video when the tool can
-record it. HTTP record is enough on `qa_tool=http`.
+The app's Playwright/Cypress suite is CI (`e2e_cmd`). QA does not run
+it. Missing `agent-browser` on a UI PR is BLOCKED, not a host-MCP
+fallback.
+
+One execute slot. Never two browser runs. UI PASS needs an
+agent-browser `.webm`. HTTP record is enough on `qa_tool=http`.
 
 ## 6. Assignee and reviewers
 

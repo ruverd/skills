@@ -12,9 +12,9 @@ The goal is done only when **all** are true on the **current head SHA**:
 ```
 
    `sha=` must equal `headRefOid`.
-5. That same comment has evidence. UI: a **Video:** line with an
-   `https://` URL (gist or equivalent). API-only: an HTTP record of
-   the changed endpoints. Local `test-results/*.webm` is not enough.
+5. That same comment has evidence. UI: a `user-attachments` URL (the
+   `--attach` video). API-only: an HTTP record of the changed
+   endpoints. Local `test-results/*.webm` is not enough.
 
 `FAIL` still completes **this** goal if the comment is on the head SHA
 (QA ran). A `PR_BUG` reopens work: new SHA → loop continues until a

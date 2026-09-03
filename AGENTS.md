@@ -3,7 +3,7 @@
 Marketplace of Ruver agent skills. Not an application repo.
 
 - Canonical skill files live under `skills/<name>/`, one flat directory each, with `category: graph | engine | lib` in the frontmatter.
-- `category: lib` marks bundled primitives (`unslop`, `grill-with-docs`, `receiving-code-review`, `principle-*`, the `ruver-bus` protocol, the `ruver-host` contract). Graphs must load those, not an external marketplace.
+- `category: lib` marks bundled primitives (`unslop`, `grill-with-docs`, `receiving-code-review`, `principle-*`, `before-and-after`, the `ruver-bus` protocol, the `ruver-host` contract). Graphs must load those, not an external marketplace.
 - Every skill is a sibling of every other, so all cross-skill links are
   `../<name>/FILE.md` (`../ruver-bus/PROTOCOL.md`). No link may leave the skills
   root: the repo root is unreachable once a skill is installed. The host contract

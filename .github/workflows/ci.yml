@@ -24,6 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: bash tests/repo.sh
+      - run: bash tests/before-and-after.sh
 
   cli:
     name: cli (${{ matrix.os }})

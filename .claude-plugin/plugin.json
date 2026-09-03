@@ -1,6 +1,6 @@
 {
   "name": "ruver",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",
@@ -17,6 +17,7 @@
   ],
   "skills": [
     "./skills/architect",
+    "./skills/before-and-after",
     "./skills/blast-radius",
     "./skills/diagnose",
     "./skills/figure-it-out",

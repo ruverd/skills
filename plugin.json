@@ -1,7 +1,7 @@
 {
   "name": "ruver",
   "displayName": "Ruver",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Agent graphs that deliver a ticket or local goal, QA a PR with evidence, and handle incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",
@@ -18,7 +18,7 @@
     "ruver-qa",
     "tdd",
     "code-review",
-    "playwright",
+    "agent-browser",
     "linear"
   ],
   "category": "developer-tools",
@@ -30,6 +30,7 @@
   ],
   "skills": [
     "./skills/architect",
+    "./skills/before-and-after",
     "./skills/blast-radius",
     "./skills/diagnose",
     "./skills/figure-it-out",

@@ -12,7 +12,7 @@
       "name": "ruver",
       "source": "./",
       "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "category": "developer-tools",
       "tags": [
         "ruver",

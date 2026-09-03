@@ -1,8 +1,8 @@
 # Node: evidence
 
 **Verb:** capture
-**Capability:** write screenshots, gist URLs, and a PR-body fragment. No product fix. No PR.
-**Does not** open the PR. Shipper inlines the fragment.
+**Capability:** write local PNGs and a PR-body fragment. No product fix. No PR.
+**Does not** open the PR. Shipper attaches the PNGs.
 
 ## Mission
 
@@ -36,8 +36,9 @@ body (`gh pr edit --body`). Developer `fix` and LSTM `patch` point here.
 
 ## How
 
-**UI.** `qa_tool=playwright` in STATE: Playwright PNG of the route.
-Anything else: host browser PNG. Same viewport as Before.
+**UI.** `qa_tool=agent-browser`: PNG of the route via
+[before-and-after](../../before-and-after/SKILL.md). Same viewport as
+Before. Restore the shared session first.
 
 **Non-UI.** A fenced command-output pair. No invented screen.
 
@@ -46,36 +47,26 @@ Save PNGs under `$RUVER_ROOT/.ruver-feature-delivery/evidence/`
 
 ## Publish
 
-One home: [publish-evidence.sh](../../ruver-qa/scripts/publish-evidence.sh).
-No new skill.
-
-```bash
-../../ruver-qa/scripts/publish-evidence.sh \
-  --repo "$REPO" --pr "$PR" --sha "$SHA" \
-  --screenshot "$BEFORE_PNG" --screenshot "$AFTER_PNG"
-```
-
-`--screenshot` is repeatable. Keep `--video`, `--artifacts`, `--repo`,
-`--pr`, `--sha`. Secret gist.
-
-No PR yet: keep the PNGs on disk. Shipper runs the same script after
-the PR exists and replaces local paths with gist raw URLs.
+Keep the PNGs on disk. There is no PR yet. Shipper attaches them with
+[before-and-after](../../before-and-after/SKILL.md) (`format.sh` +
+`gh pr edit --attach`). Do not gist.
 
 ## Fragment
 
 Write `$RUVER_ROOT/.ruver-feature-delivery/pr-body-evidence.md`.
 
 Fill **How tested** (commands + exit codes from `gates.log`) and
-**Before → After** (gist raw URLs, fenced output, or `n/a`). Each claim
-needs one of those three. Shipper inlines the fragment into
-[../templates/PR_BODY.md](../templates/PR_BODY.md).
+**Before → After** (local PNG paths, fenced output, or `n/a`).
+Shipper inlines the fragment into
+[../templates/PR_BODY.md](../templates/PR_BODY.md), then replaces
+local PNG paths with GitHub attachments.
 
 ## Output
 
 ```text
 result: ok | skipped
-before: <gist raw URL | n/a (new screen) | n/a>
-after: <gist raw URL | fenced | n/a>
+before: <png path | n/a (new screen) | n/a>
+after: <png path | fenced | n/a>
 route: <path or n/a>
 viewport: <WxH or n/a>
 fragment: .ruver-feature-delivery/pr-body-evidence.md

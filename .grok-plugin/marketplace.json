@@ -10,7 +10,7 @@
     {
       "name": "ruver",
       "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa and the graphs behind them.",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "author": {
         "name": "Ruver Dornelas",
         "email": "ruverd@gmail.com"
@@ -27,7 +27,7 @@
         "qa",
         "review",
         "linear",
-        "playwright"
+        "agent-browser"
       ],
       "keywords": [
         "ruver-developer",

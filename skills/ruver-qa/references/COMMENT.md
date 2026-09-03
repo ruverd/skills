@@ -9,43 +9,38 @@ Never comment `PENDING_TRIAGE`.
 
 QA execute must have recorded:
 
-- Playwright **video** (`--video=on` on the run)
+- agent-browser **video** (`record start` / `record stop`)
 - Screenshots of the AC paths
 - command + exit + failing names if any
 
-Paths live under `test-results/**` (or the repo's configured output).
+Paths live under `$CAPTURE_DIR` or `.ruver-qa/artifacts`.
 
-## Publish video
+Stills before/after belong on the **PR body**
+([before-and-after](../../before-and-after/SKILL.md)), not in this
+comment.
 
-GitHub comments cannot play a local `.webm`. Upload, then link.
+## Post (video on the comment)
 
-**Never** `gh gist create` on `.webm` / `.mp4` / `.png`. gh 2.58+
-returns `binary file not supported`. Secret is already the default
-(`--secret` is gone).
+GitHub comments play `user-attachments` video. They do not play
+gist `.webm`. **Never** `gh gist create` on media.
 
-Run the skill script (text gist, then `git push` of the media):
+Write `$BODY`. Replace `VIDEO_PATH` with the recorded `.webm` so
+`gh --attach` can rewrite it. Then:
 
 ```bash
 ../scripts/publish-evidence.sh \
   --repo "$REPO" --pr "$PR" --sha "$SHA" \
+  --body-file "$BODY" \
   --video "$VIDEO" --artifacts .ruver-qa/artifacts
 ```
 
-Use the printed `GIST_URL` / `VIDEO_MP4` / `SCREENSHOT=` lines in the
-comment. Embed PNGs as `![label](raw-url)`.
+The script runs `gh pr comment --attach`. Use the printed
+`COMMENT_URL`. `gh` ≥ 2.99.
 
-GitHub comments **do not inline-play** gist video (only
-`user-attachments` does). Link the gist + raw mp4/webm. Do not commit
-videos to the PR branch.
+If the script exits 2, still get a comment up with the printed
+`LOCAL_VIDEO` path — do **not** skip the comment.
 
-If the script exits 2, still comment with the printed `LOCAL_VIDEO`
-path — do **not** skip the comment.
-
-## Post
-
-```bash
-gh pr comment "$PR" --repo "$REPO" --body-file "$BODY"
-```
+## Body
 
 `$BODY` template (English — it is GitHub):
 
@@ -56,7 +51,7 @@ gh pr comment "$PR" --repo "$REPO" --body-file "$BODY"
 |---|---|
 | PR | <url> |
 | SHA | `<sha>` |
-| Surface | <routes / endpoints / specs from PLAN.md> |
+| Surface | <routes / endpoints from PLAN.md> |
 | Plan | <step count> steps |
 | Findings | <n or none> |
 | Triage | <class or n/a> |
@@ -65,8 +60,7 @@ gh pr comment "$PR" --repo "$REPO" --body-file "$BODY"
 <summary of the plan + what passed>
 
 ### Evidence
-- Video: <gist url>
-- Screenshots: <gist or raw urls>
+[Walk video](VIDEO_PATH)
 
 <!-- ruver-qa: v=1 verdict=PASS sha=<sha> -->
 ```
@@ -74,7 +68,7 @@ gh pr comment "$PR" --repo "$REPO" --body-file "$BODY"
 Headers: `## QA: PASS` · `## QA: FAIL` · `## QA: BLOCKED`.
 
 `FAIL` includes expected vs actual + triage class.
-`BLOCKED` includes what was missing (env/auth/app).
+`BLOCKED` includes what was missing (env/auth/app/agent-browser).
 
 One comment per SHA. If a comment with the same
 `ruver-qa: v=1 … sha=<sha>` already exists, do not post another.
@@ -82,10 +76,10 @@ One comment per SHA. If a comment with the same
 ## Hard rules
 
 - No verdict without this comment.
-- No comment without attempting a video upload when a `.webm` exists.
+- No comment without attempting `--attach` when a `.webm` exists.
 - **PASS requires evidence.** UI: video of the route. API-only: HTTP
-  record of the changed endpoints (video if captured). If capture
-  failed on a UI run, say so in the comment and do **not** treat
-  the run as a complete PASS.
+  record of the changed endpoints. If capture failed on a UI run,
+  say so in the comment and do **not** treat the run as a complete
+  PASS.
 - Do not commit videos to the PR branch.
 - Do not paste credentials or raw `.env`.

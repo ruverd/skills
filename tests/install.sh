@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 INSTALL="$ROOT/install.sh"
+export RUVER_SKIP_DEPS=1
 
 fail() { echo "FAIL: $*" >&2; exit 1; }
 ok() { echo "ok  $*"; }
@@ -21,6 +22,7 @@ assert_gone() { [[ ! -e "$1" && ! -L "$1" ]] || fail "should be gone: $1"; }
 run_install() {
   HOME="$TEST_HOME" XDG_CONFIG_HOME="$TEST_HOME/.config" \
     XDG_DATA_HOME="$TEST_HOME/.local/share" \
+    RUVER_SKIP_DEPS=1 \
     "$INSTALL" "$@"
 }
 
@@ -62,6 +64,7 @@ assert_link "$TEST_HOME/.local/bin/ruver"
 readlink "$TEST_HOME/.local/bin/ruver" | grep -q 'install.sh' || fail "bin not install.sh"
 assert_file "$TEST_HOME/.ruver"
 assert_not "$TEST_HOME/.ruver/memory.md"
+grep -q 'agent-browser' /tmp/ruver-setup.out || fail "setup should mention agent-browser"
 ok setup
 
 # PATH snippet once. TEST_HOME/.local/bin is not on PATH, so setup must write the block.

@@ -70,4 +70,6 @@ Only with an explicit log in Decisions, and only:
 
 ## E2E
 
-Only if done criteria needs an end-to-end UI flow. Use `e2e_cmd` / `qa_tool` from STATE. Unit/integration first. E2E does not replace TDD of logic.
+Only if done criteria needs an end-to-end UI flow. Use `e2e_cmd` from
+STATE (the app's suite, CI). Unit/integration first. E2E does not
+replace TDD of logic. `/qa` is agent-browser, not this suite.

@@ -5,7 +5,7 @@ start (PR from args or QA_REQUEST)
   → admit            # one QA slot; else enqueue and stop
   → resolve
   → plan             # inventory + step-by-step from the diff
-  → execute          # walk PLAN.md; append FINDINGS as they appear
+  → execute          # agent-browser or HTTP; append FINDINGS as they appear
   → gate
        ├ no findings / unambiguous FAIL → verdict
        └ any product suspicion          → request_triage
