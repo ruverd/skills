@@ -4,6 +4,31 @@ Notable changes per release. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html), pre-1.0.
 
+## [0.8.0] - 2026-09-03
+
+### Added
+
+- `before-and-after` lib: GitHub PR body stills (desktop, mobile only
+  when layout/CSS changes). Shipper attaches merge-base vs HEAD with
+  `gh pr edit --attach`. `/qa` fills the block when it is missing.
+- `ruver setup` installs `agent-browser` and Chrome, and warns when
+  `gh` is older than 2.99 (`--attach`).
+- Shared login state under `~/.ruver/agent-browser/ruver-<owner>-<repo>/`.
+
+### Changed
+
+- **Breaking:** `/qa` UI execute is agent-browser only. The app's
+  Playwright/Cypress suite stays in CI (`e2e_cmd`). Missing
+  `agent-browser` on a UI PR is `BLOCKED`.
+- QA video and PR stills use `gh --attach`. Gist upload is gone.
+- `qa_tool` is `agent-browser | http | none`.
+- The `evidence` node captures local PNGs with agent-browser. Shipper
+  publishes them; it does not gist them.
+
+### Removed
+
+- Playwright/Cypress/host-MCP as the agent's QA hands.
+
 ## [0.7.0] - 2026-09-03
 
 ### Added
@@ -168,5 +193,6 @@ Notable changes per release. Format follows
 
 Not tracked in this file.
 
+[0.8.0]: https://github.com/ruverd/skills/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/ruverd/skills/compare/v0.6.0...v0.7.0
 [0.5.0]: https://github.com/ruverd/skills/releases/tag/v0.5.0

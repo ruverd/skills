@@ -110,7 +110,7 @@ On `*_RESULT`:
 
 - Spawn a graph as a subagent (`ruver_qa` / `_triage` / `_developer` /
   `_reviewer` / `_lstm`). Overflow work uses `general-purpose` workers (JOBS.md).
-- Two QA `execute` runs (Playwright) at once
+- Two QA `execute` runs (agent-browser) at once
 - Two graphs “active” without a stack
 - A fourth stack frame, or pushing a graph already on the stack
 - Popping a live graph to make room for a push

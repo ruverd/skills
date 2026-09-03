@@ -9,6 +9,10 @@
             "description": "Sketch types, signatures, and module structure before code, then stay in the loop while implementation fills in."
           },
           {
+            "name": "before-and-after",
+            "description": "Use when a GitHub PR needs before/after UI stills on the body, or when ruver-qa / the shipper captures those stills with agent-browser."
+          },
+          {
             "name": "blast-radius",
             "description": "Find what a change could break somewhere else before it ships, beyond the diff."
           },
@@ -94,7 +98,7 @@
           },
           {
             "name": "ruver-qa",
-            "description": "Graph: QA a PR. One slot (queue extras). Plan from the diff, then browser, e2e, or HTTP. Bus TRIAGE_REQUEST on product errors."
+            "description": "Graph: QA a PR. One slot (queue extras). Plan from the diff, then agent-browser or HTTP. Bus TRIAGE_REQUEST on product errors."
           },
           {
             "name": "ruver-reviewer",
@@ -192,7 +196,7 @@
           },
           {
             "name": "ruver_qa",
-            "description": "Product QA agent. Runs Playwright and browser checks on a GitHub PR, then hands potential product errors to ruver_triage."
+            "description": "Product QA agent. Runs agent-browser checks on a GitHub PR, then hands potential product errors to ruver_triage."
           },
           {
             "name": "ruver_reviewer",
@@ -262,7 +266,7 @@
           },
           {
             "name": "ruver-qa",
-            "description": "QA a PR (browser, e2e, or HTTP). Hands potential bugs to ruver_triage."
+            "description": "QA a PR (agent-browser or HTTP). Hands potential bugs to ruver_triage."
           },
           {
             "name": "ruver-reviewer",

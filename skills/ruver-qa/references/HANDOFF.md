@@ -16,7 +16,7 @@ findings. Do not spawn a second triage run per finding.
 * tracker issue, when available
 * plan path (`.ruver-qa/PLAN.md`)
 * each finding: step, surface, expected, actual, reproducible,
-  evidence (Playwright / video / screenshots / API / logs),
+  evidence (agent-browser / video / screenshots / API / logs),
   whether the failing code is in this PR's diff
 * `payload_path` if the body would be huge
 
@@ -50,7 +50,7 @@ Actual:
 <...>
 Reproducible: yes | no | unknown
 Evidence:
-- Playwright: <name + exit + excerpt>
+- agent-browser: <name + exit + excerpt>
 - Video: <path or none>
 - Screenshots: <paths or none>
 - API: <or none>

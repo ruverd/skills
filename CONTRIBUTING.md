@@ -20,13 +20,14 @@ Read [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md) before adding a graph.
 ## Gates
 
 ```bash
-bash tests/install.sh   # the ruver CLI: setup, update, uninstall, flags
-bash tests/repo.sh      # repo invariants: links, frontmatter, manifests, structure
+bash tests/install.sh          # the ruver CLI: setup, update, uninstall, flags
+bash tests/repo.sh             # repo invariants: links, frontmatter, manifests, structure
+bash tests/before-and-after.sh # PR stills formatter + session dir
 ```
 
 Both run in CI on every push. `tests/repo.sh` needs `python3`, and it runs
-`shellcheck` when that is installed. Neither is needed to *use* the skills:
-installing still needs only `git` and `curl`.
+`shellcheck` when that is installed. Using the skills still needs `git` and
+`curl`; `ruver setup` also installs `agent-browser`.
 
 ## Adding a skill
 

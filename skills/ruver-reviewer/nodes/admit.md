@@ -13,6 +13,6 @@ Load `ruver-memory` (read both files). Chat follows that skill.
 4. Busy main, **or** 2+ PRs in this call → one worker +
    worktree **per PR**. Orchestrator does not review diffs.
    Each worker runs `ruver-code-review` for that PR only.
-   No `ruver_reviewer` spawn. No Playwright.
+   No `ruver_reviewer` spawn. No browser QA.
 
 Worker writes `jobs/<id>/RESULT.md`. Aggregate in chat.

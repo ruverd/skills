@@ -30,9 +30,8 @@ applies to an AC of **this** PR.
 
 **Required** after a final `PASS` / `FAIL` / `BLOCKED`.
 
-Follow [COMMENT.md](COMMENT.md): publish via
-`scripts/publish-evidence.sh`, then one `gh pr comment` with the QA
-header **and** the gist/raw video + screenshots.
+Follow [COMMENT.md](COMMENT.md): one `gh pr comment --attach` with
+the QA header and the walk video.
 
 Chat report is not enough. Never comment `PENDING_TRIAGE`.
 A run without that comment is not finished.

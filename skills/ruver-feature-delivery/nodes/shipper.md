@@ -24,10 +24,12 @@ Then the orchestrator runs **ci_watch** if a PR/MR exists.
 7. Draft PR/MR with the ticket link. Body from
    [../templates/PR_BODY.md](../templates/PR_BODY.md). Inline the
    evidence fragment (`$RUVER_ROOT/.ruver-feature-delivery/pr-body-evidence.md`).
-   If that fragment still has local PNG paths, publish them with
-   [publish-evidence.sh](../../ruver-qa/scripts/publish-evidence.sh)
-   `--screenshot` and replace with gist raw URLs first. A repo
-   `pr-description` skill may fill leftover fields. It is not the body.
+   **UI + `forge=github`:** load
+   [before-and-after](../../before-and-after/SKILL.md). Attach the
+   evidence PNGs with `format.sh` + `gh pr edit --attach`. Do not gist.
+   If the fragment has no PNGs yet, capture merge-base vs HEAD here.
+   Capture failure does not block the PR. A repo `pr-description`
+   skill may fill leftover fields. It is not the body.
 8. **Reviewers + assignee** per PRODUCT.md §6 (re-read at PR open).
    ```bash
    ME=$(gh api user --jq .login)   # or glab equivalent

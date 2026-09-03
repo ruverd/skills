@@ -186,6 +186,63 @@ ensure_bin() {
   echo "link   $BIN_LINK -> $SELF"
 }
 
+gh_attach_ok() {
+  command -v gh >/dev/null 2>&1 || return 1
+  local ver major rest minor
+  ver="$(gh --version 2>/dev/null | head -1 | grep -oE '[0-9]+\.[0-9]+' | head -1 || true)"
+  [[ -n "$ver" ]] || return 1
+  major="${ver%%.*}"
+  rest="${ver#*.}"
+  minor="${rest%%.*}"
+  if (( major > 2 )); then return 0; fi
+  if (( major == 2 && minor >= 99 )); then return 0; fi
+  return 1
+}
+
+install_agent_browser_bin() {
+  if command -v brew >/dev/null 2>&1; then
+    brew install agent-browser
+    return
+  fi
+  if command -v npm >/dev/null 2>&1; then
+    npm install -g agent-browser
+    return
+  fi
+  echo "warn   install agent-browser from https://agent-browser.dev/" >&2
+  return 1
+}
+
+ensure_agent_browser() {
+  if [[ "${RUVER_SKIP_DEPS:-0}" = "1" ]]; then
+    echo "skip   agent-browser (RUVER_SKIP_DEPS)"
+    return 0
+  fi
+  if [[ "$DRY" -eq 1 ]]; then
+    echo "dry-run: install agent-browser + Chrome if missing"
+    return 0
+  fi
+  if ! command -v agent-browser >/dev/null 2>&1; then
+    echo "need   agent-browser"
+    install_agent_browser_bin || true
+  fi
+  if command -v agent-browser >/dev/null 2>&1; then
+    echo "ok     agent-browser $(agent-browser --version 2>/dev/null | head -1)"
+    agent-browser install >/dev/null || echo "warn   agent-browser install (Chrome) failed" >&2
+  else
+    echo "warn   agent-browser missing. UI /qa is BLOCKED until it is installed." >&2
+    echo "       brew install agent-browser && agent-browser install" >&2
+  fi
+  if command -v gh >/dev/null 2>&1; then
+    if gh_attach_ok; then
+      echo "ok     gh $(gh --version 2>/dev/null | head -1)"
+    else
+      echo "warn   gh is older than 2.99; --attach will fail. brew upgrade gh" >&2
+    fi
+  else
+    echo "warn   gh missing; PR attach needs GitHub CLI ≥ 2.99" >&2
+  fi
+}
+
 ensure_path_snippet() {
   local line='# ruver PATH'
   local block rc
@@ -283,6 +340,7 @@ cmd_setup() {
   install_for_hosts
   ensure_bin
   ensure_path_snippet
+  ensure_agent_browser
   echo
   echo "done. restart the agent session, then run /developer"
   echo "  export PATH=\"$BIN_DIR:\$PATH\""
@@ -375,6 +433,11 @@ cmd_status() {
     echo "path     $(command -v ruver)"
   else
     echo "path     ruver not on PATH (export PATH=\"$BIN_DIR:\$PATH\")"
+  fi
+  if command -v agent-browser >/dev/null 2>&1; then
+    echo "browser  $(command -v agent-browser)"
+  else
+    echo "browser  agent-browser missing (ruver setup)"
   fi
   for dest in \
     "$HOME/.agents/skills/unslop" \

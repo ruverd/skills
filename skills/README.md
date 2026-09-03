@@ -10,7 +10,7 @@ links outside this directory; `tests/repo.sh` enforces that.
 |---|---|
 | `graph` | Main-thread graph engineer. Ships GRAPH.md, STATE.schema.md, nodes/ |
 | `engine` | Delivery and review engines a graph calls |
-| `lib` | Bundled primitives (`unslop`, grill, tdd, the bus protocol, the host contract) |
+| `lib` | Bundled primitives (`unslop`, grill, tdd, the bus protocol, the host contract, `before-and-after`) |
 
 Host contract: [ruver-host/SKILL.md](ruver-host/SKILL.md).
 Bundled primitives and their licences: [../THIRD_PARTY.md](../THIRD_PARTY.md).

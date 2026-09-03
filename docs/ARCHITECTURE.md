@@ -71,7 +71,7 @@ code. `ruver-fd-coder` does, one ticket at a time.
 PR from args or QA_REQUEST
   → admit          one slot; else enqueue
   → plan           from the diff, before any click
-  → execute        browser, e2e, or HTTP; record evidence
+  → execute        agent-browser or HTTP; record evidence
   → triage?        product suspicion → bus → /ruver-triage
   → verdict        comment + evidence + QA_RESULT
 ```

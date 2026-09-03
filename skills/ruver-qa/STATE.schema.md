@@ -18,6 +18,6 @@ init | resolving | planning | executing | triage_requested | verdict | done | bl
 | `findings_path` | `.ruver-qa/FINDINGS.md` when any finding exists |
 | `qa` | `PASS` / `FAIL` / `BLOCKED` / `PENDING_TRIAGE` |
 | `triage_class` | after `TRIAGE_RESULT` |
-| `video_url` | gist (or empty if upload failed) |
+| `video_url` | comment attachment (or empty if upload failed) |
 | `comment_url` | PR comment after verdict |
 | `job_id` | bus JOBS id (`qa-pr-N` / `dev-<ticket>`) |
