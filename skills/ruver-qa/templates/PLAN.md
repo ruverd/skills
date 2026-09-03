@@ -19,9 +19,9 @@ Ticket:
 - route:
 - endpoint:
 - acs:
+- intent: happy | user-break
 - how:
   1.
-- variants:
 - pass_if:
 
 ## Coverage gaps

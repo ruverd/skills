@@ -1,5 +1,5 @@
 ---
-description: QA a PR (agent-browser or HTTP). Hands potential bugs to ruver_triage.
+description: QA a PR (agent-browser or HTTP). Happy and user-break from the diff. Hands potential bugs to ruver_triage.
 argument-hint: "<PR url or owner/repo#N>"
 ---
 

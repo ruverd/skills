@@ -2,9 +2,10 @@
 name: ruver-qa
 category: graph
 description: >
-  Graph: QA a PR. One slot (queue extras). Plan from the
-  diff, then agent-browser or HTTP. Bus TRIAGE_REQUEST on product
-  errors. Use when /qa, /ruver-qa, or a QA_REQUEST arrives.
+  Graph: QA a PR. One slot (queue extras). Plan happy and
+  user-break from the diff, then agent-browser or HTTP. Bus
+  TRIAGE_REQUEST on product errors. Use when /qa, /ruver-qa, or
+  a QA_REQUEST arrives.
 argument-hint: "<PR url or owner/repo#N>"
 ---
 
@@ -23,8 +24,8 @@ Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 Init `.ruver-qa/STATE.md`. Walk GRAPH:
 **admit → resolve → plan → execute**.
 `admit` claims the single QA slot or **enqueues** (never two
-executes). `plan` writes `.ruver-qa/PLAN.md` from the diff
-before any test. Spawn execute nodes only.
+executes). `plan` writes `.ruver-qa/PLAN.md` from the diff (happy and
+user-break) before any test. Spawn execute nodes only.
 Outbound triage → **bus switch** to `triage`. Never spawn `ruver_triage`.
 
 On `TRIAGE_RESULT`, continue at **verdict** (do not re-run execute).

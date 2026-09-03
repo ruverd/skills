@@ -99,7 +99,8 @@ Details/Testing. Confirm the body has no leftover `./captures` paths.
 
 ## `/qa`
 
-Walk the plan with agent-browser. Record the happy path to `.webm`.
+Walk the plan with agent-browser. Record the plan walk (happy
+and user-break) to `.webm`.
 Product errors still FINDINGS → triage → FAIL.
 
 If the body has no block and `forge=github`, capture the pair (base

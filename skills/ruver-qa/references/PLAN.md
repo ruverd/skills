@@ -38,7 +38,8 @@ files that only exist to serve the same screen.
 
 ## Steps
 
-Each step is one user-visible path or one endpoint check:
+Each step is **one walk**: the intended use, or one user-break on
+the same surface. Do not pack several attempts into a `variants` list.
 
 ```markdown
 ### S<n> — <short title>
@@ -46,34 +47,67 @@ Each step is one user-visible path or one endpoint check:
 - kind: screen | endpoint | state | visual
 - route: </path or n/a>
 - endpoint: <METHOD /path or GQL op or n/a>
-- acs: <AC ids / quotes this step covers>
+- acs: <AC ids / quotes this step covers, or n/a>
+- intent: happy | user-break
 - how:
   1. ...
-- variants: happy | empty | error | flag-off | unauthorized
 - pass_if: <observable>
 ```
 
 Rules:
 
-- If any step is an authenticated screen, S1 (or an explicit setup step) is **log in** via session restore, then the repo helper if restore missed. Later steps assume a session.
-- Happy path of every AC the PR claims.
-- Variants the change actually touches — not a generic checklist.
-- Other screens that **read the same state**.
+- If any step is an authenticated screen, S1 (or an explicit setup
+  step) is **log in** via session restore, then the repo helper if
+  restore missed. Later steps assume a session. Login is setup, not
+  a user-break.
+- Happy path of every AC the PR claims (`intent: happy`).
+- **User-break on every process this PR changes.** `kind: screen`,
+  `state`, `endpoint`, and the host screen of a widget. `kind: visual`
+  with no operable control: stills only (empty/overflow on a host
+  screen if one exists). Derive from *this* flow, not a menu. On the
+  snapshot and the diff, ask:
+  1. **Wrong use.** Controls this change exposes or now depends on:
+     empty, invalid, too long, wrong type, submit twice, confirm then
+     cancel. One step per distinct mistake class, not one per input.
+  2. **Interrupted transition.** Submit, next, back, close, navigate:
+     refresh, browser back, leave and return, open a later step by URL.
+  3. **Around the gate.** Auth, role, flag, or validation this PR
+     added or relies on: signed out, wrong role, flag-off, skip the
+     client check and hit the endpoint.
+- Do not skip a user-break because the PR did not add an error state.
+  Users still make those mistakes on fields this change now depends on.
+- Skip a user-break only when the repo has no fixture for it (no
+  second role, no OTP helper). Write that under Coverage gaps with
+  why. "Unlikely" is not a reason.
+- Other screens that **read the same state**, after happy *and* after
+  a user-break that wrote data.
 - Desktop + mobile only when layout/CSS/media/DS changed.
 - Do not name or run an e2e spec. `qa_tool` is `agent-browser` or `http`.
 - Targeted REST/GQL checks when the PR changes a service/endpoint
   even if a screen step exists (the walk can miss the contract).
+  Endpoint user-breaks: missing required field, unauthenticated if
+  gated, duplicate POST on a mutation.
 - **Backend-only PR, no frontend sibling:** HTTP the changed
-  endpoints. Do not invent a screen. Evidence of those calls is
-  enough. `git show` / unit/CI alone is still not a complete plan.
+  endpoints (happy + user-break). Do not invent a screen. Evidence of
+  those calls is enough. `git show` / unit/CI alone is still not a
+  complete plan.
 - **Backend-only PR with a resolved frontend:** map the handler to
-  the UI that calls it and exercise that route. If no caller exists,
-  HTTP only.
+  the UI that calls it and exercise that route (happy + user-break).
+  If no caller exists, HTTP only.
+- A plan that is only `intent: happy` (plus login) is not a plan.
+  Rewrite before execute.
+
+User-break `pass_if`: the product refuses or recovers in a way the
+user can see. Silent success, crash, blank screen, lost data, or a
+5xx is a finding, not a pass.
 
 ## Gate before execute
 
-PLAN.md must have: inventory table, ≥1 step, `pass_if` on every
-step. Empty plan → stop and ask (no surface found).
+PLAN.md must have: inventory table, ≥1 `intent: happy` step, ≥1
+`intent: user-break` step per process surface (or a Coverage-gaps
+line that names the missing fixture), `intent` and `pass_if` on
+every step. Empty plan → stop and ask (no surface found). Happy-only
+plan → rewrite, do not execute.
 
 Chat (`ruver-memory`): list the steps in one short block, then execute.
 Do not wait for approval unless the user asked to review the plan.

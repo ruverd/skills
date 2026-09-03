@@ -1,7 +1,8 @@
 # `/ruver-qa`
 
 Alias: **`/qa`**. Graph engineer for **product QA**. One
-QA execute slot. Plan from the diff before any click.
+QA execute slot. Plan happy and user-break from the diff
+before any click.
 Comment with a video of the walk. UI stills go on the PR body
 ([before-and-after](../../skills/before-and-after/SKILL.md)).
 
@@ -18,7 +19,7 @@ Skill: [`../../skills/ruver-qa`](../../skills/ruver-qa).
 ```
 PR from args or QA_REQUEST
   → admit          one slot; else enqueue
-  → plan           from the diff, before any click
+  → plan           happy + user-break from the diff, before any click
   → execute        agent-browser or HTTP; record evidence
   → triage?        product suspicion → bus → /ruver-triage
   → verdict        comment + video + QA_RESULT
@@ -48,6 +49,7 @@ The graph engineer does **not** classify bugs. Suspicion →
 - Skip the PR comment.
 - `gh gist create` on `.webm` (use `scripts/publish-evidence.sh`).
 - PASS without evidence (FE video, or HTTP record on API-only).
+- PASS on a happy-only walk. User-break steps are required.
 - Fall back to Playwright or a host browser MCP.
 
 ## Related
