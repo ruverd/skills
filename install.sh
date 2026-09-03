@@ -21,7 +21,7 @@ Usage:
   ruver                 Menu (TTY) or command list (no TTY)
   ruver setup           Flatten skills into agent homes
   ruver update          git pull --ff-only main, then setup
-  ruver status          Repo, version, SHA, homes
+  ruver status          Repo, version, SHA, homes, worktrees
   ruver report          Wall time and laps per graph node, from the run ledger
   ruver uninstall       Remove our symlinks
   ruver uninstall --purge
@@ -325,6 +325,37 @@ cmd_update() {
   exec "$SELF" setup
 }
 
+# Porcelain records: path, HEAD, branch. First is the main checkout.
+# Later paths are extra. This prints them; it never deletes a worktree.
+# A trailing blank line is the record separator, including after the last one.
+status_worktrees() {
+  echo "worktrees"
+  local path="" sha="" branch="detached" extra="" line
+  while IFS= read -r line; do
+    case "$line" in
+      worktree\ *)
+        path="${line#worktree }"
+        sha=""
+        branch="detached"
+        ;;
+      HEAD\ *)
+        sha="${line#HEAD }"
+        sha="${sha:0:7}"
+        ;;
+      branch\ *)
+        branch="${line#branch }"
+        branch="${branch#refs/heads/}"
+        ;;
+      "")
+        [[ -z "$path" ]] && continue
+        echo "  $path  $branch  $sha$extra"
+        extra="  extra"
+        path=""
+        ;;
+    esac
+  done < <(git -C "$1" worktree list --porcelain 2>/dev/null || true; echo)
+}
+
 cmd_status() {
   local repo sha behind dest
   repo="$(config_get repo)"
@@ -338,6 +369,7 @@ cmd_status() {
     git -C "$repo" fetch origin >/dev/null 2>&1 || true
     behind="$(git -C "$repo" rev-list --count HEAD..origin/main 2>/dev/null || echo "?")"
     echo "behind   $behind"
+    status_worktrees "$repo"
   fi
   if command -v ruver >/dev/null 2>&1; then
     echo "path     $(command -v ruver)"
@@ -523,7 +555,7 @@ print_home() {
   print_banner
   printf '  $ ruver setup      Flatten skills into agent homes\n'
   printf '  $ ruver update     git pull --ff-only main\n'
-  printf '  $ ruver status     Repo, version, homes\n'
+  printf '  $ ruver status     Repo, version, homes, worktrees\n'
   printf '  $ ruver uninstall  Remove our symlinks\n'
   echo
   echo "  try: ruver setup"

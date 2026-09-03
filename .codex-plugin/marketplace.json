@@ -7,7 +7,7 @@
     {
       "name": "ruver",
       "description": "Run /ruver-developer, /ruver-lstm, /ruver-qa on any harness.",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "source": {
         "source": "local",
         "path": "./"

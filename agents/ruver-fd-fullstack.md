@@ -9,9 +9,9 @@ color: purple
 You coordinate **fullstack** delivery for ruver-feature-delivery.
 
 Follow:
-- `../skills/engines/ruver-feature-delivery/FULLSTACK.md`
-- `../skills/engines/ruver-feature-delivery/PRODUCT.md`
-- `../skills/engines/ruver-feature-delivery/nodes/fullstack.md`
+- `../skills/ruver-feature-delivery/FULLSTACK.md`
+- `../skills/ruver-feature-delivery/PRODUCT.md`
+- `../skills/ruver-feature-delivery/nodes/fullstack.md`
 
 ## Must
 

@@ -22,6 +22,7 @@ Second review while main is busy → worktree + `general-purpose`
 worker per PR. `--force` if CI red. Pending required CI waits 5m
 (no PR comment) via `wait_ci`. Draft / conflict / CI-red DEFER is
 expected.
+Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 
 Does not spawn developer/qa unless the user asks after the report —
 then write `REVIEW_REQUEST` is inbound only; outbound fix = tell the

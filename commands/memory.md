@@ -7,5 +7,5 @@ argument-hint: "[--project] [<note>]"
 
 Alias of **`/ruver-memory`**. **Args:** `$ARGUMENTS`
 
-Follow **`../skills/lib/ruver-memory/SKILL.md`** in full —
+Follow **`../skills/ruver-memory/SKILL.md`** in full —
 this alias defines no steps of its own.

@@ -23,7 +23,12 @@
            ok   │   not MERGEABLE
                 │        │
                 ▼        ▼
-           request_qa   resolve branch / escalate
+           bot_review   resolve branch / escalate
+                │
+      skip/pass │   loops left / exhausted
+                │        │
+                ▼        ▼
+           request_qa   wait/lstm / escalate
                 │
       enqueue-or-start QA
                 │
@@ -48,12 +53,18 @@
 | admit | idle main | **deliver** or **fix** |
 | admit | busy main | worker + worktree; **stop** this call |
 | resume | delivery not done | **deliver** (skip finished nodes) |
+| resume | delivery done, bot_review in flight | **bot_review** |
 | resume | delivery done | **mergeable** or **apply_qa** as STATE says |
 | deliver | fd `status=done` (CI green) | **mergeable** |
 | deliver | escalated / waiting_user / handed_off / waiting_blocker | **stop** |
 | fix | pushed to same PR | **mergeable** |
-| mergeable | MERGEABLE + CI green | **request_qa** |
+| mergeable | MERGEABLE + CI green | **bot_review** |
 | mergeable | conflict / dirty | fix branch → mergeable |
+| bot_review | no bot detected, or skip/pass | **request_qa** |
+| bot_review | waiting for a bot review on head SHA | **wait** (schedule_wake) |
+| bot_review | unresolved bot threads, loops left | **lstm** |
+| bot_review | `LSTM_RESULT` | wait for a bot review on the new head SHA |
+| bot_review | loops exhausted | **escalate** |
 | request_qa | QA slot free | **bus → qa** |
 | request_qa | QA slot taken | enqueue; stay on developer |
 | apply_qa | `QA_RESULT` PASS | **ready** (`gh pr ready`) then **done** |
@@ -67,7 +78,8 @@
 ## Node files
 
 `nodes/resume.md` · `nodes/admit.md` · `nodes/deliver.md` · `nodes/fix.md` ·
-`nodes/mergeable.md` · `nodes/request_qa.md` · `nodes/apply_qa.md`
+`nodes/mergeable.md` · `nodes/bot_review.md` · `nodes/request_qa.md` ·
+`nodes/apply_qa.md`
 
 ## Defaults
 
@@ -76,6 +88,8 @@ never_merge: true
 stay_draft: until_qa_pass
 qa_fix_loops: 2   # laps of QA→fix→QA. A lap costs a full QA plus a triage
                   # plus a fix, so this is smaller than fd ci_fix_loops: 5
+review_bot_loops: 3
+review_bot_min_score: 5
 open_pr: true
 reuse_fd_graph: true
 chat_language: en  # default; ruver-memory overrides. This file is English.

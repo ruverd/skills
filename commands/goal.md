@@ -7,5 +7,5 @@ argument-hint: "<PR url | ticket | resume>"
 
 Alias of **`/ruver-goal`**. **Args:** `$ARGUMENTS`
 
-Follow **`../skills/graphs/ruver-goal/SKILL.md`** in full. This alias defines no
+Follow **`../skills/ruver-goal/SKILL.md`** in full. This alias defines no
 steps of its own.

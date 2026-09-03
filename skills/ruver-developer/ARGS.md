@@ -49,7 +49,7 @@ Then continue at `next_node` / current graph status. Do **not**:
 - re-fetch the tracker as a blank start
 - re-grill settled `## Decisions`
 - skip an open ASK; the current user message **is** the answer
-- restart delivery if `fd_status=done` (go **mergeable** / QA instead)
+- restart delivery if `fd_status=done` (go **mergeable** / **bot_review** / QA instead)
 
 No STATE / no HANDOFF → tell the user in English that there is nothing to resume.
 

@@ -175,6 +175,13 @@ Index: `.ruver-feature-delivery/mcp-sources.md`
 - **Commands run:**
 - **Summary:**
 
+## Evidence
+
+- **Before:** n/a | gist raw URL
+- **After:**
+- **Route / viewport:**
+- **Fragment:** `.ruver-feature-delivery/pr-body-evidence.md`
+
 ## Blast radius
 
 - **Safety fact:**

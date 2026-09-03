@@ -46,6 +46,8 @@ deliver      fix
         ▼
     mergeable          CI green AND mergeable
         │
+    bot_review         skip if no bot; else wait / lstm
+        │
    request_qa  ──bus──►  /ruver-qa
         │
    apply_qa

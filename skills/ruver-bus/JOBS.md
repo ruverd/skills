@@ -48,8 +48,8 @@ on this machine is **one slot**.
 
 1. Register the job on `JOBS.md`.
 2. If main is **idle** for this call → `lane=foreground`.
-   Write `.ruver-<kind>/STATE.md`. Continue the graph on main.
-   No extra worktree unless already isolated.
+   Write `.ruver-<kind>/STATE.md`. Continue the graph.
+   Use a worktree + branch unless already isolated.
 3. If main is **busy** → `lane=worker`:
    - Create a worktree ([Worktree](#worktree)).
    - Spawn **one** `general-purpose` subagent ([Worker](#worker)).
@@ -61,22 +61,57 @@ Worker jobs use `.ruver-bus/jobs/<id>/STATE.md` only.
 
 ## Worktree
 
+Every task, including foreground, gets its own worktree and branch from
+`origin/main` (or the repo default). If the host already created a
+worktree, keep that branch.
+
+If a UI route already exists, capture Before after this worktree exists
+and before the first RED
+([evidence.md](../ruver-feature-delivery/nodes/evidence.md)).
+
+`git fetch origin` before creating any branch or worktree.
+
 Prefer host `spawn_worker` with worktree isolation ([ruver-host](../ruver-host/SKILL.md)).
 Do not also pass `cwd` when isolation is a worktree.
 
 Else git fallback (`.worktrees/` if the repo gitignores it, else a sibling dir):
 
 ```bash
-git rev-parse --show-toplevel          # repo root
+git fetch origin
+git rev-parse --show-toplevel
 git check-ignore -q .worktrees
 git worktree add ".worktrees/<id>" -b "<branch>" origin/main
 ```
 
-Reuse the ticket branch if it already exists
-(`feature/<id-lowercase>` or the tracker's branch name).
+Branch name:
+
+- Tracker task: `feature/<id-lowercase>` (or the tracker's branch name).
+- Free goal: `feature/<slug>`.
+- Name taken: append `-<n>`. Never reuse. Never force.
+- Resume with STATE: reuse the existing branch.
+
+Never touch another agent's worktree, branch, or uncommitted files.
 Do not nest a worktree inside another worktree.
-Do not run the full test suite as a baseline (too heavy). Install
-deps with the discovered `pkg` only if they are missing in that worktree.
+
+Scope check at fd tickets, once files are known: `gh pr list` and
+`gh pr diff <n> --name-only`. Overlap: DECIDE, or ASK last resort.
+
+Never `--force`. `--force-with-lease` only on the task branch, never on
+main/master.
+
+Shipper: rebase onto `origin/<base>` and re-run the hard gate before push.
+
+Lockfile conflict: regenerate with the discovered `pkg`. Never hand-merge.
+
+Shared resources: `lsof -i :<port>` before trusting a port. No migration
+on a shared DB. Install deps inside the worktree with the discovered
+`pkg` only if they are missing there.
+
+Keep the worktree until the PR is merged or closed. Cleanup is
+`git worktree remove` + `git branch -D` by a human after `ruver status`
+lists orphans. No auto-remove.
+
+Do not run the full test suite as a baseline (too heavy).
 
 ## Worker
 

@@ -4,6 +4,26 @@ Notable changes per release. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html), pre-1.0.
 
+## [0.7.0] - 2026-09-03
+
+### Added
+
+- Branch and worktree rules in `ruver-bus` `JOBS.md`. Every task, foreground
+  included, gets its own worktree and branch from `origin/main` after
+  `git fetch`. Never commit to main. `--force-with-lease` only on the task
+  branch, never on main. Shipper rebases onto `origin/<base>` and re-runs
+  the hard gate before push. `ruver status` lists worktrees.
+- `templates/PR_BODY.md` and an `evidence` node. Before and After belong in
+  the PR description. Screenshots publish as a secret gist.
+- Developer `bot_review` between `mergeable` and `request_qa`. Detected
+  review bots wait on the head SHA. Unresolved bot threads go to LSTM. A
+  score gate holds QA until `N/5` meets `review_bot_min_score`.
+
+### Fixed
+
+- Stale `skills/graphs`, `skills/engines`, and `skills/lib` paths in inline
+  code. `check_links.py` now validates backtick skill paths.
+
 ## [0.6.0] - 2026-08-28
 
 ### Added
@@ -148,4 +168,5 @@ Notable changes per release. Format follows
 
 Not tracked in this file.
 
+[0.7.0]: https://github.com/ruverd/skills/compare/v0.6.0...v0.7.0
 [0.5.0]: https://github.com/ruverd/skills/releases/tag/v0.5.0

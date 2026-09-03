@@ -14,8 +14,8 @@ Graphs name **primitives**. This file maps them onto the harness in
 front of you. If a node mentions a primitive, do that mapping here.
 Do not copy harness APIs into GRAPH.md.
 
-In this repo, skills live under `skills/{graphs,engines,lib}/`.
-After install they flatten to siblings (`ruver-qa` next to `ruver-bus`
+In this repo, skills live under `skills/<name>/`.
+After install they are siblings (`ruver-qa` next to `ruver-bus`
 and `unslop`).
 Resolve a skill **by name** via the host skill loader, or by the
 relative path in git. Never hardcode `~/.agents/skills`, `~/.grok`,
@@ -25,7 +25,7 @@ relative path in git. Never hardcode `~/.agents/skills`, `~/.grok`,
 
 | Primitive | Meaning | Fallback if the host has no API |
 |---|---|---|
-| `load_skill name` | Inject that skill's SKILL.md (and GRAPH.md if present) into **this** thread | Read the flattened sibling, or `skills/<category>/<name>/SKILL.md` in git |
+| `load_skill name` | Inject that skill's SKILL.md (and GRAPH.md if present) into **this** thread | Read the flattened sibling, or `skills/<name>/SKILL.md` in git |
 | `load_graph name` | Same as `load_skill ruver-<name>`. Main thread only | Same |
 | `spawn_worker` | One child session, **general-purpose**. Not a graph name | Tell the user the worker prompt; or run the node inline if isolation is impossible |
 | `worktree` | Isolated checkout of the same branch | `git worktree add` (JOBS.md) |
@@ -107,13 +107,13 @@ stay `ruver-*`. `/memory` is `ruver-memory` (lib), not a graph.
 
 ## Disk
 
-`$RUVER_ROOT` is host-neutral. See [skills/graphs/ruver-bus/DISK.md](../ruver-bus/DISK.md).
+`$RUVER_ROOT` is host-neutral. See [skills/ruver-bus/DISK.md](../ruver-bus/DISK.md).
 Claude, Codex, Grok, and Cursor on one machine **share** that tree.
 
 ## Quality rubric
 
 `ruver-fd-quality` loads bundled
-`thermo-nuclear-code-quality-review` (`skills/lib/`). Always run
+`thermo-nuclear-code-quality-review` (`skills/thermo-nuclear-code-quality-review/`). Always run
 `fix all`. Do not skip.
 
 ## Product policy

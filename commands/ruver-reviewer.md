@@ -7,7 +7,7 @@ argument-hint: "<PR url | owner/repo#N | branch>"
 
 Short alias: **`/reviewer`**.
 
-Follow **`../skills/graphs/ruver-reviewer/SKILL.md`** in full.
+Follow **`../skills/ruver-reviewer/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 

@@ -1,6 +1,6 @@
 # Grill (Matt Pocock, last-resort ASK)
 
-Source: bundled `grill-with-docs` + `grill-me` (`skills/lib/`).
+Source: bundled `grill-with-docs` + `grill-me` (`skills/grill-with-docs/`, `skills/grill-me/`).
 This file is the adapted loop. Policy: [DECISION_POLICY.md](DECISION_POLICY.md).
 Formats: [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md),
 [ADR-FORMAT.md](../grill-with-docs/ADR-FORMAT.md).

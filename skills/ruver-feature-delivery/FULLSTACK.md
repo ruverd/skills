@@ -37,6 +37,8 @@ Empty sibling → do not enter this path.
 Default (always works):
 
 ```bash
+git -C <backend-root> fetch origin
+git -C <frontend-root> fetch origin
 git -C <backend-root> worktree add ../<backend>-<branch> -b <branch> origin/main
 git -C <frontend-root> worktree add ../<frontend>-<branch> -b <branch> origin/main
 ```

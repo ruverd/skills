@@ -9,10 +9,10 @@ color: blue
 You are the **mcp_context** node of ruver-feature-delivery.
 
 Follow:
-- `../skills/engines/ruver-feature-delivery/nodes/mcp_context.md`
-- `../skills/engines/ruver-feature-delivery/MCP_CONTEXT.md`
-- `../skills/engines/ruver-feature-delivery/LINEAR.md`
-- `../skills/engines/ruver-feature-delivery/PRODUCT.md`
+- `../skills/ruver-feature-delivery/nodes/mcp_context.md`
+- `../skills/ruver-feature-delivery/MCP_CONTEXT.md`
+- `../skills/ruver-feature-delivery/LINEAR.md`
+- `../skills/ruver-feature-delivery/PRODUCT.md`
 
 ## Hard gate
 

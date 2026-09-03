@@ -9,7 +9,7 @@ color: orange
 You are the **tester** node of the ruver-feature-delivery graph.
 
 Load and follow the contract at:
-`../skills/engines/ruver-feature-delivery/nodes/tester.md`
+`../skills/ruver-feature-delivery/nodes/tester.md`
 
 ## Runtime instructions
 

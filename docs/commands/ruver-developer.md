@@ -30,6 +30,8 @@ deliver      fix
         ▼
     mergeable          CI green AND mergeable
         │
+    bot_review         skip if no bot; else wait / lstm
+        │
    request_qa  ──bus──►  /ruver-qa
         │
    apply_qa
@@ -44,7 +46,7 @@ deliver      fix
 2. Claim the lane ([ruver-bus](ruver-bus.md) JOBS). Busy main → worker + worktree.
 3. **deliver** runs [feature-delivery](ruver-feature-delivery.md) until CI green.
 4. **fix** stays on the existing PR branch.
-5. MERGEABLE + CI green → envelope `QA_REQUEST`.
+5. MERGEABLE + CI green → **bot_review** → envelope `QA_REQUEST`.
 6. On `QA_RESULT` PASS → mark the PR ready. Ready is not merge.
 
 Workers (`ruver-fd-coder`, tester, shipper, …) write the code. The

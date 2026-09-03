@@ -282,6 +282,20 @@ HOME="$WT_HOME" XDG_CONFIG_HOME="$WT_HOME/.config" \
   XDG_DATA_HOME="$WT_HOME/.local/share" \
   "$mini_wt/install.sh" setup >/dev/null
 
+# MINI_HOME repo= is $mini, so this grep cannot pass on the repo line.
+# git may canonicalize /var to /private/var, so accept pwd -P too.
+HOME="$MINI_HOME" XDG_CONFIG_HOME="$MINI_HOME/.config" \
+  XDG_DATA_HOME="$MINI_HOME/.local/share" \
+  "$mini/install.sh" status >/tmp/ruver-wt-status.out
+wt_real="$(cd "$mini_wt" && pwd -P)"
+wt_line="$(grep -F -e "$mini_wt" -e "$wt_real" /tmp/ruver-wt-status.out | head -n 1 || true)"
+[[ -n "$wt_line" ]] || fail "status missing extra worktree path $mini_wt"
+echo "$wt_line" | grep -q 'wt-test' \
+  || fail "status extra worktree line missing branch wt-test ($wt_line)"
+echo "$wt_line" | grep -Eq '[0-9a-f]{7}' \
+  || fail "status extra worktree line missing 7-char SHA ($wt_line)"
+ok status-worktrees
+
 set +e
 HOME="$WT_HOME" XDG_CONFIG_HOME="$WT_HOME/.config" \
   XDG_DATA_HOME="$WT_HOME/.local/share" \

@@ -3,7 +3,7 @@ name: ruver-developer
 category: graph
 description: >
   Graph: deliver a ticket or a local goal via grill -> spec -> tickets -> TDD
-  (ruver-feature-delivery), then MERGEABLE + ruver-qa over the bus. Use when
+  (ruver-feature-delivery), then MERGEABLE + bot_review + ruver-qa over the bus. Use when
   /developer, /ruver-developer, a ticket, or a QA_RESULT FAIL+PR_BUG. ASK the
   user only as a last resort.
 argument-hint: "<ticket | goal | PR url | resume>"
@@ -21,9 +21,10 @@ You are the **orchestrator**. Chat: `ruver-memory`. Unslop always. You **do not*
 - [ruver-host](../ruver-host/SKILL.md)
 - `ruver-bus` [PROTOCOL.md](../ruver-bus/PROTOCOL.md) · [DISK.md](../ruver-bus/DISK.md)
 - `ruver-memory`
-- delivery voice + policy: `../../engines/ruver-feature-delivery/VOICE.md` · `../../engines/ruver-feature-delivery/DECISION_POLICY.md` · `../../engines/ruver-feature-delivery/PSTACK.md`
+- delivery voice + policy: `../ruver-feature-delivery/VOICE.md` · `../ruver-feature-delivery/DECISION_POLICY.md` · `../ruver-feature-delivery/PSTACK.md`
 
 Never merge. Stay Draft until **QA PASS**, then `gh pr ready`. Ready is not merge.
+Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 
 ## Start
 
@@ -55,6 +56,7 @@ Delivery spine (inside fd): grill → spec → tickets → implement(TDD). Bugs 
 ## Extra gates (after delivery / after fix)
 
 `CI green AND mergeability = MERGEABLE`. See [references/GATES.md](references/GATES.md).
+Then **bot_review** ([nodes/bot_review.md](nodes/bot_review.md)).
 Then envelope `QA_REQUEST`. See [references/QA_HANDOFF.md](references/QA_HANDOFF.md).
 
 ## Resume

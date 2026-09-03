@@ -10,9 +10,9 @@ You are a **fresh implementer subagent** for ruver-feature-delivery.
 
 Follow:
 
-- `../skills/engines/ruver-feature-delivery/nodes/implement.md`
-- `../skills/engines/ruver-feature-delivery/nodes/coder.md`
-- `../skills/engines/ruver-feature-delivery/TDD.md` (iron law)
+- `../skills/ruver-feature-delivery/nodes/implement.md`
+- `../skills/ruver-feature-delivery/nodes/coder.md`
+- `../skills/ruver-feature-delivery/TDD.md` (iron law)
 
 ## Scope
 

@@ -8,9 +8,10 @@
 # Usage:
 #   publish-evidence.sh --repo owner/repo --pr N --sha OID
 #     [--video path.webm] [--artifacts dir] [--out path]
+#     [--screenshot path]   (repeat for each PNG)
 #
 # Prints key=value lines. Exit 0 on gist+push; 2 if upload failed
-# (still printed local paths — caller must still post the PR comment).
+# (still printed local paths. Caller must still post the PR comment).
 
 set -euo pipefail
 
@@ -20,9 +21,10 @@ SHA=""
 VIDEO=""
 ARTIFACTS=""
 OUT=""
+SCREENSHOTS=()
 
 usage() {
-  sed -n '2,16p' "$0" | sed 's/^# \?//'
+  sed -n '2,14p' "$0" | sed 's/^# \?//'
   exit 1
 }
 
@@ -33,6 +35,7 @@ while [[ $# -gt 0 ]]; do
     --sha) SHA="${2:-}"; shift 2 ;;
     --video) VIDEO="${2:-}"; shift 2 ;;
     --artifacts) ARTIFACTS="${2:-}"; shift 2 ;;
+    --screenshot) SCREENSHOTS+=("${2:-}"); shift 2 ;;
     --out) OUT="${2:-}"; shift 2 ;;
     -h|--help) usage ;;
     *) echo "unknown arg: $1" >&2; usage ;;
@@ -91,6 +94,14 @@ fi
 
 if [[ -n "$ARTIFACTS" && -d "$ARTIFACTS" ]]; then
   find "$ARTIFACTS" -maxdepth 1 -name '*.png' -exec cp {} "$WORKDIR/" \;
+fi
+
+if [[ ${#SCREENSHOTS[@]} -gt 0 ]]; then
+  for shot in "${SCREENSHOTS[@]}"; do
+    if [[ -n "$shot" && -f "$shot" ]]; then
+      cp "$shot" "$WORKDIR/$(basename "$shot")"
+    fi
+  done
 fi
 
 git -C "$WORKDIR" add -A

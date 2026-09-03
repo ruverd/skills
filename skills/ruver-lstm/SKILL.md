@@ -27,6 +27,7 @@ fd [DECISION_POLICY.md](../ruver-feature-delivery/DECISION_POLICY.md)
 
 Init `.ruver-lstm/STATE.md`. Walk GRAPH (**admit** first).
 Busy main or 2+ PRs → worktree + `general-purpose` worker per PR.
+Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 
 Orchestrator does **not** write product code. **patch** spawns
 `ruver-fd-coder` (TDD). Grill only when the fix is complicated.

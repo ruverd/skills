@@ -18,6 +18,7 @@ Orchestrator. You do **not** make the final bug call.
 [DISK.md](../ruver-bus/DISK.md) (`.ruver-*` is **global**, never git root)
 
 Chat: `ruver-memory`. Unslop always. PR link required (args or envelope).
+Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 
 Init `.ruver-qa/STATE.md`. Walk GRAPH:
 **admit → resolve → plan → execute**.

@@ -12,7 +12,7 @@ Only then does the shipper package.
 
 ## When
 
-After **blast** (or after **tester** on `light_change`).
+After **blast** (or after **evidence** on `light_change`).
 Before **shipper**. Thermo `fix all` is still required before any PR.
 
 ## Steps
@@ -21,7 +21,7 @@ Before **shipper**. Thermo `fix all` is still required before any PR.
    - `git diff <base_branch>...HEAD` (and unstaged if not committed yet)
    - contents of the touched files
 2. Invoke the thermo-nuclear review with the bundled skill
-   `thermo-nuclear-code-quality-review` (`skills/lib/`). Always.
+   `thermo-nuclear-code-quality-review` (`skills/thermo-nuclear-code-quality-review/`). Always.
    Do not skip.
 3. Required mode: **`fix all`**
    - Do not only list findings.

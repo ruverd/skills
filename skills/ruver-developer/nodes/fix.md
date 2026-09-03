@@ -16,3 +16,7 @@ not hold, so treat the previous attempt as evidence, not as a starting point.
 ## Output
 
 commit sha, files, tests, same `pr_url`.
+
+If the SHA changed, recapture After and `gh pr edit --body` so the
+Before → After section matches HEAD.
+[evidence.md](../../ruver-feature-delivery/nodes/evidence.md).

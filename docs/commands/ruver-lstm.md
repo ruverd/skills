@@ -43,7 +43,7 @@ URL | resume | LSTM_REQUEST
 
 The graph engineer does not type the patch. The coder worker does.
 
-Uses bundled `receiving-code-review` and `unslop` (`skills/lib/`).
+Uses bundled `receiving-code-review` and `unslop` (`skills/receiving-code-review/`, `skills/unslop/`).
 
 ## Never
 

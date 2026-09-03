@@ -7,7 +7,7 @@ argument-hint: "<ticket | goal | PR url | resume>"
 
 Short alias: **`/developer`**.
 
-Follow **`../skills/graphs/ruver-developer/SKILL.md`** in full.
+Follow **`../skills/ruver-developer/SKILL.md`** in full.
 
 **Args:** `$ARGUMENTS`
 

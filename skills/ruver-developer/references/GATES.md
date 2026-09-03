@@ -31,13 +31,13 @@ If GitHub does not expose required, treat every attached check as required.
 
 Not ready: `CONFLICTING`, `DIRTY`, `BLOCKED`, `UNKNOWN`, pending.
 
-Conflicts on this branch → merge/rebase base when safe, push, re-check CI.
-Do not force-push unless the repo already uses it and it is safe.
+Conflicts on this branch → rebase onto origin/<base> when safe, push, re-check CI.
+`--force-with-lease` on the task branch only. Never on main/master. Never `--force`.
 
 ## Draft
 
-Draft + MERGEABLE + green CI is the **ready-for-QA** state. Do not mark
-Ready before QA.
+Draft + MERGEABLE + green CI is ready for **bot_review**, then QA.
+Do not mark Ready before QA.
 
 After `QA_RESULT` **PASS** (apply_qa): mark **Ready for Review**
 
