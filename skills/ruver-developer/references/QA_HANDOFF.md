@@ -32,7 +32,7 @@ Setup:
 <auth, flags, seed data>
 
 Please validate the behavior. Build `.ruver-qa/PLAN.md` from the
-diff (screens, endpoints, specs) before running anything. Do not
+diff (happy and user-break walks) before running anything. Do not
 assume green CI means the feature is correct.
 ```
 

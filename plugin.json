@@ -1,7 +1,7 @@
 {
   "name": "ruver",
   "displayName": "Ruver",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Agent graphs that deliver a ticket or local goal, QA a PR with evidence, and handle incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",

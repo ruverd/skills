@@ -98,7 +98,7 @@
           },
           {
             "name": "ruver-qa",
-            "description": "Graph: QA a PR. One slot (queue extras). Plan from the diff, then agent-browser or HTTP. Bus TRIAGE_REQUEST on product errors."
+            "description": "Graph: QA a PR. One slot (queue extras). Plan happy and user-break from the diff, then agent-browser or HTTP. Bus TRIAGE_REQUEST on product errors."
           },
           {
             "name": "ruver-reviewer",
@@ -266,7 +266,7 @@
           },
           {
             "name": "ruver-qa",
-            "description": "QA a PR (agent-browser or HTTP). Hands potential bugs to ruver_triage."
+            "description": "QA a PR (agent-browser or HTTP). Happy and user-break from the diff. Hands potential bugs to ruver_triage."
           },
           {
             "name": "ruver-reviewer",

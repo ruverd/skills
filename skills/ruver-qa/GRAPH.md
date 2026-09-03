@@ -4,7 +4,7 @@
 start (PR from args or QA_REQUEST)
   → admit            # one QA slot; else enqueue and stop
   → resolve
-  → plan             # inventory + step-by-step from the diff
+  → plan             # inventory + happy + user-break from the diff
   → execute          # agent-browser or HTTP; append FINDINGS as they appear
   → gate
        ├ no findings / unambiguous FAIL → verdict
@@ -28,9 +28,9 @@ start (PR from args or QA_REQUEST)
 | admit | `qa_active` holds another **live** PR | **enqueue** and **stop** |
 | admit | slot free, this job, or a claim that expired / was abandoned | **resolve** (claim, or take over and say so) |
 | resolve | ok | **plan** |
-| plan | PLAN.md has ≥1 step | **execute** |
+| plan | PLAN.md gate (happy + user-break) | **execute** |
 | plan | no surface | **stop** (ask) |
-| execute | plan finished, no findings | **verdict** (`PASS` or infra `BLOCKED`) |
+| execute | plan finished, no findings, user-break walked | **verdict** (`PASS` or infra `BLOCKED`) |
 | execute | plan finished, findings exist | **request_triage** |
 | execute | unambiguous FAIL (VERDICTS.md) | **verdict** `FAIL` |
 | execute | cannot run (env/auth/app) | **verdict** `BLOCKED` |

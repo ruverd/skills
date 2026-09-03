@@ -1,6 +1,6 @@
 {
   "name": "ruver",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Ruver agent graphs for delivery, QA, review, and incoming review comments. Never merges.",
   "author": {
     "name": "Ruver Dornelas",

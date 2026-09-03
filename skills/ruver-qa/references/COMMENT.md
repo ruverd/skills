@@ -77,9 +77,9 @@ One comment per SHA. If a comment with the same
 
 - No verdict without this comment.
 - No comment without attempting `--attach` when a `.webm` exists.
-- **PASS requires evidence.** UI: video of the route. API-only: HTTP
-  record of the changed endpoints. If capture failed on a UI run,
-  say so in the comment and do **not** treat the run as a complete
-  PASS.
+- **PASS requires evidence.** UI: video of the plan walk (happy
+  and user-break). API-only: HTTP record of the changed endpoints
+  (happy and user-break). If capture failed on a UI run, say so
+  in the comment and do **not** treat the run as a complete PASS.
 - Do not commit videos to the PR branch.
 - Do not paste credentials or raw `.env`.
