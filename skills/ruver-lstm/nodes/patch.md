@@ -32,7 +32,9 @@ Follow [implement.md](../../ruver-feature-delivery/nodes/implement.md) +
 time. Fresh `ruver-fd-coder` per slice.
 
 Inject: finding + disposition, grill decisions if any, file whitelist,
-TDD RED/GREEN, same branch. Forbidden: production code before RED,
+TDD RED/GREEN, same branch. Spawn payload:
+[ruver-host](../../ruver-host/SKILL.md) `spawn_worker`. Forbidden:
+GRAPH.md, `why`, parent tool catalog, production code before RED,
 other tickets, merge, new PR.
 
 Worker lane (cannot spawn): run [coder.md](../../ruver-feature-delivery/nodes/coder.md)

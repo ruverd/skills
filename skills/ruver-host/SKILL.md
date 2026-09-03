@@ -35,8 +35,20 @@ relative path in git. Never hardcode `~/.agents/skills`, `~/.grok`,
 
 ## spawn_worker
 
-Pass: job id, worktree path (or “host worktree”), the **node file**
-as the contract, “do not spawn graph types”, never merge.
+Pass, and nothing else:
+
+- job id
+- worktree path (or “host worktree”)
+- the **node file** as the contract
+- the ticket, finding, or PR this node is for (full text, not “read STATE”)
+- a file/path whitelist, plus 20–40 line excerpts if a snippet is required
+- “do not spawn graph types”, never merge
+
+The child loads the node and any skill **that node names**.
+
+Do not pass GRAPH.md, the parent skill tree, the parent MCP/tool
+catalog, `how` / `why`, or the session history. Isolation is a short
+prompt, not a copy of this thread.
 
 Prefer host isolation `worktree` when the spawn API has it. Then do
 **not** also pass `cwd`.
@@ -82,7 +94,13 @@ every row degrades to the fallback rather than blocking.
 | `tracker_fetch_issue` | Linear: `mcp__linear-server__get_issue` | The PR body and title alone. Never invent AC |
 | `tracker_save_issue` | Linear: `mcp__linear-server__save_issue` | `gh issue create` / `glab issue create` ([BLOCKERS.md](../ruver-feature-delivery/BLOCKERS.md)) |
 | `tracker_save_comment` | Linear: `mcp__linear-server__save_comment` | Comment on the PR instead |
-| `code_graph_explore` | `mcp__codegraph__codegraph_explore` | `Grep` the symbol name, same result cap |
+| `code_graph_explore` | `mcp__codegraph__codegraph_explore` or TokenSave `tokensave_context` (search the tool list) | `Grep` the symbol name, same result cap |
+
+When the git toplevel has `.codegraph/` or `.tokensave/`, this
+capability is **required** for discovery. Query the graph before a
+Grep/Read loop. Do not spawn an extra explorer worker. Grep/Read of
+whole files is the fallback when the index is missing or the query
+misses.
 
 Tools may be **deferred**: absent from the initial function list until a tool
 search selects them. Try the search before concluding a capability is missing.

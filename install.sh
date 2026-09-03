@@ -22,7 +22,7 @@ Usage:
   ruver setup           Flatten skills into agent homes
   ruver update          git pull --ff-only main, then setup
   ruver status          Repo, version, SHA, homes, worktrees
-  ruver report          Wall time and laps per graph node, from the run ledger
+  ruver report          Wall time and laps per graph node; host token totals when a transcript exists
   ruver uninstall       Remove our symlinks
   ruver uninstall --purge
                         Also delete the managed clone
@@ -532,11 +532,121 @@ report_ledger() {
   done
 }
 
+# Host transcript (Grok unified.jsonl). Graphs never write token counts;
+# this is the only honest source. Missing python3 or missing log: skip.
+report_tokens() {
+  command -v python3 >/dev/null 2>&1 || return 0
+  local log="${HOME}/.grok/logs/unified.jsonl"
+  local sessions="${HOME}/.grok/sessions"
+  [[ -f "$log" ]] || return 0
+  python3 - "$log" "$sessions" <<'PY' || true
+import collections
+import json
+import re
+import sys
+import urllib.parse
+from pathlib import Path
+
+log_path, sess_root = sys.argv[1], sys.argv[2]
+sid_ws = {}
+root = Path(sess_root)
+if root.is_dir():
+    for folder in root.iterdir():
+        if not folder.is_dir():
+            continue
+        ws = urllib.parse.unquote(folder.name)
+        for child in folder.iterdir():
+            if child.is_dir():
+                sid_ws[child.name] = ws
+
+
+def classify(ws):
+    w = (ws or "").lower()
+    if "lstm" in w:
+        return "lstm"
+    if "review" in w or "rev-pr-" in w:
+        return "reviewer"
+    if "featuredev" in w or "feature-dev" in w:
+        return "fd"
+    if re.search(r"/dev-\d+", w):
+        return "fd"
+    return "other"
+
+
+def fmt(n):
+    n = int(n)
+    sign = "-" if n < 0 else ""
+    n = abs(n)
+    if n >= 1_000_000:
+        return f"{sign}{n / 1_000_000:.1f}M"
+    if n >= 10_000:
+        return f"{sign}{n / 1000:.0f}k"
+    if n >= 1000:
+        return f"{sign}{n / 1000:.1f}k"
+    return f"{sign}{n}"
+
+
+by = collections.defaultdict(
+    lambda: {"prompt": 0, "cached": 0, "n": 0, "sids": set(), "uncached": 0}
+)
+total = {"prompt": 0, "cached": 0, "n": 0, "uncached": 0}
+days = set()
+
+with open(log_path, encoding="utf-8", errors="replace") as handle:
+    for line in handle:
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if rec.get("msg") != "shell.turn.inference_done":
+            continue
+        ctx = rec.get("ctx") or {}
+        sid = rec.get("sid") or "nosid"
+        prompt = int(ctx.get("prompt_tokens") or 0)
+        cached = int(ctx.get("cached_prompt_tokens") or 0)
+        uncached = max(prompt - cached, 0)
+        ts = (rec.get("ts") or "")[:10]
+        if ts:
+            days.add(ts)
+        bucket = by[classify(sid_ws.get(sid, ""))]
+        bucket["prompt"] += prompt
+        bucket["cached"] += cached
+        bucket["n"] += 1
+        bucket["sids"].add(sid)
+        bucket["uncached"] += uncached
+        total["prompt"] += prompt
+        total["cached"] += cached
+        total["n"] += 1
+        total["uncached"] += uncached
+
+if total["n"] == 0:
+    raise SystemExit(0)
+
+window = ",".join(sorted(days)) if days else "unknown"
+cache_pct = 100 * total["cached"] / total["prompt"] if total["prompt"] else 0
+print("tokens (host transcript)")
+print(
+    f"  window {window}   calls {total['n']}   "
+    f"prompt {fmt(total['prompt'])}   uncached {fmt(total['uncached'])}   "
+    f"cache {cache_pct:.0f}%"
+)
+print(f"  {'class':12} {'sids':>4} {'calls':>5} {'prompt':>8} {'uncached':>8} {'cache':>5}")
+for cls, bucket in sorted(by.items(), key=lambda item: -item[1]["uncached"]):
+    pct = 100 * bucket["cached"] / bucket["prompt"] if bucket["prompt"] else 0
+    print(
+        f"  {cls:12} {len(bucket['sids']):4d} {bucket['n']:5d} "
+        f"{fmt(bucket['prompt']):>8} {fmt(bucket['uncached']):>8} {pct:4.0f}%"
+    )
+print("  uncached = prompt tokens that missed the prefix cache. Not written by the graphs.")
+PY
+}
+
 # Read-only. Aggregates what the graphs already append to the run ledger, so
-# a bottleneck is a number instead of a hunch.
+# a bottleneck is a number instead of a hunch. Token totals come from the
+# host transcript when present, never from the ledger.
 cmd_report() {
   local home="${RUVER_HOME:-$HOME/.ruver}"
-  local found=0 dir slug ledger jobs body
+  local found=0 dir slug ledger jobs body tokens
   if [[ -d "$home" ]]; then
     for dir in "$home"/*; do
       [[ -d "$dir" ]] || continue
@@ -563,6 +673,11 @@ cmd_report() {
       echo "$body"
       echo
     done
+  fi
+  tokens="$(report_tokens)"
+  if [[ -n "$tokens" ]]; then
+    found=1
+    echo "$tokens"
   fi
   if [[ "$found" -eq 0 ]]; then
     echo "no runs recorded under $home"

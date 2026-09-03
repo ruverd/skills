@@ -18,7 +18,7 @@ Importance alone is not enough. Uncertainty on a small call is not enough. Pick 
 | **ASK** | Last resort: very important **and** high uncertainty | One question in the chat language. Show the recommendation. Wait. Then continue. |
 | **ESCALATE** | Loops exhausted, missing critical MCP, cannot run the graph | Freeze. Chat summary in the chat language. Tracker and PR notes stay English. Wait. |
 
-Before ASK, spend the lookup: `how` / `why` / the tracker / neighbor files / a throwaway prototype. If that produces a rec you would ship, **DECIDE**.
+Before ASK, spend the lookup: `how`, the tracker, neighbor files, a throwaway prototype. Load `why` only if that still leaves a last-resort fork. If the lookup produces a rec you would ship, **DECIDE**.
 
 Test: would you stop a senior engineer at 11pm for this. If no, DECIDE.
 

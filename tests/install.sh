@@ -484,4 +484,59 @@ echo "$out" | grep -qi 'no run' || fail "report should say nothing is recorded: 
 rm -rf "$QUIET_HOME"
 ok report-quiet
 
+# --- report: host transcript tokens, classified by session cwd ---
+TOK_HOME="$(mktemp -d "${TMPDIR:-/tmp}/ruver-report-tok.XXXXXX")"
+python3 - "$TOK_HOME" <<'PY'
+import json, os, sys, urllib.parse
+from pathlib import Path
+home = Path(sys.argv[1])
+log_dir = home / ".grok" / "logs"
+log_dir.mkdir(parents=True)
+sessions = home / ".grok" / "sessions"
+lstm_cwd = "/tmp/orca/empath-ui/pr-empath-ui-2583-lstm"
+rev_cwd = "/tmp/orca/empath-api-v2/pr-1546-review"
+fd_cwd = "/tmp/orca/empath-ui/feature-dev-4409"
+for cwd, sid in (
+    (lstm_cwd, "01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+    (rev_cwd, "01bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"),
+    (fd_cwd, "01cccccccccccccccccccccccccccccccc"),
+):
+    (sessions / urllib.parse.quote(cwd, safe="")).mkdir(parents=True)
+    (sessions / urllib.parse.quote(cwd, safe="") / sid).mkdir()
+rows = [
+    ("01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 1000, 100),
+    ("01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 2000, 1500),
+    ("01bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", 400, 0),
+    ("01cccccccccccccccccccccccccccccccc", 800, 200),
+]
+with (log_dir / "unified.jsonl").open("w", encoding="utf-8") as handle:
+    for sid, prompt, cached in rows:
+        json.dump({
+            "ts": "2026-09-03T12:00:00.000Z",
+            "msg": "shell.turn.inference_done",
+            "sid": sid,
+            "ctx": {
+                "prompt_tokens": prompt,
+                "cached_prompt_tokens": cached,
+                "completion_tokens": 10,
+            },
+        }, handle)
+        handle.write("\n")
+PY
+set +e
+out="$(HOME="$TOK_HOME" XDG_CONFIG_HOME="$TOK_HOME/.config" \
+  XDG_DATA_HOME="$TOK_HOME/.local/share" "$INSTALL" report 2>&1)"
+got=$?
+set -e
+assert_eq "$got" "0" "report tokens exit"
+echo "$out" | grep -q 'tokens (host transcript)' || fail "report missing tokens heading: $out"
+echo "$out" | grep -qE 'lstm' || fail "report missing lstm class: $out"
+echo "$out" | grep -qE 'reviewer' || fail "report missing reviewer class: $out"
+echo "$out" | grep -qE 'fd' || fail "report missing fd class: $out"
+echo "$out" | grep -qE 'calls[[:space:]]+4' || fail "report should total 4 calls: $out"
+echo "$out" | grep -qi 'uncached' || fail "report should name uncached: $out"
+echo "$out" | grep -qi 'no run' && fail "tokens-only report should not say no runs: $out"
+rm -rf "$TOK_HOME"
+ok report-tokens
+
 echo "all passed"

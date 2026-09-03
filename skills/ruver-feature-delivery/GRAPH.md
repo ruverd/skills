@@ -107,3 +107,4 @@ See [PSTACK.md](PSTACK.md). Grill is [GRILL.md](GRILL.md). Voice is [VOICE.md](V
 - Shipping without TDD evidence on behavior change
 - Auto-merge
 - Interviewing the user through the grill tree
+- Pasting GRAPH.md, `why`, or the parent tool catalog into a worker

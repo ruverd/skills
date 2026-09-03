@@ -4,6 +4,24 @@ Notable changes per release. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html), pre-1.0.
 
+## [0.9.0] - 2026-09-03
+
+### Added
+
+- `ruver report` prints host token totals (prompt, uncached, cache%)
+  by workspace class when a Grok transcript exists. Graphs still do
+  not write token counts into the run ledger.
+
+### Changed
+
+- `spawn_worker` passes the node file, the ticket/finding/PR, and a
+  path whitelist. It does not pass GRAPH.md, `why`, or the parent
+  tool catalog.
+- `code_graph_explore` is required for discovery when `.codegraph/`
+  or `.tokensave/` exists. Grep/Read of whole files is the fallback.
+- `why` is no longer on the default grill / diagnose / review path.
+  Load it only when a last-resort design fork remains after `how`.
+
 ## [0.8.1] - 2026-09-03
 
 ### Changed
@@ -203,6 +221,7 @@ Notable changes per release. Format follows
 
 Not tracked in this file.
 
+[0.9.0]: https://github.com/ruverd/skills/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/ruverd/skills/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/ruverd/skills/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/ruverd/skills/compare/v0.6.0...v0.7.0

@@ -11,7 +11,7 @@ for the end (CI green / handoff).
 | STATE + files under `.ruver-feature-delivery/` as memory | Re-pasting the whole tracker-context into every subagent |
 | Whitelist per node (this ticket + refs) | "Read the whole monorepo" |
 | Paths + 20–40 line excerpts | Dumping whole files into the prompt |
-| Fresh subagent **with a minimal prompt** | Passing the session history to the subagent |
+| Fresh subagent **with a minimal prompt** ([ruver-host](../ruver-host/SKILL.md) `spawn_worker`) | GRAPH.md, `why`, parent MCP/tool catalog, session history |
 | 1 parallel tool call when independent | Re-read loops on the same file |
 | User chat: short English (status + next step) | Narrating every tool call |
 | Incremental commits | Loading a 50-file diff into the orchestrator |
@@ -39,9 +39,10 @@ TDD: red→green
 Do NOT read all of SPEC/TICKETS if the ticket text is already in the prompt
 ```
 
-- Reviewer: `git diff` + files_touched + done criteria of the ticket.
+- Reviewer: path to `git diff` + files_touched + done criteria. Not the diff inline.
 - One ticket per subagent. Do not "resume" with a monster transcript.
-- `how` / `why` only on the subsystem you will touch.
+- Do not load `how` / `why` in the coder ([PSTACK.md](PSTACK.md)).
+- Discovery: host `code_graph_explore` when `.codegraph/` or `.tokensave/` exists. No extra explorer worker.
 
 ### quality / CI
 - Logs: only the **tail** of the failure (`gh run view --log-failed`, filtered).
@@ -70,7 +71,7 @@ No preamble "I will now…".
 1. **Do not** re-run MCP if `mcp_gate: passed` and context files exist (resume).
 2. **Do not** re-triage if path/scope is already in STATE (unless the goal changed).
 3. Before a limit handoff: **stop expanding scope**; close the current phase + write HANDOFF.
-4. Prefer targeted `grep`/`codegraph` over `read` of 1k+ line files.
+4. Prefer host `code_graph_explore` (required when an index exists) over `read` of 1k+ line files.
 
 ## Do not cut
 
