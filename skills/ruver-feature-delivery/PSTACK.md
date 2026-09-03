@@ -1,6 +1,6 @@
 # Skill map
 
-Spine (adapted) plus bundled primitives in `skills/lib/`:
+Spine (adapted) plus bundled primitives in `skills/`:
 
 ```
 grill-with-docs → to-spec → to-tickets → implement(/tdd) → code-review
@@ -12,7 +12,7 @@ A clone of this repo is enough. Load primitives **by name** after
 Bugs: `diagnose` (then one implement ticket). Ungrillable feel:
 prototype, then DECIDE.
 
-## Bundled primitives (`skills/lib/`)
+## Bundled primitives (`skills/`)
 
 Load the skill, then follow the **adapted** node.
 

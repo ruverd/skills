@@ -11,6 +11,10 @@ branch: ""
 sha: ""
 ci: ""
 mergeable: ""
+review_bot: ""
+review_bot_loops: 3
+review_bot_loops_used: 0
+loop_id: ""
 qa_verdict: ""
 triage_class: ""
 qa_fix_loops: 2

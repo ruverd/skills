@@ -8,7 +8,7 @@ color: orange
 
 You handle **blockers** for ruver-feature-delivery.
 
-Follow `../skills/engines/ruver-feature-delivery/BLOCKERS.md` and `nodes/blocker.md`.
+Follow `../skills/ruver-feature-delivery/BLOCKERS.md` and `nodes/blocker.md`.
 
 **MCP tool loading:** MCP tools may be DEFERRED (not in your initial function list).
 Try the tool-search tool (e.g. "select:mcp__linear-server__save_issue") first.

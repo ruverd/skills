@@ -45,7 +45,7 @@ On fullstack, `path` applies **per worker**.
 
 ```
 triage → grill → spec → tickets → implement* (TDD) → review → tester
-       → blast → quality (thermo) → shipper → ci_watch
+       → evidence → blast → quality (thermo) → shipper → ci_watch
 ```
 
 Use when: new feature, multi-file design still open, high blast radius (auth, billing, contract).
@@ -54,7 +54,7 @@ Use when: new feature, multi-file design still open, high blast radius (auth, bi
 
 ```
 triage → diagnose → one ticket (RED repro) → implement → review → tester
-       → blast → quality → shipper → ci_watch
+       → evidence → blast → quality → shipper → ci_watch
 ```
 
 Skip grill and multi-ticket split. Do **not** skip root cause, TDD, review, thermo.
@@ -64,7 +64,7 @@ Iron law: no product fix before root cause.
 ### `light_change`
 
 ```
-triage → one ticket → implement → review → tester → quality → shipper
+triage → one ticket → implement → review → tester → evidence → quality → shipper
 ```
 
 Skip grill and blast. Still a subagent for product code. Docs-only outside `src/` may be edited on the main thread.
@@ -84,6 +84,7 @@ Read-only diagnose. `done_report`. No PR. If it is a bug, re-route `debug_fix`. 
 | TDD | yes | yes (repro test) | if behavior |
 | review | yes | yes | yes |
 | tester | yes | yes | yes |
+| evidence | yes | yes | yes |
 | blast-radius | yes | yes | no |
 | thermo fix all | yes if ship | yes if ship | yes if ship |
 

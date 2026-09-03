@@ -49,6 +49,7 @@ check frontmatter env PYTHONPATH="$LIB" python3 "$LIB/check_frontmatter.py" "$RO
 check manifests env PYTHONPATH="$LIB" python3 "$LIB/check_manifests.py" "$ROOT"
 check enums env PYTHONPATH="$LIB" python3 "$LIB/check_enums.py" "$ROOT"
 check structure python3 "$LIB/check_structure.py" "$ROOT"
+check graphs python3 "$LIB/check_graphs.py" "$ROOT"
 check leaks python3 "$LIB/check_leaks.py" "$ROOT"
 
 if [[ "$FAILED" -ne 0 ]]; then

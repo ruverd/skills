@@ -42,7 +42,8 @@ Adapted grill: [GRILL.md](GRILL.md). ASK the user only as a last resort.
 /ruver-fd … --no-pr
 ```
 
-Branch from the tracker, or `feature/<id-lowercase>`, or the current branch.
+Checkout is the task branch: tracker name or `feature/<id-lowercase>`.
+Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 
 ## Orchestrator loop
 
@@ -52,7 +53,7 @@ Branch from the tracker, or `feature/<id-lowercase>`, or the current branch.
 
 1. Init STATE under `$RUVER_ROOT/.ruver-feature-delivery/`. Load `ruver-memory`.
 2. `mcp_context` then `triage`. Critical MCP down → STOP. Do not invent.
-3. Walk GRAPH. Grill / spec / tickets on the main thread. Spawn **one** node subagent at a time for implement / review / diagnose / tester / quality / shipper.
+3. Walk GRAPH. Grill / spec / tickets on the main thread. Spawn **one** node subagent at a time for implement / review / diagnose / tester / evidence / quality / shipper.
 4. Never merge. Draft PR only from `shipper`.
 5. Near context limit → `handoff`.
 
@@ -65,7 +66,7 @@ Branch from the tracker, or `feature/<id-lowercase>`, or the current branch.
 | **light_change** | chore | one ticket → one coder |
 | **`scope: fullstack`** | FE and BE, sibling resolved | same branch, git worktrees ([FULLSTACK.md](FULLSTACK.md); Orca optional) |
 
-Ship: review → tester → blast (not light) → **thermo fix all** → commit → push → draft PR
+Ship: review → tester → evidence → blast (not light) → **thermo fix all** → commit → push → draft PR
 (reviewers and assignee: [PRODUCT.md](PRODUCT.md))
 → **CI 100% green** (only then **delivered**).
 

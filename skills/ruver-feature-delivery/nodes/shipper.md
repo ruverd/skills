@@ -13,12 +13,21 @@ Then the orchestrator runs **ci_watch** if a PR/MR exists.
 
 1. Pre-checks: review pass, tester pass, quality fix-all + hard_gate_after pass —
    confirm exit codes in `.ruver-feature-delivery/gates.log` if it exists.
-2. Branch == tracker branch if set.
+2. `git branch --show-current` must not be `main` or `master`. Fail the node if it is.
+   Branch == tracker branch if set.
 3. Forge from [PRODUCT.md](../PRODUCT.md). `github` → `gh`. `gitlab` → `glab`. `git` → push only, no PR (`done_local` unless the user insisted).
 4. Idempotency: list PRs/MRs on this head. Exists → update, do not recreate.
 5. Commit (cite ticket id if any). **No Co-Authored-By, no "Generated with", no trailers.**
-6. Push (`-u`, no force).
-7. Draft PR/MR with the ticket link (body via repo `pr-description` skill if it exists).
+6. `git fetch origin && git rebase origin/<base>`. Re-run the hard gate.
+   Then push (`-u`). `--force-with-lease` only after a rebase that rewrote
+   commits, and only on the task branch. Never `--force`. Never on main/master.
+7. Draft PR/MR with the ticket link. Body from
+   [../templates/PR_BODY.md](../templates/PR_BODY.md). Inline the
+   evidence fragment (`$RUVER_ROOT/.ruver-feature-delivery/pr-body-evidence.md`).
+   If that fragment still has local PNG paths, publish them with
+   [publish-evidence.sh](../../ruver-qa/scripts/publish-evidence.sh)
+   `--screenshot` and replace with gist raw URLs first. A repo
+   `pr-description` skill may fill leftover fields. It is not the body.
 8. **Reviewers + assignee** per PRODUCT.md §6 (re-read at PR open).
    ```bash
    ME=$(gh api user --jq .login)   # or glab equivalent
@@ -48,7 +57,7 @@ Then the orchestrator runs **ci_watch** if a PR/MR exists.
 
 ## Hard rules
 
-- Never merge / force-push.
+- Never merge. Never `--force`. `--force-with-lease` only on the task branch after a rebase that rewrote commits.
 - Never "delivered" with failing checks.
 - Fullstack: ship per repo + ci_watch on **each** PR.
 - Every PR (create or update): reviewers/assignee per PRODUCT.md.

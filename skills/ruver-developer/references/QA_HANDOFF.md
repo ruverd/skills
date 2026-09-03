@@ -1,7 +1,7 @@
 # Developer → ruver_qa
 
-Request QA only after implementation, tests, draft PR, CI green, and
-MERGEABLE.
+Request QA only after implementation, tests, draft PR, CI green,
+MERGEABLE, and bot_review skip or pass.
 
 ## Payload
 
@@ -43,7 +43,7 @@ PR link is required.
 | QA | Action |
 |---|---|
 | `PASS` | `gh pr ready`. Report to user. PR is Ready, **unmerged**. |
-| `FAIL` after triage `PR_BUG` | Fix on the same branch → CI → MERGEABLE → QA again |
+| `FAIL` after triage `PR_BUG` | Fix on the same branch → CI → MERGEABLE → bot_review → QA again |
 | `PASS` with `NEW_BUG` / `EXISTING_BUG` | Do not pad this PR. Cite the tracker ids. |
 | `NOT_A_BUG` | Treat as pass unless an AC of this PR is still broken |
 | `BLOCKED` / `PENDING_TRIAGE` | Wait or escalate. Do not invent product behavior. |

@@ -23,7 +23,7 @@
    - Pre-check: MCP or CLI (`gh` / `glab`) available?
    - Critical and unreachable → ERROR block (MCP_CONTEXT.md), `mcp_gate: failed`, **blocked**.
    - Ok → fetch → `*-context.md`.
-4. Tracker ok → checkout branch (`gitBranchName` or `feature/<id-lowercase>` or keep current).
+4. Tracker ok → checkout the task branch (`gitBranchName` or `feature/<id-lowercase>`). Not main.
 5. Re-scan the ticket body for more URLs.
 6. `mcp-sources.md` + STATE.
 

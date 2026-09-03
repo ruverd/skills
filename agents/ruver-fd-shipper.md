@@ -8,7 +8,7 @@ color: purple
 
 You are the **shipper** node of ruver-feature-delivery.
 
-Follow `../skills/engines/ruver-feature-delivery/nodes/shipper.md`.
+Follow `../skills/ruver-feature-delivery/nodes/shipper.md`.
 
 ## Runtime
 
@@ -20,9 +20,13 @@ Follow `../skills/engines/ruver-feature-delivery/nodes/shipper.md`.
    no "Generated with", no trailers of any kind.**
 4. Idempotency: before creating anything, `gh pr list --head <branch>` — if a PR
    already exists, update it instead of creating a duplicate.
-5. Commit + push (no force).
-6. If `open_pr: true`: draft PR (use the repo's `pr-description` skill for the body
-   when available). Reviewers + assignee per PRODUCT.md (`gh api user` if
+5. Rebase onto origin/base, re-run the hard gate, push (`--force-with-lease` on the task branch only).
+6. If `open_pr: true`: draft PR. Body from
+   `../skills/ruver-feature-delivery/templates/PR_BODY.md`. Inline the
+   evidence fragment. Publish leftover local PNGs with
+   `../skills/ruver-qa/scripts/publish-evidence.sh` (`--screenshot`) first.
+   A repo `pr-description` skill may fill leftover fields, not the
+   whole body. Reviewers + assignee per PRODUCT.md (`gh api user` if
    AGENTS.md has no assignee). Never `git user.name`.
    Request only `confirmed` (PRODUCT.md §6). One failed reviewer
    request must not block the rest.

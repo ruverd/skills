@@ -5,6 +5,6 @@ argument-hint: "<ticket | PR url | status | cancel>"
 
 # /ruver-goal
 
-Follow **`../skills/graphs/ruver-goal/SKILL.md`**.
+Follow **`../skills/ruver-goal/SKILL.md`**.
 
 **Args:** `$ARGUMENTS`

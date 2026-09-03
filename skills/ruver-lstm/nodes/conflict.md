@@ -14,6 +14,7 @@ git push --force-with-lease
 ```
 
 `--force-with-lease` only. Never `--no-verify`.
+See [JOBS.md](../../ruver-bus/JOBS.md) §Worktree.
 
 Already rebasing in an Orca/worktree for this PR → do not start a
 second rebase. Note it and continue to **verify**.

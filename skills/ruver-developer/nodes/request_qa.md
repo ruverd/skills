@@ -3,7 +3,8 @@
 **Verb:** switch or enqueue  
 **Capability:** write bus only
 
-Mandatory after CI green **and** MERGEABLE. Do not stop at "delivered".
+Mandatory after CI green, MERGEABLE, and **bot_review** skip or pass.
+Do not stop at "delivered".
 
 Write `QA_REQUEST` ([../references/QA_HANDOFF.md](../references/QA_HANDOFF.md))
 to `.ruver-bus/jobs/<job_id>/qa-request.md`. PR link + `job_id` required.

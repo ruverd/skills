@@ -41,4 +41,8 @@ inline. TDD still required. Do not skip because the slice is small.
 `NEEDS_CONTEXT` → parent DECIDE from the review + repo. ASK only last
 resort.
 
+If the SHA changed, recapture After and `gh pr edit --body` so the
+Before → After section matches HEAD.
+[evidence.md](../../ruver-feature-delivery/nodes/evidence.md).
+
 Then **reply**.

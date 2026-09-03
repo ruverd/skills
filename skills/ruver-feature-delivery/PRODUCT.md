@@ -39,7 +39,7 @@ Do not STOP because Linear is missing on a local goal.
 STOP when the user pasted a tracker URL and that source cannot be read.
 
 Branch: tracker `gitBranchName` if any, else `feature/<id-lowercase>`
-if there is an id, else keep the current branch.
+if there is an id, else `feature/<slug>`. Checkout is the task branch.
 
 ## 3. Toolchain
 
@@ -173,3 +173,18 @@ Skip locally when the command is expected **>10 min**, or listed in
 
 Optional. Never a gate. Default: `git worktree` + host `spawn_worker`
 ([ruver-host](../ruver-host/SKILL.md)).
+
+## 9. Review bot
+
+Same last-20-merged-PR probe as §6. On each review author also read
+`__typename` (GraphQL) or `user.type` (REST / GitLab).
+
+A review bot is a review author whose login ends with `[bot]`, or whose
+GitHub user type is `Bot`. Do not name a vendor as *the* bot. Do not
+hardcode a product. Detect from this history.
+
+Write `review_bot`: the distinct bot logins that authored those reviews,
+or empty. Empty means skip. Developer `bot_review` re-reads this section
+and writes the field on developer STATE.
+
+GitLab: same idea on merged MRs (`glab api`). Same filters.

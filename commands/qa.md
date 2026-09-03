@@ -7,5 +7,5 @@ argument-hint: "<PR url or owner/repo#N>"
 
 Alias of **`/ruver-qa`**. **Args:** `$ARGUMENTS`
 
-Follow **`../skills/graphs/ruver-qa/SKILL.md`** in full —
+Follow **`../skills/ruver-qa/SKILL.md`** in full —
 this alias defines no steps of its own.

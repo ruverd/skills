@@ -5,6 +5,6 @@ argument-hint: "<resume | status>"
 
 # /ruver-bus
 
-Follow **`../skills/graphs/ruver-bus/SKILL.md`**.
+Follow **`../skills/ruver-bus/SKILL.md`**.
 
 **Args:** `$ARGUMENTS`

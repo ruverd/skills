@@ -19,6 +19,9 @@ init | delivering | fixing | mergeable | qa_requested | applying_qa | waiting_us
 | `sha` | head |
 | `ci` | pending \| green \| red |
 | `mergeable` | MERGEABLE \| … |
+| `review_bot` | PRODUCT.md §9 login(s), empty means skip |
+| `review_bot_loops` / `review_bot_loops_used` | remaining + used on bot threads. Default 3 |
+| `loop_id` | host `schedule_wake` id while waiting for a bot review on head SHA |
 | `qa_verdict` | after QA_RESULT (`PASS`/`FAIL`/`BLOCKED`) |
 | `triage_class` | rollup from QA notes when present |
 | `qa_fix_loops` / `qa_fix_loops_used` | remaining + used on the QA lap. Mirrors fd `ci_fix_loops` |
@@ -32,7 +35,7 @@ Orchestrator writes `status`. Nodes write their section only.
 
 ## The QA lap is bounded
 
-`apply_qa` FAIL+`PR_BUG` → `fix` → `mergeable` → `request_qa` → QA → triage →
+`apply_qa` FAIL+`PR_BUG` → `fix` → `mergeable` → `bot_review` → `request_qa` → QA → triage →
 `apply_qa` is a ring across three graphs. fd bounds its own rings
 (`review_fix_loops`, `test_fix_loops`, `ci_fix_loops`) but none of them reach
 this one: mode `fix` patches the existing branch and never re-enters the fd

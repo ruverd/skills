@@ -10,7 +10,7 @@ argument-hint: "[--project] [<note>]"
 
 Short alias: **`/memory`**.
 
-Follow **`../skills/lib/ruver-memory/SKILL.md`** in full.
+Follow **`../skills/ruver-memory/SKILL.md`** in full.
 
 ```text
 /memory

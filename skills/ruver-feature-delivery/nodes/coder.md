@@ -70,6 +70,7 @@ No Figma and no concrete refs → `NEEDS_CONTEXT` / not `DONE`.
 - **Forbidden** production code before RED.
 - **Forbidden** implementing another ticket "while I am here".
 - **Forbidden** merge / PR / force-push.
+- Before commit, `git branch --show-current` must not be `main` or `master`. Fail the node if it is.
 - **Forbidden** self-approve in place of the reviewer.
 - Do not invent an abstraction outside the spec/ticket.
 - If context is missing: `NEEDS_CONTEXT`, do not guess.

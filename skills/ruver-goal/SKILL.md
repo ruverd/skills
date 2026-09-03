@@ -19,6 +19,7 @@ skill keeps the session working until QA has **commented with evidence**.
 `ruver-memory`
 
 Chat: `ruver-memory`. Unslop always.
+Worktree and branch rules: [JOBS.md](../ruver-bus/JOBS.md) §Worktree.
 
 ## Commands
 

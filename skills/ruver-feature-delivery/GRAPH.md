@@ -13,16 +13,19 @@ goal / resume
        ├ debug_fix    → diagnose → one ticket → implement → review → tester
        └ light_change → tickets (single) → implement → review → tester
   → (more tickets? implement next)
+  → evidence
   → blast (skip on light_change)
   → quality (thermo fix all)
   → shipper → ci_watch
 ```
 
+After all tickets pass tester, **evidence**, then blast and/or quality.
+
 `implement*` is one fresh coder subagent **per ticket**. Verify the
 ticket before starting the next (bundled
 `principle-sequence-verifiable-units`).
 
-Grill, spec, and tickets run on the **main thread**. Implement / review / diagnose / tester / quality / shipper / ci are nodes (subagents where the adapter says so).
+Grill, spec, and tickets run on the **main thread**. Implement / review / diagnose / tester / evidence / quality / shipper / ci are nodes (subagents where the adapter says so).
 
 ## Edges
 
@@ -53,8 +56,9 @@ Grill, spec, and tickets run on the **main thread**. Implement / review / diagno
 | tester | fail + loops left | **implement** |
 | tester | fail + loops exhausted | **escalate** |
 | tester | pass + more tickets | **implement** (next) |
-| tester | pass + no more tickets + not light | **blast** |
-| tester | pass + no more tickets + light_change | **quality** |
+| tester | pass + no more tickets | **evidence** |
+| evidence | done + not light | **blast** |
+| evidence | done + light_change | **quality** |
 | blast | done | **quality** |
 | quality | ok | **shipper** |
 | quality | blocked | **escalate** |

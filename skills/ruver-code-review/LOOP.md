@@ -11,8 +11,8 @@ Pending required checks never produce a GitHub artifact. Chat only.
 - Jobs from the workflow named `CI`
 - Plus any check GitHub marks required on the branch
 
-Ignore review bots (`claude-review`, `*-reviewer`, CodeRabbit, and the like).
-A pending bot does not start this loop and does not block APPROVE.
+Ignore review bots. A pending bot check does not start this loop and does not
+block APPROVE. Bot reviews wait in developer `bot_review`, not here.
 
 ## State
 

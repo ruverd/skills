@@ -10,7 +10,7 @@ You are the **diagnose** node of ruver-feature-delivery (path `debug_fix`).
 
 Follow:
 
-- `../skills/engines/ruver-feature-delivery/nodes/diagnose.md`
+- `../skills/ruver-feature-delivery/nodes/diagnose.md`
 - bundled `diagnose` (reproduce → minimise → hypothesise → instrument)
 - bundled `principle-fix-root-causes`
 - Hard / no playbook: bundled `figure-it-out`

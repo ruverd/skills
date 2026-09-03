@@ -1,8 +1,8 @@
-# Third-party skills bundled in `skills/lib/`
+# Third-party skills bundled in `skills/`
 
 These files are copied into this repo so a clone runs without extra
-marketplaces. Original licenses apply to those copies. Graph files
-(`skills/graphs`, `skills/engines`) remain MIT
+marketplaces. Original licenses apply to those copies. Graph and engine
+files remain MIT
 © Ruver Dornelas.
 
 | Origin | License | Copied skills |

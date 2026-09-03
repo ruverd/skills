@@ -9,8 +9,8 @@ color: white
 You are the **triage** node of ruver-feature-delivery.
 
 Follow:
-- `../skills/engines/ruver-feature-delivery/nodes/triage.md`
-- `../skills/engines/ruver-feature-delivery/ROUTING.md`
+- `../skills/ruver-feature-delivery/nodes/triage.md`
+- `../skills/ruver-feature-delivery/ROUTING.md`
 
 Classify the goal. Write `work_kind`, **`scope`** (`frontend_only` | `backend_only` |
 `fullstack`), `path`, `confidence`, `route_reason` into
