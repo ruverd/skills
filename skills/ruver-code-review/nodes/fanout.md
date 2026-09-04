@@ -27,7 +27,10 @@ For each PR in the list, spawn a **separate** subagent (parallel when the host a
 - **Prompt must include:** this skill path / name (`ruver-code-review`), the single
   target (`REPO` + `PR` or full URL), the same flags as the parent, and an explicit
   constraint: **review this one PR only; do not fan out again; do not spawn further
-  multi-PR subagents**.
+  multi-PR subagents**. Spawn payload:
+  [ruver-host](../../ruver-host/SKILL.md) `spawn_worker`. Do not paste
+  GRAPH.md or the parent tool catalog. Pass a path to the diff, not the
+  diff inline.
 - Each child runs the full skill as a **single-PR** invocation (§1 → §11), including
   gates, publish, and its own chat-style return summary.
 

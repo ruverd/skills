@@ -24,7 +24,8 @@ Load the skill, then follow the **adapted** node.
 | `tdd` + this graph's [TDD.md](TDD.md) | `implement` | Iron law wins. Do not skip RED because bundled `tdd` says the path is expensive. |
 | `diagnose` | `diagnose` | Root cause. No product fix in this node. |
 | `unslop` | all chat | Always. English. [VOICE.md](VOICE.md) |
-| `how` / `why` | grill, diagnose, review | Subsystem you will touch, one pass |
+| `how` | grill, diagnose | Subsystem you will touch, one pass. Not a swarm. |
+| `why` | never default | Only when a last-resort design fork remains after `how` + tracker + neighbors. Not on implement, review, or lstm patch. |
 | `blast-radius` | `blast` | Before quality/ship |
 | `architect` | grill (new module) | Checkpoint only as last-resort ASK |
 | `interrogate` | after spec, `full_feature` | Read-only, then DECIDE |

@@ -57,6 +57,9 @@ claim. A row with more than one lap is where the run spent money twice.
 
 Wall time and laps are what a graph can record truthfully about itself. Token
 counts are not: a node cannot see its own usage, and a number it invents is
-worse than no number. The host's own transcript is the only honest source —
-ask [ruver-host](../ruver-host/SKILL.md) where this harness writes it, and read
-that. Do not estimate tokens into this file.
+worse than no number. Do not estimate tokens into this file.
+
+`ruver report` reads the host transcript when the installer knows the
+path, and prints prompt / uncached / cache% by workspace class (`lstm`,
+`fd`, `reviewer`, `other`). Uncached is billed input that missed the
+prefix cache. Graphs still never write those numbers.

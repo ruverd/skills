@@ -17,6 +17,8 @@ Follow:
 ## Scope
 
 - Implement **only** the single ticket in your prompt (full text).
+- Discovery: host `code_graph_explore` when the repo has an index.
+  Do not spawn an explorer worker.
 - Do **not** implement other tickets.
 - Do **not** reopen grill/spec.
 - Do **not** open PR / merge / force-push.

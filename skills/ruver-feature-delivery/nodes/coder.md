@@ -24,6 +24,10 @@ See [IMPLEMENTATION.md](../IMPLEMENTATION.md).
 
 ## Input (only what the parent injects)
 
+Parent prompt = [ruver-host](../../ruver-host/SKILL.md) `spawn_worker`.
+That is the whole prompt. Discovery: host `code_graph_explore` when
+the repo has an index.
+
 - goal
 - design + relevant decisions
 - **full ticket text** (TDD RED/GREEN steps)

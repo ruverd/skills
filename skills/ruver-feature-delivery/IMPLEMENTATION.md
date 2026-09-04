@@ -12,7 +12,10 @@ Main thread **never** edits product code. One fresh `ruver-fd-coder` per ticket 
 - If UI: DS paths + 2–5 recent same-type screens
 - Review/test findings when re-fixing
 
-Keep the prompt to about one or two screens. [TOKEN_ECONOMY.md](TOKEN_ECONOMY.md).
+Keep the prompt to about one or two screens. Do not paste GRAPH.md,
+`why`, or the parent tool catalog.
+[TOKEN_ECONOMY.md](TOKEN_ECONOMY.md). Spawn payload:
+[ruver-host](../ruver-host/SKILL.md) `spawn_worker`.
 
 ## Coder
 

@@ -46,8 +46,9 @@ $RUVER_HOME/
 
 Every graph appends one row per transition to
 `.ruver-bus/RUN_LOG.tsv` — [LEDGER.md](LEDGER.md). Two lines per node,
-and `ruver report` turns them into wall time and lap counts. It never
-gates anything.
+and `ruver report` turns them into wall time and lap counts. When the
+installer can read a host transcript, it also prints token totals.
+It never gates anything.
 `memory.md` is not a `.ruver-*` dir. Still never inside a repo.
 Format and load: skill `ruver-memory`.
 

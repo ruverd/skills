@@ -16,4 +16,5 @@ through the tree.
 This is not a feature delivery. Frontier empty → **patch**, never spec,
 never tickets, never a new PR.
 
-Load `how` / `why` for the subsystem you will touch, not the monorepo.
+Load `how` for the subsystem you will touch, not the monorepo. `why`
+only per [PSTACK.md](../../ruver-feature-delivery/PSTACK.md).

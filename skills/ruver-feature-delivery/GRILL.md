@@ -14,7 +14,7 @@ Walk the design tree until the frontier is empty. For each question: look it up,
 ## Loop
 
 1. Compute the frontier.
-2. For each item, look it up (`how` / `why` / the tracker / neighbor code / CLAUDE.md). Never ask a fact.
+2. For each item, look it up (`how`, the tracker, neighbor code, CLAUDE.md). Never ask a fact. Load `why` only if that still leaves a last-resort design fork.
 3. Write a recommendation.
 4. **DECIDE**, log, recompute frontier. Chat one line in the S/D/P rollup.
 5. ASK only if the last-resort test passes. One question. `waiting_user`. Next user message (or `/ruver-developer resume`) is the answer. Continue. Do not restart.
@@ -22,9 +22,10 @@ Walk the design tree until the frontier is empty. For each question: look it up,
 
 Most runs never hit step 5.
 
-Load bundled `how` / `why` for the subsystem you will touch, not the
-whole monorepo. One pass. Do not spawn a how-explorer swarm on a small
-change. Do **not** run vanilla grill-with-docs interview-and-wait.
+Load bundled `how` for the subsystem you will touch, not the whole
+monorepo. One pass. Do not spawn a how-explorer swarm. Do not load
+`why` unless a last-resort design fork remains after that lookup.
+Do **not** run vanilla grill-with-docs interview-and-wait.
 
 New module: run `architect`. Take the synthesized sketch (DECIDE). Checkpoint only as last-resort policy.
 

@@ -59,12 +59,13 @@ on your PATH.
 ```bash
 ruver update     # git pull --ff-only main, then relink
 ruver status
-ruver report     # wall time and laps per graph node
+ruver report     # wall time, laps, and host token totals
 ruver uninstall
 ```
 
 `ruver report` reads the run ledger the graphs write as they walk: wall time and
-lap count per node, plus the age of the QA claim. See
+lap count per node, plus the age of the QA claim. When a host transcript
+exists, it also prints prompt / uncached / cache% by workspace class. See
 [Measuring it](#measuring-it).
 
 **This checkout** (developing the repo): `./install.sh setup`
@@ -278,12 +279,19 @@ repo app
   qa/execute                           2    50m00s    26m40s   <- 2 laps
   developer/fix                        1    10m00s    10m00s
   QA lease: qa-pr-77 held 150m, cap 90m - dead claim, the queue is stuck
+
+tokens (host transcript)
+  window 2026-09-03   calls 1768   prompt 191.6M   uncached 20.4M   cache 89%
+  class        sids calls   prompt uncached cache
+  lstm           30   740    84.8M     7.6M   91%
+  fd             20   454    34.3M     5.0M   85%
+  reviewer       18   319    25.2M     4.6M   82%
 ```
 
 Nothing gates on it. The table above is the control; this is the instrument.
-Token counts are deliberately absent: a node cannot see its own usage, and an
-invented number is worse than none, so
-[`LEDGER.md`](skills/ruver-bus/LEDGER.md) points at the host transcript instead.
+Graphs still never write token counts into the ledger. `ruver report`
+reads the host transcript when the installer knows the path.
+[`LEDGER.md`](skills/ruver-bus/LEDGER.md).
 
 Runtime state:
 
