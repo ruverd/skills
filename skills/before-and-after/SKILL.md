@@ -43,8 +43,9 @@ After restore, open a gated route. Login form still up → repo helper
 (`qa:otp` / `qa:login`, `docs/ai/qa-login.md`, `AGENTS.md`) → continue
 with `--restore` so the next run skips login.
 
-`record start` is a **new context**. Load `--restore` / `state load`
-inside it or the video is logged out.
+Auth until gated chrome, then
+`agent-browser --session "$SESSION" record start` with no URL and
+no `--state` (ruver-qa `references/EXECUTION.md`).
 
 ## Inventory
 
@@ -113,3 +114,4 @@ worktree vs HEAD) and publish as above, then comment.
 - `state save` inside the app repo
 - Two browser executes at once (QA slot)
 - PASS on a UI PR with no video
+- PASS on a login-only .webm

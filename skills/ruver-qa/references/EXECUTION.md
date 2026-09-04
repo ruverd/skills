@@ -39,13 +39,34 @@ reach for Playwright, Cypress, or a host browser MCP.
 If any plan step is behind login:
 
 1. `eval "$(../before-and-after/scripts/ensure-session.sh)"` and
-   `--restore`. If a gated route is already in, skip the helper.
+   restore the shared session (`--restore`). If gated chrome is
+   already visible, skip the helper.
 2. Else find the repo helper (`package.json` `qa:otp` / `qa:login`,
-   `docs/ai/qa-login.md`, `AGENTS.md`). Run it. Keep `--restore` on.
-3. Then walk the gated routes.
-4. `record start` copies a **new** context. Restore state inside it.
-5. **BLOCKED** only after that helper is missing or fails. Skipping
-   gated screens and calling PASS is invalid.
+   `docs/ai/qa-login.md`, `AGENTS.md`). Run it on `$SESSION`. Login
+   is a precondition, not the recording. Keep `--restore` on.
+3. Confirm gated chrome is visible (not Sign in, not Check your
+   email). Snapshot that page to a start text file
+   (`agent-browser --session "$SESSION" snapshot` and/or `get url`).
+4. Then record on that session, no URL, no `--state` / `--restore`:
+
+```bash
+agent-browser --session "$SESSION" record start "$VIDEO"
+```
+
+   `record start` does not accept --state. `--session` on this
+   command is load-bearing. Omitting it records a different context
+   than the walk. Never pass a URL (the CLI would navigate the
+   recorder away).
+5. Walk PLAN.md (happy + user-break) with `--session "$SESSION"`.
+   Then `agent-browser --session "$SESSION" record stop`. Snapshot
+   stop (same `--session`). Run
+   `../scripts/walk-video-gate.sh --start … --stop …`. Login-wall /
+   Check-your-email samples → re-record or BLOCKED, never PASS.
+6. **BLOCKED** only after the auth helper is missing or fails, or
+   the walk-video gate fails and a re-record is impossible.
+
+Never record before login. Never run `qa:login` in a different `--session`
+than `record start`. They must share the same --session.
 
 ## Findings (along the way)
 

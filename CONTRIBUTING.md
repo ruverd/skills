@@ -13,7 +13,7 @@ can be executed unambiguously by a model that has never seen this repo.
 | `commands/` | Slash aliases. Each points at one skill and defines no steps |
 | `docs/` | Human-facing pages, one per command |
 | `skills/ruver-host/` | Harness primitives. Anything host-specific belongs here |
-| `tests/` | Two gates, described below |
+| `tests/` | Gates, described below |
 
 Read [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md) before adding a graph.
 
@@ -23,9 +23,10 @@ Read [docs/GRAPH_ENGINEER.md](docs/GRAPH_ENGINEER.md) before adding a graph.
 bash tests/install.sh          # the ruver CLI: setup, update, uninstall, flags
 bash tests/repo.sh             # repo invariants: links, frontmatter, manifests, structure
 bash tests/before-and-after.sh # PR stills formatter + session dir
+bash tests/ruver-qa.sh         # QA walk video is the plan, not qa:login
 ```
 
-Both run in CI on every push. `tests/repo.sh` needs `python3`, and it runs
+These run in CI on every push. `tests/repo.sh` needs `python3`, and it runs
 `shellcheck` when that is installed. Using the skills still needs `git` and
 `curl`; `ruver setup` also installs `agent-browser`.
 
