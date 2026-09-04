@@ -77,9 +77,15 @@ One comment per SHA. If a comment with the same
 
 - No verdict without this comment.
 - No comment without attempting `--attach` when a `.webm` exists.
-- **PASS requires evidence.** UI: video of the plan walk (happy
-  and user-break). API-only: HTTP record of the changed endpoints
-  (happy and user-break). If capture failed on a UI run, say so
-  in the comment and do **not** treat the run as a complete PASS.
+- **PASS requires evidence.** A `.webm` on disk is not enough. UI
+  PASS needs the plan walk on tape (happy and user-break). A login
+  wall / `Check your email` tape is not walk evidence and is never PASS
+  (re-record or BLOCKED). Execute must run `walk-video-gate.sh` on
+  start/stop snapshot text taken with the same `--session` as
+  `record start` (sampling the walk session while the recorder sat
+  on default/`qa:login` is the incident). API-only: HTTP record of
+  the changed endpoints (happy and user-break). If capture failed
+  on a UI run — including wrong-content capture — say so in the
+  comment and do **not** treat the run as a complete PASS.
 - Do not commit videos to the PR branch.
 - Do not paste credentials or raw `.env`.
